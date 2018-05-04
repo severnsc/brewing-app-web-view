@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { isUsernameUnique } from '../adapters/userAdapter'
 import { createUser } from '../auth'
+import validator from 'validator'
 
 
 class SignupForm extends Component {
@@ -10,6 +11,7 @@ class SignupForm extends Component {
     super(props)
     this.state = {
       username: "",
+      email: "",
       password: "",
       confirmPassword: "",
       usernameErrorText: ""
@@ -34,13 +36,17 @@ class SignupForm extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    createUser(this.state.username, this.state.password)
+    createUser(this.state.username, this.state.password, this.state.email)
       .then(res => this.props.navigate())
       .catch(e => e)
   }
 
   handleUsername(event) {
     this.setState({username: event.target.value})
+  }
+
+  handleEmail(event) {
+    this.setState({email: event.target.value})
   }
 
   handlePassword(event) {
@@ -57,6 +63,11 @@ class SignupForm extends Component {
       flexDirection:"column"
     }
 
+    const emailErrorText = this.state.email.length === 0 ||
+                           validator.isEmail(this.state.email)
+                           ? ""
+                           : "Invalid email!"
+
     const passwordErrorText = 0 < this.state.password.length && 
       this.state.password.length < 8 
       ? "Must be at least 8 characters!"
@@ -68,9 +79,11 @@ class SignupForm extends Component {
                                       : "Must match password!"
 
     const submitDisabled = this.state.usernameErrorText !== "" ||
+                           emailErrorText !== "" ||
                            passwordErrorText !== "" ||
                            confirmPasswordErrorText !== "" ||
                            this.state.username === "" ||
+                           this.state.email === "" ||
                            this.state.password === ""
 
     return(
@@ -80,6 +93,10 @@ class SignupForm extends Component {
           <label>Username
             <input type="text" value={this.state.username} onChange={(e) => this.handleUsername(e)} />
             <span>{this.state.usernameErrorText}</span>
+          </label>
+          <label>Email
+            <input type="email" value={this.state.email} onChange={(e) => this.handleEmail(e)} />
+            <span>{emailErrorText}</span>
           </label>
           <label>Password
             <input type ="password" value={this.state.password} onChange={(e) => this.handlePassword(e)} />
