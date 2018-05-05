@@ -108,6 +108,8 @@ class SignupForm extends Component {
           </label>
           <input disabled={submitDisabled} type="submit" value="Sign Up" />
         </form>
+        <p>Already have an account?</p>
+        <a href="#">Log in</a>
       </div>
     )
   }
