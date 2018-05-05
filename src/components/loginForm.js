@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { loginUser } from '../auth.js'
 
 class LoginForm extends Component {
@@ -59,6 +60,10 @@ class LoginForm extends Component {
     )
   }
 
+}
+
+LoginForm.propTypes = {
+  navigate: PropTypes.func.isRequired
 }
 
 export default LoginForm
