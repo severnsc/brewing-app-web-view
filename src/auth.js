@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const createUser = (username, password, email) => {
+export const createUser = async (username, password, email) => {
   return axios.post('http://localhost:3001/signup', {
     username,
     password,
@@ -10,11 +10,19 @@ export const createUser = (username, password, email) => {
     .catch(e => e)
 }
 
-export const loginUser = (username, password) => {
+export const loginUser = async (username, password) => {
   return axios.post('http://localhost:3001/login', {
     username,
     password
   })
     .then(response => response)
     .catch(e => e)
+}
+
+export const sendRecoveryEmail = async username => {
+  return axios.post('http://localhost:3001/sendRecoveryEmail', {
+    username
+  })
+    .then(response => response)
+    .catch(e => {throw new Error("email send failed!")})
 }
