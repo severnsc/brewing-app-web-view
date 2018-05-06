@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import validator from 'validator'
-
+import { Link } from 'react-router-dom'
 
 class SignupForm extends Component {
 
@@ -106,7 +106,7 @@ class SignupForm extends Component {
           <input disabled={submitDisabled} type="submit" value="Sign Up" />
         </form>
         <p>Already have an account?</p>
-        <a href="#">Log in</a>
+        <Link to="/login">Log in</Link>
       </div>
     )
   }

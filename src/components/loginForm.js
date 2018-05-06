@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class LoginForm extends Component {
 
@@ -54,7 +55,7 @@ class LoginForm extends Component {
           </label>
           <input type="submit" value="Login" />
         </form>
-        <a href="#">Forgot password?</a>
+        <Link to="/forgotPassword">Forgot password?</Link>
       </div>
     )
   }
