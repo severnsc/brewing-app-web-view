@@ -2,11 +2,6 @@ import React from 'react'
 import LoginForm from '../components/loginForm'
 import { loginUser } from '../auth'
 
-const Login = () => (
-  <div>
-    <h1>Brewing App</h1>
-    <LoginForm loginUser={loginUser} navigate={() => {}} />
-  </div>
-)
+const Login = () => <LoginForm loginUser={loginUser} navigate={() => {}} />
 
 export default Login
