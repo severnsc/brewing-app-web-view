@@ -18,8 +18,7 @@ class ForgotPasswordForm extends Component {
   handleSubmit(e) {
     e.preventDefault()
     sendRecoveryEmail(this.state.username)
-      .then(res => this.props.navigate())
-      .err(e => e)
+    this.props.navigate()
   }
 
   render(){

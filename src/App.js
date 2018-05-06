@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import SignupForm from './components/signupForm'
+import ResetPasswordForm from './components/resetPasswordForm'
+import ForgotPasswordForm from './components/forgotPasswordForm'
 
 class App extends Component {
   render() {
@@ -11,7 +12,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <SignupForm navigate={() => console.log("navigated!")} />
+        <ForgotPasswordForm navigate={() => console.log("navigated!")} />
+        <ResetPasswordForm navigate={() => console.log("navigated!")} />
       </div>
     );
   }
