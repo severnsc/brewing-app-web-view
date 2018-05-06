@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { resetPassword } from '../auth'
 
 class ResetPasswordForm extends Component {
 
@@ -22,7 +21,7 @@ class ResetPasswordForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    resetPassword(this.state.password)
+    this.props.resetPassword(this.state.password)
     this.props.navigate()
   }
 
@@ -64,6 +63,7 @@ class ResetPasswordForm extends Component {
 }
 
 ResetPasswordForm.propTypes = {
+  resetPassword: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired
 }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { loginUser } from '../auth.js'
 
 class LoginForm extends Component {
 
@@ -23,7 +22,7 @@ class LoginForm extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    loginUser(this.state.username, this.state.password)
+    this.props.loginUser(this.state.username, this.state.password)
       .then(res => {
         console.log(res)
         if(res.data === "Please login"){
@@ -63,6 +62,7 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
+  loginUser: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired
 }
 

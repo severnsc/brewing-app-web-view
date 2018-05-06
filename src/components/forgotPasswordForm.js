@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { sendRecoveryEmail } from '../auth'
 
 class ForgotPasswordForm extends Component {
 
@@ -17,9 +16,8 @@ class ForgotPasswordForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    sendRecoveryEmail(this.state.username)
-      .then(res => this.props.navigate())
-      .err(e => e)
+    this.props.sendRecoveryEmail(this.state.username)
+    this.props.navigate()
   }
 
   render(){
@@ -42,6 +40,7 @@ class ForgotPasswordForm extends Component {
 }
 
 ForgotPasswordForm.propTypes = {
+  sendRecoveryEmail: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired
 }
 

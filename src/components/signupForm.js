@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { isUsernameUnique } from '../adapters/userAdapter'
-import { createUser } from '../auth'
 import validator from 'validator'
 
 
@@ -20,7 +18,7 @@ class SignupForm extends Component {
 
   componentDidUpdate(prevProps, prevState){
     if(this.state.username !== prevState.username){
-      isUsernameUnique(this.state.username)
+      this.props.isUsernameUnique(this.state.username)
         .then(bool => {
           console.log(bool)
           if(bool && prevState.usernameErrorText !== ""){
@@ -36,9 +34,8 @@ class SignupForm extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    createUser(this.state.username, this.state.password, this.state.email)
-      .then(res => this.props.navigate())
-      .catch(e => e)
+    this.props.createUser(this.state.username, this.state.password, this.state.email)
+    this.props.navigate()
   }
 
   handleUsername(event) {
@@ -117,6 +114,8 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
+  isUsernameUnique: PropTypes.func.isRequired,
+  createUser: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired
 }
 
