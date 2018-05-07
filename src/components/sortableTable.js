@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const SortableTable = ({ columns, sort, toggleSortOrder }) => {
+const SortableTable = ({ columns, sort, toggleSortOrder, tableRows }) => {
 
   let sortIndicator = "∧"
   let sortIndex = 0
@@ -20,6 +20,34 @@ const SortableTable = ({ columns, sort, toggleSortOrder }) => {
 
   const handleClick = cellName => toggleSortOrder(cellName)
 
+  const sortedTableRows = tableRows.concat().sort((a, b) => {
+    const columnToSortBy = cell => cell.columnName === sort.sortBy
+    const aCell = a.cells.find(columnToSortBy)
+    const bCell = b.cells.find(columnToSortBy)
+    
+    if(sort.order === "asc"){
+      if(aCell.value < bCell.value){
+        return -1
+      }
+
+      if(aCell.value > bCell.value){
+        return 1
+      }
+
+      return 0
+    }else{
+      if(aCell.value < bCell.value){
+        return 1
+      }
+
+      if(aCell.value > bCell.value){
+        return -1
+      }
+
+      return 0
+    }
+  })
+
   return(
     <table>
       <thead>
@@ -32,6 +60,14 @@ const SortableTable = ({ columns, sort, toggleSortOrder }) => {
         </tr>
       </thead>
       <tbody>
+        {sortedTableRows.map(row => {
+          return (
+            <tr key={row.id}>
+              {row.cells.map(cell => 
+                <td key={cell.id}>{cell.value}</td>)}
+            </tr>
+          )
+        })}
       </tbody>
     </table>
   )
@@ -43,6 +79,14 @@ SortableTable.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired).isRequired,
+  tableRows: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    cells: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      columnName: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    })).isRequired
+  })).isRequired,
   sort: PropTypes.shape({
     sortBy: PropTypes.string.isRequired,
     order: PropTypes.oneOf(["asc", "desc"]).isRequired
