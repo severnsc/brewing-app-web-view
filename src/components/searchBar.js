@@ -11,6 +11,7 @@ class SearchBar extends Component {
   }
 
   handleChange(e) {
+    if(this.props.onChange) this.props.onChange(e.target.value)
     this.setState({value: e.target.value})
   }
 
@@ -40,6 +41,7 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string
 }
 
