@@ -4,6 +4,7 @@ import Home from './screens/home'
 import Login from './screens/login'
 import ForgotPassword from './screens/forgotPassword'
 import ResetPassword from './screens/resetPassword'
+import Dashboard from './screens/dashboard'
 
 const Main = () => (
   <main>
@@ -12,6 +13,7 @@ const Main = () => (
       <Route path="/login" component={Login} />
       <Route path="/forgotPassword" component={ForgotPassword} />
       <Route path="/resetPassword" component={ResetPassword} />
+      <Route path="/dashboard" component={Dashboard} />
     </Switch>
   </main>
 )
