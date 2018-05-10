@@ -7,13 +7,31 @@ import Header from './Header'
 import ApolloClient from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloLink } from 'apollo-link'
+import { withClientState } from 'apollo-link-state'
+import resolvers from './resolvers'
 import { ApolloProvider } from "react-apollo"
 
 const uri = "http://localhost:3001/graphql"
 
+const cache = new InMemoryCache()
+
+const defaults = {}
+
+const stateLink = withClientState({
+  cache,
+  resolvers,
+  defaults
+})
+
+const httpLink = new HttpLink({uri,credentials: "include"})
+
 const client = new ApolloClient({
-  link: new HttpLink({uri,credentials: "include"}),
-  cache: new InMemoryCache()
+  cache,
+  link: ApolloLink.from([
+    stateLink,
+    httpLink
+  ])
 })
 
 class App extends Component {
