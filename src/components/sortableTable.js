@@ -53,7 +53,7 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows }) => {
       <thead>
         <tr>
           {headerCells.map((cell, index) => (
-            <th key={cell.id} onClick={() => handleClick(cell.name)}>
+            <th key={cell.id} onClick={() => handleClick(columns[index].name)}>
               {cell.name}
             </th>
           ))}

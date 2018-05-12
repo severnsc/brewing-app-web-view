@@ -16,12 +16,18 @@ const uri = "http://localhost:3001/graphql"
 
 const cache = new InMemoryCache()
 
-const defaults = {}
+const defaults = {
+  dashboardTableSort: {
+    __typename: "DashboardTableSort",
+    sortBy: "Item name",
+    order: "asc"
+  }
+}
 
 const stateLink = withClientState({
   cache,
-  resolvers,
-  defaults
+  defaults,
+  resolvers
 })
 
 const httpLink = new HttpLink({uri,credentials: "include"})
