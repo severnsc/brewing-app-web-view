@@ -21,5 +21,7 @@ export const dashboardTableQuery = gql`
       sortBy
       order
     }
+
+    dashboardTableFilter @client
   }
 `

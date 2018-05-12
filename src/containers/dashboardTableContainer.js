@@ -42,13 +42,20 @@ const DashboardTableContainer = () => {
           return {id: inventoryItem.id, cells}
         })
 
+        let filteredTableRows
+        if(data.dashboardTableFilter !== ""){
+          filteredTableRows = tableRows.filter(tableRow => {
+            return tableRow.cells.find(cell => cell.value.toLowerCase().includes(data.dashboardTableFilter))
+          })
+        }
+
         const sort = data.dashboardTableSort
 
         return(
           <SortableTableContainer
             mutation={UPDATE_DASHBOARD_TABLE_SORT}
             columns={columns}
-            tableRows={tableRows}
+            tableRows={filteredTableRows || tableRows}
             sort={sort}
           />
         )
