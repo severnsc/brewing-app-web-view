@@ -11,3 +11,9 @@ export const UPDATE_DASHBOARD_TABLE_FILTER = gql`
     updateDashboardTableFilter(value: $value) @client
   }
 `
+
+export const UPDATE_DASHBOARD_TABLE_FILTER_SCOPE = gql`
+  mutation updateDashboardTableFilterScope($type: String!) {
+    updateDashboardTableFilterScope(type: $type) @client
+  }
+`

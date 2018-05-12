@@ -22,7 +22,11 @@ const defaults = {
     sortBy: "Item name",
     order: "asc"
   },
-  dashboardTableFilter: ""
+  dashboardTableFilter: {
+    __typename: "DashboardTableFilter",
+    filterString: "",
+    filterScope: "CURRENT_VIEW"
+  }
 }
 
 const stateLink = withClientState({

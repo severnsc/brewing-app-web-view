@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { dashboardTableFilterQuery } from '../queries'
 
 export default {
   Mutation: {
@@ -40,6 +41,25 @@ export default {
       cache.writeData({
         data: { dashboardTableFilter: value }
       })
+
+      return null
+
+    },
+
+    updateDashboardTableFilterScope: (_, { type }, { cache }) => {
+
+      const query = dashboardTableFilterQuery
+
+      const previous = cache.readQuery({ query })
+
+      const data = {
+        dashboardTableFilter: {
+          ...previous.dashboardTableFilter,
+          filterScope: type
+        }
+      }
+
+      cache.writeQuery({ query, data })
 
       return null
 

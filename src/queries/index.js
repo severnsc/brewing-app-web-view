@@ -22,6 +22,18 @@ export const dashboardTableQuery = gql`
       order
     }
 
-    dashboardTableFilter @client
+    dashboardTableFilter @client {
+      filterString
+      filterScope
+    }
+  }
+`
+
+export const dashboardTableFilterQuery = gql`
+  query {
+    dashboardTableFilter @client {
+      filterString
+      filterScope
+    }
   }
 `
