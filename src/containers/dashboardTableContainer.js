@@ -1,8 +1,9 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import shortid from 'shortid'
-import SortableTableContainer from './sortableTableContainer'
+import SortableTableContainer from './common/sortableTableContainer'
 import { dashboardTableQuery } from '../queries'
+import { UPDATE_DASHBOARD_TABLE_SORT } from "../mutations"
 
 const DashboardTableContainer = () => {
 
@@ -45,6 +46,7 @@ const DashboardTableContainer = () => {
 
         return(
           <SortableTableContainer
+            mutation={UPDATE_DASHBOARD_TABLE_SORT}
             columns={columns}
             tableRows={tableRows}
             sort={sort}

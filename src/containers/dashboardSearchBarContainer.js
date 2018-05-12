@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBarContainer from './searchBarContainer'
+import SearchBarContainer from './common/searchBarContainer'
 import { UPDATE_DASHBOARD_TABLE_FILTER } from '../mutations'
 
 const DashboardSearchBarContainer = () => (

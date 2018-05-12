@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
-import SortableTable from '../components/sortableTable'
-import { UPDATE_DASHBOARD_TABLE_SORT } from "../mutations"
+import SortableTable from '../../components/sortableTable'
 
-const SortableTableContainer = ({columns, tableRows, sort}) => (
-  <Mutation mutation={UPDATE_DASHBOARD_TABLE_SORT}>
-    {updateDashboardTableSort => {
+const SortableTableContainer = ({mutation, columns, tableRows, sort}) => (
+  <Mutation mutation={mutation}>
+    {mutation => {
 
       const toggleSortOrder = cellName => {
-        updateDashboardTableSort({ variables: {cellName: cellName} })
+        mutation({ variables: {cellName: cellName} })
       }
 
       return(
@@ -25,6 +24,7 @@ const SortableTableContainer = ({columns, tableRows, sort}) => (
 )
 
 SortableTableContainer.propTypes = {
+  mutation: PropTypes.object.isRequired,
   columns: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
