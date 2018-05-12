@@ -5,3 +5,9 @@ export const UPDATE_DASHBOARD_TABLE_SORT = gql`
     updateDashboardTableSort(cellName: $cellName) @client
   }
 `
+
+export const UPDATE_DASHBOARD_TABLE_FILTER = gql`
+  mutation updateDashboardTableFilter($value: String!) {
+    updateDashboardTableFilter(value: $value) @client
+  }
+`

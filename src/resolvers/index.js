@@ -34,5 +34,15 @@ export default {
 
       return null
     },
+
+    updateDashboardTableFilter: (_, { value }, { cache }) => {
+
+      cache.writeData({
+        data: { dashboardTableFilter: value }
+      })
+
+      return null
+
+    },
   },
 }

@@ -21,7 +21,8 @@ const defaults = {
     __typename: "DashboardTableSort",
     sortBy: "Item name",
     order: "asc"
-  }
+  },
+  dashboardTableFilter: ""
 }
 
 const stateLink = withClientState({
