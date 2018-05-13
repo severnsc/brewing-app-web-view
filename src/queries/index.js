@@ -37,3 +37,9 @@ export const dashboardTableFilterQuery = gql`
     }
   }
 `
+
+export const dashboardItemLimitQuery = gql`
+  query {
+    dashboardItemLimit @client
+  }
+`

@@ -73,5 +73,17 @@ export default {
       return null
 
     },
+
+    updateDashboardItemLimit: (_, { value }, { cache }) => {
+
+      cache.writeData({
+        data: {
+          dashboardItemLimit: value
+        }
+      })
+
+      return null
+
+    },
   },
 }

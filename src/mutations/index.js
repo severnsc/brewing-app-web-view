@@ -17,3 +17,9 @@ export const UPDATE_DASHBOARD_TABLE_FILTER_SCOPE = gql`
     updateDashboardTableFilterScope(type: $type) @client
   }
 `
+
+export const UPDATE_DASHBOARD_ITEM_LIMIT = gql`
+  mutation updateDashboardItemLimit($value: Number!) {
+    updateDashboardItemLimit(value: $value) @client
+  }
+`
