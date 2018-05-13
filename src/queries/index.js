@@ -26,6 +26,8 @@ export const dashboardTableQuery = gql`
       filterString
       filterScope
     }
+
+    dashboardItemLimit @client
   }
 `
 
