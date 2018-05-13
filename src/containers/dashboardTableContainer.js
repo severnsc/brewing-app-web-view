@@ -32,11 +32,11 @@ const DashboardTableContainer = () => {
 
         const tableRows = allInventoryItems.map(inventoryItem => {
           const cells = [
-            {id: shortid.generate(), columnName: "Item name", value: inventoryItem.object.name},
-            {id: shortid.generate(), columnName: "Current Quantity", value: `${inventoryItem.currentQuantity} ${inventoryItem.quantityUnit}`},
-            {id: shortid.generate(), columnName: "Reorder Threshold", value: `${inventoryItem.reorderThreshold} ${inventoryItem.quantityUnit}`},
-            {id: shortid.generate(), columnName: "Unit Cost", value: `${inventoryItem.unitCost} ${inventoryItem.costUnit}`},
-            {id: shortid.generate(), columnName: "Reorder Cost", value: `${inventoryItem.reorderCost} ${inventoryItem.costUnit}`}
+            {id: shortid.generate(), columnName: "Item name", value: JSON.parse(inventoryItem.object).name},
+            {id: shortid.generate(), columnName: "Current Quantity", value: inventoryItem.currentQuantity},
+            {id: shortid.generate(), columnName: "Reorder Threshold", value: inventoryItem.reorderThreshold},
+            {id: shortid.generate(), columnName: "Unit Cost", value: inventoryItem.unitCost},
+            {id: shortid.generate(), columnName: "Reorder Cost", value: inventoryItem.reorderCost}
           ]
 
           return {id: inventoryItem.id, cells}
@@ -45,7 +45,7 @@ const DashboardTableContainer = () => {
         let filteredTableRows
         if(data.dashboardTableFilter.filterString !== ""){
           filteredTableRows = tableRows.filter(tableRow => {
-            return tableRow.cells.find(cell => cell.value.toLowerCase().includes(data.dashboardTableFilter.filterString))
+            return tableRow.cells.find(cell => cell.value.toString().toLowerCase().includes(data.dashboardTableFilter.filterString))
           })
         }
 
