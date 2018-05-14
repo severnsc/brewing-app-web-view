@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import SortableTable from '../../components/sortableTable'
 
-const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, itemsPerPage, itemsPerPageMutation, currentPage}) => (
+const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation }) => (
   <Mutation mutation={sortOrderMutation}>
     {sortMutation => {
 
@@ -20,15 +20,32 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, it
             }
 
             return(
-              <SortableTable
-                columns={columns}
-                toggleSortOrder={toggleSortOrder}
-                tableRows={tableRows}
-                sort={sort}
-                itemsPerPage={itemsPerPage}
-                onItemsPerPageChange={onItemsPerPageChange}
-                currentPage={currentPage}
-              />
+              <Mutation mutation={pageNumberMutation}>
+                {pageNumMutation => {
+
+                  const decrementPage = () => {
+                    pageNumMutation({ variables: {type: "DECREMENT"} })
+                  }
+
+                  const incrementPage = () => {
+                    pageNumMutation({ variables: {type: "INCREMENT"} })
+                  }
+
+                  return(
+                    <SortableTable
+                      columns={columns}
+                      toggleSortOrder={toggleSortOrder}
+                      tableRows={tableRows}
+                      sort={sort}
+                      itemsPerPage={itemsPerPage}
+                      onItemsPerPageChange={onItemsPerPageChange}
+                      currentPage={currentPage}
+                      decrementPage={decrementPage}
+                      incrementPage={incrementPage}
+                    />
+                  )
+                }}
+              </Mutation>
             )
           }}
         </Mutation>
@@ -57,7 +74,8 @@ SortableTableContainer.propTypes = {
   }),
   itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
   itemsPerPageMutation: PropTypes.object.isRequired,
-  currentPage: PropTypes.number.isRequired
+  currentPage: PropTypes.number.isRequired,
+  pageNumberMutation: PropTypes.object.isRequired
 }
 
 export default SortableTableContainer

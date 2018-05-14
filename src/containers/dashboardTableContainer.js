@@ -5,7 +5,8 @@ import SortableTableContainer from './common/sortableTableContainer'
 import { dashboardTableQuery } from '../queries'
 import {
   UPDATE_DASHBOARD_TABLE_SORT,
-  UPDATE_DASHBOARD_ITEM_LIMIT
+  UPDATE_DASHBOARD_ITEM_LIMIT,
+  UPDATE_DASHBOARD_TABLE_PAGE_NUMBER
 } from "../mutations"
 
 const DashboardTableContainer = () => {
@@ -65,6 +66,7 @@ const DashboardTableContainer = () => {
             itemsPerPage={itemsPerPage}
             itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
             currentPage={currentPage}
+            pageNumberMutation={UPDATE_DASHBOARD_TABLE_PAGE_NUMBER}
           />
         )
       }}

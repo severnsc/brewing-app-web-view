@@ -85,5 +85,27 @@ export default {
       return null
 
     },
+
+    updateDashboardTablePageNumber: (_, { type }, { cache }) => {
+
+      const query = gql`
+        query {
+          dashboardTableCurrentPage @client
+        }
+      `
+
+      const previous = cache.readQuery({ query })
+
+      const integer = type === "INCREMENT" ? 1 : -1
+
+      const data = {
+        dashboardTableCurrentPage: previous.dashboardTableCurrentPage + integer
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    }
   },
 }

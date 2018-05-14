@@ -23,3 +23,9 @@ export const UPDATE_DASHBOARD_ITEM_LIMIT = gql`
     updateDashboardItemLimit(value: $value) @client
   }
 `
+
+export const UPDATE_DASHBOARD_TABLE_PAGE_NUMBER = gql`
+  mutation updateDashboardTablePageNumber($type: String!) {
+    updateDashboardTablePageNumber(type: $type) @client
+  }
+`
