@@ -26,23 +26,34 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
     const columnToSortBy = cell => cell.columnName === sort.sortBy
     const aCell = a.cells.find(columnToSortBy)
     const bCell = b.cells.find(columnToSortBy)
+
+    let aCellValue = aCell.value
+    let bCellValue = bCell.value
+
+    if(typeof aCell.value === 'string'){
+      aCellValue = aCellValue.toLowerCase()
+    }
+
+    if(typeof bCell.value === 'string'){
+      bCellValue = bCellValue.toLowerCase()
+    }
     
     if(sort.order === "asc"){
-      if(aCell.value < bCell.value){
+      if(aCellValue < bCellValue){
         return -1
       }
 
-      if(aCell.value > bCell.value){
+      if(aCellValue > bCellValue){
         return 1
       }
 
       return 0
     }else{
-      if(aCell.value < bCell.value){
+      if(aCellValue < bCellValue){
         return 1
       }
 
-      if(aCell.value > bCell.value){
+      if(aCellValue > bCellValue){
         return -1
       }
 
