@@ -44,3 +44,11 @@ export const dashboardItemLimitQuery = gql`
     dashboardItemLimit @client
   }
 `
+
+export const isLoggedInQuery = gql`
+  query {
+    currentUser {
+      id
+    }
+  }
+`

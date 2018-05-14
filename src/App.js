@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom'
 import Main from './Main'
 import Header from './Header'
 import ApolloClient from 'apollo-client';
+import { Query } from 'react-apollo'
+import { isLoggedInQuery } from './queries'
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link'
@@ -46,10 +48,24 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header isLoggedIn={() => false} />
-        <Main />
-      </div>
+      <Query query={isLoggedInQuery}>
+        {({loading, error, data}) => {
+          
+          let isLoggedIn
+
+          if(loading) isLoggedIn = () => false
+          if(error) isLoggedIn = () => false
+
+          isLoggedIn = () => data.currentUser ? true : false 
+
+          return(
+            <div className="App">
+              <Header isLoggedIn={isLoggedIn} />
+              <Main />
+            </div>
+          )
+        }}
+      </Query>
     );
   }
 }
