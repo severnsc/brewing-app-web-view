@@ -47,9 +47,9 @@ const DashboardTableContainer = () => {
         })
 
         let filteredTableRows
-        if(data.dashboardTableFilter.filterString !== ""){
+        if(data.dashboardTableFilterString !== ""){
           filteredTableRows = tableRows.filter(tableRow => {
-            return tableRow.cells.find(cell => cell.value.toString().toLowerCase().includes(data.dashboardTableFilter.filterString))
+            return tableRow.cells.find(cell => cell.value.toString().toLowerCase().includes(data.dashboardTableFilterString))
           })
         }
 

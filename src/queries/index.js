@@ -22,10 +22,7 @@ export const dashboardTableQuery = gql`
       order
     }
 
-    dashboardTableFilter @client {
-      filterString
-      filterScope
-    }
+    dashboardTableFilterString @client
 
     dashboardItemLimit @client
 

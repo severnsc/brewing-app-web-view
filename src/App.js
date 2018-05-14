@@ -22,11 +22,7 @@ const defaults = {
     sortBy: "Item name",
     order: "asc"
   },
-  dashboardTableFilter: {
-    __typename: "DashboardTableFilter",
-    filterString: "",
-    filterScope: "CURRENT_VIEW"
-  },
+  dashboardTableFilterString: "",
   dashboardItemLimit: 25,
   dashboardTableCurrentPage: 0
 }

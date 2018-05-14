@@ -38,18 +38,11 @@ export default {
 
     updateDashboardTableFilter: (_, { value }, { cache }) => {
 
-      const query = dashboardTableFilterQuery
-
-      const previous = cache.readQuery({ query })
-
-      const data = {
-        dashboardTableFilter: {
-          ...previous.dashboardTableFilter,
-          filterString: value
+      cache.writeData({
+        data: {
+          dashboardTableFilterString: value
         }
-      }
-
-      cache.writeQuery({ query, data })
+      })
 
       return null
 
