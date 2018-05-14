@@ -54,6 +54,11 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
   const endIndex = (currentPage + 1) * itemsPerPage
   const currentPageTableRows = sortedTableRows.slice(startIndex, endIndex)
 
+  const previousPageButton = currentPage > 0 ? <span onClick={decrementPage}>Previous page</span> : ""
+
+  const lastPage = Math.ceil(tableRows.length/itemsPerPage) - 1
+  const nextPageButton = currentPage < lastPage ? <span onClick={incrementPage}>Next page</span> : ""
+
   return(
     <div>
       <table>
@@ -78,7 +83,7 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
         </tbody>
       </table>
       <div>
-        <span onClick={decrementPage}>Previous page</span>
+        {previousPageButton}
         <span>
           <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
             <option value={25}>25</option>
@@ -87,7 +92,7 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
           </select>
           <p>items per page</p>
         </span>
-        <span onClick={incrementPage}>Next page</span>
+        {nextPageButton}
       </div>
     </div>
   )
