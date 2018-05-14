@@ -54,6 +54,7 @@ const DashboardTableContainer = () => {
 
         const sort = data.dashboardTableSort
         const itemsPerPage = parseInt(data.dashboardItemLimit, 10)
+        const currentPage = data.dashboardTableCurrentPage
 
         return(
           <SortableTableContainer
@@ -63,6 +64,7 @@ const DashboardTableContainer = () => {
             sort={sort}
             itemsPerPage={itemsPerPage}
             itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
+            currentPage={currentPage}
           />
         )
       }}

@@ -27,7 +27,8 @@ const defaults = {
     filterString: "",
     filterScope: "CURRENT_VIEW"
   },
-  dashboardItemLimit: 25
+  dashboardItemLimit: 25,
+  dashboardTableCurrentPage: 0
 }
 
 const stateLink = withClientState({

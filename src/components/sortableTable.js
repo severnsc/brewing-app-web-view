@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage, onItemsPerPageChange }) => {
+const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage, onItemsPerPageChange, currentPage }) => {
 
   let sortIndicator = "∧"
   let sortIndex = 0
@@ -50,6 +50,10 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
     }
   })
 
+  const startIndex = currentPage*itemsPerPage
+  const endIndex = (currentPage + 1) * itemsPerPage
+  const currentPageTableRows = sortedTableRows.slice(startIndex, endIndex)
+
   return(
     <div>
       <table>
@@ -63,7 +67,7 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
           </tr>
         </thead>
         <tbody>
-          {sortedTableRows.map(row => {
+          {currentPageTableRows.map(row => {
             return (
               <tr key={row.id}>
                 {row.cells.map(cell => 
@@ -109,7 +113,8 @@ SortableTable.propTypes = {
   }),
   toggleSortOrder: PropTypes.func.isRequired,
   itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
-  onItemsPerPageChange: PropTypes.func.isRequired
+  onItemsPerPageChange: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired
 }
 
 export default SortableTable

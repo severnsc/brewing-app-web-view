@@ -28,6 +28,8 @@ export const dashboardTableQuery = gql`
     }
 
     dashboardItemLimit @client
+
+    dashboardTableCurrentPage @client
   }
 `
 
