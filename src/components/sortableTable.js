@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const SortableTable = ({ columns, sort, toggleSortOrder, tableRows }) => {
+const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage, onItemsPerPageChange }) => {
 
   let sortIndicator = "∧"
   let sortIndex = 0
@@ -19,6 +19,8 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows }) => {
   })
 
   const handleClick = cellName => toggleSortOrder(cellName)
+
+  const handleItemsPerPageChange = e => onItemsPerPageChange(e.target.value)
 
   const sortedTableRows = tableRows.concat().sort((a, b) => {
     const columnToSortBy = cell => cell.columnName === sort.sortBy
@@ -49,27 +51,41 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows }) => {
   })
 
   return(
-    <table>
-      <thead>
-        <tr>
-          {headerCells.map((cell, index) => (
-            <th key={cell.id} onClick={() => handleClick(columns[index].name)}>
-              {cell.name}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {sortedTableRows.map(row => {
-          return (
-            <tr key={row.id}>
-              {row.cells.map(cell => 
-                <td key={cell.id}>{cell.value}</td>)}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            {headerCells.map((cell, index) => (
+              <th key={cell.id} onClick={() => handleClick(columns[index].name)}>
+                {cell.name}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sortedTableRows.map(row => {
+            return (
+              <tr key={row.id}>
+                {row.cells.map(cell => 
+                  <td key={cell.id}>{cell.value}</td>)}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+      <div>
+        <span>Previous page</span>
+        <span>
+          <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
+            <option value={25}>25</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+          <p>items per page</p>
+        </span>
+        <span>Next page</span>
+      </div>
+    </div>
   )
 
 }
@@ -91,7 +107,9 @@ SortableTable.propTypes = {
     sortBy: PropTypes.string.isRequired,
     order: PropTypes.oneOf(["asc", "desc"]).isRequired
   }),
-  toggleSortOrder: PropTypes.func.isRequired
+  toggleSortOrder: PropTypes.func.isRequired,
+  itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
+  onItemsPerPageChange: PropTypes.func.isRequired
 }
 
 export default SortableTable

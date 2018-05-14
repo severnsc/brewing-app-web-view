@@ -3,7 +3,10 @@ import { Query } from 'react-apollo'
 import shortid from 'shortid'
 import SortableTableContainer from './common/sortableTableContainer'
 import { dashboardTableQuery } from '../queries'
-import { UPDATE_DASHBOARD_TABLE_SORT } from "../mutations"
+import {
+  UPDATE_DASHBOARD_TABLE_SORT,
+  UPDATE_DASHBOARD_ITEM_LIMIT
+} from "../mutations"
 
 const DashboardTableContainer = () => {
 
@@ -50,13 +53,16 @@ const DashboardTableContainer = () => {
         }
 
         const sort = data.dashboardTableSort
+        const itemsPerPage = parseInt(data.dashboardItemLimit, 10)
 
         return(
           <SortableTableContainer
-            mutation={UPDATE_DASHBOARD_TABLE_SORT}
+            sortOrderMutation={UPDATE_DASHBOARD_TABLE_SORT}
             columns={columns}
             tableRows={filteredTableRows || tableRows}
             sort={sort}
+            itemsPerPage={itemsPerPage}
+            itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
           />
         )
       }}

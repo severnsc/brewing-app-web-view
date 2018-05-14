@@ -3,28 +3,41 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import SortableTable from '../../components/sortableTable'
 
-const SortableTableContainer = ({mutation, columns, tableRows, sort}) => (
-  <Mutation mutation={mutation}>
-    {mutation => {
+const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, itemsPerPage, itemsPerPageMutation}) => (
+  <Mutation mutation={sortOrderMutation}>
+    {sortMutation => {
 
       const toggleSortOrder = cellName => {
-        mutation({ variables: {cellName: cellName} })
+        sortMutation({ variables: {cellName: cellName} })
       }
 
       return(
-        <SortableTable
-          columns={columns}
-          toggleSortOrder={toggleSortOrder}
-          tableRows={tableRows}
-          sort={sort}
-        />
+        <Mutation mutation={itemsPerPageMutation}>
+          {itemsMutation => {
+
+            const onItemsPerPageChange = value => {
+              itemsMutation({ variables: { value: value } })
+            }
+
+            return(
+              <SortableTable
+                columns={columns}
+                toggleSortOrder={toggleSortOrder}
+                tableRows={tableRows}
+                sort={sort}
+                itemsPerPage={itemsPerPage}
+                onItemsPerPageChange={onItemsPerPageChange}
+              />
+            )
+          }}
+        </Mutation>
       )
     }}
   </Mutation>
 )
 
 SortableTableContainer.propTypes = {
-  mutation: PropTypes.object.isRequired,
+  sortOrderMutation: PropTypes.object.isRequired,
   columns: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
@@ -40,7 +53,9 @@ SortableTableContainer.propTypes = {
   sort: PropTypes.shape({
     sortBy: PropTypes.string.isRequired,
     order: PropTypes.oneOf(["asc", "desc"]).isRequired
-  })
+  }),
+  itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
+  itemsPerPageMutation: PropTypes.object.isRequired
 }
 
 export default SortableTableContainer
