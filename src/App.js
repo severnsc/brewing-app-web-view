@@ -53,10 +53,11 @@ class App extends Component {
           
           let isLoggedIn
 
-          if(loading) isLoggedIn = () => false
-          if(error) isLoggedIn = () => false
-
-          isLoggedIn = () => data.currentUser ? true : false 
+          if(loading || error){
+            isLoggedIn = () => false
+          }else{
+            isLoggedIn = () => data.currentUser ? true : false 
+          }
 
           return(
             <div className="App">
