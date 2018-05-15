@@ -70,13 +70,15 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
   const lastPage = Math.ceil(tableRows.length/itemsPerPage) - 1
   const nextPageButton = currentPage < lastPage ? <span onClick={incrementPage}>Next page</span> : ""
 
+  const widthPercentage = 100/columns.length
+
   return(
-    <div>
-      <table>
-        <thead>
+    <div style={{display: "flex", "flexFlow": "column"}}>
+      <table style={{border: "1px solid", margin: "10px", borderCollapse: "collapse"}}>
+        <thead style={{backgroundColor: "#e8e8e8"}}>
           <tr>
             {headerCells.map((cell, index) => (
-              <th key={cell.id} onClick={() => handleClick(columns[index].name)}>
+              <th style={{border: "1px solid", width: `${widthPercentage}%`, padding: "10px"}} key={cell.id} onClick={() => handleClick(columns[index].name)}>
                 {cell.name}
               </th>
             ))}
@@ -87,7 +89,7 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
             return (
               <tr key={row.id}>
                 {row.cells.map(cell => 
-                  <td key={cell.id}>{cell.value}</td>)}
+                  <td style={{border: "1px solid", width: `${widthPercentage}%`}} key={cell.id}>{cell.value}</td>)}
               </tr>
             )
           })}
