@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class LoginForm extends Component {
 
@@ -9,7 +9,8 @@ class LoginForm extends Component {
     this.state = {
       username: "",
       password: "",
-      errorText: ""
+      errorText: "",
+      toDashboard: false
     }
   }
 
@@ -29,13 +30,17 @@ class LoginForm extends Component {
         if(res.data === "Please login"){
           this.setState({errorText: "Invalid username or password!"})
         }else{
-          this.props.navigate()
+          this.setState({toDashboard: true})
         }
       })
       .catch(e => e)
   }
 
   render() {
+
+    if(this.state.toDashboard){
+      return <Redirect to="/dashboard" />
+    }
 
     const flexColumnStyle = {
       display: "flex",
@@ -63,8 +68,7 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired
+  loginUser: PropTypes.func.isRequired
 }
 
 export default LoginForm
