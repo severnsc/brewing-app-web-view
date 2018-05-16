@@ -65,10 +65,10 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
   const endIndex = (currentPage + 1) * itemsPerPage
   const currentPageTableRows = sortedTableRows.slice(startIndex, endIndex)
 
-  const previousPageButton = currentPage > 0 ? <span onClick={decrementPage}>Previous page</span> : ""
+  const previousPageButton = currentPage > 0 ? <span style={{position:"absolute", left:"25px", textDecoration: "underline", cursor: "pointer"}} onClick={decrementPage}>&lt; Previous page</span> : ""
 
   const lastPage = Math.ceil(tableRows.length/itemsPerPage) - 1
-  const nextPageButton = currentPage < lastPage ? <span onClick={incrementPage}>Next page</span> : ""
+  const nextPageButton = currentPage < lastPage ? <span style={{position:"absolute", right:"25px", textDecoration: "underline", cursor: "pointer"}} onClick={incrementPage}>Next page &gt;</span> : ""
 
   const widthPercentage = 100/columns.length
 
@@ -95,15 +95,15 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
           })}
         </tbody>
       </table>
-      <div>
+      <div style={{display: "flex"}}>
         {previousPageButton}
-        <span>
+        <span style={{flex: "1"}}>
           <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
             <option value={25}>25</option>
             <option value={50}>50</option>
             <option value={100}>100</option>
           </select>
-          <p>items per page</p>
+          <span style={{marginLeft: "5px"}}>items per page</span>
         </span>
         {nextPageButton}
       </div>
