@@ -7,7 +7,7 @@ import ResetPassword from './screens/resetPassword'
 import Dashboard from './screens/dashboard'
 
 const Main = () => (
-  <main>
+  <main style={{display:"flex", flexFlow:"column", alignItems:"center"}}>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />

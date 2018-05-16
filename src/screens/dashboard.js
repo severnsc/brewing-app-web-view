@@ -3,7 +3,7 @@ import DashboardSearchBarContainer from '../containers/dashboardSearchBarContain
 import DashboardTableContainer from '../containers/dashboardTableContainer'
 
 const Dashboard = () => (
-  <div>
+  <div style={{width: "75%"}}>
     <h1>Total Inventory</h1>
     <DashboardSearchBarContainer />
     <DashboardTableContainer />
