@@ -50,7 +50,8 @@ class SubMenu extends Component {
   render(){
     const linkStyle = {
       padding: "3px 40px",
-      margin: "0"
+      margin: "0",
+      color: "white"
     }
 
     const subLinkStyle = {
