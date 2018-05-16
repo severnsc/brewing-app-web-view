@@ -40,28 +40,10 @@ export default {
 
       cache.writeData({
         data: {
-          dashboardTableFilterString: value
+          dashboardTableFilterString: value,
+          dashboardTableCurrentPage: 0
         }
       })
-
-      return null
-
-    },
-
-    updateDashboardTableFilterScope: (_, { type }, { cache }) => {
-
-      const query = dashboardTableFilterQuery
-
-      const previous = cache.readQuery({ query })
-
-      const data = {
-        dashboardTableFilter: {
-          ...previous.dashboardTableFilter,
-          filterScope: type
-        }
-      }
-
-      cache.writeQuery({ query, data })
 
       return null
 
