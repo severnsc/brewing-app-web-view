@@ -49,13 +49,14 @@ class App extends Component {
   render() {
     return (
       <Query query={isLoggedInQuery}>
-        {({loading, error, data}) => {
+        {({loading, error, data, startPolling, stopPolling}) => {
           
-          let isLoggedIn
+          let isLoggedIn = () => {}
 
           if(loading || error){
-            isLoggedIn = () => false
+            startPolling(200)
           }else{
+            stopPolling()
             isLoggedIn = () => data.currentUser ? true : false 
           }
 
