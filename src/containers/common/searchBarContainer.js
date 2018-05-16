@@ -15,7 +15,7 @@ const SearchBarContainer = ({ mutation }) => (
         <SearchBar
           onSubmit={updateFilter}
           onChange={updateFilter}
-          placeholder="search" 
+          placeholder="🔍 search" 
         />
       )
     }}

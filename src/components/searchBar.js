@@ -24,8 +24,9 @@ class SearchBar extends Component {
 
     return(
 
-      <form onSubmit={e => this.handleSubmit(e)}>
+      <form style={{display:"flex", margin:"10px"}} onSubmit={e => this.handleSubmit(e)}>
         <input 
+          style={{flex:"1", borderRadius:"10px", border:"1px solid #8c8c8c", padding:"2px"}}
           type="text"
           value={this.state.value}
           onChange={e => this.handleChange(e)}
