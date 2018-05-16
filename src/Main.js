@@ -4,14 +4,16 @@ import Home from './screens/home'
 import Login from './screens/login'
 import ForgotPassword from './screens/forgotPassword'
 import ResetPassword from './screens/resetPassword'
+import Dashboard from './screens/dashboard'
 
 const Main = () => (
-  <main>
+  <main style={{display:"flex", flexFlow:"column", alignItems:"center"}}>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/forgotPassword" component={ForgotPassword} />
       <Route path="/resetPassword" component={ResetPassword} />
+      <Route path="/dashboard" component={Dashboard} />
     </Switch>
   </main>
 )
