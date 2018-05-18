@@ -64,7 +64,7 @@ class SubMenu extends Component {
       <Fragment>
         <p style={linkStyle}>{this.props.username}</p>
         <a onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.profileBackgroundColor, color: this.state.profileTextColor}} href="#">My Profile</a>
-        <a onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.signOutBackgroundColor, color: this.state.signOutTextColor}} href="#">Sign out</a>
+        <a onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.signOutBackgroundColor, color: this.state.signOutTextColor}} href="http://localhost:3001/logout">Sign out</a>
       </Fragment>
     )
   }
