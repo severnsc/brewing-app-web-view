@@ -47,7 +47,7 @@ HoverableTableRow.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.element
   ]).isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func.isRequired
 }
 
 export default HoverableTableRow

@@ -142,7 +142,7 @@ SortableTable.propTypes = {
   currentPage: PropTypes.number.isRequired,
   decrementPage: PropTypes.func.isRequired,
   incrementPage: PropTypes.func.isRequired,
-  onTableRowClick: PropTypes.func
+  onTableRowClick: PropTypes.func.isRequired
 }
 
 export default SortableTable
