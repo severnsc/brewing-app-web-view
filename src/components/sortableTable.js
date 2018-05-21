@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import HoverableTableRow from './hoverableTableRow'
 
-const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage }) => {
+const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick }) => {
 
   let sortIndicator = "∧"
   let sortIndex = 0
@@ -93,10 +94,10 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
         <tbody>
           {currentPageTableRows.map(row => {
             return (
-              <tr key={row.id}>
+              <HoverableTableRow onClick={onTableRowClick} key={row.id} id={row.id}>
                 {row.cells.map(cell => 
                   <td style={{border: "1px solid", width: `${widthPercentage}%`}} key={cell.id}>{cell.value}</td>)}
-              </tr>
+              </HoverableTableRow>
             )
           })}
         </tbody>
@@ -140,7 +141,8 @@ SortableTable.propTypes = {
   onItemsPerPageChange: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,
   decrementPage: PropTypes.func.isRequired,
-  incrementPage: PropTypes.func.isRequired
+  incrementPage: PropTypes.func.isRequired,
+  onTableRowClick: PropTypes.func
 }
 
 export default SortableTable
