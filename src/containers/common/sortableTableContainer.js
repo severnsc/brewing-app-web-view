@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import SortableTable from '../../components/sortableTable'
 
-const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation }) => (
+const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation, modalMutation }) => (
   <Mutation mutation={sortOrderMutation}>
     {sortMutation => {
 
@@ -32,18 +32,32 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, it
                   }
 
                   return(
-                    <SortableTable
-                      columns={columns}
-                      toggleSortOrder={toggleSortOrder}
-                      tableRows={tableRows}
-                      sort={sort}
-                      itemsPerPage={itemsPerPage}
-                      onItemsPerPageChange={onItemsPerPageChange}
-                      currentPage={currentPage}
-                      decrementPage={decrementPage}
-                      incrementPage={incrementPage}
-                    />
+                    <Mutation mutation={modalMutation}>
+                      {modalMutation => {
+
+                        const onTableRowClick = inventoryItemId => {
+                          modalMutation({ variables: { id: inventoryItemId} })
+                        }
+
+                        return(
+                          <SortableTable
+                            columns={columns}
+                            toggleSortOrder={toggleSortOrder}
+                            tableRows={tableRows}
+                            sort={sort}
+                            itemsPerPage={itemsPerPage}
+                            onItemsPerPageChange={onItemsPerPageChange}
+                            currentPage={currentPage}
+                            decrementPage={decrementPage}
+                            incrementPage={incrementPage}
+                            onTableRowClick={onTableRowClick}
+                          />
+                        )
+
+                      }}
+                    </Mutation>
                   )
+
                 }}
               </Mutation>
             )
@@ -75,7 +89,8 @@ SortableTableContainer.propTypes = {
   itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
   itemsPerPageMutation: PropTypes.object.isRequired,
   currentPage: PropTypes.number.isRequired,
-  pageNumberMutation: PropTypes.object.isRequired
+  pageNumberMutation: PropTypes.object.isRequired,
+  modalMutation: PropTypes.object.isRequired
 }
 
 export default SortableTableContainer

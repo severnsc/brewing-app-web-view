@@ -29,3 +29,9 @@ export const UPDATE_DASHBOARD_TABLE_PAGE_NUMBER = gql`
     updateDashboardTablePageNumber(type: $type) @client
   }
 `
+
+export const UPDATE_DASHBOARD_MODAL = gql`
+  mutation updateDashboardModal($id: String!) {
+    updateDashboardModal(id: $id) @client
+  }
+`
