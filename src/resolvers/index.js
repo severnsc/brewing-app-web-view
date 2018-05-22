@@ -85,23 +85,9 @@ export default {
 
     updateDashboardModal: (_, { id }, { cache }) => {
 
-      const query = gql`
-        query {
-          currentUser {
-            inventories {
-              item(id: ${id})
-            }
-          }
-        }
-      `
-
-      const queryResult = cache.readQuery({ query })
-
-      const selectedItem = queryResult.currentUser.inventories.item
-
       cache.writeData({
         data: {
-          dashboardModalItem: selectedItem
+          dashboardModalItemId: id
         }
       })
 

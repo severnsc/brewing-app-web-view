@@ -27,7 +27,7 @@ const defaults = {
   dashboardTableFilterString: "",
   dashboardItemLimit: 25,
   dashboardTableCurrentPage: 0,
-  dashboardModalItem: {}
+  dashboardModalItemId: ""
 }
 
 const stateLink = withClientState({
