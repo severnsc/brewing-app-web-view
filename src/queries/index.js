@@ -30,15 +30,6 @@ export const dashboardTableQuery = gql`
   }
 `
 
-export const dashboardTableFilterQuery = gql`
-  query {
-    dashboardTableFilter @client {
-      filterString
-      filterScope
-    }
-  }
-`
-
 export const dashboardItemLimitQuery = gql`
   query {
     dashboardItemLimit @client
@@ -47,8 +38,6 @@ export const dashboardItemLimitQuery = gql`
 
 export const isLoggedInQuery = gql`
   query {
-    currentUser {
-      id
-    }
+    isLoggedIn @client
   }
 `

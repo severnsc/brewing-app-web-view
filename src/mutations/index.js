@@ -29,3 +29,9 @@ export const UPDATE_DASHBOARD_TABLE_PAGE_NUMBER = gql`
     updateDashboardTablePageNumber(type: $type) @client
   }
 `
+
+export const LOGIN_MUTATION = gql`
+  mutation setIsLoggedIn($bool: Boolean) {
+    setIsLoggedIn(bool: $bool) @client
+  }
+`
