@@ -35,3 +35,8 @@ export const UPDATE_DASHBOARD_MODAL = gql`
     updateDashboardModal(id: $id) @client
   }
 `
+export const LOGIN_MUTATION = gql`
+  mutation setIsLoggedIn($bool: Boolean) {
+    setIsLoggedIn(bool: $bool) @client
+  }
+`

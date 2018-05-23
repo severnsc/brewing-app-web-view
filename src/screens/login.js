@@ -1,7 +1,6 @@
 import React from 'react'
-import LoginForm from '../components/loginForm'
-import { loginUser } from '../auth'
+import LoginContainer from '../containers/loginContainer'
 
-const Login = () => <LoginForm loginUser={loginUser} />
+const Login = () => <LoginContainer />
 
 export default Login

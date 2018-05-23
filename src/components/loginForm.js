@@ -30,6 +30,7 @@ class LoginForm extends Component {
         if(res.data === "Please login"){
           this.setState({errorText: "Invalid username or password!"})
         }else{
+          this.props.setIsLoggedIn(true)
           this.setState({toDashboard: true})
         }
       })
@@ -68,7 +69,8 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  loginUser: PropTypes.func.isRequired
+  loginUser: PropTypes.func.isRequired,
+  setIsLoggedIn: PropTypes.func.isRequired
 }
 
 export default LoginForm

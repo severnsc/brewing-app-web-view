@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { dashboardTableFilterQuery } from '../queries'
+import { isLoggedInQuery } from '../queries'
 
 export default {
   Mutation: {
@@ -91,8 +91,19 @@ export default {
         }
       })
 
+    },
+
+    setIsLoggedIn: (_, { bool }, { cache }) => {
+
+      cache.writeData({
+        data: {
+          isLoggedIn: bool
+        }
+      })
+
       return null
 
     },
-  },
+  
+  }
 }

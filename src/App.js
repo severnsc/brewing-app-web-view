@@ -28,6 +28,7 @@ const defaults = {
   dashboardItemLimit: 25,
   dashboardTableCurrentPage: 0,
   dashboardModalItemId: ""
+  isLoggedIn: false
 }
 
 const stateLink = withClientState({
@@ -50,16 +51,11 @@ class App extends Component {
   render() {
     return (
       <Query query={isLoggedInQuery}>
-        {({loading, error, data, startPolling, stopPolling}) => {
+        {({loading, error, data}) => {
           
-          let isLoggedIn = () => {}
+          let isLoggedIn = false
 
-          if(loading || error){
-            startPolling(200)
-          }else{
-            stopPolling()
-            isLoggedIn = () => data.currentUser ? true : false 
-          }
+          if(data.isLoggedIn) isLoggedIn = true
 
           return(
             <div className="App">
