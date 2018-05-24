@@ -8,12 +8,12 @@ const LoginContainer = () => (
   <Mutation mutation={LOGIN_MUTATION}>
     {mutation => {
 
-      const setIsLoggedIn = bool => {
-        mutation({ variables: { bool } })
+      const logIn = () => {
+        mutation({ variables: { bool: true } })
       }
 
       return(
-        <LoginForm setIsLoggedIn={setIsLoggedIn} loginUser={loginUser} />
+        <LoginForm logIn={logIn} loginUser={loginUser} />
       )
 
     }}

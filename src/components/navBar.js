@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 class SubMenu extends Component {
 
@@ -64,10 +65,15 @@ class SubMenu extends Component {
       <Fragment>
         <p style={linkStyle}>{this.props.username}</p>
         <a onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.profileBackgroundColor, color: this.state.profileTextColor}} href="#">My Profile</a>
-        <a onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.signOutBackgroundColor, color: this.state.signOutTextColor}} href="http://localhost:3001/logout">Sign out</a>
+        <a onClick={this.props.signOut} onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.signOutBackgroundColor, color: this.state.signOutTextColor}} href="http://localhost:3001/logout">Sign out</a>
       </Fragment>
     )
   }
+}
+
+SubMenu.propTypes = {
+  username: PropTypes.string.isRequired,
+  signOut: PropTypes.func.isRequired
 }
 
 class NavBar extends Component {
@@ -185,13 +191,17 @@ class NavBar extends Component {
         </span>
         <a onMouseEnter={this.updateAccountLinkColor} onMouseLeave={this.updateAccountLinkColor} style={{...navLinkStyle, marginRight:"100px", backgroundColor: this.state.accountLinkColor}} ref={this.setMenuRef} onClick={() => this.toggleSubmenu()} href="#">Account &or;</a>
         {this.state.submenuVisible && 
-          <nav style={subMenuStyle} ref={this.setWrapperRef}><SubMenu username={"user"} /></nav>
+          <nav style={subMenuStyle} ref={this.setWrapperRef}><SubMenu username={"user"} signOut={this.props.signOut} /></nav>
         }
       </nav>
     )
   
   }
 
+}
+
+NavBar.propTypes = {
+  signOut: PropTypes.func.isRequired
 }
 
 export default NavBar
