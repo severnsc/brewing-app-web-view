@@ -83,13 +83,33 @@ export default {
 
     },
 
-    updateDashboardModal: (_, { id }, { cache }) => {
+    updateModal: (_, { type, id }, { cache }) => {
 
-      cache.writeData({
-        data: {
-          dashboardModalItemId: id
+      const query = gql`
+        query {
+          modalItem @client {
+            type
+            itemId
+          }
         }
-      })
+      `
+
+      const previous = cache.readQuery({ query })
+
+      const data = {
+        modalItem: {
+          ...previous.modalItem,
+          type,
+          itemId: id
+        }
+      }
+
+      console.log("previous", previous.modalItem)
+      console.log("data", data)
+
+      cache.writeQuery({ query, data })
+
+      return null
 
     },
 

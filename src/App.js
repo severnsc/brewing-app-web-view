@@ -27,7 +27,11 @@ const defaults = {
   dashboardTableFilterString: "",
   dashboardItemLimit: 25,
   dashboardTableCurrentPage: 0,
-  dashboardModalItemId: "",
+  modalItem: {
+    __typename: "ModalItem",
+    type: "",
+    itemId: ""
+  },
   isLoggedIn: false
 }
 

@@ -36,7 +36,7 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, it
                       {modalMutation => {
 
                         const onTableRowClick = inventoryItemId => {
-                          modalMutation({ variables: { id: inventoryItemId} })
+                          modalMutation({ variables: { type: "inventoryItem", id: inventoryItemId} })
                         }
 
                         return(

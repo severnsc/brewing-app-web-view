@@ -30,9 +30,9 @@ export const UPDATE_DASHBOARD_TABLE_PAGE_NUMBER = gql`
   }
 `
 
-export const UPDATE_DASHBOARD_MODAL = gql`
-  mutation updateDashboardModal($id: String!) {
-    updateDashboardModal(id: $id) @client
+export const UPDATE_MODAL = gql`
+  mutation updateModal($type: String!, $id: String!) {
+    updateModal(type: $type, id: $id) @client
   }
 `
 export const LOGIN_MUTATION = gql`
