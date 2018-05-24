@@ -62,9 +62,21 @@ class App extends Component {
 
           if(data.isLoggedIn) isLoggedIn = true
 
+          const modalStyle = {
+            backgroundColor: "rgba(0,0,0,0.5)",
+            position: "fixed",
+            height: "100%",
+            width: "100%",
+            top: "0",
+            left: "0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }
+
           const modal = data.modalItem.type !== "" ? (
             <Modal>
-              <div>
+              <div style={modalStyle}>
                 {data.modalItem.itemId}
               </div>
             </Modal>
