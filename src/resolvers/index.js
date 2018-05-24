@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { isLoggedInQuery } from '../queries'
 
 export default {
   Mutation: {
@@ -103,9 +102,6 @@ export default {
           itemId: id
         }
       }
-
-      console.log("previous", previous.modalItem)
-      console.log("data", data)
 
       cache.writeQuery({ query, data })
 
