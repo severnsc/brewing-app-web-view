@@ -7,8 +7,9 @@ import Header from './Header'
 import ApolloClient from 'apollo-client';
 import Modal from "./components/modal"
 import PropertySelectorThingy from "./components/propertySelectorThingy"
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import { topLevelQuery } from './queries'
+import { UPDATE_MODAL } from './mutations'
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link'
@@ -64,9 +65,20 @@ class App extends Component {
           if(data.isLoggedIn) isLoggedIn = true
 
           const modal = data.modalItem.type !== "" ? (
-            <Modal>
-              {data.modalItem.itemId}
-            </Modal>
+            <Mutation mutation={UPDATE_MODAL}>
+              {mutation => {
+
+                const closeModal = () => {
+                  mutation({ variables: {type: "", id: ""} })
+                }
+
+                return(
+                  <Modal closeModal={closeModal}>
+                    {data.modalItem.itemId}
+                  </Modal>
+                )
+              }}
+            </Mutation>
           ) : null
 
           return(

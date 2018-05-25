@@ -59,7 +59,7 @@ Overlay.propTypes = {
   ]).isRequired
 }
 
-const Modal = ({ children }) => {
+const Modal = ({ children, closeModal }) => {
 
   const modalStyle = {
     backgroundColor: "rgba(0,0,0,0.5)",
@@ -69,6 +69,7 @@ const Modal = ({ children }) => {
     top: "0",
     left: "0",
     display: "flex",
+    flexFlow: "column",
     alignItems: "center",
     justifyContent: "center"
   }
@@ -79,6 +80,7 @@ const Modal = ({ children }) => {
           <Overlay>
             {children}
           </Overlay>
+          <button onClick={() => closeModal()}>Close</button>
         </div>
     </ModalConstructor>
   )
@@ -86,7 +88,8 @@ const Modal = ({ children }) => {
 }
 
 Modal.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  closeModal: PropTypes.func.isRequired
 }
 
 export default Modal
