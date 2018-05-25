@@ -6,6 +6,8 @@ import Main from './Main'
 import Header from './Header'
 import ApolloClient from 'apollo-client';
 import Modal from "./components/modal"
+import Overlay from "./components/overlay"
+import PropertySelectorThingy from "./components/propertySelectorThingy"
 import { Query } from 'react-apollo'
 import { topLevelQuery } from './queries'
 import { HttpLink } from 'apollo-link-http';
@@ -62,23 +64,11 @@ class App extends Component {
 
           if(data.isLoggedIn) isLoggedIn = true
 
-          const modalStyle = {
-            backgroundColor: "rgba(0,0,0,0.5)",
-            position: "fixed",
-            height: "100%",
-            width: "100%",
-            top: "0",
-            left: "0",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }
-
           const modal = data.modalItem.type !== "" ? (
             <Modal>
-              <div style={modalStyle}>
+              <Overlay>
                 {data.modalItem.itemId}
-              </div>
+              </Overlay>
             </Modal>
           ) : null
 
