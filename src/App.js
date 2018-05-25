@@ -6,7 +6,6 @@ import Main from './Main'
 import Header from './Header'
 import ApolloClient from 'apollo-client';
 import Modal from "./components/modal"
-import Overlay from "./components/overlay"
 import PropertySelectorThingy from "./components/propertySelectorThingy"
 import { Query } from 'react-apollo'
 import { topLevelQuery } from './queries'
@@ -66,9 +65,7 @@ class App extends Component {
 
           const modal = data.modalItem.type !== "" ? (
             <Modal>
-              <Overlay>
-                {data.modalItem.itemId}
-              </Overlay>
+              {data.modalItem.itemId}
             </Modal>
           ) : null
 

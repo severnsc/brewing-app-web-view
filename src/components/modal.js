@@ -35,6 +35,30 @@ ModalConstructor.propTypes = {
   children: PropTypes.element.isRequired
 }
 
+const Overlay = ({ children }) => {
+
+  const overlayStyle = {
+    overflowY: "auto",
+    height: "66%",
+    width: "41%",
+    backgroundColor: "white"
+  }
+
+  return(
+    <div style={overlayStyle}>
+      {children}
+    </div>
+  )
+
+}
+
+Overlay.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+}
+
 const Modal = ({ children }) => {
 
   const modalStyle = {
@@ -52,7 +76,9 @@ const Modal = ({ children }) => {
   return(
     <ModalConstructor>
         <div style={modalStyle}>
-          {children}
+          <Overlay>
+            {children}
+          </Overlay>
         </div>
     </ModalConstructor>
   )
