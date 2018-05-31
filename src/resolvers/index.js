@@ -94,6 +94,29 @@ export default {
       return null
 
     },
+
+    updateViewModel: (_, { viewModel }, { cache }) => {
+
+      const query = gql`
+        query {
+          viewModel @client
+        }
+      `
+
+      const previous = cache.readQuery({ query })
+
+      const data = {
+        viewModel: {
+          __typename: "ViewModel",
+          isUsernameUnique: false
+        }
+      }
+
+      cache.writeData({ query, data })
+
+      return null
+
+    },
   
   }
 }

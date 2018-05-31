@@ -41,3 +41,11 @@ export const isLoggedInQuery = gql`
     isLoggedIn @client
   }
 `
+
+export const signupViewModelQuery = gql`
+  query {
+    viewModel @client {
+      isUsernameUnique
+    }
+  }
+`

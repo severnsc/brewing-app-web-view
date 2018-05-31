@@ -27,7 +27,10 @@ const defaults = {
   dashboardTableFilterString: "",
   dashboardItemLimit: 25,
   dashboardTableCurrentPage: 0,
-  isLoggedIn: false
+  isLoggedIn: false,
+  viewModel: {
+    __typename: "ViewModel"
+  }
 }
 
 const stateLink = withClientState({

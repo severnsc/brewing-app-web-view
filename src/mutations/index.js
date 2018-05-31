@@ -35,3 +35,9 @@ export const LOGIN_MUTATION = gql`
     setIsLoggedIn(bool: $bool) @client
   }
 `
+
+export const UPDATE_VIEW_MODEL = gql`
+  mutation updateViewModel($viewModel: ViewModel) {
+    updateViewModel(viewModel: $viewModel) @client
+  }
+`
