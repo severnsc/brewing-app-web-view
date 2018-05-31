@@ -11,31 +11,19 @@ class SignupForm extends Component {
       username: "",
       email: "",
       password: "",
-      confirmPassword: "",
-      usernameErrorText: ""
+      confirmPassword: ""
     }
   }
 
   componentDidUpdate(prevProps, prevState){
     if(this.state.username !== prevState.username){
-      this.props.isUsernameUnique(this.state.username)
-        .then(bool => {
-          console.log(bool)
-          if(bool && prevState.usernameErrorText !== ""){
-            this.setState({usernameErrorText: ""})
-          }
-
-          if(!bool && prevState.usernameErrorText === ""){
-            this.setState({usernameErrorText: "Username already taken!"})
-          }
-        })
+      this.props.validateUsername(this.state.username)
     }
   }
 
   onSubmit(e) {
     e.preventDefault()
     this.props.createUser(this.state.username, this.state.password, this.state.email)
-    this.props.navigate()
   }
 
   handleUsername(event) {
@@ -75,7 +63,12 @@ class SignupForm extends Component {
                                       ? ""
                                       : "Must match password!"
 
-    const submitDisabled = this.state.usernameErrorText !== "" ||
+    const usernameErrorText = this.state.username !== "" &&
+                              !this.props.isUsernameUnique
+                              ? "Username already taken!"
+                              : ""
+
+    const submitDisabled = usernameErrorText !== "" ||
                            emailErrorText !== "" ||
                            passwordErrorText !== "" ||
                            confirmPasswordErrorText !== "" ||
@@ -89,7 +82,7 @@ class SignupForm extends Component {
         <form style={flexColumnStyle} onSubmit={(e) => this.onSubmit(e)}>
           <label>Username
             <input type="text" value={this.state.username} onChange={(e) => this.handleUsername(e)} />
-            <span>{this.state.usernameErrorText}</span>
+            <span>{usernameErrorText}</span>
           </label>
           <label>Email
             <input type="email" value={this.state.email} onChange={(e) => this.handleEmail(e)} />
@@ -114,9 +107,9 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  isUsernameUnique: PropTypes.func.isRequired,
-  createUser: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired
+  validateUsername: PropTypes.func.isRequired,
+  isUsernameUnique: PropTypes.bool.isRequired,
+  createUser: PropTypes.func.isRequired
 }
 
 export default SignupForm
