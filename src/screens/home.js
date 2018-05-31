@@ -1,14 +1,8 @@
 import React from 'react'
-import SignupForm from '../components/signupForm'
-import { isUsernameUnique } from '../adapters/userAdapter'
-import { createUser } from '../auth'
+import SignupContainer from '../containers/signupContainer'
 
 const Home = () => (
-  <SignupForm 
-    isUsernameUnique={isUsernameUnique}
-    createUser={createUser}
-    navigate={() => {}} 
-  />
+  <SignupContainer />
 )
 
 export default Home
