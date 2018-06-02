@@ -1,6 +1,6 @@
 import React from "react"
 import { Mutation, Query } from "react-apollo"
-import { UPDATE_VIEW_MODEL, SET_LOADING } from "../mutations"
+import { UPDATE_VIEW_MODEL } from "../mutations"
 import { validateUsernameAsync, createUserAsync } from "../compose"
 import { signupViewModelQuery } from "../queries"
 import { toProfile } from "../navigation"
@@ -17,49 +17,39 @@ const SignupContainer = () => (
         })
       }
 
+      const createUserFunc = (username, password, email) => {
+        createUserAsync(username, password, email).then(model => {
+          updateViewModel({ variables: {viewModel: model} })
+          if(model.username) toProfile()
+        })
+      }
+
       return(
-        <Mutation mutation={SET_LOADING}>
-          {setLoading => {
+        <Query query={signupViewModelQuery}>
+          {({loading, error, data}) => {
 
-             const createUserFunc = (username, password, email) => {
-                setLoading({ variables: {bool: true} })
-                createUserAsync(username, password, email).then(model => {
-                  updateViewModel({ variables: {viewModel: model} })
-                  if(model.username) toProfile()
-                  setLoading({ variables: {bool: false} })
-                })
-              }
+            let isUsernameUnique = true
+            let errorMessage = ""
+            
+            if(data.viewModel){
+              if(!data.viewModel.isUsernameUnique) 
+                isUsernameUnique = false
+              errorMessage = data.viewModel.error
+            }
 
-              return(
-                <Query query={signupViewModelQuery}>
-                  {({loading, error, data}) => {
+            return(
 
-                    let isUsernameUnique = true
-                    let errorMessage = ""
-                    
-                    if(data.viewModel){
-                      if(!data.viewModel.isUsernameUnique) 
-                        isUsernameUnique = false
-                      errorMessage = data.viewModel.error
-                    }
+              <SignupForm
+                error={errorMessage}
+                validateUsername={validateUsernameFunc}
+                isUsernameUnique={isUsernameUnique}
+                createUser={createUserFunc}
+              />
 
-                    return(
-
-                      <SignupForm
-                        error={errorMessage}
-                        validateUsername={validateUsernameFunc}
-                        isUsernameUnique={isUsernameUnique}
-                        createUser={createUserFunc}
-                      />
-
-                    )
-
-                  }}
-                </Query>
-              )
+            )
 
           }}
-        </Mutation>
+        </Query>
       )
 
     }}
