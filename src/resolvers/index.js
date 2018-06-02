@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { isLoggedInQuery } from '../queries'
 
 export default {
   Mutation: {
@@ -97,22 +96,14 @@ export default {
 
     updateViewModel: (_, { viewModel }, { cache }) => {
 
-      const query = gql`
-        query {
-          viewModel @client
-        }
-      `
-
-      const previous = cache.readQuery({ query })
-
       const data = {
         viewModel: {
           __typename: "ViewModel",
-          isUsernameUnique: false
+          ...viewModel
         }
       }
 
-      cache.writeData({ query, data })
+      cache.writeData({ data })
 
       return null
 
