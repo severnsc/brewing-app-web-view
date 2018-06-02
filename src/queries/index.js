@@ -46,6 +46,7 @@ export const signupViewModelQuery = gql`
   query {
     viewModel @client {
       isUsernameUnique
+      error
     }
   }
 `

@@ -12,6 +12,6 @@ export const createUser = async (username, password, email) => {
     password,
     email
   })
-    .then(response => response)
-    .catch(e => e)
+    .then(response => response.status === 200 ? true : false)
+    .catch(e => false)
 }

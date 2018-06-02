@@ -22,10 +22,18 @@ export const createUserPresenter = dispatchCreateUserAsync => {
 
   return async (username, password, email) => {
 
-    const user = await dispatchCreateUserAsync(username, password, email)
-    const userModel = userViewModel(user)
-
-    return userModel
+    const userCreated = await dispatchCreateUserAsync(username, password, email)
+    
+    if(userCreated){
+      const userModel = userViewModel({username, password, email})
+      return userModel
+    }else{
+      const signupModel = signupViewModel(
+        true,
+        "There was an error creating your account! Try again."
+      )
+      return signupModel
+    }
 
   }
 

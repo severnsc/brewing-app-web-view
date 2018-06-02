@@ -22,11 +22,11 @@ const SignupContainer = () => (
           {setLoading => {
 
              const createUserFunc = (username, password, email) => {
-                setLoading({ variables: {loading: true} })
-                createUserAsync(username, password, email).then(userModel => {
-                  updateViewModel({ variables: {viewModel: userModel} })
-                  toProfile()
-                  setLoading({ variables: {loading: false} })
+                setLoading({ variables: {bool: true} })
+                createUserAsync(username, password, email).then(model => {
+                  updateViewModel({ variables: {viewModel: model} })
+                  if(model.username) toProfile()
+                  setLoading({ variables: {bool: false} })
                 })
               }
 
@@ -35,13 +35,18 @@ const SignupContainer = () => (
                   {({loading, error, data}) => {
 
                     let isUsernameUnique = true
-                    if(data.viewModel && !data.viewModel.isUsernameUnique){
-                      isUsernameUnique = false
+                    let errorMessage = ""
+                    
+                    if(data.viewModel){
+                      if(!data.viewModel.isUsernameUnique) 
+                        isUsernameUnique = false
+                      errorMessage = data.viewModel.error
                     }
 
                     return(
 
                       <SignupForm
+                        error={errorMessage}
                         validateUsername={validateUsernameFunc}
                         isUsernameUnique={isUsernameUnique}
                         createUser={createUserFunc}

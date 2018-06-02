@@ -1,13 +1,18 @@
 import constructErrorMessage from "./utils"
 
-export const signupViewModel = isUsernameUnique => {
+export const signupViewModel = (isUsernameUnique = true, error = "") => {
 
   if(typeof isUsernameUnique !== "boolean"){
     throw new TypeError(constructErrorMessage("isUsernameUnique", "boolean", isUsernameUnique))
   }
 
+  if(typeof error !== "string"){
+    throw new TypeError(constructErrorMessage("error", "string", error))
+  }
+
   return {
-    isUsernameUnique
+    isUsernameUnique,
+    error
   }
 
 }

@@ -79,6 +79,7 @@ class SignupForm extends Component {
     return(
       <div style={flexColumnStyle}>
         <h2>Sign up</h2>
+        {this.props.error}
         <form style={flexColumnStyle} onSubmit={(e) => this.onSubmit(e)}>
           <label>Username
             <input type="text" value={this.state.username} onChange={(e) => this.handleUsername(e)} />
@@ -109,7 +110,8 @@ class SignupForm extends Component {
 SignupForm.propTypes = {
   validateUsername: PropTypes.func.isRequired,
   isUsernameUnique: PropTypes.bool.isRequired,
-  createUser: PropTypes.func.isRequired
+  createUser: PropTypes.func.isRequired,
+  error: PropTypes.string
 }
 
 export default SignupForm
