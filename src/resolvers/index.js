@@ -96,14 +96,14 @@ export default {
 
     updateViewModel: (_, { viewModel }, { cache }) => {
 
-      const data = {
-        viewModel: {
-          __typename: "ViewModel",
-          ...viewModel
+      cache.writeData({
+        data: {
+          viewModel: {
+            __typename: "ViewModel",
+            ...viewModel
+          }
         }
-      }
-
-      cache.writeData({ data })
+      })
 
       return null
 
