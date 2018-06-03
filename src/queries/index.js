@@ -51,6 +51,14 @@ export const signupViewModelQuery = gql`
   }
 `
 
+export const loginViewModelQuery = gql`
+  query {
+    viewModel @client {
+      error
+    }
+  }
+`
+
 export const profileViewModelQuery = gql`
   query {
     currentUser {

@@ -1,6 +1,8 @@
 import {
   signupViewModel,
-  userViewModel
+  userViewModel,
+  loginViewModel,
+  dashboardViewModel
 } from './viewModel'
 
 export const validateUsernamePresenter = dispatchIsUsernameUniqueAsync => {
@@ -36,6 +38,26 @@ export const createUserPresenter = dispatchCreateUserAsync => {
     }
 
     return signupModel
+
+  }
+
+}
+
+export const loginUserPresenter = dispatchLoginUserAsync => {
+
+  return async (username, password) => {
+
+    const userLoggedIn = await dispatchLoginUserAsync(username, password)
+
+    let model
+
+    if(userLoggedIn){
+      model = dashboardViewModel()
+    }else{
+      model = loginViewModel("Invalid username or password!")
+    }
+
+    return model
 
   }
 

@@ -8,9 +8,7 @@ class LoginForm extends Component {
     super(props)
     this.state = {
       username: "",
-      password: "",
-      errorText: "",
-      toDashboard: false
+      password: ""
     }
   }
 
@@ -24,23 +22,10 @@ class LoginForm extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    this.props.loginUser(this.state.username, this.state.password)
-      .then(res => {
-        console.log(res)
-        if(res.data === "Please login"){
-          this.setState({errorText: "Invalid username or password!"})
-        }else{
-          this.setState({toDashboard: true}, this.props.logIn)
-        }
-      })
-      .catch(e => e)
+    this.props.login(this.state.username, this.state.password)
   }
 
   render() {
-
-    if(this.state.toDashboard){
-      return <Redirect to="/dashboard" />
-    }
 
     const flexColumnStyle = {
       display: "flex",
@@ -51,7 +36,7 @@ class LoginForm extends Component {
       <div style={flexColumnStyle}>
         <h2>Login</h2>
         <form onSubmit={e => this.onSubmit(e)} style={flexColumnStyle}>
-          {this.state.errorText}
+          {this.props.error}
           <label>Username
             <input value={this.state.username} type="text" onChange={e => this.handleUsername(e)} />
           </label>
@@ -68,8 +53,8 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  logIn: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired,
+  error: PropTypes.string
 }
 
 export default LoginForm

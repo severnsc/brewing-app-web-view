@@ -1,16 +1,5 @@
 import axios from 'axios'
 
-export const loginUser = async (username, password) => {
-  return axios.post('http://localhost:3001/login', {
-    username,
-    password
-  },
-  {withCredentials: true}
-  )
-    .then(response => response)
-    .catch(e => e)
-}
-
 export const sendRecoveryEmail = async username => {
   return axios.post('http://localhost:3001/sendRecoveryEmail', {
     username
