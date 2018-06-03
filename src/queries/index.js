@@ -50,3 +50,11 @@ export const signupViewModelQuery = gql`
     }
   }
 `
+
+export const profileViewModelQuery = gql`
+  query {
+    currentUser {
+      userName
+    }
+  }
+`

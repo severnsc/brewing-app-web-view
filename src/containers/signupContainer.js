@@ -3,10 +3,10 @@ import { Mutation, Query } from "react-apollo"
 import { UPDATE_VIEW_MODEL } from "../mutations"
 import { validateUsernameAsync, createUserAsync } from "../compose"
 import { signupViewModelQuery } from "../queries"
-import { toProfile } from "../navigation"
+import { withRouter } from "react-router"
 import SignupForm from "../components/signupForm"
 
-const SignupContainer = () => (
+const SignupContainer = ({match, location, history}) => (
 
   <Mutation mutation={UPDATE_VIEW_MODEL}>
     {updateViewModel => {
@@ -20,7 +20,7 @@ const SignupContainer = () => (
       const createUserFunc = (username, password, email) => {
         createUserAsync(username, password, email).then(model => {
           updateViewModel({ variables: {viewModel: model} })
-          if(model.username) toProfile()
+          if(model.error === "") history.push("/profile")
         })
       }
 
@@ -57,4 +57,4 @@ const SignupContainer = () => (
 
 )
 
-export default SignupContainer
+export default withRouter(SignupContainer)
