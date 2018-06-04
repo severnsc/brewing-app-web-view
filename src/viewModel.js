@@ -50,41 +50,55 @@ export const loginViewModel = (error = "") => {
 
 }
 
-export const dashboardViewModel = (dashboardTableSort = {sortBy: "Item name", order: "asc"}, dashboardTableFilterString = "", dashboardItemLimit = 25, dashboardTableCurrentPage = 0) => {
+export const tableViewModel = (itemLimit, currentPage) => {
 
-  if(typeof dashboardTableSort !== "object"){
-    throw new TypeError(constructErrorMessage("dashboardTableSort", "object", dashboardTableSort))
+  if(typeof itemLimit !== "number"){
+    throw new TypeError(constructErrorMessage("itemLimit", "number", itemLimit))
   }
 
-  if(Object.keys(dashboardTableSort) !== ["sortBy", "order"]){
-    throw new Error("dashboardTableSort object must only have keys sortBy and order")
-  }
-
-  if(!Object.values(dashboardTableSort).every(value => typeof value === "string")){
-    throw new TypeError("All values of dashboardTableSort must be of type string!")
-  }
-
-  if(!["asc", "desc"].includes(dashboardTableSort.order)){
-    throw new Error("Order must equal either 'asc' or 'desc'")
-  }
-
-  if(typeof dashboardTableFilterString !== ""){
-    throw new TypeError(constructErrorMessage("dashboardTableFilterString", "string", dashboardTableFilterString))
-  }
-
-  if(typeof dashboardItemLimit !== "number"){
-    throw new TypeError(constructErrorMessage("dashboardItemLimit", "number", dashboardItemLimit))
-  }
-
-  if(typeof dashboardTableCurrentPage !== "number"){
-    throw new TypeError(constructErrorMessage("dashboardTableCurrentPage", "number", dashboardTableCurrentPage))
+  if(typeof currentPage !== "number"){
+    throw new TypeError(constructErrorMessage("currentPage", "number", currentPage))
   }
 
   return {
-    dashboardTableSort,
-    dashboardTableFilterString,
-    dashboardItemLimit,
-    dashboardTableCurrentPage
+    itemLimit,
+    currentPage
+  }
+
+}
+
+export const filterableTableViewModel = (filterString) => {
+
+  if(typeof filterString !== "string"){
+    throw new TypeError(constructErrorMessage("filterString", "string", filterString))
+  }
+
+  return {
+    filterString
+  }
+
+}
+
+export const sortableTableViewModel = sortObject => {
+
+  if(typeof sortObject !== "object"){
+    throw new TypeError(constructErrorMessage("sortObject", "object", sortObject))
+  }
+
+  if(!Object.keys(sortObject).every(key => key === "sortBy" || key === "order")){
+    throw new Error("sortObject object must only have keys sortBy and order")
+  }
+
+  if(!Object.values(sortObject).every(value => typeof value === "string")){
+    throw new TypeError("All values of sortObject must be of type string!")
+  }
+
+  if(!["asc", "desc"].includes(sortObject.order)){
+    throw new Error("Order must equal either 'asc' or 'desc'")
+  }
+
+  return {
+    sortObject
   }
 
 }

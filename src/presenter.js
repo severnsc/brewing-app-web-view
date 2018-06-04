@@ -2,7 +2,9 @@ import {
   signupViewModel,
   userViewModel,
   loginViewModel,
-  dashboardViewModel
+  tableViewModel,
+  filterableTableViewModel,
+  sortableTableViewModel
 } from './viewModel'
 
 export const validateUsernamePresenter = dispatchIsUsernameUniqueAsync => {
@@ -43,6 +45,24 @@ export const createUserPresenter = dispatchCreateUserAsync => {
 
 }
 
+export const dashboardViewModel = function(sortObject, itemLimit = 25, currentPage = 0, filterString = "") {
+
+  const tableModel = tableViewModel(itemLimit, currentPage)
+
+  const filterableTableModel = filterableTableViewModel(filterString)
+
+  const sortableTableModel = sortableTableViewModel(sortObject)
+
+  const dashboardModel = {
+    ...tableModel,
+    ...filterableTableModel,
+    ...sortableTableModel
+  }
+
+  return dashboardModel
+
+}
+
 export const loginUserPresenter = dispatchLoginUserAsync => {
 
   return async (username, password) => {
@@ -52,7 +72,7 @@ export const loginUserPresenter = dispatchLoginUserAsync => {
     let model
 
     if(userLoggedIn){
-      model = dashboardViewModel()
+      model = dashboardViewModel({sortBy: "Item name", order: "asc"})
     }else{
       model = loginViewModel("Invalid username or password!")
     }

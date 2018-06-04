@@ -14,10 +14,7 @@ export const createUser = async (username, password, email) => {
     password,
     email
   })
-    .then(response => {
-      console.log(response)
-      return response.status === 200 ? true : false
-    })
+    .then(response => response.status === 200 ? true : false)
     .catch(e => false)
 }
 
@@ -28,6 +25,6 @@ export const loginUser = async (username, password) => {
   },
   {withCredentials: true}
   )
-    .then(response => response)
+    .then(response => response.status === 200 ? true : false)
     .catch(e => e)
 }

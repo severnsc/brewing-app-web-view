@@ -17,7 +17,7 @@ const LoginContainer = ({ history }) => (
             const login = (username, password) => {
               loginUserAsync(username, password).then(viewModel => {
                 updateViewModel({ variables: {viewModel} })
-                if(viewModel.error === ""){
+                if(!viewModel.error){
                   loginMutation({ variables: {bool: true} })
                   history.push("/dashboard")
                 }
