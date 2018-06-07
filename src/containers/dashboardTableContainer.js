@@ -2,7 +2,12 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import shortid from 'shortid'
 import SortableTableContainer from './common/sortableTableContainer'
-import { dashboardTableQuery } from '../queries'
+
+import {
+  dashboardTableItemsQuery,
+  dashboardTablePropsQuery
+} from '../queries'
+
 import {
   UPDATE_DASHBOARD_TABLE_SORT,
   UPDATE_DASHBOARD_ITEM_LIMIT,
@@ -20,7 +25,7 @@ const DashboardTableContainer = () => {
   ]
 
   return(
-    <Query query={dashboardTableQuery}>
+    <Query query={dashboardTableItemsQuery}>
       {({loading, error, data}) => {
 
         if(loading) return <p>Loading...</p>
@@ -46,28 +51,36 @@ const DashboardTableContainer = () => {
           return {id: inventoryItem.id, cells}
         })
 
-        let filteredTableRows
-        if(data.dashboardTableFilterString !== ""){
-          filteredTableRows = tableRows.filter(tableRow => {
-            return tableRow.cells.find(cell => cell.value.toString().toLowerCase().includes(data.dashboardTableFilterString))
-          })
-        }
-
-        const sort = data.dashboardTableSort
-        const itemsPerPage = parseInt(data.dashboardItemLimit, 10)
-        const currentPage = data.dashboardTableCurrentPage
-
         return(
-          <SortableTableContainer
-            sortOrderMutation={UPDATE_DASHBOARD_TABLE_SORT}
-            columns={columns}
-            tableRows={filteredTableRows || tableRows}
-            sort={sort}
-            itemsPerPage={itemsPerPage}
-            itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
-            currentPage={currentPage}
-            pageNumberMutation={UPDATE_DASHBOARD_TABLE_PAGE_NUMBER}
-          />
+          <Query query={dashboardTablePropsQuery}>
+            {({loading, error, propsData}) => {
+
+              let filteredTableRows
+              if(propsData.viewModel.filterString !== ""){
+                filteredTableRows = tableRows.filter(tableRow => {
+                  return tableRow.cells.find(cell => cell.value.toString().toLowerCase().includes(propsData.viewModel.filterString))
+                })
+              }
+
+              const sort = propsData.viewModel.sortObject
+              const itemsPerPage = parseInt(propsData.viewModel.itemLimit, 10)
+              const currentPage = propsData.viewModel.currentPage
+
+              return(
+                <SortableTableContainer
+                  sortOrderMutation={UPDATE_DASHBOARD_TABLE_SORT}
+                  columns={columns}
+                  tableRows={filteredTableRows || tableRows}
+                  sort={sort}
+                  itemsPerPage={itemsPerPage}
+                  itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
+                  currentPage={currentPage}
+                  pageNumberMutation={UPDATE_DASHBOARD_TABLE_PAGE_NUMBER}
+                />
+              )
+
+            }}
+          </Query>
         )
       }}
     </Query>

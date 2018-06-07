@@ -96,11 +96,15 @@ export default {
 
     updateViewModel: (_, { viewModel }, { cache }) => {
 
+      const newViewModel = viewModel.sortObject
+                     ? {...viewModel, sortObject: {...viewModel.sortObject, __typename: "SubViewModel"}}
+                     : viewModel
+
       cache.writeData({
         data: {
           viewModel: {
             __typename: "ViewModel",
-            ...viewModel
+            ...newViewModel
           }
         }
       })

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const dashboardTableQuery = gql`
+export const dashboardTableItemsQuery = gql`
   query {
     currentUser {
       inventories {
@@ -16,17 +16,22 @@ export const dashboardTableQuery = gql`
         }
       }
     }
+  }
+`
 
-    dashboardTableSort @client {
-      sortBy
-      order
+export const dashboardTablePropsQuery = gql`
+  query {
+    viewModel @client {
+      __typename
+      sortObject {
+        __typename
+        sortBy
+        order
+      }
+      itemLimit
+      filterString
+      currentPage
     }
-
-    dashboardTableFilterString @client
-
-    dashboardItemLimit @client
-
-    dashboardTableCurrentPage @client
   }
 `
 
