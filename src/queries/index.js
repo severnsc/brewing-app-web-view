@@ -22,9 +22,7 @@ export const dashboardTableItemsQuery = gql`
 export const dashboardTablePropsQuery = gql`
   query {
     viewModel @client {
-      __typename
       sortObject {
-        __typename
         sortBy
         order
       }
