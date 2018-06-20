@@ -19,11 +19,8 @@ const uri = "http://localhost:3001/graphql"
 const cache = new InMemoryCache()
 
 const defaults = {
-  dashboardTableSort: {
-    __typename: "DashboardTableSort",
-    sortBy: "Item name",
-    order: "asc"
-  },
+  dashboardTableSortBy: "Item name",
+  dashboardTableSortOrder: "asc",
   dashboardTableFilterString: "",
   dashboardItemLimit: 25,
   dashboardTableCurrentPage: 0,

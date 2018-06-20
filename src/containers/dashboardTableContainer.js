@@ -36,11 +36,11 @@ const DashboardTableContainer = () => {
 
         const tableRows = allInventoryItems.map(inventoryItem => {
           const cells = [
-            {id: shortid.generate(), columnName: "Item name", value: JSON.parse(inventoryItem.object).name},
-            {id: shortid.generate(), columnName: "Current Quantity", value: inventoryItem.currentQuantity},
-            {id: shortid.generate(), columnName: "Reorder Threshold", value: inventoryItem.reorderThreshold},
-            {id: shortid.generate(), columnName: "Unit Cost", value: inventoryItem.unitCost},
-            {id: shortid.generate(), columnName: "Reorder Cost", value: inventoryItem.reorderCost}
+            JSON.parse(inventoryItem.object).name,
+            inventoryItem.currentQuantity,
+            inventoryItem.reorderThreshold,
+            inventoryItem.unitCost,
+            inventoryItem.reorderCost
           ]
 
           return {id: inventoryItem.id, cells}
@@ -49,11 +49,12 @@ const DashboardTableContainer = () => {
         let filteredTableRows
         if(data.dashboardTableFilterString !== ""){
           filteredTableRows = tableRows.filter(tableRow => {
-            return tableRow.cells.find(cell => cell.value.toString().toLowerCase().includes(data.dashboardTableFilterString))
+            return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(data.dashboardTableFilterString))
           })
         }
 
-        const sort = data.dashboardTableSort
+        const sortBy = data.dashboardTableSortBy
+        const sortOrder = data.dashboardTableSortOrder
         const itemsPerPage = parseInt(data.dashboardItemLimit, 10)
         const currentPage = data.dashboardTableCurrentPage
 
@@ -62,7 +63,8 @@ const DashboardTableContainer = () => {
             sortOrderMutation={UPDATE_DASHBOARD_TABLE_SORT}
             columns={columns}
             tableRows={filteredTableRows || tableRows}
-            sort={sort}
+            sortBy={sortBy}
+            sortOrder={sortOrder}
             itemsPerPage={itemsPerPage}
             itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
             currentPage={currentPage}

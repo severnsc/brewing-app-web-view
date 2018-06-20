@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import HoverableTableRow from './hoverableTableRow'
-import shortid from "shortid"
 
 const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick }) => {
 
@@ -21,7 +20,8 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
 
   const sortedTableRows = tableRows.concat().sort((tableRowA, tableRowB) => {
 
-    const sortByIndex = columns.indexOf(sortBy)
+    const columnNames = columns.map(column => column.name)
+    const sortByIndex = columnNames.indexOf(sortBy)
 
     let aValue = tableRowA.cells[sortByIndex]
     let bValue = tableRowB.cells[sortByIndex]

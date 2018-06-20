@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import SortableTable from '../../components/sortableTable'
 
-const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation }) => (
+const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, sortOrder, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation }) => (
   <Mutation mutation={sortOrderMutation}>
     {sortMutation => {
 
-      const toggleSortOrder = cellName => {
+      const toggleSort = cellName => {
         sortMutation({ variables: {cellName: cellName} })
       }
 
@@ -34,9 +34,10 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, it
                   return(
                     <SortableTable
                       columns={columns}
-                      toggleSortOrder={toggleSortOrder}
+                      toggleSort={toggleSort}
                       tableRows={tableRows}
-                      sort={sort}
+                      sortBy={sortBy}
+                      sortOrder={sortOrder}
                       itemsPerPage={itemsPerPage}
                       onItemsPerPageChange={onItemsPerPageChange}
                       currentPage={currentPage}
@@ -56,22 +57,20 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sort, it
 
 SortableTableContainer.propTypes = {
   sortOrderMutation: PropTypes.object.isRequired,
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired).isRequired,
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
   tableRows: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    cells: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      columnName: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-    })).isRequired
+    cells: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ).isRequired
   })).isRequired,
-  sort: PropTypes.shape({
-    sortBy: PropTypes.string.isRequired,
-    order: PropTypes.oneOf(["asc", "desc"]).isRequired
-  }),
+  sortBy: PropTypes.string.isRequired,
+  sortOrder: PropTypes.oneOf(["asc", "desc"]).isRequired,
   itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
   itemsPerPageMutation: PropTypes.object.isRequired,
   currentPage: PropTypes.number.isRequired,

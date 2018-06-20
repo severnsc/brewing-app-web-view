@@ -17,10 +17,9 @@ export const dashboardTableQuery = gql`
       }
     }
 
-    dashboardTableSort @client {
-      sortBy
-      order
-    }
+    dashboardTableSortBy @client
+
+    dashboardTableSortOrder @client
 
     dashboardTableFilterString @client
 
