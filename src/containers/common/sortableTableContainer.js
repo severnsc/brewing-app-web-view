@@ -43,6 +43,7 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, 
                       currentPage={currentPage}
                       decrementPage={decrementPage}
                       incrementPage={incrementPage}
+                      onTableRowClick={() => {}}
                     />
                   )
                 }}
