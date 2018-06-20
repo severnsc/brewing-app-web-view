@@ -8,12 +8,9 @@ class HoverableTableRow extends Component {
     this.state = {
       hover: false
     }
-
-    this.updateHoverState = this.updateHoverState.bind(this)
-    this.handleClick = this.handleClick.bind(this)
   }
 
-  updateHoverState(e) {
+  updateHoverState = e => {
     if(e.type === "mouseenter"){
       this.setState({hover: true})
     }
@@ -23,7 +20,7 @@ class HoverableTableRow extends Component {
     }
   }
 
-  handleClick() {
+  handleClick = () => {
     this.props.onClick(this.props.id)
   }
 

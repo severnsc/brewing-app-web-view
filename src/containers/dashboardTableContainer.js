@@ -41,11 +41,11 @@ const DashboardTableContainer = () => {
 
         const tableRows = allInventoryItems.map(inventoryItem => {
           const cells = [
-            {id: shortid.generate(), columnName: "Item name", value: JSON.parse(inventoryItem.object).name},
-            {id: shortid.generate(), columnName: "Current Quantity", value: inventoryItem.currentQuantity},
-            {id: shortid.generate(), columnName: "Reorder Threshold", value: inventoryItem.reorderThreshold},
-            {id: shortid.generate(), columnName: "Unit Cost", value: inventoryItem.unitCost},
-            {id: shortid.generate(), columnName: "Reorder Cost", value: inventoryItem.reorderCost}
+            JSON.parse(inventoryItem.object).name,
+            inventoryItem.currentQuantity,
+            inventoryItem.reorderThreshold,
+            inventoryItem.unitCost,
+            inventoryItem.reorderCost
           ]
 
           return {id: inventoryItem.id, cells}
@@ -58,11 +58,12 @@ const DashboardTableContainer = () => {
               let filteredTableRows
               if(propsData.viewModel.filterString !== ""){
                 filteredTableRows = tableRows.filter(tableRow => {
-                  return tableRow.cells.find(cell => cell.value.toString().toLowerCase().includes(propsData.viewModel.filterString))
+                  return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(propsData.viewModel.filterString))
                 })
               }
 
-              const sort = propsData.viewModel.sortObject
+              const sortBy = propsData.viewModel.sortBy
+              const sortOrder = propsData.viewModel.sortOrder
               const itemsPerPage = parseInt(propsData.viewModel.itemLimit, 10)
               const currentPage = propsData.viewModel.currentPage
 
@@ -71,7 +72,8 @@ const DashboardTableContainer = () => {
                   sortOrderMutation={UPDATE_DASHBOARD_TABLE_SORT}
                   columns={columns}
                   tableRows={filteredTableRows || tableRows}
-                  sort={sort}
+                  sortBy={sortBy}
+                  sortOrder={sortOrder}
                   itemsPerPage={itemsPerPage}
                   itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
                   currentPage={currentPage}

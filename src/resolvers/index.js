@@ -6,28 +6,23 @@ export default {
 
       const query = gql`
         query {
-          dashboardTableSort @client {
-            sortBy
-            order
-          }
+          dashboardTableSortBy @client
+          dashboardTableSortOrder @client
         }
       `
 
       const previous = cache.readQuery({ query })
 
-      let order = previous.dashboardTableSort.order
-      if(previous.dashboardTableSort.sortBy === cellName){
-        order = previous.dashboardTableSort.order === "asc" ? "desc" : "asc"
+      let order = previous.dashboardTableSortOrder
+      if(previous.dashboardTableSortBy === cellName){
+        order = previous.dashboardTableSortOrder === "asc" ? "desc" : "asc"
       }else{
         order = "asc"
       }
 
       const data = {
-        dashboardTableSort: {
-          ...previous.dashboardTableSort,
-          sortBy: cellName,
-          order
-        }
+        dashboardTableSortBy: cellName,
+        dashboardTableSortOrder: order
       }
 
       cache.writeQuery({ query, data })
