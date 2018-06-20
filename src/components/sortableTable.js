@@ -8,14 +8,14 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
   const sortIndicator = sortOrder === "asc" ? "∧" : "∨"
 
   const headerCells = columns.map(column => {
-    if(column === sortBy){
-      return {id: shortid.generate(), name: `${column} ${sortIndicator}`}
+    if(column.name === sortBy){
+      return {...column, name: `${column.name} ${sortIndicator}`}
     }else{
-      return {id: shortid.generate(), name: column}
+      return column
     }
   })
 
-  const handleClick = cellName => toggleSortOrder(cellName)
+  const handleClick = cellName => toggleSort(cellName)
 
   const handleItemsPerPageChange = e => onItemsPerPageChange(e.target.value)
 
@@ -79,8 +79,8 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
       <table style={{border: "1px solid", margin: "10px", borderCollapse: "collapse"}}>
         <thead style={{backgroundColor: "#e8e8e8"}}>
           <tr>
-            {headerCells.map(cell => (
-              <th style={{border: "1px solid", width: `${widthPercentage}%`, padding: "10px"}} key={cell.id} onClick={() => handleClick(cell.name)}>
+            {headerCells.map((cell, index) => (
+              <th style={{border: "1px solid", width: `${widthPercentage}%`, padding: "10px"}} key={cell.id} onClick={() => handleClick(columns[index].name)}>
                 {cell.name}
               </th>
             ))}
@@ -89,9 +89,9 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
         <tbody>
           {currentPageTableRows.map(row => {
             return (
-              <HoverableTableRow onClick={onTableRowClick} key={row.id}>
-                {row.cells.map(cell => 
-                  <td style={{border: "1px solid", width: `${widthPercentage}%`}}>{cell}</td>)}
+              <HoverableTableRow onClick={onTableRowClick} key={row.id} id={row.id}>
+                {row.cells.map((cell, index) => 
+                  <td key={index} style={{border: "1px solid", width: `${widthPercentage}%`}}>{cell}</td>)}
               </HoverableTableRow>
             )
           })}
@@ -115,7 +115,12 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
 }
 
 SortableTable.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
   tableRows: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -123,10 +128,9 @@ SortableTable.propTypes = {
         PropTypes.oneOfType([PropTypes.string, PropTypes.number])
       )
     })
-  ).isRequired
-  })).isRequired,
+  ).isRequired,
   sortBy: PropTypes.string.isRequired,
-  sortOrder: PropTypes.oneOf(["asc", "desc"]).isRequired
+  sortOrder: PropTypes.oneOf(["asc", "desc"]).isRequired,
   toggleSort: PropTypes.func.isRequired,
   itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
   onItemsPerPageChange: PropTypes.func.isRequired,
