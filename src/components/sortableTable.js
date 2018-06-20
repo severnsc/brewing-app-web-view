@@ -1,21 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import HoverableTableRow from './hoverableTableRow'
+import shortid from "shortid"
 
-const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick }) => {
+const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick }) => {
 
-  let sortIndicator = "∧"
-  let sortIndex = 0
-  if(sort){
-    if(sort.order === "desc") sortIndicator = "∨"
-    sortIndex = sort.sortBy
-  }
+  const sortIndicator = sortOrder === "asc" ? "∧" : "∨"
 
-  const headerCells = columns.map((column, index) => {
-    if(index === sortIndex || column.name === sortIndex){
-      return {id: column.id, name: `${column.name} ${sortIndicator}`}
+  const headerCells = columns.map(column => {
+    if(column === sortBy){
+      return {id: shortid.generate(), name: `${column} ${sortIndicator}`}
     }else{
-      return {id: column.id, name: column.name}
+      return {id: shortid.generate(), name: column}
     }
   })
 
@@ -23,38 +19,37 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
 
   const handleItemsPerPageChange = e => onItemsPerPageChange(e.target.value)
 
-  const sortedTableRows = tableRows.concat().sort((a, b) => {
-    const columnToSortBy = cell => cell.columnName === sort.sortBy
-    const aCell = a.cells.find(columnToSortBy)
-    const bCell = b.cells.find(columnToSortBy)
+  const sortedTableRows = tableRows.concat().sort((tableRowA, tableRowB) => {
 
-    let aCellValue = aCell.value
-    let bCellValue = bCell.value
+    const sortByIndex = columns.indexOf(sortBy)
 
-    if(typeof aCell.value === 'string'){
-      aCellValue = aCellValue.toLowerCase()
+    let aValue = tableRowA.cells[sortByIndex]
+    let bValue = tableRowB.cells[sortByIndex]
+
+    if(typeof aValue === 'string'){
+      aValue = aValue.toLowerCase()
     }
 
-    if(typeof bCell.value === 'string'){
-      bCellValue = bCellValue.toLowerCase()
+    if(typeof bValue === 'string'){
+      bValue = bValue.toLowerCase()
     }
     
-    if(sort.order === "asc"){
-      if(aCellValue < bCellValue){
+    if(sortOrder === "asc"){
+      if(aValue < bValue){
         return -1
       }
 
-      if(aCellValue > bCellValue){
+      if(aValue > bValue){
         return 1
       }
 
       return 0
     }else{
-      if(aCellValue < bCellValue){
+      if(aValue < bValue){
         return 1
       }
 
-      if(aCellValue > bCellValue){
+      if(aValue > bValue){
         return -1
       }
 
@@ -84,8 +79,8 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
       <table style={{border: "1px solid", margin: "10px", borderCollapse: "collapse"}}>
         <thead style={{backgroundColor: "#e8e8e8"}}>
           <tr>
-            {headerCells.map((cell, index) => (
-              <th style={{border: "1px solid", width: `${widthPercentage}%`, padding: "10px"}} key={cell.id} onClick={() => handleClick(columns[index].name)}>
+            {headerCells.map(cell => (
+              <th style={{border: "1px solid", width: `${widthPercentage}%`, padding: "10px"}} key={cell.id} onClick={() => handleClick(cell.name)}>
                 {cell.name}
               </th>
             ))}
@@ -94,9 +89,9 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
         <tbody>
           {currentPageTableRows.map(row => {
             return (
-              <HoverableTableRow onClick={onTableRowClick} key={row.id} id={row.id}>
+              <HoverableTableRow onClick={onTableRowClick} key={row.id}>
                 {row.cells.map(cell => 
-                  <td style={{border: "1px solid", width: `${widthPercentage}%`}} key={cell.id}>{cell.value}</td>)}
+                  <td style={{border: "1px solid", width: `${widthPercentage}%`}}>{cell}</td>)}
               </HoverableTableRow>
             )
           })}
@@ -120,23 +115,19 @@ const SortableTable = ({ columns, sort, toggleSortOrder, tableRows, itemsPerPage
 }
 
 SortableTable.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired).isRequired,
-  tableRows: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    cells: PropTypes.arrayOf(PropTypes.shape({
+  columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tableRows: PropTypes.arrayOf(
+    PropTypes.shape({
       id: PropTypes.string.isRequired,
-      columnName: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-    })).isRequired
+      cells: PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      )
+    })
+  ).isRequired
   })).isRequired,
-  sort: PropTypes.shape({
-    sortBy: PropTypes.string.isRequired,
-    order: PropTypes.oneOf(["asc", "desc"]).isRequired
-  }),
-  toggleSortOrder: PropTypes.func.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  sortOrder: PropTypes.oneOf(["asc", "desc"]).isRequired
+  toggleSort: PropTypes.func.isRequired,
   itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
   onItemsPerPageChange: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,
