@@ -10,11 +10,10 @@ class SubMenu extends Component {
       profileTextColor: "black",
       signOutBackgroundColor: "white",
       signOutTextColor:"black"
-    },
-    this.updateLinkColors = this.updateLinkColors.bind(this)
+    }
   }
 
-  updateLinkColors(event) {
+  updateLinkColors = event => {
     if(event.type === "mouseenter"){
       if(event.target.innerHTML === "My Profile"){
         this.setState({
@@ -86,13 +85,6 @@ class NavBar extends Component {
       inventoriesLinkColor: "",
       accountLinkColor: ""
     }
-
-    this.setWrapperRef = this.setWrapperRef.bind(this);
-    this.setMenuRef = this.setMenuRef.bind(this)
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.updateTimersLinkColor = this.updateTimersLinkColor.bind(this)
-    this.updateInventoriesLinkColor = this.updateInventoriesLinkColor.bind(this)
-    this.updateAccountLinkColor = this.updateAccountLinkColor.bind(this)
   }
 
   componentDidMount() {
@@ -114,24 +106,24 @@ class NavBar extends Component {
   /**
    * Set the wrapper ref
    */
-  setWrapperRef(node) {
-    this.wrapperRef = node;
+  setWrapperRef = node => {
+    this.wrapperRef = node
   }
 
-  setMenuRef(node) {
+  setMenuRef = node => {
     this.menuRef = node
   }
 
   /**
    * Alert if clicked on outside of element
    */
-  handleClickOutside(event) {
+  handleClickOutside = event => {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target) && !this.menuRef.contains(event.target)) {
       this.setState({submenuVisible: false, accountLinkColor:""})
     }
   }
 
-  updateTimersLinkColor(event) {
+  updateTimersLinkColor = event => {
     if(event.type === "mouseenter"){
       this.setState({timersLinkColor: "gray"})
     }
@@ -141,7 +133,7 @@ class NavBar extends Component {
     }
   }
 
-  updateInventoriesLinkColor(event) {
+  updateInventoriesLinkColor = event => {
     if(event.type === "mouseenter"){
       this.setState({inventoriesLinkColor: "gray"})
     }
@@ -151,7 +143,7 @@ class NavBar extends Component {
     }
   }
 
-  updateAccountLinkColor(event){
+  updateAccountLinkColor = event => {
 
     if(event.type === "mouseenter"){
       this.setState({accountLinkColor: "gray"})
