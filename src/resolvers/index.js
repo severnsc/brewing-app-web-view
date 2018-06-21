@@ -139,6 +139,58 @@ export default {
       return null
 
     },
+
+    updateSignupUsernameError: (_, { bool }, { cache }) => {
+
+      const query = gql`
+        query {
+          signup @client {
+            isUsernameUnique
+            error
+          }
+        }
+      `
+
+      const previous = cache.readQuery({ query })
+
+      const data = {
+        signup: {
+          ...previous.signup,
+          isUsernameUnique: bool
+        }
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    },
+
+    updateSignupError: (_, { error }, { cache }) => {
+
+      const query = gql`
+        query {
+          signup @client {
+            isUsernameUnique
+            error
+          }
+        }
+      `
+
+      const previous = cache.readQuery({ query })
+
+      const data = {
+        signup: {
+          ...previous.signup,
+          error: error
+        }
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    },
   
   }
 }

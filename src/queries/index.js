@@ -28,6 +28,15 @@ export const dashboardTableQuery = gql`
   }
 `
 
+export const signupQuery = gql`
+  query {
+    signup @client {
+      isUsernameUnique
+      error
+    }
+  }
+`
+
 export const dashboardItemLimitQuery = gql`
   query {
     dashboardItemLimit @client

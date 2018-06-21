@@ -1,55 +1,67 @@
 import React from "react"
 import { Mutation, Query } from "react-apollo"
-import { UPDATE_VIEW_MODEL } from "../mutations"
+import {
+  UPDATE_SIGNUP_ERROR,
+  UPDATE_SIGNUP_USERNAME_ERROR
+} from "../mutations"
 import { validateUsernameAsync, createUserAsync } from "../compose"
-import { signupViewModelQuery } from "../queries"
+import { signupQuery } from "../queries"
 import { withRouter } from "react-router"
 import SignupForm from "../components/signupForm"
 
 const SignupContainer = ({match, location, history}) => (
 
-  <Mutation mutation={UPDATE_VIEW_MODEL}>
-    {updateViewModel => {
+  <Mutation mutation={UPDATE_SIGNUP_USERNAME_ERROR}>
+    {updateSignupIsUsernameUnique => {
 
       const validateUsernameFunc = username => {
-        validateUsernameAsync(username).then(signupModel => {
-          updateViewModel({ variables: {viewModel: signupModel} })
-        })
-      }
-
-      const createUserFunc = (username, password, email) => {
-        createUserAsync(username, password, email).then(model => {
-          updateViewModel({ variables: {viewModel: model} })
-          if(model.error === "") history.push("/profile")
+        validateUsernameAsync(username).then(bool => {
+          updateSignupIsUsernameUnique({ variables: { bool } })
         })
       }
 
       return(
-        <Query query={signupViewModelQuery}>
-          {({loading, error, data}) => {
+        <Mutation mutation={UPDATE_SIGNUP_ERROR}>
+          {updateSignupError => {
 
-            let isUsernameUnique = true
-            let errorMessage = ""
-            
-            if(data.viewModel){
-              if(!data.viewModel.isUsernameUnique) 
-                isUsernameUnique = false
-              errorMessage = data.viewModel.error
+            const createUserFunc = (username, password, email) => {
+              createUserAsync(username, password, email).then(bool => {
+                const error = bool ? "" : "There was an error creating your account!"
+                updateSignupError({ variables: {error} })
+                if(bool) history.push("/profile")
+              })
             }
 
             return(
+              <Query query={signupQuery}>
+                {({loading, error, data}) => {
 
-              <SignupForm
-                error={errorMessage}
-                validateUsername={validateUsernameFunc}
-                isUsernameUnique={isUsernameUnique}
-                createUser={createUserFunc}
-              />
+                  let isUsernameUnique = true
+                  let errorMessage = ""
+                  
+                  if(data.signup){
+                    if(!data.signup.isUsernameUnique) 
+                      isUsernameUnique = false
+                    errorMessage = data.signup.error
+                  }
 
+                  return(
+
+                    <SignupForm
+                      error={errorMessage}
+                      validateUsername={validateUsernameFunc}
+                      isUsernameUnique={isUsernameUnique}
+                      createUser={createUserFunc}
+                    />
+
+                  )
+
+                }}
+              </Query>
             )
 
           }}
-        </Query>
+        </Mutation>
       )
 
     }}
