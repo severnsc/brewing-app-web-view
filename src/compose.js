@@ -1,16 +1,30 @@
 import {
-  validateUsernamePresenter,
-  createUserPresenter,
-  loginUserPresenter
-} from "./presenter"
-import {
   isUsernameUnique,
   createUser,
   loginUser
 } from "./adapters/userAdapter"
 
-export const validateUsernameAsync = validateUsernamePresenter(isUsernameUnique)
+export const validateUsernameAsync = async username => {
 
-export const createUserAsync = createUserPresenter(createUser)
+  const usernameIsUnique = 
+    await isUsernameUnique(username).catch(e => e)
 
-export const loginUserAsync = loginUserPresenter(loginUser)
+  return usernameIsUnique
+
+}
+
+export const createUserAsync = async (username, password, email) => {
+
+  const userCreated = await createUser(username, password, email).catch(e => e)
+  
+  return userCreated
+
+}
+
+export const loginUserAsync = async (username, password) => {
+
+	 const userLoggedIn = await loginUser(username, password).catch(e => e)
+
+   return userLoggedIn
+
+}
