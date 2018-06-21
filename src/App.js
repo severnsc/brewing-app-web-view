@@ -13,6 +13,7 @@ import { ApolloLink } from 'apollo-link'
 import { withClientState } from 'apollo-link-state'
 import resolvers from './resolvers'
 import { ApolloProvider } from "react-apollo"
+import defaultState from "./defaultState"
 
 const uri = "http://localhost:3001/graphql"
 
@@ -20,9 +21,7 @@ const cache = new InMemoryCache()
 
 const defaults = {
   isLoggedIn: false,
-  viewModel: {
-    __typename: "ViewModel"
-  }
+  ...defaultState
 }
 
 const stateLink = withClientState({

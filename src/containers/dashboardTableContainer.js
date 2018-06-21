@@ -3,10 +3,7 @@ import { Query } from 'react-apollo'
 import shortid from 'shortid'
 import SortableTableContainer from './common/sortableTableContainer'
 
-import {
-  dashboardTableItemsQuery,
-  dashboardTablePropsQuery
-} from '../queries'
+import { dashboardTableQuery } from '../queries'
 
 import {
   UPDATE_DASHBOARD_TABLE_SORT,
@@ -25,7 +22,7 @@ const DashboardTableContainer = () => {
   ]
 
   return(
-    <Query query={dashboardTableItemsQuery}>
+    <Query query={dashboardTableQuery}>
       {({loading, error, data}) => {
 
         if(loading) return <p>Loading...</p>
@@ -50,39 +47,31 @@ const DashboardTableContainer = () => {
 
           return {id: inventoryItem.id, cells}
         })
+          
+        let filteredTableRows
+        if(data.dashboard.filterString !== ""){
+          filteredTableRows = tableRows.filter(tableRow => {
+            return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(data.dashboard.filterString))
+          })
+        }
+
+        const sortBy = data.dashboard.sortBy
+        const sortOrder = data.dashboard.sortOrder
+        const itemsPerPage = parseInt(data.dashboard.itemLimit, 10)
+        const currentPage = data.dashboard.currentPage
 
         return(
-          <Query query={dashboardTablePropsQuery}>
-            {({loading, error, propsData}) => {
-
-              let filteredTableRows
-              if(propsData.viewModel.filterString !== ""){
-                filteredTableRows = tableRows.filter(tableRow => {
-                  return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(propsData.viewModel.filterString))
-                })
-              }
-
-              const sortBy = propsData.viewModel.sortBy
-              const sortOrder = propsData.viewModel.sortOrder
-              const itemsPerPage = parseInt(propsData.viewModel.itemLimit, 10)
-              const currentPage = propsData.viewModel.currentPage
-
-              return(
-                <SortableTableContainer
-                  sortOrderMutation={UPDATE_DASHBOARD_TABLE_SORT}
-                  columns={columns}
-                  tableRows={filteredTableRows || tableRows}
-                  sortBy={sortBy}
-                  sortOrder={sortOrder}
-                  itemsPerPage={itemsPerPage}
-                  itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
-                  currentPage={currentPage}
-                  pageNumberMutation={UPDATE_DASHBOARD_TABLE_PAGE_NUMBER}
-                />
-              )
-
-            }}
-          </Query>
+          <SortableTableContainer
+            sortOrderMutation={UPDATE_DASHBOARD_TABLE_SORT}
+            columns={columns}
+            tableRows={filteredTableRows || tableRows}
+            sortBy={sortBy}
+            sortOrder={sortOrder}
+            itemsPerPage={itemsPerPage}
+            itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
+            currentPage={currentPage}
+            pageNumberMutation={UPDATE_DASHBOARD_TABLE_PAGE_NUMBER}
+          />
         )
       }}
     </Query>
