@@ -49,9 +49,9 @@ export const signupViewModelQuery = gql`
   }
 `
 
-export const loginViewModelQuery = gql`
+export const loginQuery = gql`
   query {
-    viewModel @client {
+    login @client {
       error
     }
   }
