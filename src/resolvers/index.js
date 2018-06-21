@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { dashboardLocalQuery } from "../queries"
 
 export default {
   Mutation: {
@@ -6,23 +7,31 @@ export default {
 
       const query = gql`
         query {
-          dashboardTableSortBy @client
-          dashboardTableSortOrder @client
+          dashboard @client {
+            sortBy
+            sortOrder
+            itemLimit
+            filterString
+            currentPage
+          }
         }
       `
 
       const previous = cache.readQuery({ query })
 
-      let order = previous.dashboardTableSortOrder
-      if(previous.dashboardTableSortBy === cellName){
-        order = previous.dashboardTableSortOrder === "asc" ? "desc" : "asc"
+      let order = previous.dashboard.sortOrder
+      if(previous.dashboard.sortBy === cellName){
+        order = previous.dashboard.sortOrder === "asc" ? "desc" : "asc"
       }else{
         order = "asc"
       }
 
       const data = {
-        dashboardTableSortBy: cellName,
-        dashboardTableSortOrder: order
+        dashboard: {
+          ...previous.dashboard,
+          sortOrder: order,
+          sortBy: cellName
+        }
       }
 
       cache.writeQuery({ query, data })
@@ -32,12 +41,28 @@ export default {
 
     updateDashboardTableFilter: (_, { value }, { cache }) => {
 
-      cache.writeData({
-        data: {
-          dashboardTableFilterString: value,
-          dashboardTableCurrentPage: 0
+      const query = gql`
+        query {
+          dashboard @client {
+            sortBy
+            sortOrder
+            itemLimit
+            filterString
+            currentPage
+          }
         }
-      })
+      `
+
+      const previous = cache.readQuery({ query })
+
+      const data = {
+        dashboard: {
+          ...previous.dashboard,
+          filterString: value
+        }
+      }
+
+      cache.writeQuery({ query, data })
 
       return null
 
@@ -45,11 +70,28 @@ export default {
 
     updateDashboardItemLimit: (_, { value }, { cache }) => {
 
-      cache.writeData({
-        data: {
-          dashboardItemLimit: value
+       const query = gql`
+        query {
+          dashboard @client {
+            sortBy
+            sortOrder
+            itemLimit
+            filterString
+            currentPage
+          }
         }
-      })
+      `
+
+      const previous = cache.readQuery({ query })
+
+      const data = {
+        dashboard: {
+          ...previous.dashboard,
+          itemLimit: value
+        }
+      }
+
+      cache.writeQuery({ query, data })
 
       return null
 
@@ -59,7 +101,13 @@ export default {
 
       const query = gql`
         query {
-          dashboardTableCurrentPage @client
+          dashboard @client {
+            sortBy
+            sortOrder
+            itemLimit
+            filterString
+            currentPage
+          }
         }
       `
 
@@ -68,7 +116,10 @@ export default {
       const integer = type === "INCREMENT" ? 1 : -1
 
       const data = {
-        dashboardTableCurrentPage: previous.dashboardTableCurrentPage + integer
+        dashboard: {
+          ...previous.dashboard,
+          currentPage: previous.dashboard.currentPage + integer
+        }
       }
 
       cache.writeQuery({ query, data })
@@ -82,25 +133,6 @@ export default {
       cache.writeData({
         data: {
           isLoggedIn: bool
-        }
-      })
-
-      return null
-
-    },
-
-    updateViewModel: (_, { viewModel }, { cache }) => {
-
-      const newViewModel = viewModel.sortObject
-                     ? {...viewModel, sortObject: {...viewModel.sortObject, __typename: "SubViewModel"}}
-                     : viewModel
-
-      cache.writeData({
-        data: {
-          viewModel: {
-            __typename: "ViewModel",
-            ...newViewModel
-          }
         }
       })
 
