@@ -12,12 +12,6 @@ export const UPDATE_DASHBOARD_TABLE_FILTER = gql`
   }
 `
 
-export const UPDATE_DASHBOARD_TABLE_FILTER_SCOPE = gql`
-  mutation updateDashboardTableFilterScope($type: String!) {
-    updateDashboardTableFilterScope(type: $type) @client
-  }
-`
-
 export const UPDATE_DASHBOARD_ITEM_LIMIT = gql`
   mutation updateDashboardItemLimit($value: Number!) {
     updateDashboardItemLimit(value: $value) @client
@@ -33,11 +27,5 @@ export const UPDATE_DASHBOARD_TABLE_PAGE_NUMBER = gql`
 export const LOGIN_MUTATION = gql`
   mutation setIsLoggedIn($bool: Boolean) {
     setIsLoggedIn(bool: $bool) @client
-  }
-`
-
-export const UPDATE_VIEW_MODEL = gql`
-  mutation updateViewModel($viewModel: ViewModel) {
-    updateViewModel(viewModel: $viewModel) @client
   }
 `
