@@ -72,6 +72,13 @@ export default {
 
        const query = gql`
         query {
+
+          currentUser {
+            inventories {
+              items
+            }
+          }
+
           dashboard @client {
             sortBy
             sortOrder
@@ -82,12 +89,19 @@ export default {
         }
       `
 
-      const previous = cache.readQuery({ query })
+      const { currentUser, dashboard } = cache.readQuery({ query })
+
+      let pageNumber = dashboard.currentPage
+      if(pageNumber > currentUser.inventories[0].items.length/value){
+        pageNumber = Math.ceil(currentUser.inventories[0].items.length/value) - 1
+      }
 
       const data = {
+        currentUser,
         dashboard: {
-          ...previous.dashboard,
-          itemLimit: value
+          ...dashboard,
+          itemLimit: value,
+          currentPage: pageNumber
         }
       }
 
