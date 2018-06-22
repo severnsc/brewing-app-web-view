@@ -58,7 +58,8 @@ export default {
       const data = {
         dashboard: {
           ...previous.dashboard,
-          filterString: value
+          filterString: value,
+          currentPage: 0
         }
       }
 
