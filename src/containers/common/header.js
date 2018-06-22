@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NavBar from './components/navBar'
+import NavBar from '../../components/navBar'
 import { Mutation } from "react-apollo"
-import { LOGIN_MUTATION } from './mutations'
+import { LOGIN_MUTATION } from '../../mutations'
 
 const Header = ({ isLoggedIn }) => (
   <Mutation mutation={LOGIN_MUTATION}>

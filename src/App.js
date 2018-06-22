@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom'
 import Main from './Main'
-import Header from './Header'
+import Header from './containers/common/header'
 import ApolloClient from 'apollo-client';
 import { Query } from 'react-apollo'
 import { isLoggedInQuery } from './queries'
