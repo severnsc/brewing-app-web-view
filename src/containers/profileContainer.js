@@ -1,9 +1,9 @@
 import React from "react"
 import { Query } from "react-apollo"
-import { profileViewModelQuery } from "../queries"
+import { profileQuery } from "../queries"
 
 const ProfileContainer = () => (
-  <Query query={profileViewModelQuery}>
+  <Query query={profileQuery}>
 
     {({loading, error, data}) => {
 

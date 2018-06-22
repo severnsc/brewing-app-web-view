@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { dashboardLocalQuery } from "../queries"
 
 export default {
   Mutation: {

@@ -49,15 +49,6 @@ export const isLoggedInQuery = gql`
   }
 `
 
-export const signupViewModelQuery = gql`
-  query {
-    viewModel @client {
-      isUsernameUnique
-      error
-    }
-  }
-`
-
 export const loginQuery = gql`
   query {
     login @client {
@@ -66,7 +57,7 @@ export const loginQuery = gql`
   }
 `
 
-export const profileViewModelQuery = gql`
+export const profileQuery = gql`
   query {
     currentUser {
       userName
