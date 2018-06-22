@@ -2,7 +2,7 @@ import axios from 'axios'
 
 axios.defaults.withCredentials = true
 
-export const isUsernameUnique = async username => {
+export const validateUsername = async username => {
   return axios.post('http://localhost:3001/isUsernameUnique', {
     username: username
   }).then(response => response.data)

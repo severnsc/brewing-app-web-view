@@ -4,7 +4,7 @@ import {
   UPDATE_SIGNUP_ERROR,
   UPDATE_SIGNUP_USERNAME_ERROR
 } from "../mutations"
-import { validateUsernameAsync, createUserAsync } from "../compose"
+import { validateUsername, createUser } from "../adapters/userAdapter"
 import { signupQuery } from "../queries"
 import { withRouter } from "react-router"
 import SignupForm from "../components/signupForm"
@@ -15,7 +15,7 @@ const SignupContainer = ({match, location, history}) => (
     {updateSignupIsUsernameUnique => {
 
       const validateUsernameFunc = username => {
-        validateUsernameAsync(username).then(bool => {
+        validateUsername(username).then(bool => {
           updateSignupIsUsernameUnique({ variables: { bool } })
         })
       }
@@ -25,7 +25,7 @@ const SignupContainer = ({match, location, history}) => (
           {updateSignupError => {
 
             const createUserFunc = (username, password, email) => {
-              createUserAsync(username, password, email).then(bool => {
+              createUser(username, password, email).then(bool => {
                 const error = bool ? "" : "There was an error creating your account!"
                 updateSignupError({ variables: {error} })
                 if(bool) history.push("/profile")
