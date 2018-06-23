@@ -41,3 +41,9 @@ export const UPDATE_SIGNUP_USERNAME_ERROR = gql`
     updateSignupUsernameError(bool: $bool) @client
   }
 `
+
+export const UPDATE_MODAL = gql`
+  mutation udpateModal($id: String!, $type: String!) {
+    updateModal(id: $id, type: $type) @client
+  }
+`

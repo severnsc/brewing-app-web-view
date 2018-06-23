@@ -4,8 +4,10 @@ import { BrowserRouter } from 'react-router-dom'
 import Main from './Main'
 import Header from './containers/common/header'
 import ApolloClient from 'apollo-client';
-import { Query } from 'react-apollo'
-import { isLoggedInQuery } from './queries'
+import Modal from "./components/modal"
+import { Query, Mutation } from 'react-apollo'
+import { UPDATE_MODAL } from "./mutations"
+import { topLevelQuery } from './queries'
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link'
@@ -42,17 +44,35 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
     return (
-      <Query query={isLoggedInQuery}>
+      <Query query={topLevelQuery}>
         {({loading, error, data}) => {
           
           let isLoggedIn = false
 
           if(data.isLoggedIn) isLoggedIn = true
 
+          const modal = data.modal.type !== "" ? (
+            <Mutation mutation={UPDATE_MODAL}>
+              {mutation => {
+
+                const closeModal = () => {
+                  mutation({ variables: { type: "", id: "" }})
+                }
+
+                return(
+                  <Modal closeModal={closeModal}>
+                    {data.modal.id}
+                  </Modal>
+                )
+              }}
+            </Mutation>
+          ) : null
+
           return(
             <div className="App">
               <Header isLoggedIn={isLoggedIn} />
               <Main />
+              {modal}
             </div>
           )
         }}

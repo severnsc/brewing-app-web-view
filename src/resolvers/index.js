@@ -205,6 +205,33 @@ export default {
       return null
 
     },
+
+    updateModal: (_, { id, type }, { cache }) => {
+
+      const query = gql`
+        query {
+          modal @client {
+            type
+            id
+          }
+        }
+      `
+
+      const { modal } = cache.readQuery({ query })
+
+      const data = {
+        modal: {
+          ...modal,
+          type: type,
+          id: id
+        }
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    },
   
   }
 }

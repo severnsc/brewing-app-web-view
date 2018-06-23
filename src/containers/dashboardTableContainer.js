@@ -8,7 +8,8 @@ import { dashboardTableQuery } from '../queries'
 import {
   UPDATE_DASHBOARD_TABLE_SORT,
   UPDATE_DASHBOARD_ITEM_LIMIT,
-  UPDATE_DASHBOARD_TABLE_PAGE_NUMBER
+  UPDATE_DASHBOARD_TABLE_PAGE_NUMBER,
+  UPDATE_MODAL
 } from "../mutations"
 
 const DashboardTableContainer = () => {
@@ -71,6 +72,8 @@ const DashboardTableContainer = () => {
             itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
             currentPage={currentPage}
             pageNumberMutation={UPDATE_DASHBOARD_TABLE_PAGE_NUMBER}
+            modalMutation={UPDATE_MODAL}
+            entityType="inventoryItem"
           />
         )
       }}

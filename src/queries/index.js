@@ -43,9 +43,13 @@ export const dashboardItemLimitQuery = gql`
   }
 `
 
-export const isLoggedInQuery = gql`
+export const topLevelQuery = gql`
   query {
     isLoggedIn @client
+    modal @client {
+      type
+      id
+    }
   }
 `
 
