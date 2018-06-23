@@ -1,20 +1,10 @@
 import gql from 'graphql-tag'
+import { currentUserFragments } from "../fragments"
 
 export const dashboardTableQuery = gql`
   query {
     currentUser {
-      inventories {
-        items {
-          id
-          object
-          quantityUnit
-          currentQuantity
-          reorderThreshold
-          costUnit
-          unitCost
-          reorderCost
-        }
-      }
+      ...InventoryItems
     }
 
     dashboard @client {
@@ -26,6 +16,7 @@ export const dashboardTableQuery = gql`
     }
 
   }
+  ${currentUserFragments.inventoryItems}
 `
 
 export const signupQuery = gql`
@@ -81,18 +72,8 @@ export const profileQuery = gql`
 export const inventoryItemsQuery = gql`
   query {
     currentUser {
-      inventories {
-        items {
-          id
-          object
-          quantityUnit
-          currentQuantity
-          reorderThreshold
-          costUnit
-          unitCost
-          reorderCost
-        }
-      }
+      ...InventoryItems
     }
   }
+  ${currentUserFragments.inventoryItems}
 `
