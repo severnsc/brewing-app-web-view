@@ -53,6 +53,15 @@ export const topLevelQuery = gql`
   }
 `
 
+export const modalQuery = gql`
+  query {
+    modal @client {
+      type
+      id
+    }
+  }
+`
+
 export const loginQuery = gql`
   query {
     login @client {
@@ -65,6 +74,25 @@ export const profileQuery = gql`
   query {
     currentUser {
       userName
+    }
+  }
+`
+
+export const inventoryItemsQuery = gql`
+  query {
+    currentUser {
+      inventories {
+        items {
+          id
+          object
+          quantityUnit
+          currentQuantity
+          reorderThreshold
+          costUnit
+          unitCost
+          reorderCost
+        }
+      }
     }
   }
 `

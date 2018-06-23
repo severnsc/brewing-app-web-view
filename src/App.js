@@ -7,7 +7,7 @@ import ApolloClient from 'apollo-client';
 import Modal from "./components/modal"
 import { Query, Mutation } from 'react-apollo'
 import { UPDATE_MODAL } from "./mutations"
-import { topLevelQuery } from './queries'
+import { topLevelQuery, inventoryItemsQuery } from './queries'
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link'
@@ -45,11 +45,24 @@ class App extends Component {
   render() {
     return (
       <Query query={topLevelQuery}>
-        {({loading, error, data}) => {
+        {({loading, error, data, client}) => {
           
           let isLoggedIn = false
 
           if(data.isLoggedIn) isLoggedIn = true
+          
+          let modalItem
+          switch(data.modal.type) {
+
+            case "inventoryItem":
+              const { currentUser } = client.readQuery({ query: inventoryItemsQuery })
+              modalItem = currentUser.inventories[0].items.find(item => item.id === data.modal.id)
+              break
+
+            default:
+              modalItem = null
+
+          }
 
           const modal = data.modal.type !== "" ? (
             <Mutation mutation={UPDATE_MODAL}>
@@ -61,13 +74,13 @@ class App extends Component {
 
                 return(
                   <Modal closeModal={closeModal}>
-                    {data.modal.id}
+                    {JSON.stringify(modalItem)}
                   </Modal>
                 )
               }}
             </Mutation>
           ) : null
-
+          
           return(
             <div className="App">
               <Header isLoggedIn={isLoggedIn} />

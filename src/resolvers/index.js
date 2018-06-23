@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { modalQuery } from "../queries"
 
 export default {
   Mutation: {
@@ -208,26 +209,17 @@ export default {
 
     updateModal: (_, { id, type }, { cache }) => {
 
-      const query = gql`
-        query {
-          modal @client {
-            type
-            id
-          }
-        }
-      `
-
-      const { modal } = cache.readQuery({ query })
+      const { modal } = cache.readQuery({ query: modalQuery })
 
       const data = {
         modal: {
           ...modal,
           type: type,
-          id: id
+          id: id,
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: modalQuery, data })
 
       return null
 
