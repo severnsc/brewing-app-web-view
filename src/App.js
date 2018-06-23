@@ -3,42 +3,11 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom'
 import Main from './Main'
 import Header from './containers/common/header'
-import ApolloClient from 'apollo-client';
 import ModalContainer from "./containers/common/modalContainer"
 import { Query } from 'react-apollo'
 import { topLevelQuery, inventoryItemsQuery } from './queries'
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloLink } from 'apollo-link'
-import { withClientState } from 'apollo-link-state'
-import resolvers from './resolvers'
 import { ApolloProvider } from "react-apollo"
-import defaultState from "./defaultState"
-
-const uri = "http://localhost:3001/graphql"
-
-const cache = new InMemoryCache()
-
-const defaults = {
-  isLoggedIn: false,
-  ...defaultState
-}
-
-const stateLink = withClientState({
-  cache,
-  defaults,
-  resolvers
-})
-
-const httpLink = new HttpLink({uri,credentials: "include"})
-
-const client = new ApolloClient({
-  cache,
-  link: ApolloLink.from([
-    stateLink,
-    httpLink
-  ])
-})
+import client from "./ApolloClient"
 
 class App extends Component {
   render() {
