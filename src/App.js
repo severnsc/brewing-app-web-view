@@ -4,9 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import Main from './Main'
 import Header from './containers/common/header'
 import ApolloClient from 'apollo-client';
-import Modal from "./components/modal"
-import { Query, Mutation } from 'react-apollo'
-import { UPDATE_MODAL } from "./mutations"
+import ModalContainer from "./containers/common/modalContainer"
+import { Query } from 'react-apollo'
 import { topLevelQuery, inventoryItemsQuery } from './queries'
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -64,22 +63,7 @@ class App extends Component {
 
           }
 
-          const modal = data.modal.type !== "" ? (
-            <Mutation mutation={UPDATE_MODAL}>
-              {mutation => {
-
-                const closeModal = () => {
-                  mutation({ variables: { type: "", id: "" }})
-                }
-
-                return(
-                  <Modal closeModal={closeModal}>
-                    {JSON.stringify(modalItem)}
-                  </Modal>
-                )
-              }}
-            </Mutation>
-          ) : null
+          const modal = data.modal.type !== "" ? <ModalContainer modalItem={JSON.stringify(modalItem)} /> : null
           
           return(
             <div className="App">
