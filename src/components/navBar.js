@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from "react-router-dom"
 import PropTypes from 'prop-types'
 
 class SubMenu extends Component {
@@ -63,7 +64,7 @@ class SubMenu extends Component {
     return (
       <Fragment>
         <p style={linkStyle}>{this.props.username}</p>
-        <a onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.profileBackgroundColor, color: this.state.profileTextColor}} href="/profile">My Profile</a>
+        <Link onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.profileBackgroundColor, color: this.state.profileTextColor}} to="/profile">My Profile</Link>
         <a onClick={this.props.signOut} onMouseEnter={this.updateLinkColors} onMouseLeave={this.updateLinkColors} style={{...subLinkStyle, backgroundColor: this.state.signOutBackgroundColor, color: this.state.signOutTextColor}} href="http://localhost:3001/logout">Sign out</a>
       </Fragment>
     )
@@ -178,8 +179,8 @@ class NavBar extends Component {
     return(
       <nav style={{display:"flex", justifyContent:"space-between", alignItems: "center", height:"50px", backgroundColor:"#383838"}} >
         <span style={{marginLeft:"100px"}} >
-          <a onMouseEnter={this.updateTimersLinkColor} onMouseLeave={this.updateTimersLinkColor} style={{...navLinkStyle, backgroundColor: this.state.timersLinkColor}} href="/timers">Timers</a>
-          <a onMouseEnter={this.updateInventoriesLinkColor} onMouseLeave={this.updateInventoriesLinkColor} style={{...navLinkStyle, backgroundColor: this.state.inventoriesLinkColor}} href="/inventories">Inventories</a>
+          <Link onMouseEnter={this.updateTimersLinkColor} onMouseLeave={this.updateTimersLinkColor} style={{...navLinkStyle, backgroundColor: this.state.timersLinkColor}} to="/timers">Timers</Link>
+          <Link onMouseEnter={this.updateInventoriesLinkColor} onMouseLeave={this.updateInventoriesLinkColor} style={{...navLinkStyle, backgroundColor: this.state.inventoriesLinkColor}} to="/inventories">Inventories</Link>
         </span>
         <a onMouseEnter={this.updateAccountLinkColor} onMouseLeave={this.updateAccountLinkColor} style={{...navLinkStyle, marginRight:"100px", backgroundColor: this.state.accountLinkColor}} ref={this.setMenuRef} onClick={() => this.toggleSubmenu()}>Account &or;</a>
         {this.state.submenuVisible && 
