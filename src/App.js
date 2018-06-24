@@ -4,8 +4,9 @@ import { BrowserRouter } from 'react-router-dom'
 import Main from './Main'
 import Header from './containers/common/header'
 import ModalContainer from "./containers/common/modalContainer"
+import InventoryItemFormContainer from "./containers/inventoryItemFormContainer"
 import { Query } from 'react-apollo'
-import { topLevelQuery, inventoryItemsQuery } from './queries'
+import { topLevelQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
 import client from "./ApolloClient"
 
@@ -23,8 +24,7 @@ class App extends Component {
           switch(data.modal.type) {
 
             case "inventoryItem":
-              const { currentUser } = client.readQuery({ query: inventoryItemsQuery })
-              modalItem = currentUser.inventories[0].items.find(item => item.id === data.modal.id)
+              modalItem = <InventoryItemFormContainer id={data.modal.id} />
               break
 
             default:
@@ -32,7 +32,7 @@ class App extends Component {
 
           }
 
-          const modal = data.modal.type !== "" ? <ModalContainer modalItem={JSON.stringify(modalItem)} /> : null
+          const modal = data.modal.type !== "" ? <ModalContainer modalItem={modalItem} /> : null
           
           return(
             <div className="App">

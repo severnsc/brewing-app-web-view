@@ -77,3 +77,21 @@ export const inventoryItemsQuery = gql`
   }
   ${currentUserFragments.inventoryItems}
 `
+
+export const inventoryItemQuery = gql`
+  query inventoryItemQuery($id: String!) {
+    inventoryItem(id: $id) {
+      id
+      object
+      quantityUnit
+      currentQuantity
+      reorderQuantity
+      reorderThreshold
+      costUnit
+      unitCost
+      reorderCost
+      lastReorderDate
+      deliveryDate
+    }
+  }
+`
