@@ -20,10 +20,22 @@ const InventoryItemFormContainer = ({ id }) => (
 				quantityUnit,
 				currentQuantity,
 				reorderQuantity,
-				reorderThreshold,
-				lastReorderDate,
-				deliveryDate
+				reorderThreshold
 			} = data.inventoryItem
+
+			const lastReorderDate = new Date(data.inventoryItem.lastReorderDate)
+			const deliveryDate = new Date(data.inventoryItem.deliveryDate)
+
+			const formatDate = date => date < 10 ? ("0" + date) : date
+
+			const lastReorderDateMonth = lastReorderDate.getMonth() + 1
+			const lastReorderDateDay = lastReorderDate.getDate()
+
+			const deliveryDateMonth = deliveryDate.getMonth() + 1
+			const deliveryDateDay = deliveryDate.getDate()
+
+			const lastReorderDateString = `${lastReorderDate.getFullYear()}-${formatDate(lastReorderDateMonth)}-${formatDate(lastReorderDateDay)}`
+			const deliveryDateString = `${deliveryDate.getFullYear()}-${formatDate(deliveryDateMonth)}-${formatDate(deliveryDateDay)}`
 
 			return(
 				<InventoryItemForm
@@ -34,8 +46,8 @@ const InventoryItemFormContainer = ({ id }) => (
 					currentQuantity={currentQuantity}
 					reorderQuantity={reorderQuantity}
 					reorderThreshold={reorderThreshold}
-					lastReorderDate={lastReorderDate}
-					deliveryDate={deliveryDate}
+					lastReorderDate={lastReorderDateString}
+					deliveryDate={deliveryDateString}
 				/>
 			)
 

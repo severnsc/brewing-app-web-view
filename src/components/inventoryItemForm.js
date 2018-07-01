@@ -138,8 +138,16 @@ InventoryItemForm.propTypes = {
 	reorderThreshold: PropTypes.number.isRequired,
 
 	//Dates
-	lastReorderDate: PropTypes.instanceOf(Date),
-	deliveryDate: PropTypes.instanceOf(Date)
+	lastReorderDate: (props, propName, componentName) => {
+		if(!/\d{4}-\d{2}-\d{2}/.test(props[propName])){
+			return new Error(`Invalid prop ${propName} supplied to ${componentName}. Validation failed.`)
+		}
+	},
+	deliveryDate: (props, propName, componentName) => {
+		if(!/\d{4}-\d{2}-\d{2}/.test(props[propName])){
+			return new Error(`Invalid prop ${propName} supplied to ${componentName}. Validation failed.`)
+		}
+	}
 }
 
 export default InventoryItemForm
