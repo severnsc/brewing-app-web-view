@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import SortableTable from '../../components/sortableTable'
-import { dashboardTableQuery } from "../../queries"
 
 const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, sortOrder, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation, modalMutation, entityType }) => (
   <Mutation mutation={sortOrderMutation}>
@@ -33,7 +32,7 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, 
                   }
 
                   return(
-                    <Mutation mutation={modalMutation} refetchQueries={[{query: dashboardTableQuery}]}>
+                    <Mutation mutation={modalMutation}>
                       {modalMutation => {
 
                         const onTableRowClick = itemId => {
