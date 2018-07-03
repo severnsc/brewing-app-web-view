@@ -47,3 +47,11 @@ export const UPDATE_MODAL = gql`
     updateModal(id: $id, type: $type) @client
   }
 `
+
+export const UPDATE_INVENTORY_ITEM = gql`
+  mutation updateInventoryItem($id: String!, $inventoryId: String!, $costUnit: String!, $unitCost: Float!, $reorderCost: Float!, $quantityUnit: String!, $currentQuantity: Float!, $reorderQuantity: Float!, $reorderThreshold: Float!, $lastReorderDate: String!, $deliveryDate: String!) {
+    updateInventoryItem(id: $id, inventoryId: $inventoryId, costUnit: $costUnit, unitCost: $unitCost, reorderCost: $reorderCost, quantityUnit: $quantityUnit, currentQuantity: $currentQuantity, reorderQuantity: $reorderQuantity, reorderThreshold: $reorderThreshold, lastReorderDate: $lastReorderDate, deliveryDate: $deliveryDate) {
+      id
+    }
+  }
+`

@@ -53,6 +53,7 @@ class InventoryItemForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
+		this.props.saveInventoryItem(this.state)
 	}
 
 	render() {
@@ -117,6 +118,8 @@ class InventoryItemForm extends Component {
 					<input type="date" value={deliveryDate} onChange={this.deliveryDateChange} />
 				</label>
 
+				<input type="submit" value="Save" />
+
 			</form>
 
 		)
@@ -147,7 +150,8 @@ InventoryItemForm.propTypes = {
 		if(!/\d{4}-\d{2}-\d{2}/.test(props[propName])){
 			return new Error(`Invalid prop ${propName} supplied to ${componentName}. Validation failed.`)
 		}
-	}
+	},
+	saveInventoryItem: PropTypes.func.isRequired
 }
 
 export default InventoryItemForm

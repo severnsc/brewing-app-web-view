@@ -81,7 +81,9 @@ export const inventoryItemsQuery = gql`
 export const inventoryItemQuery = gql`
   query inventoryItemQuery($id: String!) {
     inventoryItem(id: $id) {
-      id
+      inventory {
+        id
+      }
       object
       quantityUnit
       currentQuantity

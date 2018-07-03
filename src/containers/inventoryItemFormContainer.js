@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Query, Mutation } from "react-apollo"
-import { inventoryItemQuery } from "../queries"
+import { inventoryItemQuery, dashboardTableQuery } from "../queries"
+import { UPDATE_INVENTORY_ITEM } from "../mutations"
 import InventoryItemForm from "../components/inventoryItemForm"
 
 const InventoryItemFormContainer = ({ id }) => (
@@ -14,6 +15,7 @@ const InventoryItemFormContainer = ({ id }) => (
 			if(error) return "Error!"
 
 			const {
+				inventory,
 				costUnit,
 				unitCost,
 				reorderCost,
@@ -22,6 +24,8 @@ const InventoryItemFormContainer = ({ id }) => (
 				reorderQuantity,
 				reorderThreshold
 			} = data.inventoryItem
+
+			const inventoryId = inventory.id
 
 			const lastReorderDate = new Date(data.inventoryItem.lastReorderDate)
 			const deliveryDate = new Date(data.inventoryItem.deliveryDate)
@@ -38,17 +42,57 @@ const InventoryItemFormContainer = ({ id }) => (
 			const deliveryDateString = `${deliveryDate.getFullYear()}-${formatDate(deliveryDateMonth)}-${formatDate(deliveryDateDay)}`
 
 			return(
-				<InventoryItemForm
-					costUnit={costUnit}
-					unitCost={unitCost}
-					reorderCost={reorderCost}
-					quantityUnit={quantityUnit}
-					currentQuantity={currentQuantity}
-					reorderQuantity={reorderQuantity}
-					reorderThreshold={reorderThreshold}
-					lastReorderDate={lastReorderDateString}
-					deliveryDate={deliveryDateString}
-				/>
+				<Mutation mutation={UPDATE_INVENTORY_ITEM} refetchQueries={[{query: dashboardTableQuery}]}>
+					{updateInventoryItem => {
+
+						const saveInventoryItem = inventoryItem => {
+							const {
+								costUnit,
+								unitCost,
+								reorderCost,
+								quantityUnit,
+								currentQuantity,
+								reorderQuantity,
+								reorderThreshold,
+								lastReorderDate,
+								deliveryDate
+							} = inventoryItem
+
+							const lastReorderDateString = new Date(lastReorderDate).toUTCString()
+							const deliveryDateString = new Date(deliveryDate).toUTCString()
+
+							updateInventoryItem({ variables: {
+								id,
+								inventoryId,
+								costUnit,
+								unitCost,
+								reorderCost,
+								quantityUnit,
+								currentQuantity,
+								reorderQuantity,
+								reorderThreshold,
+								lastReorderDate: lastReorderDateString,
+								deliveryDate: deliveryDateString
+							}})
+						}
+
+						return(
+							<InventoryItemForm
+								costUnit={costUnit}
+								unitCost={unitCost}
+								reorderCost={reorderCost}
+								quantityUnit={quantityUnit}
+								currentQuantity={currentQuantity}
+								reorderQuantity={reorderQuantity}
+								reorderThreshold={reorderThreshold}
+								lastReorderDate={lastReorderDateString}
+								deliveryDate={deliveryDateString}
+								saveInventoryItem={saveInventoryItem}
+							/>
+						)
+
+					}}
+				</Mutation>
 			)
 
 		}}
