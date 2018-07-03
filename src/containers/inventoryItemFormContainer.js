@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Query, Mutation } from "react-apollo"
-import { inventoryItemQuery, dashboardTableQuery } from "../queries"
+import { inventoryItemQuery } from "../queries"
 import { UPDATE_INVENTORY_ITEM } from "../mutations"
 import InventoryItemForm from "../components/inventoryItemForm"
 
@@ -45,7 +45,7 @@ const InventoryItemFormContainer = ({ id }) => (
 			const deliveryDateString = `${deliveryDate.getFullYear()}-${formatDate(deliveryDateMonth)}-${formatDate(deliveryDateDay)}`
 
 			return(
-				<Mutation mutation={UPDATE_INVENTORY_ITEM} refetchQueries={[{query: dashboardTableQuery}]}>
+				<Mutation mutation={UPDATE_INVENTORY_ITEM}>
 					{updateInventoryItem => {
 
 						const saveInventoryItem = inventoryItem => {
@@ -61,8 +61,6 @@ const InventoryItemFormContainer = ({ id }) => (
 								lastReorderDate,
 								deliveryDate
 							} = inventoryItem
-
-							console.log(name)
 
 							const object = JSON.stringify({ name })
 
