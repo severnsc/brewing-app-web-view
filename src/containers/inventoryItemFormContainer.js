@@ -16,6 +16,7 @@ const InventoryItemFormContainer = ({ id }) => (
 
 			const {
 				inventory,
+				object,
 				costUnit,
 				unitCost,
 				reorderCost,
@@ -26,6 +27,8 @@ const InventoryItemFormContainer = ({ id }) => (
 			} = data.inventoryItem
 
 			const inventoryId = inventory.id
+
+			const name = JSON.parse(object).name
 
 			const lastReorderDate = new Date(data.inventoryItem.lastReorderDate)
 			const deliveryDate = new Date(data.inventoryItem.deliveryDate)
@@ -47,6 +50,7 @@ const InventoryItemFormContainer = ({ id }) => (
 
 						const saveInventoryItem = inventoryItem => {
 							const {
+								name,
 								costUnit,
 								unitCost,
 								reorderCost,
@@ -58,12 +62,17 @@ const InventoryItemFormContainer = ({ id }) => (
 								deliveryDate
 							} = inventoryItem
 
+							console.log(name)
+
+							const object = JSON.stringify({ name })
+
 							const lastReorderDateString = new Date(lastReorderDate).toUTCString()
 							const deliveryDateString = new Date(deliveryDate).toUTCString()
 
 							updateInventoryItem({ variables: {
 								id,
 								inventoryId,
+								object,
 								costUnit,
 								unitCost,
 								reorderCost,
@@ -78,6 +87,7 @@ const InventoryItemFormContainer = ({ id }) => (
 
 						return(
 							<InventoryItemForm
+								name={name}
 								costUnit={costUnit}
 								unitCost={unitCost}
 								reorderCost={reorderCost}

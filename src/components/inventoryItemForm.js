@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 class InventoryItemForm extends Component {
 
 	state = {
+		name: this.props.name,
 		costUnit: this.props.costUnit,
 		unitCost: this.props.unitCost,
 		reorderCost: this.props.reorderCost,
@@ -13,6 +14,10 @@ class InventoryItemForm extends Component {
 		reorderThreshold: this.props.reorderThreshold,
 		lastReorderDate: this.props.lastReorderDate,
 		deliveryDate: this.props.deliveryDate
+	}
+
+	nameChange = e => {
+		this.setState({ name: e.target.value })
 	}
 
 	costUnitChange = e => {
@@ -59,6 +64,7 @@ class InventoryItemForm extends Component {
 	render() {
 
 		const {
+			name,
 			costUnit,
 			unitCost,
 			reorderCost,
@@ -73,6 +79,10 @@ class InventoryItemForm extends Component {
 		return(
 
 			<form onSubmit={this.handleSubmit}>
+
+				<label>Name
+					<input type="text" value={name} onChange={this.nameChange} />
+				</label>
 
 				<label>Cost Unit
 					<select name="costUnit" value={costUnit} onChange={this.costUnitChange}>
@@ -129,6 +139,7 @@ class InventoryItemForm extends Component {
 }
 
 InventoryItemForm.propTypes = {
+	name: PropTypes.string.isRequired,
 	//Costs
 	costUnit: PropTypes.string.isRequired,
 	unitCost: PropTypes.number.isRequired,
