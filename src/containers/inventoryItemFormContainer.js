@@ -35,14 +35,22 @@ const InventoryItemFormContainer = ({ id }) => (
 
 			const formatDate = date => date < 10 ? ("0" + date) : date
 
-			const lastReorderDateMonth = lastReorderDate.getMonth() + 1
-			const lastReorderDateDay = lastReorderDate.getDate()
+			const dateToObject = date => {
+				const year = date.getFullYear()
+				const month = date.getMonth() + 1
+				const day = date.getDate()
+				return {
+					year,
+					month,
+					day
+				}
+			}
 
-			const deliveryDateMonth = deliveryDate.getMonth() + 1
-			const deliveryDateDay = deliveryDate.getDate()
+			const lastReorderDateObject = dateToObject(lastReorderDate)
+			const deliveryDateObject = dateToObject(deliveryDate)
 
-			const lastReorderDateString = `${lastReorderDate.getFullYear()}-${formatDate(lastReorderDateMonth)}-${formatDate(lastReorderDateDay)}`
-			const deliveryDateString = `${deliveryDate.getFullYear()}-${formatDate(deliveryDateMonth)}-${formatDate(deliveryDateDay)}`
+			const lastReorderDateString = `${lastReorderDateObject.year}-${formatDate(lastReorderDateObject.month)}-${formatDate(lastReorderDateObject.day)}`
+			const deliveryDateString = `${deliveryDateObject.year}-${formatDate(deliveryDateObject.month)}-${formatDate(deliveryDateObject.day)}`
 
 			return(
 				<Mutation mutation={UPDATE_INVENTORY_ITEM}>

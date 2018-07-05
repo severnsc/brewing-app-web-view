@@ -16,44 +16,10 @@ class InventoryItemForm extends Component {
 		deliveryDate: this.props.deliveryDate
 	}
 
-	nameChange = e => {
-		this.setState({ name: e.target.value })
-	}
-
-	costUnitChange = e => {
-		this.setState({ costUnit: e.target.value })
-	}
-
-	unitCostChange = e => {
-		this.setState({ unitCost: e.target.value })
-	}
-
-	reorderCostChange = e => {
-		this.setState({ reorderCost: e.target.value })
-	}
-
-	quantityUnitChange = e => {
-		this.setState({ quantityUnit: e.target.value })
-	}
-
-	currentQuantityChange = e => {
-		this.setState({ currentQuantity: e.target.value })
-	}
-
-	reorderQuantityChange = e => {
-		this.setState({ reorderQuantity: e.target.value })
-	}
-
-	reorderThresholdChange = e => {
-		this.setState({ reorderThreshold: e.target.value })
-	}
-
-	lastReorderDateChange = e => {
-		this.setState({ lastReorderDate: e.target.value })
-	}
-
-	deliveryDateChange = e => {
-		this.setState({ deliveryDate: e.target.value })
+	updateState = e => {
+		const object = {}
+		object[e.target.name] = e.target.value
+		this.setState(object)
 	}
 
 	handleSubmit = e => {
@@ -81,11 +47,11 @@ class InventoryItemForm extends Component {
 			<form onSubmit={this.handleSubmit}>
 
 				<label>Name
-					<input type="text" value={name} onChange={this.nameChange} />
+					<input name="name" type="text" value={name} onChange={this.updateState} />
 				</label>
 
 				<label>Cost Unit
-					<select name="costUnit" value={costUnit} onChange={this.costUnitChange}>
+					<select name="costUnit" value={costUnit} onChange={this.updateState}>
 						<option value="USD">USD</option>
 						<option value="EUR">EUR</option>
 						<option value="GBP">GBP</option>
@@ -94,38 +60,38 @@ class InventoryItemForm extends Component {
 
 
 				<label>Unit Cost
-					<input type="number" value={unitCost} onChange={this.unitCostChange} />
+					<input name="unitCost" type="number" value={unitCost} onChange={this.updateState} />
 				</label>
 
 				<label>Reorder Cost
-					<input type="number" value={reorderCost} onChange={this.reorderCostChange} />
+					<input name="reorderCost" type="number" value={reorderCost} onChange={this.updateState} />
 				</label>
 
 				<label>Quantity Unit
-					<select name="quantityUnit" value={quantityUnit} onChange={this.quantityUnitChange}>
+					<select name="quantityUnit" value={quantityUnit} onChange={this.updateState}>
 						<option value="imperial">U.S. Imperial</option>
 						<option value="metric">Metric</option>
 					</select>
 				</label>
 
 				<label>Current Quantity
-					<input type="number" value={currentQuantity} onChange={this.currentQuantityChange} />
+					<input name="currentQuantity" type="number" value={currentQuantity} onChange={this.updateState} />
 				</label>
 
 				<label>Reorder Quantity
-					<input type="number" value={reorderQuantity} onChange={this.reorderQuantityChange} />
+					<input name="reorderQuantity" type="number" value={reorderQuantity} onChange={this.updateState} />
 				</label>
 
 				<label>Reorder Threshold
-					<input type="number" value={reorderThreshold} onChange={this.reorderThresholdChange} />
+					<input name="reorderThreshold" type="number" value={reorderThreshold} onChange={this.updateState} />
 				</label>
 
 				<label>Last Reorder Date
-					<input type="date" value={lastReorderDate} onChange={this.lastReorderDateChange} />
+					<input name="lastReorderDate" type="date" value={lastReorderDate} onChange={this.updateState} />
 				</label>
 
 				<label>Delivery Date
-					<input type="date" value={deliveryDate} onChange={this.deliveryDateChange} />
+					<input name="deliveryDate" type="date" value={deliveryDate} onChange={this.updateState} />
 				</label>
 
 				<input type="submit" value="Save" />
