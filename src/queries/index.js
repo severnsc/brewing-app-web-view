@@ -19,6 +19,34 @@ export const dashboardTableQuery = gql`
   ${currentUserFragments.inventoryItems}
 `
 
+export const timersTableQuery = gql`
+  query {
+    currentUser {
+      timers {
+        id
+        duration
+        remainingDuration
+        intervalDuration
+        isRunning
+        timerAlerts {
+          id
+          activationTime
+          message
+          activated
+        }
+      }
+    }
+
+    timers @client {
+      sortBy
+      sortOrder
+      itemLimit
+      filterString
+      currentPage
+    }
+  }
+`
+
 export const signupQuery = gql`
   query {
     signup @client {

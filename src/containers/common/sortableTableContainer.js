@@ -16,7 +16,7 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, 
           {itemsMutation => {
 
             const onItemsPerPageChange = value => {
-              itemsMutation({ variables: { value: value } })
+              itemsMutation({ variables: { value: parseInt(value, 10) } })
             }
 
             return(
