@@ -315,7 +315,7 @@ export default {
       const { currentUser, timers } = cache.readQuery({ query })
 
       let pageNumber = timers.currentPage
-      if(pageNumber > currentUser.timers.length/value){
+      if(pageNumber >= currentUser.timers.length/value){
         pageNumber = Math.ceil(currentUser.timers.length/value) - 1
       }
 
