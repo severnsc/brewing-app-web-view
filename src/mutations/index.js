@@ -79,3 +79,9 @@ export const UPDATE_TIMERS_TABLE_PAGE_NUMBER = gql`
     updateTimersTablePageNumber(type: $type) @client
   }
 `
+
+export const UPDATE_ACTIVE_TIMER = gql`
+  mutation updateActiveTimer($id: String!) {
+    updateActiveTimer(id: $id) @client
+  }
+`

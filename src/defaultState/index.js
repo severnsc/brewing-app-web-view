@@ -9,5 +9,6 @@ export default {
 	login,
 	signup,
 	modal,
-	timers
+	timers,
+	activeTimerId: null
 }

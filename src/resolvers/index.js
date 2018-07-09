@@ -364,6 +364,24 @@ export default {
       return null
 
     },
+
+    updateActiveTimer: (_, { id }, { cache }) => {
+
+      const query = gql`
+        query {
+          activeTimerId @client
+        }
+      `
+
+      const data = {
+        activeTimerId: id
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    },
   
   }
 }

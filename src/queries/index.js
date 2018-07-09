@@ -125,3 +125,45 @@ export const inventoryItemQuery = gql`
     }
   }
 `
+
+export const timersQuery = gql`
+  query {
+    currentUser {
+      timers {
+        id
+        duration
+        remainingDuration
+        intervalDuration
+        isRunning
+        timerAlerts {
+          id
+          activationTime
+          message
+          activated
+        }
+      }
+    }
+  }
+`
+
+export const activeTimerQuery = gql`
+  query {
+    activeTimerId @client
+
+    currentUser {
+      timers {
+        id
+        duration
+        remainingDuration
+        intervalDuration
+        isRunning
+        timerAlerts {
+          id
+          activationTime
+          message
+          activated
+        }
+      }
+    }
+  }
+`
