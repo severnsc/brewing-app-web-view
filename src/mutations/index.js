@@ -95,3 +95,23 @@ export const START_TIMER = gql`
     }
   }
 `
+
+export const STOP_TIMER = gql`
+  mutation stopTimer($id: String!) {
+    stopTimer(id: $id) {
+      id
+      remainingDuration
+      isRunning
+    }
+  }
+`
+
+export const RESET_TIMER = gql`
+  mutation resetTimer($id: String!) {
+    resetTimer(id: $id) {
+      id
+      remainingDuration
+      isRunning
+    }
+  }
+`
