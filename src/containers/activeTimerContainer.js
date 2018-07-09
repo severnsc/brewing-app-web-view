@@ -32,7 +32,6 @@ const ActiveTimerContainer = () => (
 					update={(cache, { data: { startTimer } }) => {
 						const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
 						const timers = currentUser.timers
-						console.log(startTimer.id)
 						const newTimers = timers.map(timer => timer.id === startTimer.id ? startTimer : timer)
 						const data = {
 							activeTimerId,
@@ -41,7 +40,6 @@ const ActiveTimerContainer = () => (
 								timers: newTimers
 							}
 						}
-						console.log(data)
 						cache.writeQuery({ query: activeTimerQuery, data })
 					}}
 				>
