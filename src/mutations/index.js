@@ -93,6 +93,11 @@ export const START_TIMER = gql`
       remainingDuration
       intervalDuration
       isRunning
+      timerAlerts {
+        id
+        activated
+        activationTime
+      }
     }
   }
 `
@@ -104,6 +109,11 @@ export const STOP_TIMER = gql`
       remainingDuration
       intervalDuration
       isRunning
+      timerAlerts {
+        id
+        activated
+        activationTime
+      }
     }
   }
 `
@@ -115,6 +125,11 @@ export const RESET_TIMER = gql`
       remainingDuration
       intervalDuration
       isRunning
+      timerAlerts {
+        id
+        activated
+        activationTime
+      }
     }
   }
 `
@@ -126,6 +141,11 @@ export const DECREMENT_TIMER = gql`
       remainingDuration
       intervalDuration
       isRunning
+      timerAlerts {
+        id
+        activated
+        activationTime
+      }
     }
   }
 `
@@ -135,6 +155,11 @@ export const UPDATE_TIMER = gql`
     updateTimer(id: $id, duration: $duration) {
       id
       duration
+      timerAlerts {
+        id
+        activated
+        activationTime
+      }
     }
   }
 `
@@ -144,7 +169,17 @@ export const UPDATE_TIMER_ALERT = gql`
     updateTimerAlert(id: $id, activationTime: $activationTime, message: $message) {
       id
       activationTime
+      activated
+    }
+  }
+`
+
+export const ACTIVATE_TIMER_ALERT = gql`
+  mutation activateTimerAlert($id: String!) {
+    activateTimerAlert(id: $id) {
+      id
       message
+      activated
     }
   }
 `

@@ -5,7 +5,8 @@ import {
 	START_TIMER,
 	STOP_TIMER,
 	RESET_TIMER,
-	DECREMENT_TIMER
+	DECREMENT_TIMER,
+	ACTIVATE_TIMER_ALERT
 } from "../mutations"
 import ActiveTimer from "../components/activeTimer"
 import moment from "moment"
@@ -101,44 +102,53 @@ const ActiveTimerContainer = () => (
 													}
 
 													return(
-														<Mutation 
-															mutation={DECREMENT_TIMER}
-															update={(cache, { data: { decrementTimer } }) => {
-																const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
-																const timers = currentUser.timers
-																const newTimers = timers.map(timer => timer.id === decrementTimer.id ? decrementTimer : timer)
-																const data = {
-																	activeTimerId,
-																	currentUser: {
-																		...currentUser,
-																		timers: newTimers
-																	}
-																}
-																cache.writeQuery({ query: activeTimerQuery, data })
-															}}
-														>
-															{decrementTimerMutation => {
-
-																let timeoutId
-																if(timer && timer.isRunning){
-																	timeoutId = setTimeout(() => decrementTimerMutation({ 
-																		variables: {id: activeTimerId} 
-																	}), timer.intervalDuration)
-																}else{
-																	if(timeoutId){
-																		clearTimeout(timeoutId)
-																	}
-																}
-
+														<Mutation mutation={ACTIVATE_TIMER_ALERT}>
+															{activateTimerAlertMutation => {
 																return(
-																	<div style={{border: "1px solid black"}}>
-																		<h2>Active Timer</h2>
-																		{timer ? <ActiveTimer time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
-																	</div>
-																)
+																	<Mutation 
+																		mutation={DECREMENT_TIMER}
+																		update={(cache, { data: { decrementTimer } }) => {
+																			const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
+																			const timers = currentUser.timers
+																			const currentTimer = timers.find(timer => timer.id === activeTimerId)
+																			const alertsToActivate = currentTimer.timerAlerts.filter(alert => alert.activationTime === currentTimer.remainingDuration)
+																			if(alertsToActivate.length) alertsToActivate.forEach(alert => activateTimerAlertMutation({ variables: { id: alert.id } }))
+																			const newTimers = timers.map(timer => timer.id === decrementTimer.id ? decrementTimer : timer)
+																			const data = {
+																				activeTimerId,
+																				currentUser: {
+																					...currentUser,
+																					timers: newTimers
+																				}
+																			}
+																			cache.writeQuery({ query: activeTimerQuery, data })
+																		}}
+																	>
+																		{decrementTimerMutation => {
 
+																			let timeoutId
+																			if(timer && timer.isRunning){ 
+																				timeoutId = setTimeout(() => decrementTimerMutation({ 
+																					variables: {id: activeTimerId} 
+																				}), timer.intervalDuration)
+																			}else{
+																				if(timeoutId){
+																					clearTimeout(timeoutId)
+																				}
+																			}
+
+																			return(
+																				<div style={{border: "1px solid black"}}>
+																					<h2>Active Timer</h2>
+																					{timer ? <ActiveTimer time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
+																				</div>
+																			)
+																		}}
+																	</Mutation>
+																)
 															}}
 														</Mutation>
+														
 													)
 												}}
 											</Mutation>
