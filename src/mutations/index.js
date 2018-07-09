@@ -91,6 +91,7 @@ export const START_TIMER = gql`
     startTimer(id: $id) {
       id
       remainingDuration
+      intervalDuration
       isRunning
     }
   }
@@ -101,6 +102,7 @@ export const STOP_TIMER = gql`
     stopTimer(id: $id) {
       id
       remainingDuration
+      intervalDuration
       isRunning
     }
   }
@@ -111,6 +113,18 @@ export const RESET_TIMER = gql`
     resetTimer(id: $id) {
       id
       remainingDuration
+      intervalDuration
+      isRunning
+    }
+  }
+`
+
+export const DECREMENT_TIMER = gql`
+  mutation decrementTimer($id: String!) {
+    decrementTimer(id: $id) {
+      id
+      remainingDuration
+      intervalDuration
       isRunning
     }
   }

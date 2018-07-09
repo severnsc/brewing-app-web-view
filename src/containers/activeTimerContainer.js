@@ -1,7 +1,12 @@
 import React from "react"
 import { Query, Mutation } from "react-apollo"
 import { activeTimerQuery } from "../queries"
-import { START_TIMER, STOP_TIMER, RESET_TIMER } from "../mutations"
+import {
+	START_TIMER,
+	STOP_TIMER,
+	RESET_TIMER,
+	DECREMENT_TIMER
+} from "../mutations"
 import ActiveTimer from "../components/activeTimer"
 import moment from "moment"
 
@@ -96,10 +101,44 @@ const ActiveTimerContainer = () => (
 													}
 
 													return(
-														<div style={{border: "1px solid black"}}>
-															<h2>Active Timer</h2>
-															{timer ? <ActiveTimer time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
-														</div>
+														<Mutation 
+															mutation={DECREMENT_TIMER}
+															update={(cache, { data: { decrementTimer } }) => {
+																const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
+																const timers = currentUser.timers
+																const newTimers = timers.map(timer => timer.id === decrementTimer.id ? decrementTimer : timer)
+																const data = {
+																	activeTimerId,
+																	currentUser: {
+																		...currentUser,
+																		timers: newTimers
+																	}
+																}
+																cache.writeQuery({ query: activeTimerQuery, data })
+															}}
+														>
+															{decrementTimerMutation => {
+
+																let timeoutId
+																if(timer && timer.isRunning){
+																	timeoutId = setTimeout(() => decrementTimerMutation({ 
+																		variables: {id: activeTimerId} 
+																	}), timer.intervalDuration)
+																}else{
+																	if(timeoutId){
+																		clearTimeout(timeoutId)
+																	}
+																}
+
+																return(
+																	<div style={{border: "1px solid black"}}>
+																		<h2>Active Timer</h2>
+																		{timer ? <ActiveTimer time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
+																	</div>
+																)
+
+															}}
+														</Mutation>
 													)
 												}}
 											</Mutation>

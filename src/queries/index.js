@@ -148,6 +148,7 @@ export const activeTimerQuery = gql`
       timers {
         id
         remainingDuration
+        intervalDuration
         isRunning
       }
     }
