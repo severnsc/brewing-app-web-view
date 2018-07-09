@@ -129,3 +129,12 @@ export const DECREMENT_TIMER = gql`
     }
   }
 `
+
+export const UPDATE_TIMER = gql`
+  mutation updateTimer($id: String!, $duration: Number) {
+    updateTimer(id: $id, duration: $duration) {
+      id
+      duration
+    }
+  }
+`

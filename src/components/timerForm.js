@@ -10,6 +10,7 @@ class TimerForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
+		this.props.saveTimer(this.state.duration)
 	}
 
 	handleDurationChange = e => {
@@ -51,7 +52,8 @@ TimerForm.propTypes = {
 			message: PropTypes.string,
 			activated: PropTypes.bool
 		})
-	).isRequired
+	).isRequired,
+	saveTimer: PropTypes.func.isRequired
 }
 
 export default TimerForm
