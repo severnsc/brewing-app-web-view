@@ -138,3 +138,13 @@ export const UPDATE_TIMER = gql`
     }
   }
 `
+
+export const UPDATE_TIMER_ALERT = gql`
+  mutation updateTimerAlert($id: String!, $activationTime: Int, $message: String) {
+    updateTimerAlert(id: $id, activationTime: $activationTime, message: $message) {
+      id
+      activationTime
+      message
+    }
+  }
+`

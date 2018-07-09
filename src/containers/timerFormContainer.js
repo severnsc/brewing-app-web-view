@@ -1,7 +1,11 @@
 import React, { Fragment } from "react"
 import { Query, Mutation } from "react-apollo"
 import { timersQuery } from "../queries"
-import { UPDATE_ACTIVE_TIMER, UPDATE_TIMER } from "../mutations"
+import {
+	UPDATE_ACTIVE_TIMER,
+	UPDATE_TIMER,
+	UPDATE_TIMER_ALERT
+} from "../mutations"
 import TimerForm from "../components/timerForm"
 import PropTypes from "prop-types"
 
@@ -33,14 +37,28 @@ const TimerFormContainer = ({ id }) => (
 									}
 
 									return(
-										<Fragment>
-											<button onClick={activateTimer}>Activate timer</button>
-											<TimerForm
-												duration={timer.duration}
-												timerAlerts={timer.timerAlerts}
-												saveTimer={saveTimer}
-											/>
-										</Fragment>
+										<Mutation mutation={UPDATE_TIMER_ALERT}>
+											{updateTimerAlertMutation => {
+
+												const saveTimerAlert = (id, activationTime, message) => {
+													updateTimerAlertMutation({
+														variables: {id, activationTime, message}
+													})
+												}
+
+												return(
+													<Fragment>
+														<button onClick={activateTimer}>Activate timer</button>
+														<TimerForm
+															duration={timer.duration}
+															timerAlerts={timer.timerAlerts}
+															saveTimer={saveTimer}
+															saveTimerAlert={saveTimerAlert}
+														/>
+													</Fragment>
+												)
+											}}
+										</Mutation>
 									)
 
 								}}

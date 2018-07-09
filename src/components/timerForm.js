@@ -20,7 +20,7 @@ class TimerForm extends Component {
 	render(){
 
 		const timerAlerts = this.props.timerAlerts.map(timerAlert =>
-			<TimerAlertForm key={timerAlert.id} activationTime={timerAlert.activationTime} message={timerAlert.message} />
+			<TimerAlertForm key={timerAlert.id} id={timerAlert.id} activationTime={timerAlert.activationTime} message={timerAlert.message} saveTimerAlert={this.props.saveTimerAlert} />
 		)
 
 		return(
@@ -53,7 +53,8 @@ TimerForm.propTypes = {
 			activated: PropTypes.bool
 		})
 	).isRequired,
-	saveTimer: PropTypes.func.isRequired
+	saveTimer: PropTypes.func.isRequired,
+	saveTimerAlert: PropTypes.func.isRequired
 }
 
 export default TimerForm

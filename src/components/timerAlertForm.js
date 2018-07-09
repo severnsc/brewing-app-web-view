@@ -10,6 +10,7 @@ class TimerAlertForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
+		this.props.saveTimerAlert(this.props.id, this.state.activationTime, this.state.message)
 	}
 
 	handleActivationTimeChange = e => {
@@ -39,8 +40,10 @@ class TimerAlertForm extends Component {
 }
 
 TimerAlertForm.propTypes = {
+	id: PropTypes.string.isRequired,
 	activationTime: PropTypes.number.isRequired,
-	message: PropTypes.string.isRequired
+	message: PropTypes.string.isRequired,
+	saveTimerAlert: PropTypes.func.isRequired
 }
 
 export default TimerAlertForm
