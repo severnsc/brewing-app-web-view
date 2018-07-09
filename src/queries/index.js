@@ -132,9 +132,6 @@ export const timersQuery = gql`
       timers {
         id
         duration
-        remainingDuration
-        intervalDuration
-        isRunning
         timerAlerts {
           id
           activationTime

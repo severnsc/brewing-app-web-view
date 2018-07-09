@@ -5,8 +5,7 @@ import PropTypes from "prop-types"
 class TimerForm extends Component {
 
 	state = {
-		duration: this.props.duration,
-		intervalDuration: this.props.intervalDuration
+		duration: this.props.duration
 	}
 
 	handleSubmit = e => {
@@ -15,10 +14,6 @@ class TimerForm extends Component {
 
 	handleDurationChange = e => {
 		this.setState({ duration: e.target.value })
-	}
-
-	handleIntervalDurationChange = e => {
-		this.setState({ intervalDuration: e.target.value })
 	}
 
 	render(){
@@ -35,10 +30,6 @@ class TimerForm extends Component {
 						<input name="duration" type="number" value={this.state.duration} onChange={this.handleDurationChange} />
 					</label>
 
-					<label>Interval duration
-						<input name="intervalDuration" type="number" value={this.state.intervalDuration} onChange={this.handleIntervalDurationChange} />
-					</label>
-
 					<input type="submit" value="Save" />
 				</form>
 
@@ -53,7 +44,6 @@ class TimerForm extends Component {
 
 TimerForm.propTypes = {
 	duration: PropTypes.number.isRequired,
-	intervalDuration: PropTypes.number.isRequired,
 	timerAlerts: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string,

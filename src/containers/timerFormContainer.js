@@ -29,7 +29,6 @@ const TimerFormContainer = ({ id }) => (
 								<button onClick={activateTimer}>Activate timer</button>
 								<TimerForm
 									duration={timer.duration}
-									intervalDuration={timer.intervalDuration}
 									timerAlerts={timer.timerAlerts}
 								/>
 							</Fragment>
