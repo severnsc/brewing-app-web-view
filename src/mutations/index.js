@@ -85,3 +85,13 @@ export const UPDATE_ACTIVE_TIMER = gql`
     updateActiveTimer(id: $id) @client
   }
 `
+
+export const START_TIMER = gql`
+  mutation startTimer($id: String!) {
+    startTimer(id: $id) {
+      id
+      remainingDuration
+      isRunning
+    }
+  }
+`

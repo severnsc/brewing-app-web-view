@@ -1,6 +1,7 @@
 import React from "react"
-import { Query } from "react-apollo"
+import { Query, Mutation } from "react-apollo"
 import { activeTimerQuery } from "../queries"
+import { START_TIMER } from "../mutations"
 import ActiveTimer from "../components/activeTimer"
 import moment from "moment"
 
@@ -25,15 +26,42 @@ const ActiveTimerContainer = () => (
 				time = tempTime.hours() ? (tempTime.hours() + ":" + time) : time
 			}
 
-			const startTimer = () => console.log("timer started!")
-			const stopTimer = () => console.log("timer stopped!")
-			const resetTimer = () => console.log("timer reset!")
-
 			return(
-				<div style={{border: "1px solid black"}}>
-					<h2>Active Timer</h2>
-					{timer ? <ActiveTimer time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
-				</div>
+				<Mutation 
+					mutation={START_TIMER}
+					update={(cache, { data: { startTimer } }) => {
+						const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
+						const timers = currentUser.timers
+						console.log(startTimer.id)
+						const newTimers = timers.map(timer => timer.id === startTimer.id ? startTimer : timer)
+						const data = {
+							activeTimerId,
+							currentUser: {
+								...currentUser,
+								timers: newTimers
+							}
+						}
+						console.log(data)
+						cache.writeQuery({ query: activeTimerQuery, data })
+					}}
+				>
+					{startTimerMutation => {
+
+							const startTimer = () => {
+								startTimerMutation({ variables: { id: activeTimerId } })
+							}
+							const stopTimer = () => console.log("timer stopped!")
+							const resetTimer = () => console.log("timer reset!")
+
+							return(
+								<div style={{border: "1px solid black"}}>
+									<h2>Active Timer</h2>
+									{timer ? <ActiveTimer time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
+								</div>
+							)
+
+					}}
+				</Mutation>
 			)
 		}}
 	</Query>
