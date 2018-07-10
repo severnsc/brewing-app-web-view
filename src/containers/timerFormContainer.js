@@ -6,7 +6,7 @@ import {
 	UPDATE_TIMER,
 	UPDATE_TIMER_ALERT
 } from "../mutations"
-import TimerForm from "../components/timerForm"
+import { TimerForm } from "../components"
 import PropTypes from "prop-types"
 
 const TimerFormContainer = ({ id }) => (

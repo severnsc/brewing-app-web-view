@@ -7,7 +7,7 @@ import {
 import { validateUsername, createUser } from "../adapters/userAdapter"
 import { signupQuery } from "../queries"
 import { withRouter } from "react-router"
-import SignupForm from "../components/signupForm"
+import { SignupForm } from "../components"
 
 const SignupContainer = ({match, location, history}) => (
 

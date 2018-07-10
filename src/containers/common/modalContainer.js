@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Modal from "../../components/modal"
+import{ Modal} from "../../components"
 import { Mutation } from "react-apollo"
 import { UPDATE_MODAL } from "../../mutations"
 

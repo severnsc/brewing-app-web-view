@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./styles"
 import PropTypes from 'prop-types'
-import HoverableTableRow from './hoverableTableRow'
+import { HoverableTableRow } from '..'
 
 const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick }) => {
 
@@ -62,10 +62,10 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
   const endIndex = (currentPage + 1) * itemsPerPage
   const currentPageTableRows = sortedTableRows.slice(startIndex, endIndex)
 
-  const previousPageButton = currentPage > 0 ? <span style={styles.leftPageButton} onClick={decrementPage}>&lt; Previous</span> : <span style={pageButtonStyle} ></span>
+  const previousPageButton = currentPage > 0 ? <span style={styles.leftPageButton} onClick={decrementPage}>&lt; Previous</span> : <span style={styles.pageButton} ></span>
 
   const lastPage = Math.ceil(tableRows.length/itemsPerPage) - 1
-  const nextPageButton = currentPage < lastPage ? <span style={styles.rightPageButton} onClick={incrementPage}>Next &gt;</span> : <span style={pageButtonStyle} ></span>
+  const nextPageButton = currentPage < lastPage ? <span style={styles.rightPageButton} onClick={incrementPage}>Next &gt;</span> : <span style={styles.pageButton} ></span>
 
   const widthPercentage = 100/columns.length
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import SearchBar from '../../components/searchBar'
+import { SearchBar } from '../../components'
 import { Mutation } from 'react-apollo'
 
 const SearchBarContainer = ({ mutation }) => (

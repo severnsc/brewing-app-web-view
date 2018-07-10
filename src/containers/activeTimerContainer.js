@@ -8,7 +8,7 @@ import {
 	DECREMENT_TIMER,
 	ACTIVATE_TIMER_ALERT
 } from "../mutations"
-import ActiveTimer from "../components/activeTimer"
+import { ActiveTimer } from "../components"
 import moment from "moment"
 
 const ActiveTimerContainer = () => (

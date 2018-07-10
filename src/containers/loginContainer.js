@@ -1,5 +1,5 @@
 import React from "react"
-import LoginForm from "../components/loginForm"
+import { LoginForm } from "../components"
 import { Mutation, Query } from "react-apollo"
 import { LOGIN_MUTATION } from "../mutations"
 import { loginQuery } from "../queries"

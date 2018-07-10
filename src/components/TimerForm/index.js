@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react"
-import TimerAlertForm from "./timerAlertForm"
+import { TimerAlertForm } from ".."
 import PropTypes from "prop-types"
 
 class TimerForm extends Component {

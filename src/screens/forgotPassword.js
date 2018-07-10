@@ -1,5 +1,5 @@
 import React from 'react'
-import ForgotPasswordForm from '../components/forgotPasswordForm'
+import { ForgotPasswordForm } from '../components'
 import { sendRecoveryEmail } from '../adapters/userAdapter'
 
 const ForgotPassword = () => (

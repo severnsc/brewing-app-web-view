@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Query, Mutation } from "react-apollo"
 import { inventoryItemQuery } from "../queries"
 import { UPDATE_INVENTORY_ITEM } from "../mutations"
-import InventoryItemForm from "../components/inventoryItemForm"
+import { InventoryItemForm } from "../components"
 
 const InventoryItemFormContainer = ({ id }) => (
 
