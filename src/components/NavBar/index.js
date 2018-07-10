@@ -92,7 +92,7 @@ class NavBar extends Component {
 
     const timersLinkStyle = this.state.mouseenter === "Timers" ? styles.navLinkMouseEnter : styles.navLink
     const inventoriesLinkStyle = this.state.mouseenter === "Inventories" ? styles.navLinkMouseEnter : styles.navLink
-    const accountLinkStyle = this.state.mouseenter === "Account" ? styles.accountLinkMouseEnter : styles.accountlink
+    const accountLinkStyle = this.state.mouseenter === "Account ∨" ? styles.accountLinkMouseEnter : styles.accountLink
 
     return(
       <nav style={styles.nav} >

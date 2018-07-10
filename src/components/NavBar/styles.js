@@ -54,6 +54,7 @@ styles.navLinkMouseEnter = {
 
 styles.accountLink = {
 	...styles.navLink,
+	cursor: "pointer",
 	marginRight: "100px"
 }
 
