@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
+import styles from "./styles"
 import PropTypes from 'prop-types'
 
 class SearchBar extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      value: ""
-    }
+  state = {
+    value: ""
   }
 
-  handleChange(e) {
+  handleChange = e => {
     if(this.props.onChange) this.props.onChange(e.target.value)
     this.setState({value: e.target.value})
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault()
     this.props.onSubmit(this.state.value)
   }
@@ -24,12 +22,12 @@ class SearchBar extends Component {
 
     return(
 
-      <form style={{display:"flex", margin:"10px"}} onSubmit={e => this.handleSubmit(e)}>
+      <form style={styles.form} onSubmit={this.handleSubmit}>
         <input 
-          style={{flex:"1", borderRadius:"10px", border:"1px solid #8c8c8c", padding:"2px"}}
+          style={styles.input}
           type="text"
           value={this.state.value}
-          onChange={e => this.handleChange(e)}
+          onChange={this.handleChange}
           placeholder={this.props.placeholder}
         />
       </form>
