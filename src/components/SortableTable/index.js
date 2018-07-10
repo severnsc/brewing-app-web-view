@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from "./styles"
 import PropTypes from 'prop-types'
 import HoverableTableRow from './hoverableTableRow'
 
@@ -61,26 +62,20 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
   const endIndex = (currentPage + 1) * itemsPerPage
   const currentPageTableRows = sortedTableRows.slice(startIndex, endIndex)
 
-  const pageButtonStyle = {
-    textDecoration: "underline",
-    cursor:"pointer",
-    width: "86.73px"
-  }
-
-  const previousPageButton = currentPage > 0 ? <span style={{...pageButtonStyle, textAlign: "left"}} onClick={decrementPage}>&lt; Previous</span> : <span style={pageButtonStyle} ></span>
+  const previousPageButton = currentPage > 0 ? <span style={styles.leftPageButton} onClick={decrementPage}>&lt; Previous</span> : <span style={pageButtonStyle} ></span>
 
   const lastPage = Math.ceil(tableRows.length/itemsPerPage) - 1
-  const nextPageButton = currentPage < lastPage ? <span style={{...pageButtonStyle, textAlign: "right"}} onClick={incrementPage}>Next &gt;</span> : <span style={pageButtonStyle} ></span>
+  const nextPageButton = currentPage < lastPage ? <span style={styles.rightPageButton} onClick={incrementPage}>Next &gt;</span> : <span style={pageButtonStyle} ></span>
 
   const widthPercentage = 100/columns.length
 
   return(
-    <div style={{display: "flex", "flexFlow": "column"}}>
-      <table style={{border: "1px solid", margin: "10px", borderCollapse: "collapse"}}>
-        <thead style={{backgroundColor: "#e8e8e8"}}>
+    <div style={styles.container}>
+      <table style={styles.table}>
+        <thead style={styles.tableHead}>
           <tr>
             {headerCells.map((cell, index) => (
-              <th style={{border: "1px solid", width: `${widthPercentage}%`, padding: "10px"}} key={cell.id} onClick={() => handleClick(columns[index].name)}>
+              <th style={{...styles.tableHeadCell, width: `${widthPercentage}%`}} key={cell.id} onClick={() => handleClick(columns[index].name)}>
                 {cell.name}
               </th>
             ))}
@@ -91,21 +86,21 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
             return (
               <HoverableTableRow onClick={onTableRowClick} key={row.id} id={row.id}>
                 {row.cells.map((cell, index) => 
-                  <td key={index} style={{border: "1px solid", width: `${widthPercentage}%`}}>{cell}</td>)}
+                  <td key={index} style={{...styles.tableData, width: `${widthPercentage}%`}}>{cell}</td>)}
               </HoverableTableRow>
             )
           })}
         </tbody>
       </table>
-      <div style={{display: "flex", margin:"0 10px"}}>
+      <div style={styles.footer}>
         {previousPageButton}
-        <span style={{flex: "1"}}>
+        <span style={styles.span}>
           <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
             <option value={25}>25</option>
             <option value={50}>50</option>
             <option value={100}>100</option>
           </select>
-          <span style={{marginLeft: "5px"}}>items per page</span>
+          <span style={styles.itemsPerPage}>items per page</span>
         </span>
         {nextPageButton}
       </div>
