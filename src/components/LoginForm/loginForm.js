@@ -1,41 +1,33 @@
 import React, { Component } from 'react'
+import styles from "./styles"
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 class LoginForm extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      username: "",
-      password: ""
-    }
+  state = {
+    username: "",
+    password: ""
   }
 
-  handleUsername(e) {
+  handleUsername = e => {
     this.setState({username: e.target.value})
   }
 
-  handlePassword(e) {
+  handlePassword = e => {
     this.setState({password: e.target.value})
   }
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault()
     this.props.login(this.state.username, this.state.password)
   }
 
   render() {
-
-    const flexColumnStyle = {
-      display: "flex",
-      flexDirection:"column"
-    }
-
     return(
-      <div style={flexColumnStyle}>
+      <div style={styles.flexColumn}>
         <h2>Login</h2>
-        <form onSubmit={e => this.onSubmit(e)} style={flexColumnStyle}>
+        <form onSubmit={e => this.onSubmit(e)} style={styles.flexColumn}>
           {this.props.error}
           <label>Username
             <input value={this.state.username} type="text" onChange={e => this.handleUsername(e)} />
