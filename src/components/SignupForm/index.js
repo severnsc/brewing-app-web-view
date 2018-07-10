@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
+import styles from "./styles"
 import PropTypes from 'prop-types'
 import validator from 'validator'
 import { Link } from 'react-router-dom'
 
 class SignupForm extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: ""
-    }
+  state = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -21,32 +19,18 @@ class SignupForm extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault()
     this.props.createUser(this.state.username, this.state.password, this.state.email)
   }
 
-  handleUsername(event) {
-    this.setState({username: event.target.value})
-  }
-
-  handleEmail(event) {
-    this.setState({email: event.target.value})
-  }
-
-  handlePassword(event) {
-    this.setState({password: event.target.value})
-  }
-
-  handleConfirmPassword(event) {
-    this.setState({confirmPassword: event.target.value})
+  handleChange = e => {
+    const object = {}
+    object[e.target.name] = e.target.value
+    this.setState(object)
   }
 
   render(){
-    const flexColumnStyle = {
-      display: "flex",
-      flexDirection:"column"
-    }
 
     const emailErrorText = this.state.email.length === 0 ||
                            validator.isEmail(this.state.email)
@@ -77,24 +61,24 @@ class SignupForm extends Component {
                            this.state.password === ""
 
     return(
-      <div style={flexColumnStyle}>
+      <div style={styles.flexColumn}>
         <h2>Sign up</h2>
         {this.props.error}
-        <form style={flexColumnStyle} onSubmit={(e) => this.onSubmit(e)}>
+        <form style={styles.flexColumn} onSubmit={this.onSubmit}>
           <label>Username
-            <input type="text" value={this.state.username} onChange={(e) => this.handleUsername(e)} />
+            <input name="username" type="text" value={this.state.username} onChange={this.handleChange} />
             <span>{usernameErrorText}</span>
           </label>
           <label>Email
-            <input type="email" value={this.state.email} onChange={(e) => this.handleEmail(e)} />
+            <input name="email" type="email" value={this.state.email} onChange={this.handleChange} />
             <span>{emailErrorText}</span>
           </label>
           <label>Password
-            <input type ="password" value={this.state.password} onChange={(e) => this.handlePassword(e)} />
+            <input name="password" type ="password" value={this.state.password} onChange={this.handleChange} />
             <span>{passwordErrorText}</span>
           </label>
           <label>Confirm password
-            <input type ="password" value={this.state.confirmPassword} onChange={(e) => this.handleConfirmPassword(e)} />
+            <input name="confirmPassword" type ="password" value={this.state.confirmPassword} onChange={this.handleChange} />
             <span>{confirmPasswordErrorText}</span>
           </label>
           <input disabled={submitDisabled} type="submit" value="Sign Up" />
