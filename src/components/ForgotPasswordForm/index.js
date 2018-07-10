@@ -3,18 +3,15 @@ import PropTypes from 'prop-types'
 
 class ForgotPasswordForm extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      username: ""
-    }
+  state = {
+    username: ""
   }
 
-  handleUsername(e) {
+  handleUsername = e => {
     this.setState({username: e.target.value})
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault()
     this.props.sendRecoveryEmail(this.state.username)
     this.props.navigate()
