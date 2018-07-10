@@ -369,12 +369,19 @@ export default {
 
       const query = gql`
         query {
-          activeTimerId @client
+          activeTimer @client {
+            id
+          }
         }
       `
 
+      const { activeTimer } = cache.readQuery({ query })
+
       const data = {
-        activeTimerId: id
+        activeTimer: {
+          ...activeTimer,
+          id
+        }
       }
 
       cache.writeQuery({ query, data })

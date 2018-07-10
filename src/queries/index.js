@@ -144,7 +144,9 @@ export const timersQuery = gql`
 
 export const activeTimerQuery = gql`
   query {
-    activeTimerId @client
+    activeTimer @client {
+      id
+    }
 
     currentUser {
       timers {
