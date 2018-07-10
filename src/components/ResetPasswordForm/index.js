@@ -3,23 +3,20 @@ import PropTypes from 'prop-types'
 
 class ResetPasswordForm extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      password: "",
-      confirmPassword: ""
-    }
+  state = {
+    password: "",
+    confirmPassword: ""
   }
 
-  handlePassword(e) {
+  handlePassword = e => {
     this.setState({password: e.target.value})
   }
 
-  handleConfirmPassword(e) {
+  handleConfirmPassword = e => {
     this.setState({confirmPassword: e.target.value})
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault()
     this.props.resetPassword(this.state.password)
     this.props.navigate()
@@ -45,13 +42,13 @@ class ResetPasswordForm extends Component {
     return (
       <div>
         <h2>Reset Password</h2>
-        <form onSubmit={e => this.handleSubmit(e)}>
+        <form onSubmit={this.handleSubmit}>
           <label>Password
-            <input type="password" value={this.state.password} onChange={e => this.handlePassword(e)} />
+            <input type="password" value={this.state.password} onChange={this.handlePassword} />
             <span>{passwordErrorText}</span>
           </label>
           <label>Confirm Password
-            <input type="password" value={this.state.confirmPassword} onChange={e => this.handleConfirmPassword(e)} />
+            <input type="password" value={this.state.confirmPassword} onChange={this.handleConfirmPassword} />
             <span>{confirmPasswordErrorText}</span>
           </label>
           <input disabled={buttonDisabled} type="submit" value="Reset password" />
