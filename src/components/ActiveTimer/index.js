@@ -1,24 +1,8 @@
 import React from "react"
+import styles from "./styles"
 import PropTypes from "prop-types"
 
 const ActiveTimer = ({ name, time, isRunning, startTimer, stopTimer, resetTimer }) => {
-
-	const styles = {
-		button: {
-			color: "white",
-			backgroundColor: "grey"
-		}
-	}
-
-	styles.start = {
-		...styles.button,
-		backgroundColor: "green"
-	}
-
-	styles.stop = {
-		...styles.button,
-		backgroundColor: "red"
-	}
 
 	const startButton = <button onClick={startTimer} style={styles.start}>Start</button>
 	const stopButton = <button onClick={stopTimer} style={styles.stop}>Stop</button>
