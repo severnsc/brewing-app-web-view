@@ -27,7 +27,7 @@ const TimersTableContainer = () => {
 
         const tableRows = data.currentUser.timers.map(timer => {
         	const cells = [
-        		timer.id,
+        		timer.name,
         		timer.duration,
         		timer.timerAlerts.length
         	]

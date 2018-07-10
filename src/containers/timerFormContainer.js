@@ -32,8 +32,8 @@ const TimerFormContainer = ({ id }) => (
 							<Mutation mutation={UPDATE_TIMER}>
 								{updateTimer => {
 
-									const saveTimer = duration => {
-										updateTimer({ variables: { id, duration: parseInt(duration, 10) } })
+									const saveTimer = (name, duration) => {
+										updateTimer({ variables: { id, name, duration: parseInt(duration, 10) } })
 									}
 
 									return(
@@ -50,6 +50,7 @@ const TimerFormContainer = ({ id }) => (
 													<Fragment>
 														<button onClick={activateTimer}>Activate timer</button>
 														<TimerForm
+															name={timer.name}
 															duration={timer.duration}
 															timerAlerts={timer.timerAlerts}
 															saveTimer={saveTimer}

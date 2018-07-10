@@ -24,6 +24,7 @@ export const timersTableQuery = gql`
     currentUser {
       timers {
         id
+        name
         duration
         timerAlerts {
           id
@@ -128,6 +129,7 @@ export const timersQuery = gql`
     currentUser {
       timers {
         id
+        name
         duration
         timerAlerts {
           id
@@ -147,6 +149,7 @@ export const activeTimerQuery = gql`
     currentUser {
       timers {
         id
+        name
         remainingDuration
         intervalDuration
         isRunning

@@ -5,12 +5,17 @@ import PropTypes from "prop-types"
 class TimerForm extends Component {
 
 	state = {
+		name: this.props.name,
 		duration: this.props.duration
 	}
 
 	handleSubmit = e => {
 		e.preventDefault()
-		this.props.saveTimer(this.state.duration)
+		this.props.saveTimer(this.state.name, this.state.duration)
+	}
+
+	handleNameChange = e => {
+		this.setState({ name: e.target.value })
 	}
 
 	handleDurationChange = e => {
@@ -27,6 +32,11 @@ class TimerForm extends Component {
 			<Fragment>
 				<h2>Timer</h2>
 				<form onSubmit={this.handleSubmit}>
+
+					<label>Name
+						<input name="name" type="text" value={this.state.name} onChange={this.handleNameChange} />
+					</label>
+
 					<label>Duration
 						<input name="duration" type="number" value={this.state.duration} onChange={this.handleDurationChange} />
 					</label>
@@ -44,6 +54,7 @@ class TimerForm extends Component {
 }
 
 TimerForm.propTypes = {
+	name: PropTypes.string.isRequired,
 	duration: PropTypes.number.isRequired,
 	timerAlerts: PropTypes.arrayOf(
 		PropTypes.shape({

@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const ActiveTimer = ({ time, isRunning, startTimer, stopTimer, resetTimer }) => {
+const ActiveTimer = ({ name, time, isRunning, startTimer, stopTimer, resetTimer }) => {
 
 	const styles = {
 		button: {
@@ -25,6 +25,7 @@ const ActiveTimer = ({ time, isRunning, startTimer, stopTimer, resetTimer }) => 
 
 	return (
 		<div>
+			<h2>{name}</h2>
 			<h2>{time}</h2>
 			{isRunning ? stopButton : startButton}
 			<button onClick={resetTimer} style={styles.button}>Reset</button>
@@ -33,6 +34,7 @@ const ActiveTimer = ({ time, isRunning, startTimer, stopTimer, resetTimer }) => 
 }
 
 ActiveTimer.propTypes = {
+	name: PropTypes.string.isRequired,
 	time: PropTypes.string.isRequired,
 	isRunning: PropTypes.bool.isRequired,
 	startTimer: PropTypes.func.isRequired,

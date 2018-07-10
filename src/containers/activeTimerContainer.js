@@ -140,7 +140,7 @@ const ActiveTimerContainer = () => (
 																			return(
 																				<div style={{border: "1px solid black"}}>
 																					<h2>Active Timer</h2>
-																					{timer ? <ActiveTimer time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
+																					{timer ? <ActiveTimer name={timer.name} time={time} isRunning={timer.isRunning} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
 																				</div>
 																			)
 																		}}
