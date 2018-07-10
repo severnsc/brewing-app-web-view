@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import ReactDOM from "react-dom"
+import styles from "./styles"
 import PropTypes from "prop-types"
 
 class ModalConstructor extends Component {
@@ -37,15 +38,8 @@ ModalConstructor.propTypes = {
 
 const Overlay = ({ children }) => {
 
-  const overlayStyle = {
-    overflowY: "auto",
-    height: "66%",
-    width: "41%",
-    backgroundColor: "white"
-  }
-
   return(
-    <div style={overlayStyle}>
+    <div style={styles.overlay}>
       {children}
     </div>
   )
@@ -60,23 +54,10 @@ Overlay.propTypes = {
 }
 
 const Modal = ({ children, closeModal }) => {
-
-  const modalStyle = {
-    backgroundColor: "rgba(0,0,0,0.5)",
-    position: "fixed",
-    height: "100%",
-    width: "100%",
-    top: "0",
-    left: "0",
-    display: "flex",
-    flexFlow: "column",
-    alignItems: "center",
-    justifyContent: "center"
-  }
   
   return(
     <ModalConstructor>
-        <div style={modalStyle}>
+        <div style={styles.modal}>
           <Overlay>
             {children}
           </Overlay>
