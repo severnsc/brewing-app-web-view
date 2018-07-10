@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
+import styles from "./styles"
 import PropTypes from "prop-types"
 
 class HoverableTableRow extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      hover: false
-    }
+  state = {
+    hover: false
   }
 
   updateHoverState = e => {
@@ -26,10 +24,10 @@ class HoverableTableRow extends Component {
 
   render(){
 
-    const backgroundColor = this.state.hover ? "#e8e8e8" : "white"
+    const style = this.state.hover ? styles.hover : styles.default
 
     return(
-      <tr style={{cursor:"pointer", backgroundColor}} onClick={this.handleClick} onMouseEnter={this.updateHoverState} onMouseLeave={this.updateHoverState}>
+      <tr style={style} onClick={this.handleClick} onMouseEnter={this.updateHoverState} onMouseLeave={this.updateHoverState}>
         {this.props.children}
       </tr>
     )
