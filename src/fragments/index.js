@@ -6,13 +6,19 @@ export const currentUserFragments = {
 			inventories {
 				items {
 					id
+					inventory {
+						id
+					}
           object
           quantityUnit
           currentQuantity
+          reorderQuantity
           reorderThreshold
           costUnit
           unitCost
           reorderCost
+          lastReorderDate
+          deliveryDate
 				}
 			}
 		}

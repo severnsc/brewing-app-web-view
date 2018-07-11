@@ -1,18 +1,22 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Query, Mutation } from "react-apollo"
-import { inventoryItemQuery } from "../queries"
+import { inventoryItemsQuery } from "../queries"
 import { UPDATE_INVENTORY_ITEM } from "../mutations"
 import { InventoryItemForm } from "../components"
 
 const InventoryItemFormContainer = ({ id }) => (
 
-	<Query query={inventoryItemQuery} variables={{ id }}>
+	<Query query={inventoryItemsQuery} variables={{ id }}>
 
 		{({loading, error, data}) => {
 
 			if(loading) return "Loading..."
 			if(error) return "Error!"
+
+			const inventories = data.currentUser.inventories
+			const itemIdMatch = item => item.id === id
+			const inventoryItem = inventories.find(inventory => inventory.items.some(itemIdMatch)).items.find(itemIdMatch)
 
 			const {
 				inventory,
@@ -24,14 +28,14 @@ const InventoryItemFormContainer = ({ id }) => (
 				currentQuantity,
 				reorderQuantity,
 				reorderThreshold
-			} = data.inventoryItem
+			} = inventoryItem
 
 			const inventoryId = inventory.id
 
 			const name = JSON.parse(object).name
 
-			const lastReorderDate = new Date(data.inventoryItem.lastReorderDate)
-			const deliveryDate = new Date(data.inventoryItem.deliveryDate)
+			const lastReorderDate = new Date(inventoryItem.lastReorderDate)
+			const deliveryDate = new Date(inventoryItem.deliveryDate)
 
 			const formatDate = date => date < 10 ? ("0" + date) : date
 

@@ -15,10 +15,7 @@ import loginQuery from "./login"
 
 import profileQuery from "./profile"
 
-import {
-  inventoryItemQuery,
-  inventoryItemsQuery
-} from "./inventoryItem"
+import inventoryItemsQuery from "./inventoryItem"
 
 import timersQuery from "./timer"
 
@@ -42,7 +39,6 @@ export {
   modalQuery,
   loginQuery,
   profileQuery,
-  inventoryItemQuery,
   inventoryItemsQuery,
   timersQuery,
   activeTimerQuery,
