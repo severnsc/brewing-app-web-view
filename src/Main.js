@@ -7,6 +7,7 @@ import ResetPassword from './screens/resetPassword'
 import Profile from "./screens/profile"
 import Dashboard from './screens/dashboard'
 import Timers from "./screens/timers"
+import Inventories from "./screens/inventories"
 
 const Main = () => (
   <main style={{display:"flex", flexFlow:"column", alignItems:"center"}}>
@@ -18,6 +19,7 @@ const Main = () => (
       <Route path="/profile" component={Profile} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/timers" component={Timers} />
+      <Route path="/inventories" component={Inventories} />
     </Switch>
   </main>
 )
