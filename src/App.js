@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <Query query={rootQuery}>
-        {({loading, error, data, client}) => {
+        {({loading, error, data}) => {
           
           let isLoggedIn = false
 
