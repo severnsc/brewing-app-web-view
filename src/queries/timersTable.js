@@ -1,19 +1,10 @@
 import gql from "graphql-tag"
+import { currentUserFragments } from "../fragments"
 
 export default gql`
   query {
     currentUser {
-      timers {
-        id
-        name
-        duration
-        timerAlerts {
-          id
-          activationTime
-          message
-          activated
-        }
-      }
+      ...Timers
     }
 
     timers @client {
@@ -24,4 +15,5 @@ export default gql`
       currentPage
     }
   }
+  ${currentUserFragments.timers}
 `

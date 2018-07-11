@@ -1,7 +1,7 @@
 import gql from "graphql-tag"
 import { currentUserFragments } from "../fragments"
 
-export const dashboardTableQuery = gql`
+export default gql`
   query {
     currentUser {
       ...InventoryItems
@@ -17,10 +17,4 @@ export const dashboardTableQuery = gql`
 
   }
   ${currentUserFragments.inventoryItems}
-`
-
-export const dashboardItemLimitQuery = gql`
-  query {
-    dashboardItemLimit @client
-  }
 `

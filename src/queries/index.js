@@ -1,24 +1,12 @@
 import gql from 'graphql-tag'
-
-import {
-  dashboardTableQuery,
-  dashboardItemLimitQuery
-} from "./dashboard"
-
+import dashboardTableQuery from "./dashboard"
 import timersTableQuery from "./timersTable"
-
 import signupQuery from "./signup"
-
 import modalQuery from "./modal"
-
 import loginQuery from "./login"
-
 import profileQuery from "./profile"
-
 import inventoryItemsQuery from "./inventoryItem"
-
 import timersQuery from "./timer"
-
 import activeTimerQuery from "./activeTimer"
 
 const rootQuery = gql`
@@ -33,7 +21,6 @@ const rootQuery = gql`
 
 export {
   dashboardTableQuery,
-  dashboardItemLimitQuery,
   timersTableQuery,
   signupQuery,
   modalQuery,

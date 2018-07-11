@@ -22,5 +22,20 @@ export const currentUserFragments = {
 				}
 			}
 		}
+	`,
+	timers: gql`
+		fragment Timers on User {
+			timers {
+        id
+        name
+        duration
+        timerAlerts {
+          id
+          activationTime
+          message
+          activated
+        }
+      }
+		}
 	`
 }
