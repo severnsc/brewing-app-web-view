@@ -1,66 +1,30 @@
 import gql from 'graphql-tag'
-import { currentUserFragments } from "../fragments"
 
-export const dashboardTableQuery = gql`
-  query {
-    currentUser {
-      ...InventoryItems
-    }
+import {
+  dashboardTableQuery,
+  dashboardItemLimitQuery
+} from "./dashboard"
 
-    dashboard @client {
-      sortBy
-      sortOrder
-      itemLimit
-      filterString
-      currentPage
-    }
+import timersTableQuery from "./timersTable"
 
-  }
-  ${currentUserFragments.inventoryItems}
-`
+import signupQuery from "./signup"
 
-export const timersTableQuery = gql`
-  query {
-    currentUser {
-      timers {
-        id
-        name
-        duration
-        timerAlerts {
-          id
-          activationTime
-          message
-          activated
-        }
-      }
-    }
+import modalQuery from "./modal"
 
-    timers @client {
-      sortBy
-      sortOrder
-      itemLimit
-      filterString
-      currentPage
-    }
-  }
-`
+import loginQuery from "./login"
 
-export const signupQuery = gql`
-  query {
-    signup @client {
-      isUsernameUnique
-      error
-    }
-  }
-`
+import profileQuery from "./profile"
 
-export const dashboardItemLimitQuery = gql`
-  query {
-    dashboardItemLimit @client
-  }
-`
+import {
+  inventoryItemQuery,
+  inventoryItemsQuery
+} from "./inventoryItem"
 
-export const topLevelQuery = gql`
+import timersQuery from "./timer"
+
+import activeTimerQuery from "./activeTimer"
+
+const rootQuery = gql`
   query {
     isLoggedIn @client
     modal @client {
@@ -70,97 +34,17 @@ export const topLevelQuery = gql`
   }
 `
 
-export const modalQuery = gql`
-  query {
-    modal @client {
-      type
-      id
-    }
-  }
-`
-
-export const loginQuery = gql`
-  query {
-    login @client {
-      error
-    }
-  }
-`
-
-export const profileQuery = gql`
-  query {
-    currentUser {
-      userName
-    }
-  }
-`
-
-export const inventoryItemsQuery = gql`
-  query {
-    currentUser {
-      ...InventoryItems
-    }
-  }
-  ${currentUserFragments.inventoryItems}
-`
-
-export const inventoryItemQuery = gql`
-  query inventoryItemQuery($id: String!) {
-    inventoryItem(id: $id) {
-      inventory {
-        id
-      }
-      object
-      quantityUnit
-      currentQuantity
-      reorderQuantity
-      reorderThreshold
-      costUnit
-      unitCost
-      reorderCost
-      lastReorderDate
-      deliveryDate
-    }
-  }
-`
-
-export const timersQuery = gql`
-  query {
-    currentUser {
-      timers {
-        id
-        name
-        duration
-        timerAlerts {
-          id
-          activationTime
-          message
-          activated
-        }
-      }
-    }
-  }
-`
-
-export const activeTimerQuery = gql`
-  query {
-    activeTimer @client {
-      id
-    }
-
-    currentUser {
-      timers {
-        id
-        name
-        remainingDuration
-        intervalDuration
-        isRunning
-        timerAlerts {
-          id
-          activated
-          activationTime
-        }
-      }
-    }
-  }
-`
+export {
+  dashboardTableQuery,
+  dashboardItemLimitQuery,
+  timersTableQuery,
+  signupQuery,
+  modalQuery,
+  loginQuery,
+  profileQuery,
+  inventoryItemQuery,
+  inventoryItemsQuery,
+  timersQuery,
+  activeTimerQuery,
+  rootQuery
+}

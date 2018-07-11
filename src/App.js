@@ -7,14 +7,14 @@ import ModalContainer from "./containers/common/modalContainer"
 import InventoryItemFormContainer from "./containers/inventoryItemFormContainer"
 import TimerFormContainer from "./containers/timerFormContainer"
 import { Query } from 'react-apollo'
-import { topLevelQuery } from './queries'
+import { rootQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
 import client from "./ApolloClient"
 
 class App extends Component {
   render() {
     return (
-      <Query query={topLevelQuery}>
+      <Query query={rootQuery}>
         {({loading, error, data, client}) => {
           
           let isLoggedIn = false
