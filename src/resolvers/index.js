@@ -103,8 +103,10 @@ export default {
       const { currentUser, dashboard } = cache.readQuery({ query })
 
       let pageNumber = dashboard.currentPage
-      if(pageNumber > currentUser.inventories[0].items.length/value){
-        pageNumber = Math.ceil(currentUser.inventories[0].items.length/value) - 1
+      let allInventoryItems = currentUser.inventories.map(inventory => inventory.items)
+      allInventoryItems = [].concat.apply([], allInventoryItems)
+      if(pageNumber >= allInventoryItems.length/value){
+        pageNumber = Math.ceil(allInventoryItems.length/value) - 1
       }
 
       const data = {
