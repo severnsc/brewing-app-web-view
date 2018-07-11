@@ -18,13 +18,13 @@ const ActiveTimerContainer = () => (
 			if(loading) return <p>Loading...</p>
 			if(error) return <p>Error...</p>
 
-			const { activeTimerId, currentUser } = data
+			const { activeTimer, currentUser } = data
 
 			let timer
 			let time
-			if(activeTimerId){
+			if(activeTimer.id){
 				const timers = currentUser.timers
-				timer = timers.find(timer => timer.id === activeTimerId)
+				timer = timers.find(timer => timer.id === activeTimer.id)
 				const tempTime = moment.duration(timer.remainingDuration)
 				time = `${tempTime.minutes()}:${tempTime.seconds()}`
 				time = tempTime.seconds() < 10 ? (time + "0") : time
@@ -36,11 +36,11 @@ const ActiveTimerContainer = () => (
 				<Mutation 
 					mutation={START_TIMER}
 					update={(cache, { data: { startTimer } }) => {
-						const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
+						const { activeTimer, currentUser } = cache.readQuery({ query: activeTimerQuery })
 						const timers = currentUser.timers
 						const newTimers = timers.map(timer => timer.id === startTimer.id ? startTimer : timer)
 						const data = {
-							activeTimerId,
+							activeTimer,
 							currentUser: {
 								...currentUser,
 								timers: newTimers
@@ -52,18 +52,18 @@ const ActiveTimerContainer = () => (
 					{startTimerMutation => {
 
 							const startTimer = () => {
-								startTimerMutation({ variables: { id: activeTimerId } })
+								startTimerMutation({ variables: { id: activeTimer.id } })
 							}
 
 							return(
 								<Mutation 
 									mutation={STOP_TIMER}
 									update={(cache, { data: { stopTimer } }) => {
-										const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
+										const { activeTimer, currentUser } = cache.readQuery({ query: activeTimerQuery })
 										const timers = currentUser.timers
 										const newTimers = timers.map(timer => timer.id === stopTimer.id ? stopTimer : timer)
 										const data = {
-											activeTimerId,
+											activeTimer,
 											currentUser: {
 												...currentUser,
 												timers: newTimers
@@ -75,18 +75,18 @@ const ActiveTimerContainer = () => (
 									{stopTimerMutation => {
 
 										const stopTimer = () => {
-											stopTimerMutation({ variables: { id: activeTimerId } })
+											stopTimerMutation({ variables: { id: activeTimer.id } })
 										}
 
 										return(
 											<Mutation
 												mutation={RESET_TIMER}
 												update={(cache, { data: { resetTimer } }) => {
-													const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
+													const { activeTimer, currentUser } = cache.readQuery({ query: activeTimerQuery })
 													const timers = currentUser.timers
 													const newTimers = timers.map(timer => timer.id === resetTimer.id ? resetTimer : timer)
 													const data = {
-														activeTimerId,
+														activeTimer,
 														currentUser: {
 															...currentUser,
 															timers: newTimers
@@ -98,7 +98,7 @@ const ActiveTimerContainer = () => (
 												{resetTimerMutation => {
 
 													const resetTimer = () => {
-														resetTimerMutation({ variables: { id: activeTimerId} })
+														resetTimerMutation({ variables: { id: activeTimer.id} })
 													}
 
 													return(
@@ -108,14 +108,14 @@ const ActiveTimerContainer = () => (
 																	<Mutation 
 																		mutation={DECREMENT_TIMER}
 																		update={(cache, { data: { decrementTimer } }) => {
-																			const { activeTimerId, currentUser } = cache.readQuery({ query: activeTimerQuery })
+																			const { activeTimer, currentUser } = cache.readQuery({ query: activeTimerQuery })
 																			const timers = currentUser.timers
-																			const currentTimer = timers.find(timer => timer.id === activeTimerId)
+																			const currentTimer = timers.find(timer => timer.id === activeTimer.id)
 																			const alertsToActivate = currentTimer.timerAlerts.filter(alert => alert.activationTime === currentTimer.remainingDuration)
 																			if(alertsToActivate.length) alertsToActivate.forEach(alert => activateTimerAlertMutation({ variables: { id: alert.id } }))
 																			const newTimers = timers.map(timer => timer.id === decrementTimer.id ? decrementTimer : timer)
 																			const data = {
-																				activeTimerId,
+																				activeTimer,
 																				currentUser: {
 																					...currentUser,
 																					timers: newTimers
@@ -129,7 +129,7 @@ const ActiveTimerContainer = () => (
 																			let timeoutId
 																			if(timer && timer.isRunning){ 
 																				timeoutId = setTimeout(() => decrementTimerMutation({ 
-																					variables: {id: activeTimerId} 
+																					variables: {id: activeTimer.id} 
 																				}), timer.intervalDuration)
 																			}else{
 																				if(timeoutId){

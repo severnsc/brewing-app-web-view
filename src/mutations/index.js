@@ -90,6 +90,7 @@ export const START_TIMER = gql`
   mutation startTimer($id: String!) {
     startTimer(id: $id) {
       id
+      name
       remainingDuration
       intervalDuration
       isRunning
@@ -106,6 +107,7 @@ export const STOP_TIMER = gql`
   mutation stopTimer($id: String!) {
     stopTimer(id: $id) {
       id
+      name
       remainingDuration
       intervalDuration
       isRunning
@@ -122,6 +124,7 @@ export const RESET_TIMER = gql`
   mutation resetTimer($id: String!) {
     resetTimer(id: $id) {
       id
+      name
       remainingDuration
       intervalDuration
       isRunning
@@ -138,6 +141,7 @@ export const DECREMENT_TIMER = gql`
   mutation decrementTimer($id: String!) {
     decrementTimer(id: $id) {
       id
+      name
       remainingDuration
       intervalDuration
       isRunning
