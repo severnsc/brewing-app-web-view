@@ -1,24 +1,45 @@
 import gql from 'graphql-tag'
 import { modalQuery } from "../queries"
 
+const dashboardTableQuery = gql`
+  query {
+    dashboard @client {
+      sortBy
+      sortOrder
+      itemLimit
+      filterString
+      currentPage
+    }
+  }
+`
+
+const signupQuery = gql`
+  query {
+    signup @client {
+      isUsernameUnique
+      error
+    }
+  }
+`
+
+const timersQuery = gql`
+  query {
+    timers @client {
+      sortBy
+      sortOrder
+      itemLimit
+      filterString
+      currentPage
+    }
+  }
+`
+
 export default {
   Mutation: {
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
 
-      const query = gql`
-        query {
-          dashboard @client {
-            sortBy
-            sortOrder
-            itemLimit
-            filterString
-            currentPage
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
-      const { sortOrder, sortBy } = previous.dashboard
+      const { dashboard } = cache.readQuery({ query: dashboardTableQuery })
+      const { sortOrder, sortBy } = dashboard
 
       let order = sortOrder
       if(sortBy === cellName){
@@ -29,42 +50,30 @@ export default {
 
       const data = {
         dashboard: {
-          ...previous.dashboard,
+          ...dashboard,
           sortOrder: order,
           sortBy: cellName
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: dashboardTableQuery, data })
 
       return null
     },
 
     updateDashboardTableFilter: (_, { value }, { cache }) => {
 
-      const query = gql`
-        query {
-          dashboard @client {
-            sortBy
-            sortOrder
-            itemLimit
-            filterString
-            currentPage
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
+      const { dashboard } = cache.readQuery({ query: dashboardTableQuery })
 
       const data = {
         dashboard: {
-          ...previous.dashboard,
+          ...dashboard,
           filterString: value,
           currentPage: 0
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: dashboardTableQuery, data })
 
       return null
 
@@ -115,30 +124,18 @@ export default {
 
     updateDashboardTablePageNumber: (_, { type }, { cache }) => {
 
-      const query = gql`
-        query {
-          dashboard @client {
-            sortBy
-            sortOrder
-            itemLimit
-            filterString
-            currentPage
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
+      const { dashboard } = cache.readQuery({ query: dashboardTableQuery })
 
       const integer = type === "INCREMENT" ? 1 : -1
 
       const data = {
         dashboard: {
-          ...previous.dashboard,
-          currentPage: previous.dashboard.currentPage + integer
+          ...dashboard,
+          currentPage: dashboard.currentPage + integer
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: dashboardTableQuery, data })
 
       return null
 
@@ -158,25 +155,16 @@ export default {
 
     updateSignupUsernameError: (_, { bool }, { cache }) => {
 
-      const query = gql`
-        query {
-          signup @client {
-            isUsernameUnique
-            error
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
+      const { signup } = cache.readQuery({ query: signupQuery })
 
       const data = {
         signup: {
-          ...previous.signup,
+          ...signup,
           isUsernameUnique: bool
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: signupQuery, data })
 
       return null
 
@@ -184,25 +172,16 @@ export default {
 
     updateSignupError: (_, { error }, { cache }) => {
 
-      const query = gql`
-        query {
-          signup @client {
-            isUsernameUnique
-            error
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
+      const { signup } = cache.readQuery({ query: signupQuery })
 
       const data = {
         signup: {
-          ...previous.signup,
+          ...signup,
           error: error
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: signupQuery, data })
 
       return null
 
@@ -228,20 +207,8 @@ export default {
 
     updateTimersTableSort: (_, { cellName }, { cache }) => {
 
-      const query = gql`
-        query {
-          timers @client {
-            sortBy
-            sortOrder
-            itemLimit
-            filterString
-            currentPage
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
-      const { sortOrder, sortBy } = previous.timers
+      const { timers } = cache.readQuery({ query: timersQuery })
+      const { sortOrder, sortBy } = timers
 
       let order = sortOrder
       if(sortBy === cellName){
@@ -252,42 +219,30 @@ export default {
 
       const data = {
         timers: {
-          ...previous.timers,
+          ...timers,
           sortOrder: order,
           sortBy: cellName
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: timersQuery, data })
 
       return null
     },
 
     updateTimersTableFilter: (_, { value }, { cache }) => {
 
-      const query = gql`
-        query {
-          timers @client {
-            sortBy
-            sortOrder
-            itemLimit
-            filterString
-            currentPage
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
+      const { timers } = cache.readQuery({ query: timersQuery })
 
       const data = {
         timers: {
-          ...previous.timers,
+          ...timers,
           filterString: value,
           currentPage: 0
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: timersQuery, data })
 
       return null
 
@@ -336,30 +291,18 @@ export default {
 
     updateTimersTablePageNumber: (_, { type }, { cache }) => {
 
-      const query = gql`
-        query {
-          timers @client {
-            sortBy
-            sortOrder
-            itemLimit
-            filterString
-            currentPage
-          }
-        }
-      `
-
-      const previous = cache.readQuery({ query })
+      const { timers } = cache.readQuery({ query: timersQuery })
 
       const integer = type === "INCREMENT" ? 1 : -1
 
       const data = {
         timers: {
-          ...previous.timers,
-          currentPage: previous.timers.currentPage + integer
+          ...timers,
+          currentPage: timers.currentPage + integer
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query: timersQuery, data })
 
       return null
 
