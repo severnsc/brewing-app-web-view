@@ -1,190 +1,63 @@
-import gql from 'graphql-tag'
+import {
+  UPDATE_DASHBOARD_TABLE_SORT,
+  UPDATE_DASHBOARD_TABLE_FILTER,
+  UPDATE_DASHBOARD_ITEM_LIMIT,
+  UPDATE_DASHBOARD_TABLE_PAGE_NUMBER
+} from "./dashboard"
 
-export const UPDATE_DASHBOARD_TABLE_SORT = gql`
-  mutation updateDashboardTableSort($cellName: String!) {
-    updateDashboardTableSort(cellName: $cellName) @client
-  }
-`
+import LOGIN_MUTATION from "./login"
 
-export const UPDATE_DASHBOARD_TABLE_FILTER = gql`
-  mutation updateDashboardTableFilter($value: String!) {
-    updateDashboardTableFilter(value: $value) @client
-  }
-`
+import {
+  UPDATE_SIGNUP_ERROR,
+  UPDATE_SIGNUP_USERNAME_ERROR
+} from "./signup"
 
-export const UPDATE_DASHBOARD_ITEM_LIMIT = gql`
-  mutation updateDashboardItemLimit($value: Number!) {
-    updateDashboardItemLimit(value: $value) @client
-  }
-`
+import UPDATE_MODAL from "./modal"
 
-export const UPDATE_DASHBOARD_TABLE_PAGE_NUMBER = gql`
-  mutation updateDashboardTablePageNumber($type: String!) {
-    updateDashboardTablePageNumber(type: $type) @client
-  }
-`
+import UPDATE_INVENTORY_ITEM from "./inventoryItem"
 
-export const LOGIN_MUTATION = gql`
-  mutation setIsLoggedIn($bool: Boolean) {
-    setIsLoggedIn(bool: $bool) @client
-  }
-`
+import {
+  UPDATE_TIMERS_TABLE_FILTER,
+  UPDATE_TIMERS_TABLE_SORT,
+  UPDATE_TIMERS_TABLE_ITEM_LIMIT,
+  UPDATE_TIMERS_TABLE_PAGE_NUMBER
+} from "./timersTable"
 
-export const UPDATE_SIGNUP_ERROR = gql`
-  mutation updateSignupError($error: String!) {
-    updateSignupError(error: $error) @client
-  }
-`
+import UPDATE_ACTIVE_TIMER from "./activeTimer"
 
-export const UPDATE_SIGNUP_USERNAME_ERROR = gql`
-  mutation updateSignupUsernameError($bool: Boolean!) {
-    updateSignupUsernameError(bool: $bool) @client
-  }
-`
+import {
+  START_TIMER,
+  STOP_TIMER,
+  RESET_TIMER,
+  UPDATE_TIMER,
+  DECREMENT_TIMER
+} from "./timer"
 
-export const UPDATE_MODAL = gql`
-  mutation udpateModal($id: String!, $type: String!) {
-    updateModal(id: $id, type: $type) @client
-  }
-`
+import {
+  UPDATE_TIMER_ALERT,
+  ACTIVATE_TIMER_ALERT
+} from "./timerAlert"
 
-export const UPDATE_INVENTORY_ITEM = gql`
-  mutation updateInventoryItem($id: String!, $inventoryId: String!, $object: String!, $costUnit: String!, $unitCost: Float!, $reorderCost: Float!, $quantityUnit: String!, $currentQuantity: Float!, $reorderQuantity: Float!, $reorderThreshold: Float!, $lastReorderDate: String!, $deliveryDate: String!) {
-    updateInventoryItem(id: $id, inventoryId: $inventoryId, object: $object, costUnit: $costUnit, unitCost: $unitCost, reorderCost: $reorderCost, quantityUnit: $quantityUnit, currentQuantity: $currentQuantity, reorderQuantity: $reorderQuantity, reorderThreshold: $reorderThreshold, lastReorderDate: $lastReorderDate, deliveryDate: $deliveryDate) {
-      id
-    }
-  }
-`
-
-export const UPDATE_TIMERS_TABLE_FILTER = gql`
-  mutation updateTimersTableFilter($value: String!) {
-    updateTimersTableFilter(value: $value) @client
-  }
-`
-
-export const UPDATE_TIMERS_TABLE_SORT = gql`
-  mutation updateTimersTableSort($cellName: String!) {
-    updateTimersTableSort(cellName: $cellName) @client
-  }
-`
-
-export const UPDATE_TIMERS_TABLE_ITEM_LIMIT = gql`
-  mutation updateTimersTableItemLimit($value: Number!) {
-    updateTimersTableItemLimit(value: $value) @client
-  }
-`
-
-export const UPDATE_TIMERS_TABLE_PAGE_NUMBER = gql`
-  mutation updateTimersTablePageNumber($type: String!) {
-    updateTimersTablePageNumber(type: $type) @client
-  }
-`
-
-export const UPDATE_ACTIVE_TIMER = gql`
-  mutation updateActiveTimer($id: String!) {
-    updateActiveTimer(id: $id) @client
-  }
-`
-
-export const START_TIMER = gql`
-  mutation startTimer($id: String!) {
-    startTimer(id: $id) {
-      id
-      name
-      remainingDuration
-      intervalDuration
-      isRunning
-      timerAlerts {
-        id
-        activated
-        activationTime
-      }
-    }
-  }
-`
-
-export const STOP_TIMER = gql`
-  mutation stopTimer($id: String!) {
-    stopTimer(id: $id) {
-      id
-      name
-      remainingDuration
-      intervalDuration
-      isRunning
-      timerAlerts {
-        id
-        activated
-        activationTime
-      }
-    }
-  }
-`
-
-export const RESET_TIMER = gql`
-  mutation resetTimer($id: String!) {
-    resetTimer(id: $id) {
-      id
-      name
-      remainingDuration
-      intervalDuration
-      isRunning
-      timerAlerts {
-        id
-        activated
-        activationTime
-      }
-    }
-  }
-`
-
-export const DECREMENT_TIMER = gql`
-  mutation decrementTimer($id: String!) {
-    decrementTimer(id: $id) {
-      id
-      name
-      remainingDuration
-      intervalDuration
-      isRunning
-      timerAlerts {
-        id
-        activated
-        activationTime
-      }
-    }
-  }
-`
-
-export const UPDATE_TIMER = gql`
-  mutation updateTimer($id: String!, $name: String, $duration: Int) {
-    updateTimer(id: $id, name: $name, duration: $duration) {
-      id
-      name
-      duration
-      timerAlerts {
-        id
-        activated
-        activationTime
-      }
-    }
-  }
-`
-
-export const UPDATE_TIMER_ALERT = gql`
-  mutation updateTimerAlert($id: String!, $activationTime: Int, $message: String) {
-    updateTimerAlert(id: $id, activationTime: $activationTime, message: $message) {
-      id
-      activationTime
-      activated
-    }
-  }
-`
-
-export const ACTIVATE_TIMER_ALERT = gql`
-  mutation activateTimerAlert($id: String!) {
-    activateTimerAlert(id: $id) {
-      id
-      message
-      activated
-    }
-  }
-`
+export {
+  UPDATE_DASHBOARD_TABLE_SORT,
+  UPDATE_DASHBOARD_TABLE_FILTER,
+  UPDATE_DASHBOARD_ITEM_LIMIT,
+  UPDATE_DASHBOARD_TABLE_PAGE_NUMBER,
+  LOGIN_MUTATION,
+  UPDATE_SIGNUP_ERROR,
+  UPDATE_SIGNUP_USERNAME_ERROR,
+  UPDATE_MODAL,
+  UPDATE_INVENTORY_ITEM,
+  UPDATE_TIMERS_TABLE_FILTER,
+  UPDATE_TIMERS_TABLE_SORT,
+  UPDATE_TIMERS_TABLE_ITEM_LIMIT,
+  UPDATE_TIMERS_TABLE_PAGE_NUMBER,
+  UPDATE_ACTIVE_TIMER,
+  START_TIMER,
+  STOP_TIMER,
+  RESET_TIMER,
+  UPDATE_TIMER,
+  DECREMENT_TIMER,
+  UPDATE_TIMER_ALERT,
+  ACTIVATE_TIMER_ALERT
+}
