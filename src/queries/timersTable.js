@@ -7,7 +7,7 @@ export default gql`
       ...Timers
     }
 
-    timers @client {
+    timersTable @client {
       sortBy
       sortOrder
       itemLimit

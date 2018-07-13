@@ -40,7 +40,7 @@ const TimersTableContainer = () => {
 					itemLimit,
 					currentPage,
 					filterString
-				} = data.timers
+				} = data.timersTable
 
 				let filteredTableRows
 				if(filterString !== ""){
