@@ -24,7 +24,19 @@ const signupQuery = gql`
 
 const timersQuery = gql`
   query {
-    timers @client {
+    timersTable @client {
+      sortBy
+      sortOrder
+      itemLimit
+      filterString
+      currentPage
+    }
+  }
+`
+
+const inventoriesTableQuery = gql`
+  query {
+    inventoriesTable @client {
       sortBy
       sortOrder
       itemLimit
@@ -209,8 +221,8 @@ export default {
 
     updateTimersTableSort: (_, { cellName }, { cache }) => {
 
-      const { timers } = cache.readQuery({ query: timersQuery })
-      const { sortOrder, sortBy } = timers
+      const { timersTable } = cache.readQuery({ query: timersQuery })
+      const { sortOrder, sortBy } = timersTable
 
       let order = sortOrder
       if(sortBy === cellName){
@@ -220,8 +232,8 @@ export default {
       }
 
       const data = {
-        timers: {
-          ...timers,
+        timersTable: {
+          ...timersTable,
           sortOrder: order,
           sortBy: cellName
         }
@@ -234,11 +246,11 @@ export default {
 
     updateTimersTableFilter: (_, { value }, { cache }) => {
 
-      const { timers } = cache.readQuery({ query: timersQuery })
+      const { timersTable } = cache.readQuery({ query: timersQuery })
 
       const data = {
-        timers: {
-          ...timers,
+        timersTable: {
+          ...timersTable,
           filterString: value,
           currentPage: 0
         }
@@ -259,7 +271,7 @@ export default {
             timers
           }
 
-          timers @client {
+          timersTable @client {
             sortBy
             sortOrder
             itemLimit
@@ -269,17 +281,17 @@ export default {
         }
       `
 
-      const { currentUser, timers } = cache.readQuery({ query })
+      const { currentUser, timersTable } = cache.readQuery({ query })
 
-      let pageNumber = timers.currentPage
+      let pageNumber = timersTable.currentPage
       if(pageNumber >= currentUser.timers.length/value){
         pageNumber = Math.ceil(currentUser.timers.length/value) - 1
       }
 
       const data = {
         currentUser,
-        timers: {
-          ...timers,
+        timersTable: {
+          ...timersTable,
           itemLimit: value,
           currentPage: pageNumber
         }
@@ -293,14 +305,14 @@ export default {
 
     updateTimersTablePageNumber: (_, { type }, { cache }) => {
 
-      const { timers } = cache.readQuery({ query: timersQuery })
+      const { timersTable } = cache.readQuery({ query: timersQuery })
 
       const integer = type === "INCREMENT" ? 1 : -1
 
       const data = {
-        timers: {
-          ...timers,
-          currentPage: timers.currentPage + integer
+        timersTable: {
+          ...timersTable,
+          currentPage: timersTable.currentPage + integer
         }
       }
 
