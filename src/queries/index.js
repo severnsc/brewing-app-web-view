@@ -9,6 +9,7 @@ import inventoryItemsQuery from "./inventoryItem"
 import timersQuery from "./timer"
 import activeTimerQuery from "./activeTimer"
 import inventoriesTableQuery from "./inventoriesTable"
+import inventoriesQuery from "./inventories"
 
 const rootQuery = gql`
   query {
@@ -31,5 +32,6 @@ export {
   timersQuery,
   activeTimerQuery,
   inventoriesTableQuery,
+  inventoriesQuery,
   rootQuery
 }

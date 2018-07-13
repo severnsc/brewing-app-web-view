@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import Main from './Main'
 import Header from './containers/common/header'
 import ModalContainer from "./containers/common/modalContainer"
+import InventoryFormContainer from "./containers/inventoryFormContainer"
 import InventoryItemFormContainer from "./containers/inventoryItemFormContainer"
 import TimerFormContainer from "./containers/timerFormContainer"
 import { Query } from 'react-apollo'
@@ -23,6 +24,10 @@ class App extends Component {
           
           let modalItem
           switch(data.modal.type) {
+
+            case "inventory":
+              modalItem = <InventoryFormContainer id={data.modal.id} />
+              break
 
             case "inventoryItem":
               modalItem = <InventoryItemFormContainer id={data.modal.id} />

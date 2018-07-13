@@ -11,6 +11,7 @@ import SignupForm from "./SignupForm"
 import SortableTable from "./SortableTable"
 import TimerAlertForm from "./TimerAlertForm"
 import TimerForm from "./TimerForm"
+import InventoryForm from "./InventoryForm"
 
 export {
 	ActiveTimer,
@@ -25,5 +26,6 @@ export {
 	SignupForm,
 	SortableTable,
 	TimerAlertForm,
-	TimerForm
+	TimerForm,
+	InventoryForm
 }
