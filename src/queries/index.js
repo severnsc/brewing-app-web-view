@@ -8,6 +8,7 @@ import profileQuery from "./profile"
 import inventoryItemsQuery from "./inventoryItem"
 import timersQuery from "./timer"
 import activeTimerQuery from "./activeTimer"
+import inventoriesTableQuery from "./inventoriesTable"
 
 const rootQuery = gql`
   query {
@@ -29,5 +30,6 @@ export {
   inventoryItemsQuery,
   timersQuery,
   activeTimerQuery,
+  inventoriesTableQuery,
   rootQuery
 }

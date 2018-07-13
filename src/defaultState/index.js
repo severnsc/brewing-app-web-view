@@ -4,6 +4,7 @@ import signup from "./signup"
 import modal from "./modal"
 import timersTable from "./timersTable"
 import activeTimer from "./activeTimer"
+import inventoriesTable from "./inventoriesTable"
 
 export default {
 	dashboard,
@@ -11,5 +12,6 @@ export default {
 	signup,
 	modal,
 	timersTable,
-	activeTimer
+	activeTimer,
+	inventoriesTable
 }
