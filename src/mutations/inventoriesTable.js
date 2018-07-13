@@ -1,5 +1,11 @@
 import gql from "graphql-tag"
 
+export const UPDATE_INVENTORIES_TABLE_FILTER = gql`
+	mutation updateInventoriesTableFilter($value: String!) {
+		updateInventoriesTableFilter(value: $value) @client
+	}
+`
+
 export const UPDATE_INVENTORIES_TABLE_SORT = gql`
 	mutation updateInventoriesTableSort($cellName: String!) {
 		updateInventoriesTableSort(cellName: $cellName) @client
