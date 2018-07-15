@@ -46,6 +46,18 @@ const inventoriesTableQuery = gql`
   }
 `
 
+const maltInventoryTableQuery = gql`
+  query {
+    maltInventoryTable @client {
+      sortBy
+      sortOrder
+      itemLimit
+      filterString
+      currentPage
+    }
+  }
+`
+
 export default {
   Mutation: {
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
@@ -441,6 +453,94 @@ export default {
         currentUser,
         inventoriesTable: {
           ...inventoriesTable,
+          itemLimit: value,
+          currentPage: pageNumber
+        }
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    },
+
+    updateMaltInventoryTableSort: (_, { cellName }, { cache }) => {
+
+      const { maltInventoryTable } = cache.readQuery({ query: maltInventoryTableQuery })
+
+      const { sortOrder, sortBy } = maltInventoryTable
+
+      let order = sortOrder
+      if(sortBy === cellName){
+        order = sortOrder === "asc" ? "desc" : "asc"
+      }else{
+        order = "asc"
+      }
+
+      const data = {
+        maltInventoryTable: {
+          ...maltInventoryTable,
+          sortOrder: order,
+          sortBy: cellName
+        }
+      }
+
+      cache.writeQuery({ query: maltInventoryTableQuery, data })
+
+      return null
+    },
+
+    updateMaltInventoryTablePageNumber:(_, { type }, { cache }) => {
+
+      const { maltInventoryTable } = cache.readQuery({ query: maltInventoryTableQuery })
+
+      const { currentPage } = maltInventoryTable
+      const integer = type === "INCREMENT" ? 1 : -1
+
+      const data = {
+        maltInventoryTable: {
+          ...maltInventoryTable,
+          currentPage: currentPage + integer
+        }
+      }
+
+      cache.writeQuery({ query: maltInventoryTableQuery, data })
+
+      return null
+
+    },
+
+    updateMaltInventoryTableItemLimit: (_, { value }, { cache }) => {
+
+      const query = gql`
+        query {
+
+          currentUser {
+            inventories
+          }
+
+          maltInventoryTable @client {
+            sortBy
+            sortOrder
+            itemLimit
+            filterString
+            currentPage
+          }
+        }
+      `
+
+      const { currentUser, maltInventoryTable } = cache.readQuery({ query })
+
+      let pageNumber = maltInventoryTable.currentPage
+      const malts = currentUser.inventories.find(inventory => inventory.name === "Malt").items
+      if(pageNumber >= malts.length/value){
+        pageNumber = Math.ceil(malts.length/value) - 1
+      }
+
+      const data = {
+        currentUser,
+        maltInventoryTable: {
+          ...maltInventoryTable,
           itemLimit: value,
           currentPage: pageNumber
         }

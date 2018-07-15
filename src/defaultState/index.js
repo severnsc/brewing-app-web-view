@@ -5,6 +5,7 @@ import modal from "./modal"
 import timersTable from "./timersTable"
 import activeTimer from "./activeTimer"
 import inventoriesTable from "./inventoriesTable"
+import maltInventoryTable from "./maltInventoryTable"
 
 export default {
 	dashboard,
@@ -13,5 +14,6 @@ export default {
 	modal,
 	timersTable,
 	activeTimer,
-	inventoriesTable
+	inventoriesTable,
+	maltInventoryTable
 }

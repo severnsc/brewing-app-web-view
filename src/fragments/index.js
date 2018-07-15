@@ -4,6 +4,7 @@ export const currentUserFragments = {
 	inventoryItems: gql`
 		fragment InventoryItems on User {
 			inventories {
+        name
 				items {
 					id
 					inventory {

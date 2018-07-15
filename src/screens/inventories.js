@@ -1,12 +1,14 @@
 import React from 'react'
-import InventoriesTableSearchBarContainer from '../containers/inventoriesTableSearchBarContainer'
-import InventoriesTableContainer from '../containers/inventoriesTableContainer'
+import MaltInventoryTableContainer from "../containers/maltInventoryTableContainer"
 
 const Inventories = () => (
 	<div style={{width: "75%"}}>
-    <h1>All Inventories</h1>
-    <InventoriesTableSearchBarContainer />
-    <InventoriesTableContainer />
+    <h1>Inventories</h1>
+    <h2>Malt</h2>
+    	<MaltInventoryTableContainer />
+    <h2>Hops</h2>
+    <h2>Yeast</h2>
+    <h2>Other</h2>
   </div>
 )
 
