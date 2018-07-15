@@ -516,7 +516,10 @@ export default {
         query {
 
           currentUser {
-            inventories
+            inventories {
+              name
+              items
+            }
           }
 
           maltInventoryTable @client {
