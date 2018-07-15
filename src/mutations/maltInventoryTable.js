@@ -17,3 +17,9 @@ export const UPDATE_MALT_TABLE_PAGE_NUMBER = gql`
 		updateMaltInventoryTablePageNumber(type: $type) @client
 	}
 `
+
+export const UPDATE_MALT_TABLE_FILTER = gql`
+	mutation updateMaltInventoryTableFilter($value: String!) {
+		updateMaltInventoryTableFilter(value: $value) @client
+	}
+`

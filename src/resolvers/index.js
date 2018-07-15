@@ -551,6 +551,24 @@ export default {
       return null
 
     },
+
+    updateMaltInventoryTableFilter: (_, { value }, { cache }) => {
+
+      const { maltInventoryTable } = cache.readQuery({ query: maltInventoryTableQuery })
+
+      const data = {
+        maltInventoryTable: {
+          ...maltInventoryTable,
+          filterString: value,
+          currentPage: 0
+        }
+      }
+
+      cache.writeQuery({ query: maltInventoryTableQuery, data })
+
+      return null
+
+    },
   
   }
 }
