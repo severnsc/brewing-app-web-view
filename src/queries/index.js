@@ -11,6 +11,7 @@ import activeTimerQuery from "./activeTimer"
 import inventoriesTableQuery from "./inventoriesTable"
 import inventoriesQuery from "./inventories"
 import maltInventoryTableQuery from "./maltInventoryTable"
+import hopsInventoryTableQuery from "./hopsInventoryTable"
 
 const rootQuery = gql`
   query {
@@ -35,5 +36,6 @@ export {
   inventoriesTableQuery,
   inventoriesQuery,
   maltInventoryTableQuery,
+  hopsInventoryTableQuery,
   rootQuery
 }

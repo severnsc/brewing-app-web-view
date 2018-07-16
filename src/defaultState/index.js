@@ -6,6 +6,7 @@ import timersTable from "./timersTable"
 import activeTimer from "./activeTimer"
 import inventoriesTable from "./inventoriesTable"
 import maltInventoryTable from "./maltInventoryTable"
+import hopsInventoryTable from "./hopsInventoryTable"
 
 export default {
 	dashboard,
@@ -15,5 +16,6 @@ export default {
 	timersTable,
 	activeTimer,
 	inventoriesTable,
-	maltInventoryTable
+	maltInventoryTable,
+	hopsInventoryTable
 }

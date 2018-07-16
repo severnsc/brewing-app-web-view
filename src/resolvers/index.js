@@ -58,6 +58,18 @@ const maltInventoryTableQuery = gql`
   }
 `
 
+const hopsInventoryTableQuery = gql`
+  query {
+    hopsInventoryTable @client {
+      sortBy
+      sortOrder
+      itemsPerPage
+      currentPage
+      filterString
+    }
+  }
+`
+
 export default {
   Mutation: {
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
@@ -568,6 +580,115 @@ export default {
       }
 
       cache.writeQuery({ query: maltInventoryTableQuery, data })
+
+      return null
+
+    },
+
+    updateHopsInventoryTableSort: (_, { cellName }, { cache }) => {
+
+      const { hopsInventoryTable } = cache.readQuery({ query: hopsInventoryTableQuery })
+
+      const { sortOrder, sortBy } = hopsInventoryTable
+
+      let order = sortOrder
+      if(sortBy === cellName){
+        order = sortOrder === "asc" ? "desc" : "asc"
+      }else{
+        order = "asc"
+      }
+
+      const data = {
+        hopsInventoryTable: {
+          ...hopsInventoryTable,
+          sortOrder: order,
+          sortBy: cellName
+        }
+      }
+
+      cache.writeQuery({ query: hopsInventoryTableQuery, data })
+
+      return null      
+
+    },
+
+    updateHopsInventoryTablePageNumber: (_, { type }, { cache }) => {
+
+      const { hopsInventoryTable } = cache.readQuery({ query: hopsInventoryTableQuery })
+
+      const { currentPage } = hopsInventoryTable
+      const integer = type === "INCREMENT" ? 1 : -1
+
+      const data = {
+        hopsInventoryTable: {
+          ...hopsInventoryTable,
+          currentPage: currentPage + integer
+        }
+      }
+
+      cache.writeQuery({ query: hopsInventoryTableQuery, data })
+
+      return null
+
+    },
+
+    updateHopsInventoryTableItemLimit: (_, { value }, { cache }) => {
+
+      const query = gql`
+        query {
+
+          currentUser {
+            inventories {
+              name
+              items
+            }
+          }
+
+          hopsInventoryTable @client {
+            sortBy
+            sortOrder
+            itemsPerPage
+            currentPage
+          }
+        }
+      `
+
+      const { currentUser, hopsInventoryTable } = cache.readQuery({ query })
+
+      let pageNumber = hopsInventoryTable.currentPage
+      const hops = currentUser.inventories.find(inventory => inventory.name === "Hops").items
+      if(pageNumber >= hops.length/value){
+        pageNumber = Math.ceil(hops.length/value) - 1
+      }
+
+      const data = {
+        currentUser,
+        hopsInventoryTable: {
+          ...hopsInventoryTable,
+          itemsPerPage: value,
+          currentPage: pageNumber
+        }
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    },
+
+    updateHopsInventoryTableFilter: (_, { value }, { cache }) => {
+
+      const { hopsInventoryTable } = cache.readQuery({ query: hopsInventoryTableQuery })
+
+      const data = {
+        hopsInventoryTable: {
+          ...hopsInventoryTable,
+          filterString: value,
+          currentPage: 0
+        }
+      }
+
+      cache.writeQuery({ query: hopsInventoryTableQuery, data })
 
       return null
 
