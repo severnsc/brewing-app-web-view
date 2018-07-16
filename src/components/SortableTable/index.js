@@ -3,7 +3,7 @@ import styles from "./styles"
 import PropTypes from 'prop-types'
 import { HoverableTableRow } from '..'
 
-const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick }) => {
+const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, itemsPerPageOptions, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick }) => {
 
   const sortIndicator = sortOrder === "asc" ? "∧" : "∨"
 
@@ -69,6 +69,10 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
 
   const widthPercentage = 100/columns.length
 
+  const optionElements = itemsPerPageOptions.map(option => 
+    <option key={option} value={option}>{option}</option>
+  )
+
   return(
     <div style={styles.container}>
       <table style={styles.table}>
@@ -96,9 +100,7 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
         {previousPageButton}
         <span style={styles.span}>
           <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
-            <option value={25}>25</option>
-            <option value={50}>50</option>
-            <option value={100}>100</option>
+            {optionElements}
           </select>
           <span style={styles.itemsPerPage}>items per page</span>
         </span>
@@ -127,7 +129,8 @@ SortableTable.propTypes = {
   sortBy: PropTypes.string.isRequired,
   sortOrder: PropTypes.oneOf(["asc", "desc"]).isRequired,
   toggleSort: PropTypes.func.isRequired,
-  itemsPerPage: PropTypes.oneOf([25, 50, 100]).isRequired,
+  itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
+  itemsPerPage: PropTypes.number.isRequired,
   onItemsPerPageChange: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,
   decrementPage: PropTypes.func.isRequired,

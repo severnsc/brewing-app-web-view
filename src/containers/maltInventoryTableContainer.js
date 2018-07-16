@@ -55,6 +55,7 @@ const MaltInventoryTableContainer = () => (
 					tableRows={filteredRows || tableRows}
 					sortBy={sortBy}
 					sortOrder={sortOrder}
+					itemsPerPageOptions={[5,25,50,100]}
 					itemsPerPage={itemLimit}
 					itemsPerPageMutation={UPDATE_MALT_TABLE_ITEM_LIMIT}
 					currentPage={currentPage}
