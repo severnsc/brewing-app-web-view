@@ -3,6 +3,8 @@ import MaltInventoryTableContainer from "../containers/maltInventoryTableContain
 import MaltInventoryTableSearchBarContainer from "../containers/maltInventoryTableSearchBarContainer"
 import HopsInventoryTableContainer from "../containers/hopsInventoryTableContainer"
 import HopsInventoryTableSearchBarContainer from "../containers/hopsInventoryTableSearchBarContainer"
+import YeastInventoryTableContainer from "../containers/yeastInventoryTableContainer"
+import YeastInventoryTableSearchBarContainer from "../containers/yeastInventoryTableSearchBarContainer"
 
 const Inventories = () => (
 	<div style={{width: "75%"}}>
@@ -14,6 +16,8 @@ const Inventories = () => (
       <HopsInventoryTableSearchBarContainer />
     	<HopsInventoryTableContainer />
     <h2>Yeast</h2>
+      <YeastInventoryTableSearchBarContainer />
+      <YeastInventoryTableContainer />
     <h2>Other</h2>
   </div>
 )

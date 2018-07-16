@@ -70,6 +70,18 @@ const hopsInventoryTableQuery = gql`
   }
 `
 
+const yeastInventoryTableQuery = gql`
+  query {
+    yeastInventoryTable @client {
+      sortBy
+      sortOrder
+      itemsPerPage
+      currentPage
+      filterString
+    }
+  }
+`
+
 export default {
   Mutation: {
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
@@ -689,6 +701,113 @@ export default {
       }
 
       cache.writeQuery({ query: hopsInventoryTableQuery, data })
+
+      return null
+
+    },
+
+    updateYeastInventoryTableSort: (_, { cellName }, { cache }) => {
+
+      const { yeastInventoryTable } = cache.readQuery({ query: yeastInventoryTableQuery })
+
+      const { sortOrder, sortBy } = yeastInventoryTable
+
+      let order = sortOrder
+      if(sortBy === cellName){
+        order = sortOrder === "asc" ? "desc" : "asc"
+      }else{
+        order = "asc"
+      }
+
+      const data = {
+        yeastInventoryTable: {
+          ...yeastInventoryTable,
+          sortOrder: order,
+          sortBy: cellName
+        }
+      }
+
+      cache.writeQuery({ query: yeastInventoryTableQuery, data })
+
+      return null
+    },
+
+    updateYeastInventoryTableItemLimit: (_, { value }, { cache }) => {
+
+      const query = gql`
+        query {
+
+          currentUser {
+            inventories {
+              name
+              items
+            }
+          }
+
+          yeastInventoryTable @client {
+            sortBy
+            sortOrder
+            itemsPerPage
+            currentPage
+          }
+        }
+      `
+
+      const { currentUser, yeastInventoryTable } = cache.readQuery({ query })
+
+      let pageNumber = yeastInventoryTable.currentPage
+      const yeast = currentUser.inventories.find(inventory => inventory.name === "Yeast").items
+      if(pageNumber >= yeast.length/value){
+        pageNumber = Math.ceil(yeast.length/value) - 1
+      }
+
+      const data = {
+        currentUser,
+        yeastInventoryTable: {
+          ...yeastInventoryTable,
+          itemsPerPage: value,
+          currentPage: pageNumber
+        }
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+    },
+
+    updateYeastInventoryTablePageNumber: (_, { type }, { cache }) => {
+
+      const { yeastInventoryTable } = cache.readQuery({ query: yeastInventoryTableQuery })
+
+      const { currentPage } = yeastInventoryTable
+      const integer = type === "INCREMENT" ? 1 : -1
+
+      const data = {
+        yeastInventoryTable: {
+          ...yeastInventoryTable,
+          currentPage: currentPage + integer
+        }
+      }
+
+      cache.writeQuery({ query: yeastInventoryTableQuery, data })
+
+      return null
+
+    },
+
+    updateYeastInventoryTableFilter: (_, { value }, { cache }) => {
+
+      const { yeastInventoryTable } = cache.readQuery({ query: yeastInventoryTableQuery })
+
+      const data = {
+        yeastInventoryTable: {
+          ...yeastInventoryTable,
+          filterString: value,
+          currentPage: 0
+        }
+      }
+
+      cache.writeQuery({ query: yeastInventoryTableQuery, data })
 
       return null
 
