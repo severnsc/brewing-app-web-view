@@ -68,6 +68,7 @@ const DashboardTableContainer = () => {
             tableRows={filteredTableRows || tableRows}
             sortBy={sortBy}
             sortOrder={sortOrder}
+            itemsPerPageOptions={[25,50,100]}
             itemsPerPage={itemsPerPage}
             itemsPerPageMutation={UPDATE_DASHBOARD_ITEM_LIMIT}
             currentPage={currentPage}

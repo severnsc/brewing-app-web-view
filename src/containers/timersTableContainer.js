@@ -56,6 +56,7 @@ const TimersTableContainer = () => {
 			      tableRows={filteredTableRows || tableRows}
 			      sortBy={sortBy}
 			      sortOrder={sortOrder}
+			      itemsPerPageOptions={[25,50,100]}
 			      itemsPerPage={itemLimit}
 			      itemsPerPageMutation={UPDATE_TIMERS_TABLE_ITEM_LIMIT}
 			      currentPage={currentPage}
