@@ -19,8 +19,11 @@ const HopsInventoryTableContainer = () => (
 
 			const columns = [
 				{id: shortid.generate(), name: "Hop name"},
-				{id: shortid.generate(), name: "Amount"},
-				{id: shortid.generate(), name: "Purchased on"}
+				{id: shortid.generate(), name: "Amount (lbs, oz)"},
+				{id: shortid.generate(), name: "Country of origin"},
+				{id: shortid.generate(), name: "Alpha acid %"},
+				{id: shortid.generate(), name: "Cost per lb"},
+				{id: shortid.generate(), name: "Purchase date"}
 			]
 
 			const { currentUser, hopsInventoryTable } = data
@@ -35,7 +38,14 @@ const HopsInventoryTableContainer = () => (
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
 			const tableRows = inventory.items.map(item => ({
 				id: item.id,
-				cells: [JSON.parse(item.object).name, item.currentQuantity, item.lastReorderDate]
+				cells: [
+					JSON.parse(item.object).name,
+					item.currentQuantity,
+					JSON.parse(item.object).name,
+					JSON.parse(item.object).name,
+					item.unitCost,
+					item.lastReorderDate
+				]
 			}))
 
 			let filteredRows

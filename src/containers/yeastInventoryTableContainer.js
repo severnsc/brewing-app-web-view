@@ -20,6 +20,10 @@ const YeastInventoryTableContainer = () => (
 			const columns = [
 				{id: shortid.generate(), name: "Yeast name"},
 				{id: shortid.generate(), name: "Amount"},
+				{id: shortid.generate(), name: "Yeast lab"},
+				{id: shortid.generate(), name: "Yeast number"},
+				{id: shortid.generate(), name: "Yeast type"},
+				{id: shortid.generate(), name: "Dry or Liquid"},
 				{id: shortid.generate(), name: "Purchase date"}
 			]
 
@@ -35,7 +39,15 @@ const YeastInventoryTableContainer = () => (
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Yeast")
 			const tableRows = inventory.items.map(item => ({
 				id: item.id,
-				cells: [JSON.parse(item.object).name, item.currentQuantity, item.lastReorderDate]
+				cells: [
+					JSON.parse(item.object).name,
+					item.currentQuantity,
+					JSON.parse(item.object).name,
+					JSON.parse(item.object).name,
+					JSON.parse(item.object).name,
+					JSON.parse(item.object).name,
+					item.lastReorderDate
+				]
 			}))
 			let filteredTableRows
 			if(filterString){

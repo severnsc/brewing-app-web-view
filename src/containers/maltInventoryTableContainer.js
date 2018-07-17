@@ -20,8 +20,12 @@ const MaltInventoryTableContainer = () => (
 
 			const columns = [
 				{id: shortid.generate(), name: "Malt name"},
+				{id: shortid.generate(), name: "Amount (lbs, oz)"},
 				{id: shortid.generate(), name: "Malt type"},
-				{id: shortid.generate(), name: "Amount"}
+				{id: shortid.generate(), name: "Malt color"},
+				{id: shortid.generate(), name: "Country of origin"},
+				{id: shortid.generate(), name: "Cost per lb"},
+				{id: shortid.generate(), name: "Purchase date"}
 			]
 
 			const { maltInventoryTable, currentUser } = data
@@ -38,7 +42,15 @@ const MaltInventoryTableContainer = () => (
 																	 .find(inventory => inventory.name === "Malt")
 																	 .items.map(item => ({
 																	 	id: item.id,
-																	 	cells: [JSON.parse(item.object).name, JSON.parse(item.object).name, item.currentQuantity]
+																	 	cells: [
+																	 		JSON.parse(item.object).name,
+																	 		item.currentQuantity,
+																	 		JSON.parse(item.object).name,
+																	 		JSON.parse(item.object).name,
+																	 		JSON.parse(item.object).name,
+																	 		item.unitCost,
+																	 		item.lastReorderDate
+																	 	]
 																	 }))
 
 			let filteredRows															
