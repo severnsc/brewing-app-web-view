@@ -8,6 +8,7 @@ import inventoriesTable from "./inventoriesTable"
 import maltInventoryTable from "./maltInventoryTable"
 import hopsInventoryTable from "./hopsInventoryTable"
 import yeastInventoryTable from "./yeastInventoryTable"
+import otherInventoriesTable from "./otherInventoriesTable"
 
 export default {
 	dashboard,
@@ -19,5 +20,6 @@ export default {
 	inventoriesTable,
 	maltInventoryTable,
 	hopsInventoryTable,
-	yeastInventoryTable
+	yeastInventoryTable,
+	otherInventoriesTable
 }

@@ -13,6 +13,7 @@ import inventoriesQuery from "./inventories"
 import maltInventoryTableQuery from "./maltInventoryTable"
 import hopsInventoryTableQuery from "./hopsInventoryTable"
 import yeastInventoryTableQuery from "./yeastInventoryTable"
+import otherInventoriesTableQuery from "./otherInventoriesTable"
 
 const rootQuery = gql`
   query {
@@ -39,5 +40,6 @@ export {
   maltInventoryTableQuery,
   hopsInventoryTableQuery,
   yeastInventoryTableQuery,
+  otherInventoriesTableQuery,
   rootQuery
 }

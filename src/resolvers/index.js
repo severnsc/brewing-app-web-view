@@ -82,6 +82,18 @@ const yeastInventoryTableQuery = gql`
   }
 `
 
+const otherInventoriesTableQuery = gql`
+  query {
+    otherInventoriesTable @client {
+      sortBy
+      sortOrder
+      itemsPerPage
+      currentPage
+      filterString
+    }
+  }
+`
+
 export default {
   Mutation: {
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
@@ -808,6 +820,117 @@ export default {
       }
 
       cache.writeQuery({ query: yeastInventoryTableQuery, data })
+
+      return null
+
+    },
+
+    updateOtherInventoriesTableSort: (_, { cellName }, { cache }) => {
+
+      const { otherInventoriesTable } = cache.readQuery({ query: otherInventoriesTableQuery })
+
+      const { sortOrder, sortBy } = otherInventoriesTable
+
+      let order = sortOrder
+      if(sortBy === cellName){
+        order = sortOrder === "asc" ? "desc" : "asc"
+      }else{
+        order = "asc"
+      }
+
+      const data = {
+        otherInventoriesTable: {
+          ...otherInventoriesTable,
+          sortOrder: order,
+          sortBy: cellName
+        }
+      }
+
+      cache.writeQuery({ query: otherInventoriesTableQuery, data })
+
+      return null
+
+    },
+
+    updateOtherInventoriesTableItemLimit: (_, { value }, { cache }) => {
+
+      const query = gql`
+        query {
+
+          currentUser {
+            inventories {
+              name
+              items
+            }
+          }
+
+          otherInventoriesTable @client {
+            sortBy
+            sortOrder
+            itemsPerPage
+            currentPage
+          }
+        }
+      `
+
+      const { currentUser, otherInventoriesTable } = cache.readQuery({ query })
+
+      let pageNumber = otherInventoriesTable.currentPage
+      const otherInventories = currentUser.inventories.filter(inventory => !["Malt", "Hops", "Yeast"].includes(inventory.name))
+      const allOtherItems = otherInventories.map(inventory => inventory.items)
+      const other = [].concat.apply([], allOtherItems)
+      if(pageNumber >= other.length/value){
+        pageNumber = Math.ceil(other.length/value) - 1
+      }
+
+      const data = {
+        currentUser,
+        otherInventoriesTable: {
+          ...otherInventoriesTable,
+          itemsPerPage: value,
+          currentPage: pageNumber
+        }
+      }
+
+      cache.writeQuery({ query, data })
+
+      return null
+
+    },
+
+    updateOtherInventoriesTablePageNumber: (_, { type }, { cache }) => {
+
+      const { otherInventoriesTable } = cache.readQuery({ query: otherInventoriesTableQuery })
+
+      const { currentPage } = otherInventoriesTable
+      const integer = type === "INCREMENT" ? 1 : -1
+
+      const data = {
+        otherInventoriesTable: {
+          ...otherInventoriesTable,
+          currentPage: currentPage + integer
+        }
+      }
+
+      cache.writeQuery({ query: otherInventoriesTableQuery, data })
+
+      return null
+
+    },
+
+    updateOtherInventoriesTableFilter: (_, { value }, { cache }) => {
+
+      const { otherInventoriesTable } = cache.readQuery({ query: otherInventoriesTableQuery })
+
+      const data = {
+        otherInventoriesTable: {
+          ...otherInventoriesTable,
+          filterString: value,
+          currentPage: 0
+        }
+      }
+
+      cache.writeQuery({ query: otherInventoriesTableQuery, data })
 
       return null
 
