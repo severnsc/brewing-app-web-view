@@ -19,6 +19,10 @@ class NewTimerAlertForm extends Component {
 	handleSubmit = e => {
 		e.preventDefault()
 		this.props.handleSubmit(this.state.activationTime, this.state.message)
+		this.setState({
+			activationTime: "",
+			message: ""
+		})
 	}
 
 	render(){

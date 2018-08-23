@@ -18,7 +18,21 @@ const NewTimerAlertFormContainer = ({ id }) => (
 			const timer = timers.find(timer => timer.id === id)
 
 			return (
-				<Mutation mutation={CREATE_TIMER_ALERT}>
+				<Mutation 
+					mutation={CREATE_TIMER_ALERT}
+					update={(cache, { data: { createTimerAlert } }) => {
+						const { currentUser } = cache.readQuery({ query: timersQuery })
+						cache.writeQuery({
+							query: timersQuery,
+							data: {
+								currentUser:{
+									...currentUser,
+									timers: timers.map(timer => timer.id === id ? {...timer, timerAlerts: [...timer.timerAlerts, createTimerAlert]} : timer)
+								}
+							}
+						})						
+					}}
+				>
 					{mutation => {
 
 						const createTimeralert = (activationTime, message) => {
@@ -30,6 +44,9 @@ const NewTimerAlertFormContainer = ({ id }) => (
 						return(
 							<Fragment>
 								<h2>{timer.name} alerts</h2>
+								<ul>
+									{timer.timerAlerts.map(alert => <li key={alert.id}>{alert.message} | {alert.activationTime}</li>)}
+								</ul>
 								<NewTimerAlertForm handleSubmit={createTimeralert} />
 							</Fragment>
 						)

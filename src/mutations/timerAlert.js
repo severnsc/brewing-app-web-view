@@ -4,6 +4,9 @@ export const CREATE_TIMER_ALERT = gql`
   mutation createTimerAlert($timerId: String!, $activationTime: Int!, $message: String!) {
     createTimerAlert(timerId: $timerId, activationTime: $activationTime, message: $message) {
       id
+      activationTime
+      message
+      activated
     }
   }
 `
