@@ -2,14 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import styles from "./styles"
 
-const NewButton = ({ onClick }) => (
+const FixedNewItemButton = ({ onClick }) => (
 	<button style={styles.newButton} onClick={onClick}>
 		+
 	</button>
 )
 
-NewButton.propTypes = {
+FixedNewItemButton.propTypes = {
 	onClick: PropTypes.func.isRequired
 }
 
-export default NewButton
+export default FixedNewItemButton
