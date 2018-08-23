@@ -4,6 +4,16 @@ export const CREATE_TIMER = gql`
   mutation createTimer($userId: String!, $name: String!, $duration: Int!, $intervalDuration: Int!) {
     createTimer(userId: $userId, name: $name, duration: $duration, intervalDuration: $intervalDuration) {
       id
+      name
+      duration
+      remainingDuration
+      intervalDuration
+      isRunning
+      timerAlerts {
+        id
+        activated
+        activationTime
+      }
     }
   }
 `

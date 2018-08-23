@@ -14,6 +14,7 @@ import TimerForm from "./TimerForm"
 import InventoryForm from "./InventoryForm"
 import FixedNewItemButton from "./FixedNewItemButton"
 import NewTimerForm from "./NewTimerForm"
+import NewTimerAlertForm from "./NewTimerAlertForm"
 
 export {
 	ActiveTimer,
@@ -31,5 +32,6 @@ export {
 	TimerForm,
 	InventoryForm,
 	FixedNewItemButton,
-	NewTimerForm
+	NewTimerForm,
+	NewTimerAlertForm
 }

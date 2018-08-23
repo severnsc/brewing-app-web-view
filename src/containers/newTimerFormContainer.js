@@ -3,6 +3,23 @@ import { NewTimerForm } from "../components"
 import { Mutation, Query } from "react-apollo"
 import { CREATE_TIMER } from "../mutations"
 import { currentUserQuery } from "../queries"
+import { currentUserFragments } from "../fragments"
+import gql from "graphql-tag"
+
+const query = gql`
+	query {
+		modal @client {
+			type
+			id
+		}
+
+		currentUser {
+			id
+			...Timers
+		}
+	}
+	${currentUserFragments.timers}
+`
 
 const NewTimerFormContainer = () => (
 	<Query query={currentUserQuery}>
@@ -14,7 +31,26 @@ const NewTimerFormContainer = () => (
 			const userId = data.currentUser.id
 
 			return(
-				<Mutation mutation={CREATE_TIMER}>
+				<Mutation
+					mutation={CREATE_TIMER}
+					update={(cache, {data: { createTimer } }) => {
+						const { modal, currentUser } = cache.readQuery({ query })
+						cache.writeQuery({
+							query,
+							data: {
+								modal: {
+									...modal,
+									type: "newTimerAlert",
+									id: createTimer.id
+								},
+								currentUser: {
+									...currentUser,
+									timers: [...currentUser.timers, createTimer]
+								}
+							}
+						})
+					}}
+				>
 					{mutation => {
 
 						const createTimer = (name, duration) => {
