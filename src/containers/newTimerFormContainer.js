@@ -15,6 +15,7 @@ const NewTimerFormContainer = () => (
 					const convertedTime = splitTime[0] * 60 * 1000 + splitTime[1] * 1000
 					return {...alert, activationTime: convertedTime}
 				})
+				//Need to get userId though a query and add to the mutation
 				mutation({ variables: {name, duration: durationInMs, alerts: convertedAlerts, intervalDuration: 1000} })
 			}
 

@@ -7,6 +7,7 @@ import ModalContainer from "./containers/common/modalContainer"
 import InventoryFormContainer from "./containers/inventoryFormContainer"
 import InventoryItemFormContainer from "./containers/inventoryItemFormContainer"
 import TimerFormContainer from "./containers/timerFormContainer"
+import NewTimerFormContainer from "./containers/newTimerFormContainer"
 import { Query } from 'react-apollo'
 import { rootQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
@@ -35,6 +36,10 @@ class App extends Component {
 
             case "timer":
               modalItem = <TimerFormContainer id={data.modal.id} />
+              break
+
+            case "newTimer":
+              modalItem = <NewTimerFormContainer />
               break
 
             default:
