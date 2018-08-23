@@ -1,8 +1,8 @@
 import gql from "graphql-tag"
 
 export const CREATE_TIMER = gql`
-  mutation createTimer($userId: String!, $name: String!, $duration: Int!, $alerts: Array!, $intervalDuration: Int!) {
-    createTimer(userId: $userId, name: $name, duration: $duration, intervalDuration: $intervalDuration, alerts: $alerts) {
+  mutation createTimer($userId: String!, $name: String!, $duration: Int!, $intervalDuration: Int!) {
+    createTimer(userId: $userId, name: $name, duration: $duration, intervalDuration: $intervalDuration) {
       id
     }
   }

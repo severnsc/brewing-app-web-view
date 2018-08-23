@@ -17,16 +17,9 @@ const NewTimerFormContainer = () => (
 				<Mutation mutation={CREATE_TIMER}>
 					{mutation => {
 
-						const createTimer = (name, duration, alerts) => {
+						const createTimer = (name, duration) => {
 							const durationInMs = duration * 60 * 1000
-							const convertedAlerts = alerts.map(alert => {
-								const { activationTime } = alert
-								const splitTime = activationTime.split(":").map(time => parseInt(time, 10))
-								const convertedTime = splitTime[0] * 60 * 1000 + splitTime[1] * 1000
-								return {...alert, activationTime: convertedTime}
-							})
-							//Need to get userId though a query and add to the mutation
-							mutation({ variables: {userId, name, duration: durationInMs, alerts: convertedAlerts, intervalDuration: 1000} })
+							mutation({ variables: {userId, name, duration: durationInMs, intervalDuration: 1000} })
 						}
 
 						return(
