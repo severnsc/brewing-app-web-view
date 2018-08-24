@@ -34,7 +34,7 @@ const TimerAlertFormContainer = ({ id, activationTime, message, saveTimerAlert }
 
 TimerAlertFormContainer.propTypes = {
 	id: PropTypes.string.isRequired,
-	activationTime: PropTypes.string.isRequired,
+	activationTime: PropTypes.number.isRequired,
 	message: PropTypes.string.isRequired,
 	saveTimerAlert: PropTypes.func.isRequired
 }
