@@ -1,6 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { convertMsToMinutesSecondsString } from "../../utils"
+import {
+	convertMsToMinutesSecondsString,
+	convertMinutesSecondsStringToMs 
+} from "../../utils"
 
 class TimerAlertForm extends Component {
 
@@ -15,8 +18,7 @@ class TimerAlertForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
-		const splitTime = this.input.current.value.split(":")
-		const convertedTime = splitTime[0] * 60 * 1000 + splitTime[1] * 1000
+		const convertedTime = convertMinutesSecondsStringToMs(this.input.current.value)
 		this.props.saveTimerAlert(this.props.id, convertedTime, this.state.message)
 	}
 

@@ -7,3 +7,8 @@ export const convertMsToMinutesSecondsString = ms => {
 	if(seconds < 10) seconds = "0" + seconds
 	return `${minutes}:${seconds}`
 }
+
+export const convertMinutesSecondsStringToMs = string => {
+	const splitTime = string.split(":")
+	return splitTime[0] * 60 * 1000 + splitTime[1] * 1000
+}

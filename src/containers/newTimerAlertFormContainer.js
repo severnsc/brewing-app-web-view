@@ -5,7 +5,10 @@ import { CREATE_TIMER_ALERT, DELETE_TIMER_ALERT } from "../mutations"
 import { NewTimerAlertForm } from "../components"
 import TimerAlertFormContainer from "./common/timerAlertFormContainer"
 import DeleteButtonContainer from "./common/deleteButtonContainer"
-import { convertMsToMinutesSecondsString } from "../utils"
+import {
+	convertMsToMinutesSecondsString,
+	convertMinutesSecondsStringToMs
+} from "../utils"
 
 class NewTimerAlertFormContainer extends Component {
 
@@ -53,8 +56,7 @@ class NewTimerAlertFormContainer extends Component {
 							{mutation => {
 
 								const createTimeralert = (activationTime, message) => {
-									const splitTime = activationTime.split(":")
-									const convertedTime = splitTime[0] * 60 * 1000 + splitTime[1] * 1000
+									const convertedTime = convertMinutesSecondsStringToMs(activationTime)
 									mutation({ variables: {timerId: timer.id, activationTime: convertedTime, message} })
 								}
 
