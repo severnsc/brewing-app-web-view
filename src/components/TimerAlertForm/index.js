@@ -1,16 +1,25 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import {
+	convertMsToMinutesSecondsString,
+	convertMinutesSecondsStringToMs 
+} from "../../utils"
 
 class TimerAlertForm extends Component {
 
+	constructor(props){
+		super(props)
+		this.input = React.createRef()
+	}
+
 	state = {
-		activationTime: this.props.activationTime,
 		message: this.props.message
 	}
 
 	handleSubmit = e => {
 		e.preventDefault()
-		this.props.saveTimerAlert(this.props.id, this.state.activationTime, this.state.message)
+		const convertedTime = convertMinutesSecondsStringToMs(this.input.current.value)
+		this.props.saveTimerAlert(this.props.id, convertedTime, this.state.message)
 	}
 
 	handleActivationTimeChange = e => {
@@ -22,10 +31,14 @@ class TimerAlertForm extends Component {
 	}
 
 	render(){
+
+		const { activationTime } = this.props
+		const convertedActivationTime = convertMsToMinutesSecondsString(activationTime)
+
 		return(
 			<form onSubmit={this.handleSubmit}>
 				<label>Activation time
-					<input type="number" value={this.state.activationTime} onChange={this.handleActivationTimeChange} />
+					<input type="text" defaultValue={convertedActivationTime} ref={this.input} />
 				</label>
 
 				<label>Message
