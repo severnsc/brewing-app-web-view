@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { convertMsToMinutesSecondsString } from "../../utils"
 
 class TimerAlertForm extends Component {
 
@@ -30,10 +31,7 @@ class TimerAlertForm extends Component {
 	render(){
 
 		const { activationTime } = this.props
-		const minutes = Math.floor(activationTime/60000)
-		let seconds = (activationTime/60000 - minutes)*60
-		if(seconds < 10) seconds = "0" + seconds
-		const convertedActivationTime = `${minutes}:${seconds}`
+		const convertedActivationTime = convertMsToMinutesSecondsString(activationTime)
 
 		return(
 			<form onSubmit={this.handleSubmit}>

@@ -5,6 +5,7 @@ import { CREATE_TIMER_ALERT, DELETE_TIMER_ALERT } from "../mutations"
 import { NewTimerAlertForm } from "../components"
 import TimerAlertFormContainer from "./common/timerAlertFormContainer"
 import DeleteButtonContainer from "./common/deleteButtonContainer"
+import { convertMsToMinutesSecondsString } from "../utils"
 
 class NewTimerAlertFormContainer extends Component {
 
@@ -71,7 +72,7 @@ class NewTimerAlertFormContainer extends Component {
 									}else{
 										return(
 											<Fragment key={alert.id}>
-												<li>{alert.message} | {alert.activationTime}</li>
+												<li>{alert.message} | {convertMsToMinutesSecondsString(alert.activationTime)}</li>
 												<button onClick={() => this.setEditingId(alert.id)}>Edit</button>
 												<DeleteButtonContainer id={alert.id} mutation={DELETE_TIMER_ALERT} refetchQuery={timersQuery} />
 											</Fragment>	
