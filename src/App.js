@@ -8,7 +8,7 @@ import InventoryFormContainer from "./containers/inventoryFormContainer"
 import InventoryItemFormContainer from "./containers/inventoryItemFormContainer"
 import TimerFormContainer from "./containers/timerFormContainer"
 import NewTimerFormContainer from "./containers/newTimerFormContainer"
-import NewTimerAlertFormContainer from "./containers/NewTimerAlertFormContainer"
+import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import { Query } from 'react-apollo'
 import { rootQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
