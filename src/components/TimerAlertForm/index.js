@@ -3,14 +3,20 @@ import PropTypes from "prop-types"
 
 class TimerAlertForm extends Component {
 
+	constructor(props){
+		super(props)
+		this.input = React.createRef()
+	}
+
 	state = {
-		activationTime: this.props.activationTime,
 		message: this.props.message
 	}
 
 	handleSubmit = e => {
 		e.preventDefault()
-		this.props.saveTimerAlert(this.props.id, this.state.activationTime, this.state.message)
+		const splitTime = this.input.current.value.split(":")
+		const convertedTime = splitTime[0] * 60 * 1000 + splitTime[1] * 1000
+		this.props.saveTimerAlert(this.props.id, convertedTime, this.state.message)
 	}
 
 	handleActivationTimeChange = e => {
@@ -22,10 +28,17 @@ class TimerAlertForm extends Component {
 	}
 
 	render(){
+
+		const { activationTime } = this.props
+		const minutes = Math.floor(activationTime/60000)
+		let seconds = (activationTime/60000 - minutes)*60
+		if(seconds < 10) seconds = "0" + seconds
+		const convertedActivationTime = `${minutes}:${seconds}`
+
 		return(
 			<form onSubmit={this.handleSubmit}>
 				<label>Activation time
-					<input type="number" value={this.state.activationTime} onChange={this.handleActivationTimeChange} />
+					<input type="text" defaultValue={convertedActivationTime} ref={this.input} />
 				</label>
 
 				<label>Message
