@@ -17,6 +17,7 @@ export const UPDATE_TIMER_ALERT = gql`
       id
       activationTime
       activated
+      message
     }
   }
 `
@@ -27,6 +28,16 @@ export const ACTIVATE_TIMER_ALERT = gql`
       id
       message
       activated
+    }
+  }
+`
+
+export const DELETE_TIMER_ALERT = gql`
+  mutation deleteTimerAlert($id: String!) {
+    deleteTimerAlert(id: $id) {
+      id
+      activationTime
+      message
     }
   }
 `
