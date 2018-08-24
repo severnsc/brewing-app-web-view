@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "apollo-boost": "^0.1.6",
+    "apollo-link-ws": "^1.0.8",
     "axios": "^0.18.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
@@ -14,10 +15,11 @@
     "react-router-dom": "^4.2.2",
     "reset-css": "^3.0.0",
     "shortid": "^2.2.8",
+    "subscriptions-transport-ws": "^0.9.14",
     "validator": "^10.0.0"
   },
   "devDependencies": {
-    "react-scripts": "1.1.4"
+    "react-scripts": "^1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
