@@ -31,7 +31,7 @@ class NewTimerAlertForm extends Component {
 			<form onSubmit={this.handleSubmit}>
 
 				<label>Activation time
-					<span>This is the time that the alert should be sent to you. The format is Minutes:Seconds</span>
+					<span>This is the time that the alert should be sent to you. The format is Hours:Minutes:Seconds</span>
 					<input name="activationTime" type="text" value={this.state.activationTime} onChange={this.handleActivationTimeChange} />
 				</label>
 
