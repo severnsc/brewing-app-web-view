@@ -1,4 +1,4 @@
-import ActiveTimer from "./ActiveTimer"
+import Timer from "./Timer"
 import ForgotPasswordForm from "./ForgotPasswordForm"
 import HoverableTableRow from "./HoverableTableRow"
 import InventoryItemForm from "./InventoryItemForm"
@@ -17,7 +17,7 @@ import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
 
 export {
-	ActiveTimer,
+	Timer,
 	ForgotPasswordForm,
 	HoverableTableRow,
 	InventoryItemForm,
