@@ -30,6 +30,8 @@ export const currentUserFragments = {
         id
         name
         duration
+        isRunning
+        remainingDuration
         timerAlerts {
           id
           activationTime
