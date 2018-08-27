@@ -19,6 +19,29 @@ const TimerContainer = ({ id, startTimer, stopTimer, resetTimer }) => (
 			const timer = timers.find(timer => timer.id === id)
 			const time = convertMsToMinutesSecondsString(timer.remainingDuration)
 
+			const { timerAlerts } = timer
+			let unActivatedTimerAlerts = timerAlerts.filter(alert => !alert.activated)
+			let nextAlert = null
+			let nextAlertMessage = null
+			let nextAlertActivationTime = null
+			if(unActivatedTimerAlerts.length > 0){
+				unActivatedTimerAlerts.sort((a,b) => {
+					if(a.activationTime < b.activationTime){
+						return 1
+					}
+
+					if(a.activationTime > b.activationTime){
+						return -1
+					}
+
+					return 0
+				})
+
+				nextAlert = unActivatedTimerAlerts[0]
+				nextAlertMessage = nextAlert.message
+				nextAlertActivationTime = convertMsToMinutesSecondsString(nextAlert.activationTime)
+			}
+
 			const startTimerFunc = () => {
 				startTimer()
 				startPolling(1000)
@@ -37,6 +60,8 @@ const TimerContainer = ({ id, startTimer, stopTimer, resetTimer }) => (
 					startTimer={startTimerFunc}
 					stopTimer={stopTimerFunc}
 					resetTimer={resetTimer}
+					nextAlertMessage={nextAlertMessage}
+					nextAlertActivationTime={nextAlertActivationTime}
 				/>
 			)
 
