@@ -1,11 +1,12 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Query, Mutation } from "react-apollo"
 import { activeTimerQuery } from "../queries"
 import {
 	START_TIMER,
 	STOP_TIMER,
 	RESET_TIMER,
-	ACTIVATE_TIMER_ALERT
+	ACTIVATE_TIMER_ALERT,
+	UPDATE_ACTIVE_TIMER
 } from "../mutations"
 import TimerContainer from "./timerContainer"
 
@@ -93,11 +94,36 @@ const ActiveTimerContainer = () => (
 												return(
 													<Mutation mutation={ACTIVATE_TIMER_ALERT}>
 														{activateTimerAlertMutation => {
+
 															return(
-																<div style={{border: "1px solid black"}}>
-																	<h2>Active Timer</h2>
-																	{activeTimer.id ? <TimerContainer id={activeTimer.id} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} /> : <p>You don't have any active timers!</p>}
-																</div>
+																<Mutation mutation={UPDATE_ACTIVE_TIMER}>
+																	{updateActiveTimer => {
+
+																		const deactivateTimer = () => {
+																			updateActiveTimer({ variables: {id: null} })
+																		}
+
+																		let content
+																		if(activeTimer.id){
+																			content = (
+																				<Fragment>
+																					<TimerContainer id={activeTimer.id} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
+																					<button onClick={deactivateTimer}>Deactivate timer</button>
+																				</Fragment>
+																			)
+																		}else{
+																			content = <p>You don't have any active timers!</p>
+																		}
+
+																		return(
+																			<div style={{border: "1px solid black"}}>
+																				<h2>Active Timer</h2>
+																				{content}
+																			</div>
+																		)
+
+																	}}
+																</Mutation>
 															)
 														}}
 													</Mutation>
