@@ -2,7 +2,7 @@ import React from "react"
 import styles from "./styles"
 import PropTypes from "prop-types"
 
-const ActiveTimer = ({ name, time, isRunning, startTimer, stopTimer, resetTimer }) => {
+const Timer = ({ name, time, isRunning, startTimer, stopTimer, resetTimer }) => {
 
 	const startButton = <button onClick={startTimer} style={styles.start}>Start</button>
 	const stopButton = <button onClick={stopTimer} style={styles.stop}>Stop</button>
@@ -17,7 +17,7 @@ const ActiveTimer = ({ name, time, isRunning, startTimer, stopTimer, resetTimer 
 	)
 }
 
-ActiveTimer.propTypes = {
+Timer.propTypes = {
 	name: PropTypes.string.isRequired,
 	time: PropTypes.string.isRequired,
 	isRunning: PropTypes.bool.isRequired,
@@ -26,4 +26,4 @@ ActiveTimer.propTypes = {
 	resetTimer: PropTypes.func.isRequired
 }
 
-export default ActiveTimer
+export default Timer
