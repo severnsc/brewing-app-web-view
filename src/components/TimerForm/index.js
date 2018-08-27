@@ -1,17 +1,22 @@
 import React, { Component, Fragment } from "react"
 import { TimerAlertForm } from ".."
 import PropTypes from "prop-types"
+import {
+	convertMsToMinutesSecondsString,
+	convertMinutesSecondsStringToMs 
+} from "../../utils"
 
 class TimerForm extends Component {
 
 	state = {
 		name: this.props.name,
-		duration: this.props.duration
+		duration: convertMsToMinutesSecondsString(this.props.duration)
 	}
 
 	handleSubmit = e => {
 		e.preventDefault()
-		this.props.saveTimer(this.state.name, this.state.duration)
+		const duration = convertMinutesSecondsStringToMs(this.state.duration)
+		this.props.saveTimer(this.state.name, duration)
 	}
 
 	handleNameChange = e => {
@@ -28,6 +33,8 @@ class TimerForm extends Component {
 			<TimerAlertForm key={timerAlert.id} id={timerAlert.id} activationTime={timerAlert.activationTime} message={timerAlert.message} saveTimerAlert={this.props.saveTimerAlert} />
 		)
 
+		console.log(this.state.duration)
+
 		return(
 			<Fragment>
 				<h2>Timer</h2>
@@ -38,7 +45,7 @@ class TimerForm extends Component {
 					</label>
 
 					<label>Duration
-						<input name="duration" type="number" value={this.state.duration} onChange={this.handleDurationChange} />
+						<input name="duration" type="text" value={this.state.duration} onChange={this.handleDurationChange} />
 					</label>
 
 					<input type="submit" value="Save" />

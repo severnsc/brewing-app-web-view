@@ -5,11 +5,12 @@ export const constructErrorMessage = (name, type, item) =>
 
 export const convertMsToMinutesSecondsString = ms => {
 	const tempTime = moment.duration(ms)
-	const hours = tempTime.hours()
-	const minutes = tempTime.minutes()
+	let hours = tempTime.hours()
+	let minutes = tempTime.minutes()
 	let seconds = tempTime.seconds()
-	if(seconds < 10) seconds = "0" + seconds
-	return `${hours}:${minutes}:${seconds}`
+	let times = [hours, minutes, seconds]
+	times = times.map(time => time < 10 ? "0" + time : time)
+	return `${times[0]}:${times[1]}:${times[2]}`
 }
 
 export const convertMinutesSecondsStringToMs = string => {
