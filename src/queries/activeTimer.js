@@ -7,6 +7,7 @@ export default gql`
     }
 
     currentUser {
+      id
       timers {
         id
         name
