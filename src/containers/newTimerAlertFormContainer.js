@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react"
+import PropTypes from "prop-types"
 import { Query, Mutation } from "react-apollo"
 import { timersQuery } from "../queries"
 import { CREATE_TIMER_ALERT, DELETE_TIMER_ALERT } from "../mutations"
@@ -101,6 +102,10 @@ class NewTimerAlertFormContainer extends Component {
 		)
 	}
 	
+}
+
+NewTimerAlertFormContainer.propTypes = {
+	id: PropTypes.string.isRequired
 }
 
 export default NewTimerAlertFormContainer

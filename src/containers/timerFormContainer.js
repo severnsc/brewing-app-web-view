@@ -2,6 +2,7 @@ import React, { Fragment } from "react"
 import { Query, Mutation } from "react-apollo"
 import { timersQuery } from "../queries"
 import {
+	CREATE_TIMER_ALERT,
 	UPDATE_ACTIVE_TIMER,
 	UPDATE_TIMER,
 	UPDATE_TIMER_ALERT
@@ -47,17 +48,37 @@ const TimerFormContainer = ({ id }) => (
 												}
 
 												return(
-													<Fragment>
-														<p>All times are in HH:MM:SS format</p>
-														<button onClick={activateTimer}>Activate timer</button>
-														<TimerForm
-															name={timer.name}
-															duration={timer.duration}
-															timerAlerts={timer.timerAlerts}
-															saveTimer={saveTimer}
-															saveTimerAlert={saveTimerAlert}
-														/>
-													</Fragment>
+													<Mutation
+														mutation={CREATE_TIMER_ALERT}
+														refetchQueries={[{query: timersQuery}]}
+													>
+														{createTimerAlertMutation => {
+
+															const createTimerAlert = () =>{
+																createTimerAlertMutation({ variables: {
+																	timerId: id,
+																	activationTime: 0,
+																	message: ""
+																}})
+															}
+
+															return(
+																<Fragment>
+																	<p>All times are in HH:MM:SS format</p>
+																	<button onClick={activateTimer}>Activate timer</button>
+																	<TimerForm
+																		name={timer.name}
+																		duration={timer.duration}
+																		timerAlerts={timer.timerAlerts}
+																		saveTimer={saveTimer}
+																		saveTimerAlert={saveTimerAlert}
+																		addTimerAlert={createTimerAlert}
+																	/>
+																</Fragment>
+															)
+
+														}}
+													</Mutation>
 												)
 											}}
 										</Mutation>
