@@ -74,7 +74,11 @@ const ActiveTimerContainer = () => (
 											update={(cache, { data: { resetTimer } }) => {
 												const { activeTimer, currentUser } = cache.readQuery({ query: activeTimerQuery })
 												const timers = currentUser.timers
-												const newTimers = timers.map(timer => timer.id === resetTimer.id ? resetTimer : timer)
+												const newTimer = {
+													...resetTimer,
+													timerAlerts: resetTimer.timerAlerts.map(alert => ({...alert, activated: false}))
+												}
+												const newTimers = timers.map(timer => timer.id === resetTimer.id ? newTimer : timer)
 												const data = {
 													activeTimer,
 													currentUser: {
