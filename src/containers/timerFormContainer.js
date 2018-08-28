@@ -65,6 +65,15 @@ const TimerFormContainer = ({ id }) => (
 															}
 															cache.writeQuery({query: timersQuery, data})
 														}}
+														optimisticResponse={{
+															createTimerAlert: {
+																__typename: "TimerAlert",
+																id: "1",
+																activationTime: 0,
+																message: "",
+																activated: false
+															}
+														}}
 													>
 														{createTimerAlertMutation => {
 
