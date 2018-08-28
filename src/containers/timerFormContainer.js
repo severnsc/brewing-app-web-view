@@ -51,7 +51,20 @@ const TimerFormContainer = ({ id }) => (
 												return(
 													<Mutation
 														mutation={CREATE_TIMER_ALERT}
-														refetchQueries={[{query: timersQuery}]}
+														update={(cache, { data: { createTimerAlert }}) => {
+															const { currentUser } = cache.readQuery({query: timersQuery})
+															const { timers } = currentUser
+															const timer = timers.find(timer => timer.id === id)
+															const { timerAlerts } = timer
+															const newTimerAlerts = [...timerAlerts, createTimerAlert]
+															const data = {
+																currentUser: {
+																	...currentUser,
+																	timers: timers.map(timer => timer.id === id ? {...timer, timerAlerts: newTimerAlerts} : timer)
+																}
+															}
+															cache.writeQuery({query: timersQuery, data})
+														}}
 													>
 														{createTimerAlertMutation => {
 
