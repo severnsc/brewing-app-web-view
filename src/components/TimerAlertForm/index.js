@@ -30,6 +30,11 @@ class TimerAlertForm extends Component {
 		this.setState({ message: e.target.value })
 	}
 
+	deleteTimerAlert = e => {
+		e.preventDefault()
+		this.props.deleteTimerAlert(this.props.id)
+	}
+
 	render(){
 
 		const { activationTime } = this.props
@@ -46,6 +51,7 @@ class TimerAlertForm extends Component {
 				</label>
 
 				<input type="submit" value="Save" />
+				<button onClick={this.deleteTimerAlert}>Delete</button>
 			</form>
 		)
 	}
@@ -56,7 +62,8 @@ TimerAlertForm.propTypes = {
 	id: PropTypes.string.isRequired,
 	activationTime: PropTypes.number.isRequired,
 	message: PropTypes.string.isRequired,
-	saveTimerAlert: PropTypes.func.isRequired
+	saveTimerAlert: PropTypes.func.isRequired,
+	deleteTimerAlert: PropTypes.func.isRequired
 }
 
 export default TimerAlertForm

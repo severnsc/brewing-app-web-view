@@ -27,15 +27,13 @@ class TimerForm extends Component {
 		this.setState({ duration: e.target.value })
 	}
 
-	addTimerAlert = () => {
-		this.props.addTimerAlert()
-	}
-
 	render(){
 
-		const timerAlerts = this.props.timerAlerts.map(timerAlert =>
-			<TimerAlertForm key={timerAlert.id} id={timerAlert.id} activationTime={timerAlert.activationTime} message={timerAlert.message} saveTimerAlert={this.props.saveTimerAlert} />
-		)
+		const timerAlerts = this.props.timerAlerts.map(timerAlert =>(
+			<Fragment key={timerAlert.id}>
+				<TimerAlertForm id={timerAlert.id} activationTime={timerAlert.activationTime} message={timerAlert.message} saveTimerAlert={this.props.saveTimerAlert} deleteTimerAlert={this.props.deleteTimerAlert} />
+			</Fragment>
+		))
 
 		console.log(this.state.duration)
 
@@ -57,7 +55,7 @@ class TimerForm extends Component {
 
 				<h2>Alerts</h2>
 				{timerAlerts}
-				<button onClick={this.addTimerAlert}>Add timer alert</button>
+				<button onClick={this.props.addTimerAlert}>Add timer alert</button>
 			</Fragment>
 		)
 
@@ -78,7 +76,8 @@ TimerForm.propTypes = {
 	).isRequired,
 	saveTimer: PropTypes.func.isRequired,
 	saveTimerAlert: PropTypes.func.isRequired,
-	addTimerAlert: PropTypes.func.isRequired
+	addTimerAlert: PropTypes.func.isRequired,
+	deleteTimerAlert: PropTypes.func.isRequired
 }
 
 export default TimerForm

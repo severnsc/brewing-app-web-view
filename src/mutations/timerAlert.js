@@ -36,8 +36,6 @@ export const DELETE_TIMER_ALERT = gql`
   mutation deleteTimerAlert($id: String!) {
     deleteTimerAlert(id: $id) {
       id
-      activationTime
-      message
     }
   }
 `
