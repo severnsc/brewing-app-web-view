@@ -9,6 +9,7 @@ import {
 	UPDATE_ACTIVE_TIMER
 } from "../mutations"
 import TimerContainer from "./timerContainer"
+import ViewActiveTimerAlertsLinkContainer from "./viewActiveTimerAlertsLinkContainer"
 
 const ActiveTimerContainer = () => (
 	<Query query={activeTimerQuery}>
@@ -113,6 +114,8 @@ const ActiveTimerContainer = () => (
 																				<Fragment>
 																					<TimerContainer id={activeTimer.id} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
 																					<button onClick={deactivateTimer}>Deactivate timer</button>
+																					<br />
+																					<ViewActiveTimerAlertsLinkContainer id={activeTimer.id} />
 																				</Fragment>
 																			)
 																		}else{
