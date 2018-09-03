@@ -3,7 +3,7 @@ import { Query } from "react-apollo"
 import { profileQuery } from "../queries"
 
 const ProfileContainer = () => (
-  <Query query={profileQuery}>
+  <Query query={profileQuery} fetchPolicy={"network-only"}>
 
     {({loading, error, data}) => {
 
