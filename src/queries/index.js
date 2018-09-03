@@ -18,9 +18,7 @@ import currentUserQuery from "./currentUser"
 
 const rootQuery = gql`
   query {
-    currentUser {
-      id
-    }
+    isLoggedIn @client
     modal @client {
       type
       id

@@ -23,7 +23,7 @@ const DashboardTableContainer = () => {
   ]
 
   return(
-    <Query query={dashboardTableQuery} fetchPolicy={"network-only"}>
+    <Query query={dashboardTableQuery}>
       {({loading, error, data}) => {
 
         if(loading) return <p>Loading...</p>

@@ -19,7 +19,7 @@ const TimersTableContainer = () => {
   ]
 
 	return(
-		<Query query={timersTableQuery} fetchPolicy={"network-only"}>
+		<Query query={timersTableQuery}>
 			{({ loading, error, data }) => {
 
 				if(loading) return <p>Loading...</p>

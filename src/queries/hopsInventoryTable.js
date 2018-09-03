@@ -4,7 +4,6 @@ import { currentUserFragments } from "../fragments"
 export default gql`
 	query {
 		currentUser {
-			id
 			...InventoryItems
 		}
 

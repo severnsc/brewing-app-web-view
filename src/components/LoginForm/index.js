@@ -21,7 +21,6 @@ class LoginForm extends Component {
   onSubmit = e => {
     e.preventDefault()
     this.props.login(this.state.username, this.state.password)
-    this.setState({ username: "", password: "" })
   }
 
   render() {

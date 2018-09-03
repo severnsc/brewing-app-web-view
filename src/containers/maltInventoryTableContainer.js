@@ -11,8 +11,9 @@ import {
 } from "../mutations"
 
 const MaltInventoryTableContainer = () => (
-	<Query query={maltInventoryTableQuery} fetchPolicy={"network-only"}>
+	<Query query={maltInventoryTableQuery}>
 		{({loading, error, data}) => {
+
 
 			if(loading) return <p>Loading...</p>
 			if(error) return <p>Error!</p>
@@ -37,10 +38,9 @@ const MaltInventoryTableContainer = () => (
 				filterString
 			} = maltInventoryTable
 
-			const inventory = currentUser.inventories
+			const tableRows = currentUser.inventories
 																	 .find(inventory => inventory.name === "Malt")
-			const tableRows = inventory
-												? inventory.items.map(item => ({
+																	 .items.map(item => ({
 																	 	id: item.id,
 																	 	cells: [
 																	 		JSON.parse(item.object).name,
@@ -52,7 +52,6 @@ const MaltInventoryTableContainer = () => (
 																	 		item.lastReorderDate
 																	 	]
 																	 }))
-												: []
 
 			let filteredRows															
 			if(filterString){

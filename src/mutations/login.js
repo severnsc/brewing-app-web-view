@@ -1,9 +1,7 @@
 import gql from "graphql-tag"
 
 export default gql`
-  mutation loginUser($username: String!, $password: String!) {
-  	authenticateUser(username: $username, password: $password) {
-  		id
-  	}
+  mutation setIsLoggedIn($bool: Boolean) {
+    setIsLoggedIn(bool: $bool) @client
   }
 `
