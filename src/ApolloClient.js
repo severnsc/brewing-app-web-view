@@ -22,7 +22,7 @@ const stateLink = withClientState({
   resolvers
 })
 
-const httpLink = new HttpLink({uri,credentials: "include"})
+const httpLink = new HttpLink({ uri })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
