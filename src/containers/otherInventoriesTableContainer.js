@@ -11,7 +11,7 @@ import {
 } from "../mutations"
 
 const OtherInventoriesTableContainer = () => (
-	<Query query={otherInventoriesTableQuery}>
+	<Query query={otherInventoriesTableQuery} fetchPolicy={"network-only"}>
 		{({loading, error, data}) => {
 
 			if(loading) return <p>Loading...</p>

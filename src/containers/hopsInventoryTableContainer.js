@@ -11,11 +11,14 @@ import {
 } from "../mutations"
 
 const HopsInventoryTableContainer = () => (
-	<Query query={hopsInventoryTableQuery}>
+	<Query query={hopsInventoryTableQuery} fetchPolicy={"network-only"}>
 		{({loading, error, data}) => {
 
 			if(loading) return <p>Loading...</p>
-			if(error) return <p>Error!</p>
+			if(error){
+				console.error(error)
+				return <p>Error!</p>
+			}
 
 			const columns = [
 				{id: shortid.generate(), name: "Hop name"},
@@ -36,17 +39,19 @@ const HopsInventoryTableContainer = () => (
 			}	= hopsInventoryTable
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
-			const tableRows = inventory.items.map(item => ({
-				id: item.id,
-				cells: [
-					JSON.parse(item.object).name,
-					item.currentQuantity,
-					JSON.parse(item.object).name,
-					JSON.parse(item.object).name,
-					item.unitCost,
-					item.lastReorderDate
-				]
-			}))
+			const tableRows = inventory 
+												? inventory.items.map(item => ({
+														id: item.id,
+														cells: [
+															JSON.parse(item.object).name,
+															item.currentQuantity,
+															JSON.parse(item.object).name,
+															JSON.parse(item.object).name,
+															item.unitCost,
+															item.lastReorderDate
+														]
+													}))
+												: []
 
 			let filteredRows
 			if(filterString){

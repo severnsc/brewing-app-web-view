@@ -12,6 +12,7 @@ export default gql`
 		}
 
 		currentUser {
+			id
 			...InventoryItems
 		}
 	}
