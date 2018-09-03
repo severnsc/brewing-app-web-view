@@ -23,7 +23,7 @@ class App extends Component {
           
           let isLoggedIn = false
 
-          if(data.isLoggedIn) isLoggedIn = true
+          if(data.currentUser.id) isLoggedIn = true
           
           let modalItem
           switch(data.modal.type) {
