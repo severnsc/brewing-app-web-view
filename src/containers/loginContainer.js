@@ -1,46 +1,40 @@
 import React from "react"
 import { LoginForm } from "../components"
-import { Mutation, Query } from "react-apollo"
-import { LOGIN_MUTATION } from "../mutations"
+import { Query } from "react-apollo"
 import { loginQuery } from "../queries"
 import { loginUser } from "../adapters/userAdapter"
 import { withRouter } from "react-router"
 
-const LoginContainer = ({ history }) => (
+const LoginContainer = ({ history }) => {
 
-  <Mutation mutation={LOGIN_MUTATION}>
-    {loginMutation => {
+  return(
+    <Query query={loginQuery}>
+      {({loading, error, data, client}) => {
 
-      const login = (username, password) => {
-        loginUser(username, password).then(bool => {
-          if(bool){
-            loginMutation({ variables: { bool } })
-            history.push("/dashboard")
-          }
-        })
-      }
+        let errorText = ""
 
-      return(
-        <Query query={loginQuery}>
-          {({loading, error, data}) => {
+        if(data.login){
+          errorText = data.login.error
+        }
 
-            let errorText = ""
-
-            if(data.login){
-              errorText = data.login.error
+        const login = (username, password) => {
+          loginUser(username, password).then(bool => {
+            if(bool){
+              client.resetStore().then(() =>
+                history.push("/dashboard")
+              )
             }
+          })
+        }
 
-            return(
-              <LoginForm login={login} error={errorText} />
-            )
+        return(
+          <LoginForm login={login} error={errorText} />
+        )
 
-          }}
-        </Query>
-      )
+      }}
+    </Query>
+  )
 
-    }}
-  </Mutation>
-
-)
+}
 
 export default withRouter(LoginContainer)

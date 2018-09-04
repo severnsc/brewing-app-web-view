@@ -11,19 +11,15 @@ import NewTimerFormContainer from "./containers/newTimerFormContainer"
 import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
 import { Query } from 'react-apollo'
-import { rootQuery } from './queries'
+import { modalQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
 import client from "./ApolloClient"
 
 class App extends Component {
   render() {
     return (
-      <Query query={rootQuery}>
+      <Query query={modalQuery}>
         {({loading, error, data}) => {
-          
-          let isLoggedIn = false
-
-          if(data.isLoggedIn) isLoggedIn = true
           
           let modalItem
           switch(data.modal.type) {
@@ -61,7 +57,7 @@ class App extends Component {
           
           return(
             <div className="App">
-              <Header isLoggedIn={isLoggedIn} />
+              <Header />
               <Main />
               {modal}
             </div>

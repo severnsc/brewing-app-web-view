@@ -12,7 +12,6 @@ const uri = "http://localhost:3001/graphql"
 const cache = new InMemoryCache()
 
 const defaults = {
-  isLoggedIn: false,
   ...defaultState
 }
 

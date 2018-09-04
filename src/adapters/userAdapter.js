@@ -29,6 +29,12 @@ export const loginUser = async (username, password) => {
     .catch(e => e)
 }
 
+export const logoutUser = async () => {
+  return axios.get("http://localhost:3001/logout")
+    .then(res => res)
+    .catch(e => e)
+}
+
 export const sendRecoveryEmail = async username => {
   return axios.post('http://localhost:3001/sendRecoveryEmail', {
     username

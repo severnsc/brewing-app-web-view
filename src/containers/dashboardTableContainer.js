@@ -27,7 +27,10 @@ const DashboardTableContainer = () => {
       {({loading, error, data}) => {
 
         if(loading) return <p>Loading...</p>
-        if(error) return <p>Error</p>
+        if(error){
+          console.error(error)
+          return <p>Error</p>
+        }
 
         //Returns an array of arrays
         let allInventoryItems = data.currentUser.inventories.map(inventory => {
