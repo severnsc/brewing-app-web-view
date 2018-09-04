@@ -1,36 +1,24 @@
 import React from 'react'
 import { NavBar } from '../../components'
-import { Query, Mutation } from "react-apollo"
-import { LOGIN_MUTATION } from '../../mutations'
+import { Query } from "react-apollo"
 import { currentUserQuery } from "../../queries"
+import { logoutUser } from "../../adapters/userAdapter"
 
 const Header = () => (
   <Query query={currentUserQuery} fetchPolicy={"network-only"}>
     {({loading, error, data}) => {
-
-      console.log(data)
 
       let currentUser
       if(data){
         currentUser = data.currentUser
       }
 
+      const signOut = () => {
+        logoutUser()
+      }
+
       return(
-        <Mutation mutation={LOGIN_MUTATION}>
-
-          {mutation => {
-
-            const signOut = () => {
-              mutation({ variables: { bool: false } })
-            }
-
-            return(
-              currentUser ? <NavBar signOut={signOut} /> : <h1>Brewing App</h1>
-            )
-
-          }}
-
-        </Mutation>
+        currentUser ? <NavBar signOut={signOut} /> : <h1>Brewing App</h1>
       )
 
     }}
