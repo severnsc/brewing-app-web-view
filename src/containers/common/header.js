@@ -1,29 +1,40 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { NavBar } from '../../components'
-import { Mutation } from "react-apollo"
+import { Query, Mutation } from "react-apollo"
 import { LOGIN_MUTATION } from '../../mutations'
+import { currentUserQuery } from "../../queries"
 
-const Header = ({ isLoggedIn }) => (
-  <Mutation mutation={LOGIN_MUTATION}>
+const Header = () => (
+  <Query query={currentUserQuery} fetchPolicy={"network-only"}>
+    {({loading, error, data}) => {
 
-    {mutation => {
+      console.log(data)
 
-      const signOut = () => {
-        mutation({ variables: { bool: false } })
+      let currentUser
+      if(data){
+        currentUser = data.currentUser
       }
 
       return(
-        isLoggedIn ? <NavBar signOut={signOut} /> : <h1>Brewing App</h1>
+        <Mutation mutation={LOGIN_MUTATION}>
+
+          {mutation => {
+
+            const signOut = () => {
+              mutation({ variables: { bool: false } })
+            }
+
+            return(
+              currentUser ? <NavBar signOut={signOut} /> : <h1>Brewing App</h1>
+            )
+
+          }}
+
+        </Mutation>
       )
 
     }}
-
-  </Mutation>
+  </Query>
 )
-
-Header.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
-}
 
 export default Header

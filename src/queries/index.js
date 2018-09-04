@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import dashboardTableQuery from "./dashboard"
 import timersTableQuery from "./timersTable"
 import signupQuery from "./signup"
@@ -16,16 +15,6 @@ import yeastInventoryTableQuery from "./yeastInventoryTable"
 import otherInventoriesTableQuery from "./otherInventoriesTable"
 import currentUserQuery from "./currentUser"
 
-const rootQuery = gql`
-  query {
-    isLoggedIn @client
-    modal @client {
-      type
-      id
-    }
-  }
-`
-
 export {
   dashboardTableQuery,
   timersTableQuery,
@@ -42,6 +31,5 @@ export {
   hopsInventoryTableQuery,
   yeastInventoryTableQuery,
   otherInventoriesTableQuery,
-  currentUserQuery,
-  rootQuery
+  currentUserQuery
 }

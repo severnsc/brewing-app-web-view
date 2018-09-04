@@ -37,18 +37,20 @@ const YeastInventoryTableContainer = () => (
 			} = yeastInventoryTable
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Yeast")
-			const tableRows = inventory.items.map(item => ({
-				id: item.id,
-				cells: [
-					JSON.parse(item.object).name,
-					item.currentQuantity,
-					JSON.parse(item.object).name,
-					JSON.parse(item.object).name,
-					JSON.parse(item.object).name,
-					JSON.parse(item.object).name,
-					item.lastReorderDate
-				]
-			}))
+			const tableRows = inventory
+												? inventory.items.map(item => ({
+														id: item.id,
+														cells: [
+															JSON.parse(item.object).name,
+															item.currentQuantity,
+															JSON.parse(item.object).name,
+															JSON.parse(item.object).name,
+															JSON.parse(item.object).name,
+															JSON.parse(item.object).name,
+															item.lastReorderDate
+														]
+													}))
+												: []
 			let filteredTableRows
 			if(filterString){
 				filteredTableRows = tableRows.filter(tableRow => {
