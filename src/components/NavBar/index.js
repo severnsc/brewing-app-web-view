@@ -27,7 +27,7 @@ class SubMenu extends Component {
     return (
       <Fragment>
         <p style={styles.link}>{this.props.username}</p>
-        <Link onMouseEnter={this.updateMouseEnter} onMouseLeave={this.updateMouseEnter} style={profileStyle} to="/profile">My Profile</Link>
+        <Link onClick={this.props.onProfileClick} onMouseEnter={this.updateMouseEnter} onMouseLeave={this.updateMouseEnter} style={profileStyle} to="/profile">My Profile</Link>
         <a onClick={this.props.signOut} onMouseEnter={this.updateMouseEnter} onMouseLeave={this.updateMouseEnter} style={signOutStyle} href="http://localhost:3001/logout">Sign out</a>
       </Fragment>
     )
@@ -36,6 +36,7 @@ class SubMenu extends Component {
 
 SubMenu.propTypes = {
   username: PropTypes.string.isRequired,
+  onProfileClick: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired
 }
 
@@ -102,7 +103,7 @@ class NavBar extends Component {
         </span>
         <a onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={accountLinkStyle} ref={this.setMenuRef} onClick={this.toggleSubmenu}>Account &or;</a>
         {this.state.submenuVisible && 
-          <nav style={styles.subMenu} ref={this.setWrapperRef}><SubMenu username={"user"} signOut={this.props.signOut} /></nav>
+          <nav style={styles.subMenu} ref={this.setWrapperRef}><SubMenu onProfileClick={this.toggleSubmenu} username={"user"} signOut={this.props.signOut} /></nav>
         }
       </nav>
     )
