@@ -3,13 +3,13 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 
 export const validateUsername = async username => {
-  return axios.post('http://localhost:3001/isUsernameUnique', {
+  return axios.post('https://brewing-app-api.herokuapp.com/isUsernameUnique', {
     username: username
   }).then(response => response.data)
 }
 
 export const createUser = async (username, password, email) => {
-  return axios.post('http://localhost:3001/signup', {
+  return axios.post('https://brewing-app-api.herokuapp.com/signup', {
     username,
     password,
     email
@@ -19,7 +19,7 @@ export const createUser = async (username, password, email) => {
 }
 
 export const loginUser = async (username, password) => {
-  return axios.post('http://localhost:3001/login', {
+  return axios.post('https://brewing-app-api.herokuapp.com/login', {
     username,
     password
   },
@@ -30,13 +30,13 @@ export const loginUser = async (username, password) => {
 }
 
 export const logoutUser = async () => {
-  return axios.get("http://localhost:3001/logout")
+  return axios.get("https://brewing-app-api.herokuapp.com/logout")
     .then(res => res)
     .catch(e => e)
 }
 
 export const sendRecoveryEmail = async username => {
-  return axios.post('http://localhost:3001/sendRecoveryEmail', {
+  return axios.post('https://brewing-app-api.herokuapp.com/sendRecoveryEmail', {
     username
   })
     .then(response => response)
@@ -44,7 +44,7 @@ export const sendRecoveryEmail = async username => {
 }
 
 export const resetPassword = async password => {
-  return axios.post('http://localhost:3001/resetForm', {
+  return axios.post('https://brewing-app-api.herokuapp.com/resetForm', {
     password
   })
     .then(response => response)
