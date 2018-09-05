@@ -25,7 +25,10 @@ export const loginUser = async (username, password) => {
   },
   {withCredentials: true}
   )
-    .then(response => response.status === 200 ? true : false)
+    .then(response => {
+      console.log(response.status)
+      return response.status === 200 ? true : false
+    })
     .catch(e => e)
 }
 
