@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { modalQuery } from "../queries"
+import { modalQuery, loginQuery } from "../queries"
 
 const dashboardTableQuery = gql`
   query {
@@ -933,6 +933,23 @@ export default {
       cache.writeQuery({ query: otherInventoriesTableQuery, data })
 
       return null
+
+    },
+
+    updateLogin: (_, { error }, { cache }) => {
+
+      const { login } = cache.readQuery({ query: loginQuery })
+
+      const data = {
+        login: {
+          ...login,
+          error
+        }
+      }
+
+      cache.writeQuery({ query: loginQuery, data})
+
+      return data
 
     },
   
