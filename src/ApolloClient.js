@@ -7,7 +7,7 @@ import { onError } from "apollo-link-error";
 import resolvers from './resolvers'
 import defaultState from "./defaultState"
 
-const uri = "https://brewing-app-api.herokuapp.com/graphql"
+const uri = "http://localhost:3001/graphql"
 
 const cache = new InMemoryCache()
 
