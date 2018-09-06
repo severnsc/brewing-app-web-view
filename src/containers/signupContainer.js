@@ -24,14 +24,6 @@ const SignupContainer = ({match, location, history}) => (
         <Mutation mutation={UPDATE_SIGNUP_ERROR}>
           {updateSignupError => {
 
-            const createUserFunc = (username, password, email) => {
-              createUser(username, password, email).then(bool => {
-                const error = bool ? "" : "There was an error creating your account!"
-                updateSignupError({ variables: {error} })
-                if(bool) history.push("/profile")
-              })
-            }
-
             return(
               <Query query={signupQuery}>
                 {({loading, error, data}) => {
@@ -43,6 +35,14 @@ const SignupContainer = ({match, location, history}) => (
                     if(!data.signup.isUsernameUnique) 
                       isUsernameUnique = false
                     errorMessage = data.signup.error
+                  }
+
+                  const createUserFunc = (username, password, email) => {
+                    createUser(username, password, email).then(bool => {
+                      const error = bool ? "" : "There was an error creating your account!"
+                      updateSignupError({ variables: {error} })
+                      if(bool) client.resetStore().then(() => history.push("/profile"))
+                    })
                   }
 
                   return(
