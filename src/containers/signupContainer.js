@@ -26,7 +26,7 @@ const SignupContainer = ({match, location, history}) => (
 
             return(
               <Query query={signupQuery}>
-                {({loading, error, data}) => {
+                {({loading, error, data, client}) => {
 
                   let isUsernameUnique = true
                   let errorMessage = ""
