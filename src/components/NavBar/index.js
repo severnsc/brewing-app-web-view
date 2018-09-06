@@ -28,7 +28,7 @@ class SubMenu extends Component {
       <Fragment>
         <p style={styles.link}>{this.props.username}</p>
         <Link onClick={this.props.onProfileClick} onMouseEnter={this.updateMouseEnter} onMouseLeave={this.updateMouseEnter} style={profileStyle} to="/profile">My Profile</Link>
-        <a onClick={this.props.signOut} onMouseEnter={this.updateMouseEnter} onMouseLeave={this.updateMouseEnter} style={signOutStyle} href="https://brewing-app-api.herokuapp.com/logout">Sign out</a>
+        <a onClick={this.props.signOut} onMouseEnter={this.updateMouseEnter} onMouseLeave={this.updateMouseEnter} style={signOutStyle} href="http://localhost:3001/logout">Sign out</a>
       </Fragment>
     )
   }
