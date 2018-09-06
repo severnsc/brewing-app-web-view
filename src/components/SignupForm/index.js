@@ -10,7 +10,11 @@ class SignupForm extends Component {
     username: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    usernameFocus: false,
+    emailFocus: false,
+    passwordFocus: false,
+    confirmPasswordFocus: false
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -28,6 +32,12 @@ class SignupForm extends Component {
     const object = {}
     object[e.target.name] = e.target.value
     this.setState(object)
+  }
+
+  toggleFocus = e => {
+    const newState = {}
+    newState[e.target.name+"Focus"] = !this.state[e.target.name+"Focus"]
+    this.setState(newState)
   }
 
   render(){
@@ -60,31 +70,39 @@ class SignupForm extends Component {
                            this.state.email === "" ||
                            this.state.password === ""
 
+    const isErrorState = errorText => errorText ? {...styles.inputFocus, ...styles.error} : styles.inputFocus
+
+    const usernameInputFocusStyle = isErrorState(usernameErrorText)
+    const emailInputFocusStyle = isErrorState(emailErrorText)
+    const passwordInputFocusStyle = isErrorState(passwordErrorText)
+    const confirmPasswordInputFocusStyle = isErrorState(confirmPasswordErrorText)
+
     return(
       <div style={styles.flexColumn}>
         <h2>Sign up</h2>
         {this.props.error}
-        <form style={styles.flexColumn} onSubmit={this.onSubmit}>
-          <label>Username
-            <input name="username" type="text" value={this.state.username} onChange={this.handleChange} />
-            <span>{usernameErrorText}</span>
+        <form className="signupForm" style={styles.flexColumn} onSubmit={this.onSubmit}>
+          <label style={this.state.usernameFocus ? styles.labelFocus : styles.labelDefault}>Username
+            <input autoFocus style={this.state.usernameFocus ? usernameInputFocusStyle : styles.inputDefault} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" type="text" value={this.state.username} onChange={this.handleChange} />
+            <span style={usernameErrorText ? styles.errorText : null}>{usernameErrorText}</span>
           </label>
-          <label>Email
-            <input name="email" type="email" value={this.state.email} onChange={this.handleChange} />
-            <span>{emailErrorText}</span>
+          <label style={this.state.emailFocus ? styles.labelFocus : styles.labelDefault}>Email
+            <input style={this.state.emailFocus ? emailInputFocusStyle : styles.inputDefault} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="email" type="email" value={this.state.email} onChange={this.handleChange} />
+            <span style={emailErrorText ? styles.errorText : null}>{emailErrorText}</span>
           </label>
-          <label>Password
-            <input name="password" type ="password" value={this.state.password} onChange={this.handleChange} />
-            <span>{passwordErrorText}</span>
+          <label style={this.state.passwordFocus ? styles.labelFocus : styles.labelDefault}>Password
+            <input style={this.state.passwordFocus ? passwordInputFocusStyle : styles.inputDefault} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="password" type ="password" value={this.state.password} onChange={this.handleChange} />
+            <span style={passwordErrorText ? styles.errorText : null}>{passwordErrorText}</span>
           </label>
-          <label>Confirm password
-            <input name="confirmPassword" type ="password" value={this.state.confirmPassword} onChange={this.handleChange} />
-            <span>{confirmPasswordErrorText}</span>
+          <label style={this.state.confirmPasswordFocus ? styles.labelFocus : styles.labelDefault}>Confirm password
+            <input style={this.state.confirmPasswordFocus ? confirmPasswordInputFocusStyle : styles.inputDefault} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="confirmPassword" type ="password" value={this.state.confirmPassword} onChange={this.handleChange} />
+            <span style={confirmPasswordErrorText ? styles.errorText : null}>{confirmPasswordErrorText}</span>
           </label>
-          <input disabled={submitDisabled} type="submit" value="Sign Up" />
+          <span style={styles.submit}>
+            <input style={submitDisabled ? {...styles.button, ...styles.disabled} : styles.button} disabled={submitDisabled} type="submit" value="Sign Up" />
+            <span style={styles.login}>or <Link style={styles.loginLink} to="/login">Log in</Link></span>
+          </span>
         </form>
-        <p>Already have an account?</p>
-        <Link to="/login">Log in</Link>
       </div>
     )
   }
