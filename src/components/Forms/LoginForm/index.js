@@ -40,10 +40,10 @@ class LoginForm extends Component {
         <h2 style={globalStyles.subHeading}>Login</h2>
         <form onSubmit={e => this.onSubmit(e)} style={styles.form}>
           {this.props.error}
-          <label style={formStyles.label}>Username
+          <label style={this.state.usernameFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Username
             <input autoFocus style={this.state.usernameFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" value={this.state.username} type="text" onChange={e => this.handleUsername(e)} />
           </label>
-          <label style={formStyles.label}>Password
+          <label style={this.state.passwordFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Password
             <input style={this.state.passwordFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} value={this.state.password} name="password" type ="password" onChange={e => this.handlePassword(e)} />
           </label>
           <span style={styles.login}>
