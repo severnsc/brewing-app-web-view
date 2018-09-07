@@ -1,16 +1,14 @@
 import React from 'react'
 import SignupContainer from '../containers/signupContainer'
-import { green } from "../components/constants"
 
 const styles = {
 	container: {
-		background:green,
+		background:"linear-gradient(to top left, hsl(167, 90%, 38%), hsl(167, 90%, 90%))",
 		flex: "1 1 auto",
-		width: "100%",
 		display:"flex",
 		justifyContent:"center",
 		alignItems: "flex-start",
-		padding: "10px"
+		padding: "50px 10px 0px"
 	}
 }
 

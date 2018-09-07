@@ -5,7 +5,7 @@ export default {
 		fontSize: "1em",
     padding: "10px",
     borderRadius: "20px",
-    color: "hsl(0, 0%, 100%)",
+    color: "hsla(0, 0%, 100%, 0.85)",
     background: green,
     border: "none",
     appearance: "none",
@@ -27,7 +27,8 @@ export default {
   label: {
     display: "flex",
     flexFlow: "column",
-    alignItems: "flex-start",
+    alignItems: "stretch",
+    textAlign: "left",
     textTransform: "uppercase",
     color: "hsl(0, 0%, 50%)",
     fontSize: "0.75em",
@@ -37,15 +38,13 @@ export default {
     color: green
   },
   input: {
-    width: "20em",
-    height: "2em",
-    marginBottom: "10px",
+    margin: "10px 0",
     borderTop: "none",
     borderLeft: "none",
     borderRight: "none",
     borderBottom: "2px solid",
     borderColor: "hsl(0, 0%, 90%)",
-    fontSize: "1em",
+    fontSize: "1.25em",
     color: "hsl(0, 0%, 50%)"
   },
   inputFocus: {
