@@ -12,7 +12,7 @@ export default {
     "WebkitAppearance": "none",
     "MozAppearance": "none",
     cursor: "pointer",
-    width: "10em"
+    minWidth: "10em"
   },
 	disabled: {
 		background: "hsl(0, 0%, 90%)",

@@ -1,0 +1,61 @@
+import React, { Component } from 'react'
+import formStyles from "../styles"
+import styles from "./styles"
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+
+class LoginForm extends Component {
+
+  state = {
+    username: "",
+    password: "",
+    usernameFocus: false,
+    passwordFocus: false
+  }
+
+  handleUsername = e => {
+    this.setState({username: e.target.value})
+  }
+
+  handlePassword = e => {
+    this.setState({password: e.target.value})
+  }
+
+  onSubmit = e => {
+    e.preventDefault()
+    this.props.login(this.state.username, this.state.password)
+  }
+
+  toggleFocus = e => {
+    const newState = {}
+    newState[e.target.name+"Focus"] = !this.state[e.target.name+"Focus"]
+    this.setState(newState)
+  }
+
+  render() {
+    return(
+      <div style={styles.flexColumn}>
+        <h2>Login</h2>
+        <form onSubmit={e => this.onSubmit(e)} style={styles.flexColumn}>
+          {this.props.error}
+          <label style={formStyles.label}>Username
+            <input autoFocus style={this.state.usernameFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" value={this.state.username} type="text" onChange={e => this.handleUsername(e)} />
+          </label>
+          <label style={formStyles.label}>Password
+            <input style={this.state.passwordFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} value={this.state.password} name="password" type ="password" onChange={e => this.handlePassword(e)} />
+          </label>
+          <input style={formStyles.button} type="submit" value="Login" />
+        </form>
+        <Link style={styles.link} to="/forgotPassword">Forgot password?</Link>
+      </div>
+    )
+  }
+
+}
+
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
+  error: PropTypes.string
+}
+
+export default LoginForm
