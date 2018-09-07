@@ -1,5 +1,4 @@
 import Timer from "./Timer"
-import ForgotPasswordForm from "./ForgotPasswordForm"
 import HoverableTableRow from "./HoverableTableRow"
 import InventoryItemForm from "./InventoryItemForm"
 import Modal from "./Modal"
@@ -15,7 +14,8 @@ import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
 import {
 	SignupForm,
-	LoginForm
+	LoginForm,
+	ForgotPasswordForm
 } from "./Forms"
 
 export {
