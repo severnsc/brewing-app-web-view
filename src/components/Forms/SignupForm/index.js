@@ -81,6 +81,7 @@ class SignupForm extends Component {
 
     return(
       <div style={styles.container}>
+        <h1 style={{...globalStyles.heading, ...styles.title}}>Brewing App</h1> 
         <h2 style={globalStyles.subHeading}>Sign up</h2>
         {this.props.error}
         <form className="signupForm" style={styles.form} onSubmit={this.onSubmit}>
