@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import globalStyles from "../../styles"
 import formStyles from "../styles"
 import styles from "./styles"
 import PropTypes from 'prop-types'
@@ -79,10 +80,10 @@ class SignupForm extends Component {
     const confirmPasswordInputFocusStyle = isErrorState(confirmPasswordErrorText)
 
     return(
-      <div style={styles.flexColumn}>
-        <h2>Sign up</h2>
+      <div style={styles.container}>
+        <h2 style={globalStyles.subHeading}>Sign up</h2>
         {this.props.error}
-        <form className="signupForm" style={styles.flexColumn} onSubmit={this.onSubmit}>
+        <form className="signupForm" style={styles.form} onSubmit={this.onSubmit}>
           <label style={this.state.usernameFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Username
             <input autoFocus style={this.state.usernameFocus ? {...formStyles.input, ...usernameInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" type="text" value={this.state.username} onChange={this.handleChange} />
             <span style={usernameErrorText ? formStyles.errorText : null}>{usernameErrorText}</span>

@@ -10,7 +10,7 @@ import Timers from "./screens/timers"
 import Inventories from "./screens/inventories"
 
 const Main = () => (
-  <main style={{display:"flex", flexFlow:"column", alignItems:"center"}}>
+  <main style={{display:"flex", flexFlow:"column", alignItems:"center", flex:"1 1 auto"}}>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
