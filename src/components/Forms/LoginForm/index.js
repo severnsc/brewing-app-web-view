@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import formStyles from "../styles"
+import globalStyles from "../../styles"
 import styles from "./styles"
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -34,19 +35,22 @@ class LoginForm extends Component {
 
   render() {
     return(
-      <div style={styles.flexColumn}>
-        <h2>Login</h2>
-        <form onSubmit={e => this.onSubmit(e)} style={styles.flexColumn}>
+      <div style={styles.container}>
+        <h1 style={{...globalStyles.heading, ...styles.title}}>Brewing App</h1>
+        <h2 style={globalStyles.subHeading}>Login</h2>
+        <form onSubmit={e => this.onSubmit(e)} style={styles.form}>
           {this.props.error}
-          <label style={formStyles.label}>Username
+          <label style={this.state.usernameFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Username
             <input autoFocus style={this.state.usernameFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" value={this.state.username} type="text" onChange={e => this.handleUsername(e)} />
           </label>
-          <label style={formStyles.label}>Password
+          <label style={this.state.passwordFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Password
             <input style={this.state.passwordFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} value={this.state.password} name="password" type ="password" onChange={e => this.handlePassword(e)} />
           </label>
-          <input style={formStyles.button} type="submit" value="Login" />
+          <span style={styles.login}>
+            <input style={formStyles.button} type="submit" value="Login" />
+            <Link style={styles.link} to="/forgotPassword">Forgot password?</Link>
+          </span>
         </form>
-        <Link style={styles.link} to="/forgotPassword">Forgot password?</Link>
       </div>
     )
   }
