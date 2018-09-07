@@ -23,5 +23,8 @@ export default {
   	display: "flex",
   	justifyContent: "flex-start",
   	alignItems: "center"
+  },
+  title: {
+    marginBottom: "10px"
   }
 }
