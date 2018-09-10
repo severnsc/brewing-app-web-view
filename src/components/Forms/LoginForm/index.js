@@ -35,7 +35,7 @@ class LoginForm extends Component {
 
   render() {
     return(
-      <div style={styles.container}>
+      <div style={formStyles.container}>
         <h1 style={{...globalStyles.heading, ...styles.title}}>Brewing App</h1>
         <h2 style={globalStyles.subHeading}>Login</h2>
         <form onSubmit={e => this.onSubmit(e)} style={styles.form}>
