@@ -7,13 +7,6 @@ export default {
 		display: "flex",
 		justifyContent: "center"
 	},
-	container: {
-		background: "hsl(0, 0%, 100%)",
-		flex: 1,
-		maxWidth: "800px",
-		borderRadius: "20px",
-		padding: "50px"
-	},
 	form: {
 		marginTop: "10px"
 	},

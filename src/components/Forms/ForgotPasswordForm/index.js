@@ -28,7 +28,7 @@ class ForgotPasswordForm extends Component {
   render(){
     
     return(
-      <div style={styles.container}>
+      <div style={formStyles.container}>
         <h1 style={globalStyles.heading}>Brewing App</h1>
         <h2 style={globalStyles.subHeading}>Forgot Password</h2>
         <p style={styles.text}>We'll send you an email so that you can recover your password</p>

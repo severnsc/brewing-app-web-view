@@ -14,6 +14,14 @@ export default {
     cursor: "pointer",
     minWidth: "10em"
   },
+  container: {
+    background: "hsl(0,0%,100%)",
+    padding: "50px",
+    borderRadius: "20px",
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)",
+    flex: 1,
+    maxWidth: "800px"
+  },
 	disabled: {
 		background: "hsl(0, 0%, 90%)",
 		cursor: "default"

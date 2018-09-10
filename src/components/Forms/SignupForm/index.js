@@ -80,7 +80,7 @@ class SignupForm extends Component {
     const confirmPasswordInputFocusStyle = isErrorState(confirmPasswordErrorText)
 
     return(
-      <div style={styles.container}>
+      <div style={formStyles.container}>
         <h1 style={{...globalStyles.heading, ...styles.title}}>Brewing App</h1> 
         <h2 style={globalStyles.subHeading}>Sign up</h2>
         {this.props.error}
