@@ -3,10 +3,18 @@ import ActiveTimerContainer from "../containers/activeTimerContainer"
 import TimersSearchBarContainer from "../containers/timersSearchBarContainer"
 import TimersTableContainer from "../containers/timersTableContainer"
 import FixedNewTimerButtonContainer from "../containers/FixedNewTimerButtonContainer"
+import globalStyles from "../components/styles"
+
+const styles = {
+	container: {
+		width: "75%",
+		alignSelf: "center"
+	}
+}
 
 const Timers = () => (
-	<div style={{width:"75%"}}>
-		<h1>Timers</h1>
+	<div style={styles.container}>
+		<h1 style={{...globalStyles.heading, padding: "10px"}}>Timers</h1>
 		<ActiveTimerContainer />
 		<TimersSearchBarContainer />
 		<TimersTableContainer />

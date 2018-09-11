@@ -10,6 +10,7 @@ import {
 } from "../mutations"
 import TimerContainer from "./timerContainer"
 import ViewActiveTimerAlertsLinkContainer from "./viewActiveTimerAlertsLinkContainer"
+import globalStyles from "../components/styles"
 
 const ActiveTimerContainer = () => (
 	<Query query={activeTimerQuery}>
@@ -123,8 +124,8 @@ const ActiveTimerContainer = () => (
 																		}
 
 																		return(
-																			<div style={{border: "1px solid black"}}>
-																				<h2>Active Timer</h2>
+																			<div style={{border: "1px solid black", padding: "10px"}}>
+																				<h2 style={globalStyles.subHeading}>Active Timer</h2>
 																				{content}
 																			</div>
 																		)
