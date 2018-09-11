@@ -1,3 +1,5 @@
+import { green } from "../constants"
+
 export default {
 	default: {
 		cursor: "pointer",
@@ -5,6 +7,7 @@ export default {
 	},
 	hover: {
 		cursor: "pointer",
-		backgroundColor: "hsl(0, 0%, 95%)"
+		backgroundColor: "hsl(0, 0%, 95%)",
+		borderLeft: "4px solid " + green
 	}
 }
