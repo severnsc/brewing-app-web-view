@@ -15,7 +15,8 @@ const styles = {
 	},
 	tableHead: {
 		backgroundColor: "hsl(0, 0%, 95%)",
-		color: "hsl(0, 0%, 50%)"
+		color: "hsl(0, 0%, 50%)",
+		cursor: "pointer"
 	},
 	tableHeadCell: {
 		padding: "20px 10px"
