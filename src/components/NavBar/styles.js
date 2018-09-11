@@ -4,7 +4,7 @@ const styles = {
 	link: {
     padding: "3px 40px",
     margin: "0",
-    color: "hsla(0, 0%, 100%, 0.9)"
+    color: "#c1c1c1",
   },
   navLink: {
 	  display:"inline-block",
@@ -17,10 +17,10 @@ const styles = {
 	  position: "absolute",
 	  right: "100px",
 	  top: "50px",
-	  background: "hsl(0, 0%, 22%)",
+	  background: "#383838",
 	  display: "flex",
 	  flexFlow: "column",
-	  border:"1px solid"
+	  borderRadius: "5px"
 	},
 	nav: {
 		display:"flex",
@@ -37,16 +37,14 @@ const styles = {
 }
 
 styles.default = {
-	...styles.linkStyle,
+	...styles.link,
   padding: "12px",
-  textDecoration: "none",
-  backgroundColor: "white",
-	color: "hsl(0, 0%, 22%)"
+  textDecoration: "none"
 }
 
 styles.mouseenter = {
 	...styles.default,
-	backgroundColor: "#c1c1c1",
+	backgroundColor: "hsl(0, 0%, 35%)",
 	color: "hsla(0, 0%, 100%, 0.9)"
 }
 
