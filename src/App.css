@@ -74,7 +74,7 @@ table {
   font-size: large;
 }
 
-h1, h2, h3, h4, h5, h6, p, label, span, input {
+h1, h2, h3, h4, h5, h6, p, label, span, input, a {
   font-family: 'Roboto', sans-serif;
 }
 

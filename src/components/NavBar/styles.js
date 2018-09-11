@@ -1,22 +1,23 @@
+import { green } from "../constants"
+
 const styles = {
 	link: {
     padding: "3px 40px",
     margin: "0",
-    color: "white"
+    color: "hsla(0, 0%, 100%, 0.9)"
   },
   navLink: {
 	  display:"inline-block",
-	  color:"white",
+	  color:"hsla(0, 0%, 100%, 90%)",
 	  textDecoration:"none",
 	  lineHeight: "50px",
-	  padding:"0 12px",
-	  backgroundColor: ""
+	  padding:"0 12px"
 	},
 	subMenu: {
 	  position: "absolute",
 	  right: "100px",
 	  top: "50px",
-	  backgroundColor: "gray",
+	  background: "hsl(0, 0%, 22%)",
 	  display: "flex",
 	  flexFlow: "column",
 	  border:"1px solid"
@@ -26,7 +27,9 @@ const styles = {
 		justifyContent:"space-between",
 		alignItems: "center",
 		height:"50px",
-		backgroundColor:"#383838"
+		backgroundColor:"#383838",
+		borderTop: "5px solid",
+		borderColor: green
 	},
 	span: {
 		marginLeft:"100px"
@@ -38,18 +41,18 @@ styles.default = {
   padding: "12px",
   textDecoration: "none",
   backgroundColor: "white",
-	color: "black"
+	color: "hsl(0, 0%, 22%)"
 }
 
 styles.mouseenter = {
 	...styles.default,
 	backgroundColor: "#c1c1c1",
-	color: "white"
+	color: "hsla(0, 0%, 100%, 0.9)"
 }
 
 styles.navLinkMouseEnter = {
 	...styles.navLink,
-	backgroundColor: "gray"
+	backgroundColor: "#c1c1c1"
 }
 
 styles.accountLink = {
@@ -60,7 +63,7 @@ styles.accountLink = {
 
 styles.accountLinkMouseEnter = {
 	...styles.accountLink,
-	backgroundColor: "gray"
+	backgroundColor: "#c1c1c1"
 }
 
 export default styles
