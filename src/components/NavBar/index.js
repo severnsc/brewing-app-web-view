@@ -68,10 +68,9 @@ class NavBar extends Component {
       const timersLinkStyle = this.state.mouseenter === "Timers" ? styles.navLinkMouseEnter : styles.navLink
       const inventoriesLinkStyle = this.state.mouseenter === "Inventories" ? styles.navLinkMouseEnter : styles.navLink
       const accountLinkStyle = this.state.mouseenter === "Account" || this.state.submenuVisible ? styles.accountLinkMouseEnter : styles.accountLink
-
       return(
-        <nav style={styles.nav} >
-          <span style={styles.span} >
+        <nav style={styles.nav}>
+          <span style={styles.span}>
             <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={timersLinkStyle} to="/timers">Timers</Link>
             <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={inventoriesLinkStyle} to="/inventories">Inventories</Link>
           </span>
@@ -84,7 +83,7 @@ class NavBar extends Component {
 
     }else{
       return(
-        <nav style={{...styles.nav, border: "none"}}>
+        <nav style={styles.nav}>
           <p style={styles.navLink}>Brewing App</p>
         </nav>
       )
