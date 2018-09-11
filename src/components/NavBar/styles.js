@@ -8,7 +8,7 @@ const styles = {
   },
   navLink: {
 	  display:"inline-block",
-	  color:"hsla(0, 0%, 100%, 90%)",
+	  color: "#c1c1c1",
 	  textDecoration:"none",
 	  lineHeight: "50px",
 	  padding:"0 12px"
@@ -52,7 +52,7 @@ styles.mouseenter = {
 
 styles.navLinkMouseEnter = {
 	...styles.navLink,
-	backgroundColor: "#c1c1c1"
+	color:"hsla(0, 0%, 100%, 90%)",
 }
 
 styles.accountLink = {
@@ -63,7 +63,7 @@ styles.accountLink = {
 
 styles.accountLinkMouseEnter = {
 	...styles.accountLink,
-	backgroundColor: "#c1c1c1"
+	color:"hsla(0, 0%, 100%, 90%)",
 }
 
 export default styles
