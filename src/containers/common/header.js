@@ -18,7 +18,7 @@ const Header = () => (
       }
 
       return(
-        currentUser ? <NavBar signOut={signOut} /> : null
+        currentUser ? <NavBar authenticated signOut={signOut} /> : <NavBar /> 
       )
 
     }}

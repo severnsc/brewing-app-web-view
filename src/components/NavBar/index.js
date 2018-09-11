@@ -63,29 +63,40 @@ class NavBar extends Component {
 
   render(){
 
-    const timersLinkStyle = this.state.mouseenter === "Timers" ? styles.navLinkMouseEnter : styles.navLink
-    const inventoriesLinkStyle = this.state.mouseenter === "Inventories" ? styles.navLinkMouseEnter : styles.navLink
-    const accountLinkStyle = this.state.mouseenter === "Account" || this.state.submenuVisible ? styles.accountLinkMouseEnter : styles.accountLink
+    if(this.props.authenticated){
 
-    return(
-      <nav style={styles.nav} >
-        <span style={styles.span} >
-          <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={timersLinkStyle} to="/timers">Timers</Link>
-          <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={inventoriesLinkStyle} to="/inventories">Inventories</Link>
-        </span>
-        <a onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={accountLinkStyle}>Account</a>
-        {this.state.submenuVisible && 
-          <nav onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={styles.subMenu}><SubMenu username={"user"} signOut={this.props.signOut} /></nav>
-        }
-      </nav>
-    )
+      const timersLinkStyle = this.state.mouseenter === "Timers" ? styles.navLinkMouseEnter : styles.navLink
+      const inventoriesLinkStyle = this.state.mouseenter === "Inventories" ? styles.navLinkMouseEnter : styles.navLink
+      const accountLinkStyle = this.state.mouseenter === "Account" || this.state.submenuVisible ? styles.accountLinkMouseEnter : styles.accountLink
+
+      return(
+        <nav style={styles.nav} >
+          <span style={styles.span} >
+            <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={timersLinkStyle} to="/timers">Timers</Link>
+            <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={inventoriesLinkStyle} to="/inventories">Inventories</Link>
+          </span>
+          <a onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={accountLinkStyle}>Account</a>
+          {this.state.submenuVisible && 
+            <nav onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={styles.subMenu}><SubMenu username={"user"} signOut={this.props.signOut} /></nav>
+          }
+        </nav>
+      )
+
+    }else{
+      return(
+        <nav style={{...styles.nav, border: "none"}}>
+          <p style={styles.navLink}>Brewing App</p>
+        </nav>
+      )
+    }
   
   }
 
 }
 
 NavBar.propTypes = {
-  signOut: PropTypes.func.isRequired
+  authenticated: PropTypes.bool,
+  signOut: PropTypes.func
 }
 
 export default NavBar
