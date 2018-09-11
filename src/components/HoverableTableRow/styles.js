@@ -1,10 +1,10 @@
 export default {
 	default: {
 		cursor: "pointer",
-		backgroundColor: "white"
+		backgroundColor: "hsl(0, 0%, 98%)"
 	},
 	hover: {
 		cursor: "pointer",
-		backgroundColor: "#e8e8e8"
+		backgroundColor: "hsl(0, 0%, 95%)"
 	}
 }
