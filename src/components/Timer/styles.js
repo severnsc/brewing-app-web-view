@@ -24,7 +24,8 @@ const styles = {
 		background: "hsl(0, 0%, 98%)",
 		padding: "20px",
 		minWidth: "50%",
-		marginTop: "10px"
+		marginTop: "10px",
+		borderRadius: "20px"
 	},
 	time: {
 		...globalStyles.heading,
