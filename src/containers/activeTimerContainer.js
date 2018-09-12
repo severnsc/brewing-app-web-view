@@ -124,7 +124,7 @@ const ActiveTimerContainer = () => (
 																		}
 
 																		return(
-																			<div style={{border: "1px solid black", padding: "10px"}}>
+																			<div style={{border: "1px solid black", padding: "10px", display: "flex", flexDirection: "column", alignItems: "center", background: "hsl(0, 0%, 90%)"}}>
 																				<h2 style={globalStyles.subHeading}>Active Timer</h2>
 																				{content}
 																			</div>
