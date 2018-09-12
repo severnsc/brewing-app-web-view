@@ -49,7 +49,6 @@ table {
 
 .App {
   text-align: center;
-  height: 100vh;
   display: flex;
   flex-flow: column;
 }
