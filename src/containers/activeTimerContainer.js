@@ -12,6 +12,16 @@ import TimerContainer from "./timerContainer"
 import ViewActiveTimerAlertsLinkContainer from "./viewActiveTimerAlertsLinkContainer"
 import globalStyles from "../components/styles"
 
+const styles = {
+	deactivate: {
+		marginTop: "10px",
+		textDecoration: "underline",
+    background: "none",
+    border: "none",
+    cursor: "pointer"
+	}
+}
+
 const ActiveTimerContainer = () => (
 	<Query query={activeTimerQuery}>
 		{({loading, error, data}) => {
@@ -114,7 +124,7 @@ const ActiveTimerContainer = () => (
 																			content = (
 																				<Fragment>
 																					<TimerContainer id={activeTimer.id} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
-																					<button onClick={deactivateTimer}>Deactivate timer</button>
+																					<button style={styles.deactivate} onClick={deactivateTimer}>Deactivate timer</button>
 																					<br />
 																					<ViewActiveTimerAlertsLinkContainer id={activeTimer.id} />
 																				</Fragment>
