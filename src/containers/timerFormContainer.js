@@ -112,7 +112,6 @@ const TimerFormContainer = ({ id }) => (
 																		return(
 																			<Fragment>
 																				<p>All times are in HH:MM:SS format</p>
-																				<button onClick={activateTimer}>Activate timer</button>
 																				<TimerForm
 																					name={timer.name}
 																					duration={timer.duration}
@@ -122,6 +121,7 @@ const TimerFormContainer = ({ id }) => (
 																					addTimerAlert={createTimerAlert}
 																					deleteTimerAlert={deleteTimerAlert}
 																				/>
+																				<button onClick={activateTimer}>Activate timer</button>
 																			</Fragment>
 																		)
 
