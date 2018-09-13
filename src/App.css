@@ -28,7 +28,11 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+html {
+  height: 100%;
+}
 body {
+  height: 100%;
   line-height: 1;
 }
 ol, ul {
@@ -47,10 +51,15 @@ table {
   border-spacing: 0;
 }
 
+#root {
+  height: 100%;
+}
+
 .App {
   text-align: center;
   display: flex;
   flex-flow: column;
+  height: 100%;
 }
 
 .App-logo {

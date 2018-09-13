@@ -7,8 +7,8 @@ import globalStyles from "../components/styles"
 
 const styles = {
 	container: {
-		width: "75%",
-		alignSelf: "center"
+		padding: "0 5%",
+		background: "rgb(250, 250, 250)"
 	}
 }
 
