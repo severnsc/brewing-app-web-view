@@ -1,4 +1,3 @@
-import { green } from "../../constants"
 import formStyles from "../styles"
 
 export default {

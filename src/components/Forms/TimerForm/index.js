@@ -5,7 +5,6 @@ import {
 	convertMsToMinutesSecondsString,
 	convertMinutesSecondsStringToMs 
 } from "../../../utils"
-import globalStyles from "../../styles"
 import formStyles from "../styles"
 import styles from "./styles"
 
