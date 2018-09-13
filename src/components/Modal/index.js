@@ -60,8 +60,8 @@ const Modal = ({ children, closeModal }) => {
         <div style={styles.modal}>
           <Overlay>
             {children}
+            <button onClick={() => closeModal()}>Cancel</button>
           </Overlay>
-          <button onClick={() => closeModal()}>Close</button>
         </div>
     </ModalConstructor>
   )
