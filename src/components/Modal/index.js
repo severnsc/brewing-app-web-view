@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import ReactDOM from "react-dom"
 import styles from "./styles"
 import PropTypes from "prop-types"
+import formStyles from "../Forms/styles"
 
 class ModalConstructor extends Component {
 
@@ -60,7 +61,7 @@ const Modal = ({ children, closeModal }) => {
         <div style={styles.modal}>
           <Overlay>
             {children}
-            <button onClick={() => closeModal()}>Cancel</button>
+            <button style={formStyles.tertiaryButton} onClick={() => closeModal()}>Cancel</button>
           </Overlay>
         </div>
     </ModalConstructor>

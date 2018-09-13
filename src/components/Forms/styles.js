@@ -61,6 +61,13 @@ const formStyles = {
   }
 }
 
+const secondaryButton = {
+  ...formStyles.button,
+  background: "none",
+  border: "1px solid " + green,
+  color: green
+}
+
 const tertiaryButton = {
   ...formStyles.button,
   border: "none",
@@ -71,4 +78,4 @@ const tertiaryButton = {
   minWidth: "5em"
 }
 
-export default {...formStyles, tertiaryButton}
+export default {...formStyles, secondaryButton, tertiaryButton}

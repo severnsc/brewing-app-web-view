@@ -63,6 +63,7 @@ class TimerForm extends Component {
 
 		return(
 			<Fragment>
+				<h2 style={styles.title}>Timer Details</h2>
 				<form onSubmit={this.handleSubmit}>
 
 					<label style={nameLabelStyle}>Name

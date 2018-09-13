@@ -10,6 +10,18 @@ import {
 } from "../mutations"
 import { TimerForm } from "../components"
 import PropTypes from "prop-types"
+import formStyles from "../components/Forms/styles"
+
+const styles = {
+	helper: {
+		marginBottom: "10px"
+	},
+	secondaryButton: {
+		...formStyles.secondaryButton,
+		minWidth: "5em",
+		padding: "5px 10px"
+	}
+}
 
 const TimerFormContainer = ({ id }) => (
 	<Query query={timersQuery}>
@@ -111,7 +123,7 @@ const TimerFormContainer = ({ id }) => (
 
 																		return(
 																			<Fragment>
-																				<p>All times are in HH:MM:SS format</p>
+																				<p style={styles.helper}>All times are in HH:MM:SS format</p>
 																				<TimerForm
 																					name={timer.name}
 																					duration={timer.duration}
@@ -121,7 +133,7 @@ const TimerFormContainer = ({ id }) => (
 																					addTimerAlert={createTimerAlert}
 																					deleteTimerAlert={deleteTimerAlert}
 																				/>
-																				<button onClick={activateTimer}>Activate timer</button>
+																				<button style={styles.secondaryButton} onClick={activateTimer}>Activate timer</button>
 																			</Fragment>
 																		)
 
