@@ -6,7 +6,6 @@ import NavBar from "./NavBar"
 import ResetPasswordForm from "./ResetPasswordForm"
 import SearchBar from "./SearchBar"
 import SortableTable from "./SortableTable"
-import TimerAlertForm from "./TimerAlertForm"
 import InventoryForm from "./InventoryForm"
 import FixedNewItemButton from "./FixedNewItemButton"
 import NewTimerForm from "./NewTimerForm"
@@ -15,7 +14,8 @@ import {
 	SignupForm,
 	LoginForm,
 	ForgotPasswordForm,
-	TimerForm
+	TimerForm,
+	TimerAlertForm
 } from "./Forms"
 
 export {
