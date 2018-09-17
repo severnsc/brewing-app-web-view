@@ -1,6 +1,6 @@
 import { green, errorRed } from "../constants"
 
-export default {
+const formStyles = {
   button: {
 		fontSize: "1em",
     padding: "10px",
@@ -60,3 +60,22 @@ export default {
     outline: "none"
   }
 }
+
+const secondaryButton = {
+  ...formStyles.button,
+  background: "none",
+  border: "1px solid " + green,
+  color: green
+}
+
+const tertiaryButton = {
+  ...formStyles.button,
+  border: "none",
+  background: "none",
+  textDecoration: "underline",
+  color: green,
+  padding: "5px",
+  minWidth: "5em"
+}
+
+export default {...formStyles, secondaryButton, tertiaryButton}

@@ -9,19 +9,22 @@ const styles = {
 		"flexFlow": "column"
 	},
 	table: {
-		border: "1px solid",
 		margin: "10px",
-		borderCollapse: "collapse"
+		borderCollapse: "collapse",
+		textAlign: "left"
 	},
 	tableHead: {
-		backgroundColor: "#e8e8e8"
+		backgroundColor: "hsl(0, 0%, 95%)",
+		color: "hsl(0, 0%, 50%)",
+		cursor: "pointer"
 	},
 	tableHeadCell: {
-		border: "1px solid",
-		padding: "10px"
+		padding: "20px 10px"
 	},
 	tableData: {
-		border: "1px solid"
+		borderBottom: "1px solid hsl(0, 0%, 90%)",
+		padding: "20px 10px",
+		color: "hsl(0, 0%, 22%)"
 	},
 	footer: {
 		display: "flex",

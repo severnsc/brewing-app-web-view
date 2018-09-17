@@ -6,7 +6,11 @@ export default {
 	input: {
 		flex:"1",
 		borderRadius:"10px",
-		border:"1px solid #8c8c8c",
-		padding:"2px"
+		border: "none",
+		padding:"5px 5px 5px 30px",
+		backgroundImage: 'url("/magnifyingGlass.png")',
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "5px",
+		fontSize: "1em"
 	}
 }

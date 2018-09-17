@@ -10,6 +10,26 @@ import {
 } from "../mutations"
 import TimerContainer from "./timerContainer"
 import ViewActiveTimerAlertsLinkContainer from "./viewActiveTimerAlertsLinkContainer"
+import globalStyles from "../components/styles"
+
+const styles = {
+	container: {
+		border: "1px solid black",
+		padding: "10px",
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		background: "hsl(0, 0%, 90%)",
+		borderRadius: "20px"
+	},
+	deactivate: {
+		marginTop: "10px",
+		textDecoration: "underline",
+    background: "none",
+    border: "none",
+    cursor: "pointer"
+	}
+}
 
 const ActiveTimerContainer = () => (
 	<Query query={activeTimerQuery}>
@@ -113,7 +133,7 @@ const ActiveTimerContainer = () => (
 																			content = (
 																				<Fragment>
 																					<TimerContainer id={activeTimer.id} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
-																					<button onClick={deactivateTimer}>Deactivate timer</button>
+																					<button style={styles.deactivate} onClick={deactivateTimer}>Deactivate timer</button>
 																					<br />
 																					<ViewActiveTimerAlertsLinkContainer id={activeTimer.id} />
 																				</Fragment>
@@ -123,8 +143,8 @@ const ActiveTimerContainer = () => (
 																		}
 
 																		return(
-																			<div style={{border: "1px solid black"}}>
-																				<h2>Active Timer</h2>
+																			<div style={styles.container}>
+																				<h2 style={globalStyles.subHeading}>Active Timer</h2>
 																				{content}
 																			</div>
 																		)

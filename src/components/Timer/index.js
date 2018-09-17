@@ -7,14 +7,16 @@ const Timer = ({ name, time, isRunning, startTimer, stopTimer, resetTimer, nextA
 	const startButton = <button onClick={startTimer} style={styles.start}>Start</button>
 	const stopButton = <button onClick={stopTimer} style={styles.stop}>Stop</button>
 
-	const nextAlert = nextAlertMessage && nextAlertActivationTime ? <p>Next alert: "{nextAlertMessage}" at {nextAlertActivationTime}</p> : null
+	const nextAlert = nextAlertMessage && nextAlertActivationTime ? <p style={styles.alert}>Next alert: "{nextAlertMessage}" at {nextAlertActivationTime}</p> : null
 
 	return (
-		<div>
-			<h2>{name}</h2>
-			<h2>{time}</h2>
-			{isRunning ? stopButton : startButton}
-			<button onClick={resetTimer} style={styles.button}>Reset</button>
+		<div style={styles.container}>
+			<h2 style={styles.title}>{name}</h2>
+			<h2 style={styles.time}>{time}</h2>
+			<span style={styles.buttons}>
+				{isRunning ? stopButton : startButton}
+				<button onClick={resetTimer} style={styles.button}>Reset</button>
+			</span>
 			{nextAlert}
 		</div>
 	)

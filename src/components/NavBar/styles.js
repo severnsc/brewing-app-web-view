@@ -20,7 +20,7 @@ const styles = {
 	  background: "#383838",
 	  display: "flex",
 	  flexFlow: "column",
-	  borderRadius: "5px"
+	  borderRadius: "5px",
 	},
 	nav: {
 		display:"flex",

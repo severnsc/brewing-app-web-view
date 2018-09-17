@@ -28,7 +28,11 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+html {
+  height: 100%;
+}
 body {
+  height: 100%;
   line-height: 1;
 }
 ol, ul {
@@ -47,11 +51,15 @@ table {
   border-spacing: 0;
 }
 
+#root {
+  height: 100%;
+}
+
 .App {
   text-align: center;
-  height: 100vh;
   display: flex;
   flex-flow: column;
+  height: 100%;
 }
 
 .App-logo {
@@ -74,8 +82,12 @@ table {
   font-size: large;
 }
 
-h1, h2, h3, h4, h5, h6, p, label, span, input, a {
+h1, h2, h3, h4, h5, h6, p, label, span, input, a, td, th {
   font-family: 'Roboto', sans-serif;
+}
+
+p {
+  color: hsl(0, 0%, 50%);
 }
 
 @keyframes App-logo-spin {
