@@ -7,7 +7,6 @@ import ResetPasswordForm from "./ResetPasswordForm"
 import SearchBar from "./SearchBar"
 import SortableTable from "./SortableTable"
 import InventoryForm from "./InventoryForm"
-import FixedNewItemButton from "./FixedNewItemButton"
 import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
 import Tabs from "./Tabs"
@@ -35,7 +34,6 @@ export {
 	TimerAlertForm,
 	TimerForm,
 	InventoryForm,
-	FixedNewItemButton,
 	NewTimerForm,
 	NewTimerAlertForm,
 	Tab,
