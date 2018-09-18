@@ -1,9 +1,8 @@
 import React from "react"
-import { FixedNewItemButton } from "../components"
 import { Mutation } from "react-apollo"
 import { UPDATE_MODAL } from "../mutations"
 
-const FixedNewTimerButtonContainer = () => (
+const NewTimerButtonContainer = ({ style }) => (
 	<Mutation mutation={UPDATE_MODAL}>
 		{mutation => {
 
@@ -12,11 +11,11 @@ const FixedNewTimerButtonContainer = () => (
 			}
 
 			return (
-				<FixedNewItemButton onClick={newTimer} />
+				<button style={style} onClick={newTimer}>New timer</button>
 			)
 			
 		}}
 	</Mutation>
 )
 
-export default FixedNewTimerButtonContainer
+export default NewTimerButtonContainer
