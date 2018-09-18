@@ -21,6 +21,7 @@ exports[`Tabs renders a tabs component 1`] = `
 <div
   style={
     Object {
+      "borderRadius": "20px",
       "boxShadow": "rgba(0, 0, 0, 0.2) 0px 4px 6px 0px",
       "padding": "20px",
     }

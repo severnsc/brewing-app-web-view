@@ -147,6 +147,18 @@ describe("Tabs", () => {
 		expect(box.prop("style").padding).toBe("20px")
 	})
 
+	it("has borderRadius 20px", () => {
+		const tabs = mount(
+			<Tabs>
+				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
+				<Tab active={false} label="tab2" component={<div key="tab2" className="inactive">Tab 2</div>} />
+				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
+			</Tabs>
+		)
+		const box = tabs.find("div").first()
+		expect(box.prop("style").borderRadius).toBe("20px")
+	})
+
 })
 
 describe("Tab", () => {
