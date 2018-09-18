@@ -23,7 +23,7 @@ class Tabs extends Component {
 		const { activeTab } = this.state
 
 		return(
-			<div>
+			<div style={styles.container}>
 				<ol style={styles.header}>
 					{children.map(child => (
 						<Tab

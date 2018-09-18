@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import styles from "./styles"
 
 const Tab = ({ label, component, active, onClick }) => (
-	<li onClick={() => onClick(label)} style={styles.tab}>
+	<li onClick={() => onClick(label)} style={active ? styles.active : styles.tab}>
 		{label}
 	</li>
 )

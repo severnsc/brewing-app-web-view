@@ -5,7 +5,11 @@ exports[`Tab renders a tab component 1`] = `
   onClick={[Function]}
   style={
     Object {
+      "borderBottom": "3px solid hsl(167, 90%, 38%)",
+      "color": "hsla(0, 0%, 100%, 0.9)",
+      "cursor": "pointer",
       "display": "inline-block",
+      "padding": "10px",
     }
   }
 >
@@ -14,11 +18,21 @@ exports[`Tab renders a tab component 1`] = `
 `;
 
 exports[`Tabs renders a tabs component 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "boxShadow": "rgba(0, 0, 0, 0.2) 0px 4px 6px 0px",
+      "padding": "20px",
+    }
+  }
+>
   <ol
     style={
       Object {
-        "background": "hsl(167, 90%, 38%)",
+        "background": "hsl(0, 0%, 22%)",
+        "display": "flex",
+        "justifyContent": "space-around",
+        "marginBottom": "10px",
       }
     }
   >
@@ -26,7 +40,11 @@ exports[`Tabs renders a tabs component 1`] = `
       onClick={[Function]}
       style={
         Object {
+          "borderBottom": "3px solid hsl(167, 90%, 38%)",
+          "color": "hsla(0, 0%, 100%, 0.9)",
+          "cursor": "pointer",
           "display": "inline-block",
+          "padding": "10px",
         }
       }
     >
@@ -36,7 +54,10 @@ exports[`Tabs renders a tabs component 1`] = `
       onClick={[Function]}
       style={
         Object {
+          "color": "hsl(0, 0%, 76%)",
+          "cursor": "pointer",
           "display": "inline-block",
+          "padding": "10px",
         }
       }
     >

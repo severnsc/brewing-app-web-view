@@ -75,7 +75,7 @@ describe("Tabs", () => {
 		expect(tabs.find(".inactive").length).toBe(1)
 	})
 
-	it("has green colored header", () => {
+	it("has hsl(0, 0%, 22%) colored header", () => {
 		const tabs = mount(
 			<Tabs>
 				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
@@ -84,10 +84,10 @@ describe("Tabs", () => {
 			</Tabs>
 		)
 		const header = tabs.find("ol")
-		expect(header.prop("style")).toEqual({background: green})
+		expect(header.prop("style").background).toBe("hsl(0, 0%, 22%)")
 	})
 
-	it("displays tabs in inline-block style", () => {
+	it("has header 10px marginBottom", () => {
 		const tabs = mount(
 			<Tabs>
 				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
@@ -95,8 +95,56 @@ describe("Tabs", () => {
 				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
 			</Tabs>
 		)
-		const tab = tabs.find("li").first()
-		expect(tab.prop("style")).toEqual({display: "inline-block"})
+		const header = tabs.find("ol")
+		expect(header.prop("style").marginBottom).toBe("10px")
+	})
+
+	it("has display flex", () => {
+		const tabs = mount(
+			<Tabs>
+				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
+				<Tab active={false} label="tab2" component={<div key="tab2" className="inactive">Tab 2</div>} />
+				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
+			</Tabs>
+		)
+		const header = tabs.find("ol")
+		expect(header.prop("style").display).toBe("flex")
+	})
+
+	it("has justifyContent space-around", () => {
+		const tabs = mount(
+			<Tabs>
+				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
+				<Tab active={false} label="tab2" component={<div key="tab2" className="inactive">Tab 2</div>} />
+				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
+			</Tabs>
+		)
+		const header = tabs.find("ol")
+		expect(header.prop("style").justifyContent).toBe("space-around")
+	})
+
+	it("has box-shadow rgba(0, 0, 0, 0.2) 0px 4px 6px 0px", () => {
+		const tabs = mount(
+			<Tabs>
+				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
+				<Tab active={false} label="tab2" component={<div key="tab2" className="inactive">Tab 2</div>} />
+				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
+			</Tabs>
+		)
+		const box = tabs.find("div").first()
+		expect(box.prop("style").boxShadow).toBe("rgba(0, 0, 0, 0.2) 0px 4px 6px 0px")
+	})
+
+	it("has 20px padding", () => {
+		const tabs = mount(
+			<Tabs>
+				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
+				<Tab active={false} label="tab2" component={<div key="tab2" className="inactive">Tab 2</div>} />
+				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
+			</Tabs>
+		)
+		const box = tabs.find("div").first()
+		expect(box.prop("style").padding).toBe("20px")
 	})
 
 })
@@ -128,6 +176,54 @@ describe("Tab", () => {
 		)
 		tab.find("li").simulate("click")
 		expect(mockOnClick.mock.calls.length).toBe(1)
+	})
+
+	it("displays inline-block style", () => {
+		const hello = <div id="hello">Hello</div>
+		const tab = shallow(
+			<Tab onClick={() => {}} active={true} label="label" component={hello} />
+		)
+		expect(tab.find("li").prop("style").display).toBe("inline-block")
+	})
+
+	it("has 10px padding", () => {
+		const hello = <div id="hello">Hello</div>
+		const tab = shallow(
+			<Tab onClick={() => {}} active={true} label="label" component={hello} />
+		)
+		expect(tab.find("li").prop("style").padding).toBe("10px")
+	})
+
+	it("has color hsla(0, 0%, 100%, 0.9) when active", () => {
+		const hello = <div id="hello">Hello</div>
+		const tab = shallow(
+			<Tab onClick={() => {}} active={true} label="label" component={hello} />
+		)
+		expect(tab.find("li").prop("style").color).toBe("hsla(0, 0%, 100%, 0.9)")
+	})
+
+	it("has borderBottom 3px solid green when active", () => {
+		const hello = <div id="hello">Hello</div>
+		const tab = shallow(
+			<Tab onClick={() => {}} active={true} label="label" component={hello} />
+		)
+		expect(tab.find("li").prop("style").borderBottom).toBe("3px solid " + green)
+	})
+
+	it("has color hsl(0, 0%, 76%) when not active", () => {
+		const hello = <div id="hello">Hello</div>
+		const tab = shallow(
+			<Tab onClick={() => {}} active={false} label="label" component={hello} />
+		)
+		expect(tab.find("li").prop("style").color).toBe("hsl(0, 0%, 76%)")
+	})
+
+	it("has cursor as pointer", () => {
+		const hello = <div id="hello">Hello</div>
+		const tab = shallow(
+			<Tab onClick={() => {}} active={true} label="label" component={hello} />
+		)
+		expect(tab.find("li").prop("style").cursor).toBe("pointer")
 	})
 
 })
