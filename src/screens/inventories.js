@@ -49,7 +49,7 @@ const styles = {
   },
   heading: {
     ...globalStyles.heading,
-    marginBottom: "10px"
+    margin: "10px"
   }
 }
 
