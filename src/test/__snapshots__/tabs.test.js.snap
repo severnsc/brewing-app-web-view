@@ -3,6 +3,11 @@
 exports[`Tab renders a tab component 1`] = `
 <li
   onClick={[Function]}
+  style={
+    Object {
+      "display": "inline-block",
+    }
+  }
 >
   label
 </li>
@@ -10,14 +15,30 @@ exports[`Tab renders a tab component 1`] = `
 
 exports[`Tabs renders a tabs component 1`] = `
 <div>
-  <ol>
+  <ol
+    style={
+      Object {
+        "background": "hsl(167, 90%, 38%)",
+      }
+    }
+  >
     <li
       onClick={[Function]}
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
     >
       tab1
     </li>
     <li
       onClick={[Function]}
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
     >
       tab2
     </li>

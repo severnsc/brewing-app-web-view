@@ -1,8 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
+import styles from "./styles"
 
 const Tab = ({ label, component, active, onClick }) => (
-	<li onClick={() => onClick(label)}>
+	<li onClick={() => onClick(label)} style={styles.tab}>
 		{label}
 	</li>
 )

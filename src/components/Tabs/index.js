@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Tab } from ".."
+import styles from "./styles"
 
 class Tabs extends Component {
 
@@ -23,7 +24,7 @@ class Tabs extends Component {
 
 		return(
 			<div>
-				<ol>
+				<ol style={styles.header}>
 					{children.map(child => (
 						<Tab
 							key={child.props.label}

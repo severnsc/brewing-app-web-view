@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from "react-test-renderer"
 import { Tab, Tabs } from "../components"
+import { green } from "../components/constants"
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
@@ -72,6 +73,30 @@ describe("Tabs", () => {
 		)
 		tabs.find({label: "tab2"}).simulate("click")
 		expect(tabs.find(".inactive").length).toBe(1)
+	})
+
+	it("has green colored header", () => {
+		const tabs = mount(
+			<Tabs>
+				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
+				<Tab active={false} label="tab2" component={<div key="tab2" className="inactive">Tab 2</div>} />
+				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
+			</Tabs>
+		)
+		const header = tabs.find("ol")
+		expect(header.prop("style")).toEqual({background: green})
+	})
+
+	it("displays tabs in inline-block style", () => {
+		const tabs = mount(
+			<Tabs>
+				<Tab active={true} label="tab1" component={<div key="tab1" id="tab1">Tab 1</div>} />
+				<Tab active={false} label="tab2" component={<div key="tab2" className="inactive">Tab 2</div>} />
+				<Tab active={false} label="tab3" component={<div key="tab3" className="inactive">Tab 3</div>} />
+			</Tabs>
+		)
+		const tab = tabs.find("li").first()
+		expect(tab.prop("style")).toEqual({display: "inline-block"})
 	})
 
 })
