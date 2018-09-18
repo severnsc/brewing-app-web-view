@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tab renders a tab component 1`] = `
+<li
+  onClick={[Function]}
+  style={
+    Object {
+      "borderBottom": "3px solid hsl(167, 90%, 38%)",
+      "color": "hsla(0, 0%, 100%, 0.9)",
+      "cursor": "pointer",
+      "display": "inline-block",
+      "padding": "10px",
+    }
+  }
+>
+  label
+</li>
+`;
+
+exports[`Tabs renders a tabs component 1`] = `
+<div
+  style={
+    Object {
+      "boxShadow": "rgba(0, 0, 0, 0.2) 0px 4px 6px 0px",
+      "padding": "20px",
+    }
+  }
+>
+  <ol
+    style={
+      Object {
+        "background": "hsl(0, 0%, 22%)",
+        "display": "flex",
+        "justifyContent": "space-around",
+        "marginBottom": "10px",
+      }
+    }
+  >
+    <li
+      onClick={[Function]}
+      style={
+        Object {
+          "borderBottom": "3px solid hsl(167, 90%, 38%)",
+          "color": "hsla(0, 0%, 100%, 0.9)",
+          "cursor": "pointer",
+          "display": "inline-block",
+          "padding": "10px",
+        }
+      }
+    >
+      tab1
+    </li>
+    <li
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "hsl(0, 0%, 76%)",
+          "cursor": "pointer",
+          "display": "inline-block",
+          "padding": "10px",
+        }
+      }
+    >
+      tab2
+    </li>
+  </ol>
+  <div>
+    <div>
+      Tab 1
+    </div>
+  </div>
+</div>
+`;

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { Tabs, Tab } from "../components"
 import MaltInventoryTableContainer from "../containers/maltInventoryTableContainer"
 import MaltInventoryTableSearchBarContainer from "../containers/maltInventoryTableSearchBarContainer"
 import HopsInventoryTableContainer from "../containers/hopsInventoryTableContainer"
@@ -7,22 +8,60 @@ import YeastInventoryTableContainer from "../containers/yeastInventoryTableConta
 import YeastInventoryTableSearchBarContainer from "../containers/yeastInventoryTableSearchBarContainer"
 import OtherInventoriesTableContainer from "../containers/otherInventoriesTableContainer"
 import OtherInventoriesTableSearchBarContainer from "../containers/otherInventoriesTableSearchBarContainer"
+import globalStyles from "../components/styles"
+
+const MaltComponent = (
+  <Fragment key="Malt">
+    <h2 style={globalStyles.subHeading}>Malt</h2>
+    <MaltInventoryTableSearchBarContainer />
+    <MaltInventoryTableContainer />
+  </Fragment>
+)
+
+const HopsComponent = (
+  <Fragment key="Hops">
+    <h2 style={globalStyles.subHeading}>Hops</h2>
+    <HopsInventoryTableSearchBarContainer />
+    <HopsInventoryTableContainer />
+  </Fragment>
+)
+
+const YeastComponent = (
+  <Fragment key="Yeast">
+    <h2 style={globalStyles.subHeading}>Yeast</h2>
+    <YeastInventoryTableSearchBarContainer />
+    <YeastInventoryTableContainer />
+  </Fragment>
+)
+
+const OtherComponent = (
+  <Fragment key="Other">
+    <h2 style={globalStyles.subHeading}>Other</h2>
+    <OtherInventoriesTableSearchBarContainer />
+    <OtherInventoriesTableContainer />
+  </Fragment>
+)
+
+const styles = {
+  container: {
+    padding: "0 5%",
+    background: "rgb(250, 250, 250)"
+  },
+  heading: {
+    ...globalStyles.heading,
+    margin: "10px"
+  }
+}
 
 const Inventories = () => (
-	<div style={{width: "75%"}}>
-    <h1>Inventories</h1>
-    <h2>Malt</h2>
-    	<MaltInventoryTableSearchBarContainer />
-    	<MaltInventoryTableContainer />
-    <h2>Hops</h2>
-      <HopsInventoryTableSearchBarContainer />
-    	<HopsInventoryTableContainer />
-    <h2>Yeast</h2>
-      <YeastInventoryTableSearchBarContainer />
-      <YeastInventoryTableContainer />
-    <h2>Other</h2>
-      <OtherInventoriesTableSearchBarContainer />
-      <OtherInventoriesTableContainer />
+	<div style={styles.container}>
+    <h1 style={styles.heading}>Inventories</h1>
+    <Tabs>
+      <Tab key="Malt" label="Malt" component={MaltComponent} active={true} />
+      <Tab key="Hops" label="Hops" component={HopsComponent} active={false} />
+      <Tab key="Yeat" label="Yeast" component={YeastComponent} active={false} />
+      <Tab key="Other" label="Other" component={OtherComponent} active={false} />
+    </Tabs>
   </div>
 )
 

@@ -10,6 +10,8 @@ import InventoryForm from "./InventoryForm"
 import FixedNewItemButton from "./FixedNewItemButton"
 import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
+import Tabs from "./Tabs"
+import Tab from "./Tab"
 import {
 	SignupForm,
 	LoginForm,
@@ -35,5 +37,7 @@ export {
 	InventoryForm,
 	FixedNewItemButton,
 	NewTimerForm,
-	NewTimerAlertForm
+	NewTimerAlertForm,
+	Tab,
+	Tabs
 }
