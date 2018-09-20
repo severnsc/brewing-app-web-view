@@ -13,7 +13,7 @@ class TimerForm extends Component {
 	state = {
 		name: this.props.name,
 		duration: convertMsToMinutesSecondsString(this.props.duration),
-		focus: null
+		focus: ""
 	}
 
 	handleSubmit = e => {
@@ -30,47 +30,47 @@ class TimerForm extends Component {
 		this.setState({ duration: e.target.value })
 	}
 
-	handleFocus = e => {
-		this.setState({ focus: e.target.name })
-	}
+	toggleFocus = e => {
+		if(e.type === "focus"){
+			this.setState({ focus: e.target.name })
+		}
 
-	handleBlur = e => {
-		this.setState({ focus: null })
+		if(e.type === "blur"){
+			this.setState({ focus: "" })
+		}
 	}
 
 	render(){
 
-		const timerAlerts = this.props.timerAlerts.map(timerAlert =>(
+		const {
+			addTimerAlert,
+			saveTimerAlert,
+			deleteTimerAlert,
+			...rest
+		} = this.props
+
+		const { name, duration, focus } = this.state
+
+		const timerAlerts = rest.timerAlerts.map(timerAlert =>(
 			<Fragment key={timerAlert.id}>
-				<TimerAlertForm id={timerAlert.id} activationTime={timerAlert.activationTime} message={timerAlert.message} saveTimerAlert={this.props.saveTimerAlert} deleteTimerAlert={this.props.deleteTimerAlert} />
+				<TimerAlertForm id={timerAlert.id} activationTime={timerAlert.activationTime} message={timerAlert.message} saveTimerAlert={saveTimerAlert} deleteTimerAlert={deleteTimerAlert} />
 			</Fragment>
 		))
 
-		let nameLabelStyle = formStyles.label
-		let nameInputStyle = formStyles.input
-		if(this.state.focus === "name"){
-			nameLabelStyle = {...nameLabelStyle, ...formStyles.labelFocus}
-			nameInputStyle = {...nameInputStyle, ...formStyles.inputFocus}
-		}
-
-		let durationLabelStyle = formStyles.label
-		let durationInputStyle = formStyles.input
-		if(this.state.focus === "duration"){
-			durationLabelStyle = {...durationLabelStyle, ...formStyles.labelFocus}
-			durationInputStyle = {...durationInputStyle, ...formStyles.inputFocus}
-		}
+		const labelFocusStyle = {...formStyles.label, ...formStyles.labelFocus}
+		const inputFocusStyle = {...formStyles.input, ...formStyles.inputFocus}
 
 		return(
 			<Fragment>
 				<h2 style={styles.title}>Timer Details</h2>
 				<form onSubmit={this.handleSubmit}>
 
-					<label style={nameLabelStyle}>Name
-						<input style={nameInputStyle} onFocus={this.handleFocus} onBlur={this.handleBlur} name="name" type="text" value={this.state.name} onChange={this.handleNameChange} />
+					<label style={focus === "name" ? labelFocusStyle : formStyles.label}>Name
+						<input style={focus === "name" ? inputFocusStyle : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="name" type="text" value={name} onChange={this.handleNameChange} />
 					</label>
 
-					<label style={durationLabelStyle}>Duration
-						<input style={durationInputStyle} onFocus={this.handleFocus} onBlur={this.handleBlur} name="duration" type="text" value={this.state.duration} onChange={this.handleDurationChange} />
+					<label style={focus === "duration" ? labelFocusStyle : formStyles.label}>Duration
+						<input style={focus === "duration" ? inputFocusStyle : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="duration" type="text" value={duration} onChange={this.handleDurationChange} />
 					</label>
 
 					<input style={styles.button} type="submit" value="Save" />
@@ -78,7 +78,7 @@ class TimerForm extends Component {
 
 				<h2 style={styles.subHeading}>Alerts</h2>
 				{timerAlerts}
-				<Button style={styles.button} onClick={this.props.addTimerAlert} value="Add timer alert" />
+				<Button style={styles.button} onClick={addTimerAlert} value="Add timer alert" />
 			</Fragment>
 		)
 
