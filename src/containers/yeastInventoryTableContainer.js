@@ -43,10 +43,10 @@ const YeastInventoryTableContainer = () => (
 														cells: [
 															JSON.parse(item.object).name,
 															item.currentQuantity,
-															JSON.parse(item.object).name,
-															JSON.parse(item.object).name,
-															JSON.parse(item.object).name,
-															JSON.parse(item.object).name,
+															JSON.parse(item.object).yeastLab,
+															JSON.parse(item.object).yeastNumber,
+															JSON.parse(item.object).yeastType,
+															JSON.parse(item.object).dry ? "Dry" : "Liquid",
 															item.lastReorderDate
 														]
 													}))

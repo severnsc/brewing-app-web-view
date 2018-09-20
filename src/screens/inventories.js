@@ -8,6 +8,7 @@ import HopsInventoryTableSearchBarContainer from "../containers/hopsInventoryTab
 import NewHopsButtonContainer from "../containers/newHopsButtonContainer"
 import YeastInventoryTableContainer from "../containers/yeastInventoryTableContainer"
 import YeastInventoryTableSearchBarContainer from "../containers/yeastInventoryTableSearchBarContainer"
+import NewYeastButtonContainer from "../containers/newYeastButtonContainer"
 import OtherInventoriesTableContainer from "../containers/otherInventoriesTableContainer"
 import OtherInventoriesTableSearchBarContainer from "../containers/otherInventoriesTableSearchBarContainer"
 import globalStyles from "../components/styles"
@@ -51,11 +52,12 @@ const HopsComponent = (
 )
 
 const YeastComponent = (
-  <Fragment key="Yeast">
+  <div key="Yeast" style={styles.relative}>
     <h2 style={globalStyles.subHeading}>Yeast</h2>
+    <NewYeastButtonContainer style={styles.button} />
     <YeastInventoryTableSearchBarContainer />
     <YeastInventoryTableContainer />
-  </Fragment>
+  </div>
 )
 
 const OtherComponent = (

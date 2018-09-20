@@ -12,6 +12,7 @@ import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
 import NewMaltContainer from "./containers/newMaltContainer"
 import NewHopsContainer from "./containers/newHopsContainer"
+import NewYeastContainer from "./containers/newYeastContainer"
 import { Query } from 'react-apollo'
 import { modalQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
@@ -52,6 +53,10 @@ class App extends Component {
 
             case "newHops":
               modalItem = <NewHopsContainer />
+              break
+
+            case "newYeast":
+              modalItem = <NewYeastContainer />
               break
 
             case "activeTimerAlerts":
