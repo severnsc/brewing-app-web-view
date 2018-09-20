@@ -12,6 +12,7 @@ import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
 import Tabs from "./Tabs"
 import Tab from "./Tab"
+import Lovibond from "./Lovibond"
 import {
 	SignupForm,
 	LoginForm,
@@ -47,5 +48,6 @@ export {
 	NewYeastForm,
 	NewOtherForm,
 	Tab,
-	Tabs
+	Tabs,
+	Lovibond
 }
