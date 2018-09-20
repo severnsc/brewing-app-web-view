@@ -5,6 +5,7 @@ import MaltInventoryTableSearchBarContainer from "../containers/maltInventoryTab
 import NewMaltButtonContainer from "../containers/newMaltButtonContainer"
 import HopsInventoryTableContainer from "../containers/hopsInventoryTableContainer"
 import HopsInventoryTableSearchBarContainer from "../containers/hopsInventoryTableSearchBarContainer"
+import NewHopsButtonContainer from "../containers/newHopsButtonContainer"
 import YeastInventoryTableContainer from "../containers/yeastInventoryTableContainer"
 import YeastInventoryTableSearchBarContainer from "../containers/yeastInventoryTableSearchBarContainer"
 import OtherInventoriesTableContainer from "../containers/otherInventoriesTableContainer"
@@ -41,11 +42,12 @@ const MaltComponent = (
 )
 
 const HopsComponent = (
-  <Fragment key="Hops">
+  <div key="Hops" style={styles.relative}>
     <h2 style={globalStyles.subHeading}>Hops</h2>
+    <NewHopsButtonContainer style={styles.button} />
     <HopsInventoryTableSearchBarContainer />
     <HopsInventoryTableContainer />
-  </Fragment>
+  </div>
 )
 
 const YeastComponent = (
