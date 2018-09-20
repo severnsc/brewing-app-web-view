@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { Button } from "../.."
 import {
 	convertMsToMinutesSecondsString,
 	convertMinutesSecondsStringToMs 
@@ -76,7 +77,7 @@ class TimerAlertForm extends Component {
 				</label>
 
 				<input style={styles.button} type="submit" value="Save" />
-				<button style={formStyles.tertiaryButton} onClick={this.deleteTimerAlert}>Delete</button>
+				<Button style={formStyles.tertiaryButton} onClick={this.deleteTimerAlert} value="Delete" />
 			</form>
 		)
 	}

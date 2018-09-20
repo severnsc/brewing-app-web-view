@@ -4,11 +4,9 @@ import TimersSearchBarContainer from "../containers/timersSearchBarContainer"
 import TimersTableContainer from "../containers/timersTableContainer"
 import NewTimerButtonContainer from "../containers/NewTimerButtonContainer"
 import globalStyles from "../components/styles"
-import formStyles from "../components/Forms/styles"
 
 const styles = {
 	button: {
-		...formStyles.button,
 		position: "absolute",
 		right: "5%",
 		top: "5px"

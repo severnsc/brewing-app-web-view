@@ -1,6 +1,7 @@
 import React, { Fragment } from "react"
 import { Query, Mutation } from "react-apollo"
 import { activeTimerQuery } from "../queries"
+import { Button } from "../components"
 import {
 	START_TIMER,
 	STOP_TIMER,
@@ -27,7 +28,8 @@ const styles = {
 		textDecoration: "underline",
     background: "none",
     border: "none",
-    cursor: "pointer"
+    cursor: "pointer",
+    color: "hsl(0, 0%, 13%)"
 	}
 }
 
@@ -133,7 +135,7 @@ const ActiveTimerContainer = () => (
 																			content = (
 																				<Fragment>
 																					<TimerContainer id={activeTimer.id} startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
-																					<button style={styles.deactivate} onClick={deactivateTimer}>Deactivate timer</button>
+																					<Button style={styles.deactivate} onClick={deactivateTimer} value="Deactivate timer" />
 																					<br />
 																					<ViewActiveTimerAlertsLinkContainer id={activeTimer.id} />
 																				</Fragment>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Query, Mutation } from "react-apollo"
 import { timersQuery } from "../queries"
 import { CREATE_TIMER_ALERT, DELETE_TIMER_ALERT } from "../mutations"
-import { NewTimerAlertForm } from "../components"
+import { NewTimerAlertForm, Button } from "../components"
 import TimerAlertFormContainer from "./common/timerAlertFormContainer"
 import DeleteButtonContainer from "./common/deleteButtonContainer"
 import {
@@ -76,7 +76,7 @@ class NewTimerAlertFormContainer extends Component {
 										return(
 											<Fragment key={alert.id}>
 												<li>{alert.message} | {convertMsToMinutesSecondsString(alert.activationTime)}</li>
-												<button onClick={() => this.setEditingId(alert.id)}>Edit</button>
+												<Button onClick={() => this.setEditingId(alert.id)} value="Edit" />
 												<DeleteButtonContainer id={alert.id} mutation={DELETE_TIMER_ALERT} refetchQuery={timersQuery} />
 											</Fragment>	
 										)

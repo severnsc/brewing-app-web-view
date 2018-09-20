@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react"
-import { TimerAlertForm } from "../.."
+import { TimerAlertForm, Button } from "../.."
 import PropTypes from "prop-types"
 import {
 	convertMsToMinutesSecondsString,
@@ -78,7 +78,7 @@ class TimerForm extends Component {
 
 				<h2 style={styles.subHeading}>Alerts</h2>
 				{timerAlerts}
-				<button style={styles.button} onClick={this.props.addTimerAlert}>Add timer alert</button>
+				<Button style={styles.button} onClick={this.props.addTimerAlert} value="Add timer alert" />
 			</Fragment>
 		)
 

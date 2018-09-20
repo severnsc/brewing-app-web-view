@@ -1,9 +1,8 @@
 import globalStyles from "../../styles"
-import formStyles from "../styles"
 
 export default {
 	button: {
-		...formStyles.button,
+		...globalStyles.button,
 		display: "flex",
 		justifyContent: "center"
 	},

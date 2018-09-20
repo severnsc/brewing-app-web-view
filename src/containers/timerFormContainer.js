@@ -8,7 +8,7 @@ import {
 	UPDATE_TIMER_ALERT,
 	DELETE_TIMER_ALERT
 } from "../mutations"
-import { TimerForm } from "../components"
+import { TimerForm, Button } from "../components"
 import PropTypes from "prop-types"
 import formStyles from "../components/Forms/styles"
 
@@ -133,7 +133,7 @@ const TimerFormContainer = ({ id }) => (
 																					addTimerAlert={createTimerAlert}
 																					deleteTimerAlert={deleteTimerAlert}
 																				/>
-																				<button style={styles.secondaryButton} onClick={activateTimer}>Activate timer</button>
+																				<Button style={styles.secondaryButton} onClick={activateTimer} value="Activate timer" />
 																			</Fragment>
 																		)
 

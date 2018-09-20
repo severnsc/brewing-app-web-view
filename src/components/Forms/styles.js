@@ -1,19 +1,7 @@
+import globalStyles from "../styles"
 import { green, errorRed } from "../constants"
 
 const formStyles = {
-  button: {
-		fontSize: "1em",
-    padding: "10px",
-    borderRadius: "20px",
-    color: "hsla(0, 0%, 100%, 0.85)",
-    background: green,
-    border: "none",
-    appearance: "none",
-    "WebkitAppearance": "none",
-    "MozAppearance": "none",
-    cursor: "pointer",
-    minWidth: "10em"
-  },
   container: {
     background: "hsl(0,0%,100%)",
     padding: "50px",
@@ -62,14 +50,14 @@ const formStyles = {
 }
 
 const secondaryButton = {
-  ...formStyles.button,
+  ...globalStyles.button,
   background: "none",
   border: "1px solid " + green,
   color: green
 }
 
 const tertiaryButton = {
-  ...formStyles.button,
+  ...globalStyles.button,
   border: "none",
   background: "none",
   textDecoration: "underline",
