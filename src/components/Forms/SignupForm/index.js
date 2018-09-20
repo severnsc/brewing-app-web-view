@@ -13,10 +13,7 @@ class SignupForm extends Component {
     email: "",
     password: "",
     confirmPassword: "",
-    usernameFocus: false,
-    emailFocus: false,
-    passwordFocus: false,
-    confirmPasswordFocus: false
+    focus: ""
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -37,30 +34,40 @@ class SignupForm extends Component {
   }
 
   toggleFocus = e => {
-    const newState = {}
-    newState[e.target.name+"Focus"] = !this.state[e.target.name+"Focus"]
-    this.setState(newState)
+    if(e.type === "focus"){
+      this.setState({ focus: e.target.name })
+    }
+
+    if(e.type === "blur"){
+      this.setState({ focus: "" })
+    }
   }
 
   render(){
 
-    const emailErrorText = this.state.email.length === 0 ||
-                           validator.isEmail(this.state.email)
+    const {
+      username,
+      email,
+      password,
+      confirmPassword,
+      focus
+    } = this.state
+
+    const { error, isUsernameUnique } = this.props
+
+    const emailErrorText = email.length === 0 || validator.isEmail(email)
                            ? ""
                            : "Invalid email!"
 
-    const passwordErrorText = 0 < this.state.password.length && 
-      this.state.password.length < 8 
-      ? "Must be at least 8 characters!"
-      : ""
+    const passwordErrorText = 0 < password.length && password.length < 8 
+                              ? "Must be at least 8 characters!"
+                              : ""
 
-    const confirmPasswordErrorText = this.state.password === 
-                                      this.state.confirmPassword
-                                      ? ""
-                                      : "Must match password!"
+    const confirmPasswordErrorText = password === confirmPassword
+                                     ? ""
+                                     : "Must match password!"
 
-    const usernameErrorText = this.state.username !== "" &&
-                              !this.props.isUsernameUnique
+    const usernameErrorText = username !== "" && !isUsernameUnique
                               ? "Username already taken!"
                               : ""
 
@@ -68,9 +75,9 @@ class SignupForm extends Component {
                            emailErrorText !== "" ||
                            passwordErrorText !== "" ||
                            confirmPasswordErrorText !== "" ||
-                           this.state.username === "" ||
-                           this.state.email === "" ||
-                           this.state.password === ""
+                           username === "" ||
+                           email === "" ||
+                           password === ""
 
     const isErrorState = errorText => errorText ? {...formStyles.inputFocus, ...formStyles.error} : formStyles.inputFocus
 
@@ -83,22 +90,22 @@ class SignupForm extends Component {
       <div style={formStyles.container}>
         <h1 style={{...globalStyles.heading, ...styles.title}}>Brewing App</h1> 
         <h2 style={globalStyles.subHeading}>Sign up</h2>
-        {this.props.error}
+        {error}
         <form className="signupForm" style={styles.form} onSubmit={this.onSubmit}>
-          <label style={this.state.usernameFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Username
-            <input autoFocus style={this.state.usernameFocus ? {...formStyles.input, ...usernameInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" type="text" value={this.state.username} onChange={this.handleChange} />
+          <label style={focus === "username" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Username
+            <input autoFocus style={focus === "username" ? {...formStyles.input, ...usernameInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" type="text" value={username} onChange={this.handleChange} />
             <span style={usernameErrorText ? formStyles.errorText : null}>{usernameErrorText}</span>
           </label>
-          <label style={this.state.emailFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Email
-            <input style={this.state.emailFocus ? {...formStyles.input, ...emailInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="email" type="email" value={this.state.email} onChange={this.handleChange} />
+          <label style={focus === "email" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Email
+            <input style={focus === "email" ? {...formStyles.input, ...emailInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="email" type="email" value={email} onChange={this.handleChange} />
             <span style={emailErrorText ? formStyles.errorText : null}>{emailErrorText}</span>
           </label>
-          <label style={this.state.passwordFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Password
-            <input style={this.state.passwordFocus ? {...formStyles.input, ...passwordInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="password" type ="password" value={this.state.password} onChange={this.handleChange} />
+          <label style={focus === "password" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Password
+            <input style={focus === "password" ? {...formStyles.input, ...passwordInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="password" type ="password" value={password} onChange={this.handleChange} />
             <span style={passwordErrorText ? formStyles.errorText : null}>{passwordErrorText}</span>
           </label>
-          <label style={this.state.confirmPasswordFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Confirm password
-            <input style={this.state.confirmPasswordFocus ? {...formStyles.input, ...confirmPasswordInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="confirmPassword" type ="password" value={this.state.confirmPassword} onChange={this.handleChange} />
+          <label style={focus === "confirmPassword" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Confirm password
+            <input style={focus === "confirmPassword" ? {...formStyles.input, ...confirmPasswordInputFocusStyle} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="confirmPassword" type ="password" value={confirmPassword} onChange={this.handleChange} />
             <span style={confirmPasswordErrorText ? formStyles.errorText : null}>{confirmPasswordErrorText}</span>
           </label>
           <span style={styles.submit}>
