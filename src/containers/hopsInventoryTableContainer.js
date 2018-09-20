@@ -9,6 +9,7 @@ import {
 	UPDATE_HOPS_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
+import moment from "moment"
 
 const HopsInventoryTableContainer = () => (
 	<Query query={hopsInventoryTableQuery}>
@@ -41,11 +42,11 @@ const HopsInventoryTableContainer = () => (
 														id: item.id,
 														cells: [
 															JSON.parse(item.object).name,
-															item.currentQuantity,
+															`${Math.trunc(item.currentQuantity/16)} lbs ${item.currentQuantity%16} oz`,
 															JSON.parse(item.object).countryOfOrigin,
-															JSON.parse(item.object).alphaAcids,
-															item.unitCost,
-															item.lastReorderDate
+															JSON.parse(item.object).alphaAcids + "%",
+															"$" + item.unitCost,
+															moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
 														]
 													}))
 												: []
