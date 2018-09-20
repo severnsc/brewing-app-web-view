@@ -48,9 +48,9 @@ const MaltInventoryTableContainer = () => (
 																					 	cells: [
 																					 		JSON.parse(item.object).name,
 																					 		item.currentQuantity,
-																					 		JSON.parse(item.object).name,
-																					 		JSON.parse(item.object).name,
-																					 		JSON.parse(item.object).name,
+																					 		JSON.parse(item.object).type,
+																					 		JSON.parse(item.object).color,
+																					 		JSON.parse(item.object).countryOfOrigin,
 																					 		item.unitCost,
 																					 		item.lastReorderDate
 																					 	]
