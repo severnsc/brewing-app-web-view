@@ -1,5 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import styles from "./styles"
+import formStyles from "../styles"
+import globalStyles from "../../styles"
 
 class NewMaltForm extends Component {
 
@@ -12,7 +15,8 @@ class NewMaltForm extends Component {
 		unitCost: 0,
 		purchaseDate: "",
 		reorderQuantity: 0,
-		reorderThreshold: 0
+		reorderThreshold: 0,
+		focus: ""
 	}
 
 	onSubmit = e => {
@@ -37,6 +41,16 @@ class NewMaltForm extends Component {
 		this.setState(newState)
 	}
 
+	toggleFocus = e => {
+		if(e.type === "focus"){
+			this.setState({ focus: e.target.name })
+		}
+
+		if(e.type === "blur"){
+			this.setState({ focus: "" })
+		}
+	}
+
 	render() {
 
 		const {
@@ -48,43 +62,44 @@ class NewMaltForm extends Component {
 			unitCost,
 			purchaseDate,
 			reorderQuantity,
-			reorderThreshold
+			reorderThreshold,
+			focus
 		} = this.state
 
 		return(
-			<form onSubmit={this.onSubmit}>
-				<label>Malt name
-					<input name="name" type="text" value={name} onChange={this.handleChange} />
+			<form style={styles.form} onSubmit={this.onSubmit}>
+				<label style={focus === "name" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Malt name
+					<input autoFocus style={focus === "name" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="name" type="text" value={name} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<label>Amount
-					<input name="amount" type="number" value={amount} onChange={this.handleChange} />
+				<label style={focus === "amount" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Amount
+					<input style={focus === "amount" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="amount" type="number" value={amount} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<label>Type
-					<select name="type" value={type} onChange={this.handleChange}>
+				<label style={focus === "type" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Type
+					<select style={formStyles.select} name="type" value={type} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus}>
 						<option value="Base">Base</option>
 						<option value="Crystal">Crystal</option>
 						<option value="Roast">Roast</option>
 					</select>
 				</label>
-				<label>Color (SRM)
-					<input name="color" type="number" value={color} onChange={this.handleChange} />
+				<label style={focus === "color" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Color (SRM)
+					<input style={focus === "color" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="color" type="number" value={color} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<label>Country of Origin
-					<input name="countryOfOrigin" type="text" value={countryOfOrigin} onChange={this.handleChange} />
+				<label style={focus === "countryOfOrigin" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Country of Origin
+					<input style={focus === "countryOfOrigin" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="countryOfOrigin" type="text" value={countryOfOrigin} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<label>Unit cost
-					<input name="unitCost" type="number" value={unitCost} onChange={this.handleChange} />
+				<label style={focus === "unitCost" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Unit cost
+					<input style={focus === "unitCost" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="unitCost" type="number" value={unitCost} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<label>Purchase date
-					<input name="purchaseDate" type="date" value={purchaseDate} onChange={this.handleChange} />
+				<label style={focus === "purchaseDate" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Purchase date
+					<input style={focus === "purchaseDate" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="purchaseDate" type="date" value={purchaseDate} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<label>Reorder Quantity
-					<input name="reorderQuantity" type="number" value={reorderQuantity} onChange={this.handleChange} />
+				<label style={focus === "reorderQuantity" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Reorder Quantity
+					<input style={focus === "reorderQuantity" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="reorderQuantity" type="number" value={reorderQuantity} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<label>Reorder Threshold
-					<input name="reorderThreshold" type="number" value={reorderThreshold} onChange={this.handleChange} />
+				<label style={focus === "reorderThreshold" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Reorder Threshold
+					<input style={focus === "reorderThreshold" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="reorderThreshold" type="number" value={reorderThreshold} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
-				<input type="submit" value="submit" />
+				<input style={globalStyles.button} type="submit" value="submit" />
 			</form>
 		)
 
