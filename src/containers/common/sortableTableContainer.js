@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { SortableTable } from '../../components'
 
-const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, sortOrder, itemsPerPageOptions, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation, modalMutation, entityType }) => (
+const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, sortOrder, itemsPerPageOptions, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation, modalMutation, entityType, customSort }) => (
   <Mutation mutation={sortOrderMutation}>
     {sortMutation => {
 
@@ -54,6 +54,7 @@ const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, 
                             decrementPage={decrementPage}
                             incrementPage={incrementPage}
                             onTableRowClick={onTableRowClick}
+                            customSort={customSort}
                           />
 
                         )

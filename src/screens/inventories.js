@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Tabs, Tab } from "../components"
 import MaltInventoryTableContainer from "../containers/maltInventoryTableContainer"
 import MaltInventoryTableSearchBarContainer from "../containers/maltInventoryTableSearchBarContainer"
