@@ -11,6 +11,7 @@ import YeastInventoryTableSearchBarContainer from "../containers/yeastInventoryT
 import NewYeastButtonContainer from "../containers/newYeastButtonContainer"
 import OtherInventoriesTableContainer from "../containers/otherInventoriesTableContainer"
 import OtherInventoriesTableSearchBarContainer from "../containers/otherInventoriesTableSearchBarContainer"
+import NewOtherButtonContainer from "../containers/newOtherButtonContainer"
 import globalStyles from "../components/styles"
 
 
@@ -61,11 +62,12 @@ const YeastComponent = (
 )
 
 const OtherComponent = (
-  <Fragment key="Other">
+  <div key="Other" style={styles.relative}>
     <h2 style={globalStyles.subHeading}>Other</h2>
+    <NewOtherButtonContainer style={styles.button} />
     <OtherInventoriesTableSearchBarContainer />
     <OtherInventoriesTableContainer />
-  </Fragment>
+  </div>
 )
 
 const Inventories = () => (

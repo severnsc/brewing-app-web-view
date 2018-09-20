@@ -20,7 +20,8 @@ import {
 	TimerAlertForm,
 	NewMaltForm,
 	NewHopsForm,
-	NewYeastForm
+	NewYeastForm,
+	NewOtherForm
 } from "./Forms"
 
 export {
@@ -44,6 +45,7 @@ export {
 	NewMaltForm,
 	NewHopsForm,
 	NewYeastForm,
+	NewOtherForm,
 	Tab,
 	Tabs
 }
