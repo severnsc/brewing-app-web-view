@@ -53,7 +53,7 @@ const MaltInventoryTableContainer = () => (
 																					 		JSON.parse(item.object).color,
 																					 		JSON.parse(item.object).countryOfOrigin,
 																					 		"$"+item.unitCost,
-																					 		moment(item.lastReorderDate).format("MM/DD/YY")
+																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
 																					 	]
 																					}))
 												: []
