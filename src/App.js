@@ -10,6 +10,7 @@ import TimerFormContainer from "./containers/timerFormContainer"
 import NewTimerFormContainer from "./containers/newTimerFormContainer"
 import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
+import NewMaltContainer from "./containers/newMaltContainer"
 import { Query } from 'react-apollo'
 import { modalQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
@@ -42,6 +43,10 @@ class App extends Component {
 
             case "newTimerAlert":
               modalItem = <NewTimerAlertFormContainer id={data.modal.id} />
+              break
+
+            case "newMalt":
+              modalItem = <NewMaltContainer />
               break
 
             case "activeTimerAlerts":

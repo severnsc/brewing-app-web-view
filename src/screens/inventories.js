@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Tabs, Tab } from "../components"
 import MaltInventoryTableContainer from "../containers/maltInventoryTableContainer"
 import MaltInventoryTableSearchBarContainer from "../containers/maltInventoryTableSearchBarContainer"
+import NewMaltButtonContainer from "../containers/newMaltButtonContainer"
 import HopsInventoryTableContainer from "../containers/hopsInventoryTableContainer"
 import HopsInventoryTableSearchBarContainer from "../containers/hopsInventoryTableSearchBarContainer"
 import YeastInventoryTableContainer from "../containers/yeastInventoryTableContainer"
@@ -10,12 +11,33 @@ import OtherInventoriesTableContainer from "../containers/otherInventoriesTableC
 import OtherInventoriesTableSearchBarContainer from "../containers/otherInventoriesTableSearchBarContainer"
 import globalStyles from "../components/styles"
 
+
+const styles = {
+  button: {
+    position: "absolute",
+    right: "10px",
+    top: "-5px"
+  },
+  container: {
+    padding: "0 5%",
+    background: "rgb(250, 250, 250)"
+  },
+  heading: {
+    ...globalStyles.heading,
+    margin: "10px"
+  },
+  relative: {
+    position: "relative"
+  }
+}
+
 const MaltComponent = (
-  <Fragment key="Malt">
+  <div key="Malt" style={styles.relative}>
     <h2 style={globalStyles.subHeading}>Malt</h2>
+    <NewMaltButtonContainer style={styles.button} />
     <MaltInventoryTableSearchBarContainer />
     <MaltInventoryTableContainer />
-  </Fragment>
+  </div>
 )
 
 const HopsComponent = (
@@ -41,17 +63,6 @@ const OtherComponent = (
     <OtherInventoriesTableContainer />
   </Fragment>
 )
-
-const styles = {
-  container: {
-    padding: "0 5%",
-    background: "rgb(250, 250, 250)"
-  },
-  heading: {
-    ...globalStyles.heading,
-    margin: "10px"
-  }
-}
 
 const Inventories = () => (
 	<div style={styles.container}>

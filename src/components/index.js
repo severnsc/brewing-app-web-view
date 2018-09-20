@@ -17,7 +17,8 @@ import {
 	LoginForm,
 	ForgotPasswordForm,
 	TimerForm,
-	TimerAlertForm
+	TimerAlertForm,
+	NewMaltForm
 } from "./Forms"
 
 export {
@@ -38,6 +39,7 @@ export {
 	InventoryForm,
 	NewTimerForm,
 	NewTimerAlertForm,
+	NewMaltForm,
 	Tab,
 	Tabs
 }
