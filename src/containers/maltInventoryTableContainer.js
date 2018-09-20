@@ -9,6 +9,7 @@ import {
 	UPDATE_MALT_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
+import moment from "moment"
 
 const MaltInventoryTableContainer = () => (
 	<Query query={maltInventoryTableQuery}>
@@ -24,7 +25,7 @@ const MaltInventoryTableContainer = () => (
 				{id: shortid.generate(), name: "Malt name"},
 				{id: shortid.generate(), name: "Amount (lbs, oz)"},
 				{id: shortid.generate(), name: "Malt type"},
-				{id: shortid.generate(), name: "Malt color"},
+				{id: shortid.generate(), name: "Malt color (SRM)"},
 				{id: shortid.generate(), name: "Country of origin"},
 				{id: shortid.generate(), name: "Cost per lb"},
 				{id: shortid.generate(), name: "Purchase date"}
@@ -47,12 +48,12 @@ const MaltInventoryTableContainer = () => (
 																					 	id: item.id,
 																					 	cells: [
 																					 		JSON.parse(item.object).name,
-																					 		item.currentQuantity,
+																					 		`${Math.trunc(item.currentQuantity)} lbs ${item.currentQuantity - Math.trunc(item.currentQuantity)} oz`,
 																					 		JSON.parse(item.object).type,
 																					 		JSON.parse(item.object).color,
 																					 		JSON.parse(item.object).countryOfOrigin,
-																					 		item.unitCost,
-																					 		item.lastReorderDate
+																					 		"$"+item.unitCost,
+																					 		moment(item.lastReorderDate).format("MM/DD/YY")
 																					 	]
 																					}))
 												: []
