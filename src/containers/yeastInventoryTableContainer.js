@@ -9,6 +9,7 @@ import {
   UPDATE_YEAST_TABLE_PAGE_NUMBER,
   UPDATE_MODAL
 } from "../mutations"
+import moment from "moment"
 
 const YeastInventoryTableContainer = () => (
 	<Query query={yeastInventoryTableQuery}>
@@ -19,7 +20,7 @@ const YeastInventoryTableContainer = () => (
 
 			const columns = [
 				{id: shortid.generate(), name: "Yeast name"},
-				{id: shortid.generate(), name: "Amount"},
+				{id: shortid.generate(), name: "Amount (vials)"},
 				{id: shortid.generate(), name: "Yeast lab"},
 				{id: shortid.generate(), name: "Yeast number"},
 				{id: shortid.generate(), name: "Yeast type"},
@@ -47,7 +48,7 @@ const YeastInventoryTableContainer = () => (
 															JSON.parse(item.object).yeastNumber,
 															JSON.parse(item.object).yeastType,
 															JSON.parse(item.object).dry ? "Dry" : "Liquid",
-															item.lastReorderDate
+															moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
 														]
 													}))
 												: []
