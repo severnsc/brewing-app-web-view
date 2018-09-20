@@ -42,8 +42,8 @@ const HopsInventoryTableContainer = () => (
 														cells: [
 															JSON.parse(item.object).name,
 															item.currentQuantity,
-															JSON.parse(item.object).name,
-															JSON.parse(item.object).name,
+															JSON.parse(item.object).countryOfOrigin,
+															JSON.parse(item.object).alphaAcids,
 															item.unitCost,
 															item.lastReorderDate
 														]

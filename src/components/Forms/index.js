@@ -4,6 +4,7 @@ import ForgotPasswordForm from "./ForgotPasswordForm"
 import TimerForm from "./TimerForm"
 import TimerAlertForm from "./TimerAlertForm"
 import NewMaltForm from "./NewMaltForm"
+import NewHopsForm from "./NewHopsForm"
 
 export {
 	LoginForm,
@@ -11,5 +12,6 @@ export {
 	ForgotPasswordForm,
 	TimerForm,
 	TimerAlertForm,
-	NewMaltForm
+	NewMaltForm,
+	NewHopsForm
 }
