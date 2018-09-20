@@ -17,7 +17,7 @@ class TimerAlertForm extends Component {
 
 	state = {
 		message: this.props.message,
-		focus: null
+		focus: ""
 	}
 
 	handleSubmit = e => {
@@ -34,12 +34,14 @@ class TimerAlertForm extends Component {
 		this.setState({ message: e.target.value })
 	}
 
-	handleFocus = e => {
-		this.setState({ focus: e.target.name })
-	}
+	toggleFocus = e => {
+		if(e.type === "focus"){
+			this.setState({ focus: e.target.name })
+		}
 
-	handleBlur = e => {
-		this.setState({ focus: null })
+		if(e.type === "blur"){
+			this.setState({ focus: "" })
+		}
 	}
 
 	deleteTimerAlert = e => {
@@ -49,31 +51,21 @@ class TimerAlertForm extends Component {
 
 	render(){
 
+		const { message, focus } = this.state
 		const { activationTime } = this.props
 		const convertedActivationTime = convertMsToMinutesSecondsString(activationTime)
 
-		let activationTimeLabelStyle = formStyles.label
-		let activationTimeInputStyle = formStyles.input
-		if(this.state.focus === "activationTime"){
-			activationTimeLabelStyle = {...activationTimeLabelStyle, ...formStyles.labelFocus}
-			activationTimeInputStyle = {...activationTimeInputStyle, ...formStyles.inputFocus}
-		}
-
-		let messageLabelStyle = formStyles.label
-		let messageInputStyle = formStyles.input
-		if(this.state.focus === "message"){
-			messageLabelStyle = {...messageLabelStyle, ...formStyles.labelFocus}
-			messageInputStyle = {...messageInputStyle, ...formStyles.inputFocus}
-		}
+		const labelFocusStyle = {...formStyles.label, ...formStyles.labelFocus}
+		const inputFocusStyle = {...formStyles.input, ...formStyles.inputFocus}
 
 		return(
 			<form style={styles.form} onSubmit={this.handleSubmit}>
-				<label style={activationTimeLabelStyle}>Activation time
-					<input style={activationTimeInputStyle} onFocus={this.handleFocus} onBlur={this.handleBlur} name="activationTime" type="text" defaultValue={convertedActivationTime} ref={this.input} />
+				<label style={focus === "activationTime" ? labelFocusStyle : formStyles.label}>Activation time
+					<input style={focus === "activationTime" ? inputFocusStyle : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="activationTime" type="text" defaultValue={convertedActivationTime} ref={this.input} />
 				</label>
 
-				<label style={messageLabelStyle}>Message
-					<input style={messageInputStyle} onFocus={this.handleFocus} onBlur={this.handleBlur} name="message" type="text" value={this.state.message} onChange={this.handleMessageChange} />
+				<label style={focus === "message" ? labelFocusStyle : formStyles.label}>Message
+					<input style={focus === "message" ? inputFocusStyle : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="message" type="text" value={message} onChange={this.handleMessageChange} />
 				</label>
 
 				<input style={styles.button} type="submit" value="Save" />

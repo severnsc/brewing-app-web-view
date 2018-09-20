@@ -10,8 +10,7 @@ class LoginForm extends Component {
   state = {
     username: "",
     password: "",
-    usernameFocus: false,
-    passwordFocus: false
+    focus: ""
   }
 
   handleUsername = e => {
@@ -28,23 +27,34 @@ class LoginForm extends Component {
   }
 
   toggleFocus = e => {
-    const newState = {}
-    newState[e.target.name+"Focus"] = !this.state[e.target.name+"Focus"]
-    this.setState(newState)
+    if(e.type === "focus"){
+      this.setState({ focus: e.target.name })
+    }
+
+    if(e.type === "blur"){
+      this.setState({ focus: "" })
+    }
   }
 
   render() {
+
+    const { username, password, focus } = this.state
+    const { error } = this.props
+
+    const labelFocusStyle = {...formStyles.label, ...formStyles.labelFocus}
+    const inputFocusStyle = {...formStyles.input, ...formStyles.inputFocus}
+
     return(
       <div style={formStyles.container}>
         <h1 style={{...globalStyles.heading, ...styles.title}}>Brewing App</h1>
         <h2 style={globalStyles.subHeading}>Login</h2>
         <form onSubmit={e => this.onSubmit(e)} style={styles.form}>
-          {this.props.error}
-          <label style={this.state.usernameFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Username
-            <input autoFocus style={this.state.usernameFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" value={this.state.username} type="text" onChange={e => this.handleUsername(e)} />
+          {error}
+          <label style={focus === "username" ? labelFocusStyle : formStyles.label}>Username
+            <input autoFocus style={focus === "username" ? inputFocusStyle : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" value={username} type="text" onChange={e => this.handleUsername(e)} />
           </label>
-          <label style={this.state.passwordFocus ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Password
-            <input style={this.state.passwordFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} value={this.state.password} name="password" type ="password" onChange={e => this.handlePassword(e)} />
+          <label style={focus === "password" ? labelFocusStyle : formStyles.label}>Password
+            <input style={focus === "password" ? inputFocusStyle : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} value={password} name="password" type ="password" onChange={e => this.handlePassword(e)} />
           </label>
           <span style={styles.login}>
             <input style={globalStyles.button} type="submit" value="Login" />
