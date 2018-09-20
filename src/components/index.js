@@ -1,3 +1,4 @@
+import Button from "./Button"
 import Timer from "./Timer"
 import HoverableTableRow from "./HoverableTableRow"
 import InventoryItemForm from "./InventoryItemForm"
@@ -20,6 +21,7 @@ import {
 } from "./Forms"
 
 export {
+	Button,
 	Timer,
 	ForgotPasswordForm,
 	HoverableTableRow,

@@ -1,8 +1,8 @@
-import formStyles from "../styles"
+import globalStyles from "../../styles"
 
 export default {
 	button: {
-		...formStyles.button,
+		...globalStyles.button,
 		padding:"5px",
 		minWidth: "5em"
 	},

@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Mutation } from "react-apollo"
+import { Button } from "../../components"
 
 const DeleteButtonContainer = ({ id, mutation, refetchQuery }) => (
 	<Mutation mutation={mutation} refetchQueries={[{query: refetchQuery}]}>
@@ -11,7 +12,7 @@ const DeleteButtonContainer = ({ id, mutation, refetchQuery }) => (
 			}
 
 			return(
-				<button onClick={deleteItem}>Delete</button>
+				<Button onClick={deleteItem} value="Delete" />
 			)
 
 		}}

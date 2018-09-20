@@ -47,7 +47,7 @@ class LoginForm extends Component {
             <input style={this.state.passwordFocus ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} value={this.state.password} name="password" type ="password" onChange={e => this.handlePassword(e)} />
           </label>
           <span style={styles.login}>
-            <input style={formStyles.button} type="submit" value="Login" />
+            <input style={globalStyles.button} type="submit" value="Login" />
             <Link style={styles.link} to="/forgotPassword">Forgot password?</Link>
           </span>
         </form>

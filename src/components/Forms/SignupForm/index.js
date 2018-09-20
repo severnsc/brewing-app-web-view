@@ -102,7 +102,7 @@ class SignupForm extends Component {
             <span style={confirmPasswordErrorText ? formStyles.errorText : null}>{confirmPasswordErrorText}</span>
           </label>
           <span style={styles.submit}>
-            <input style={submitDisabled ? {...formStyles.button, ...formStyles.disabled} : formStyles.button} disabled={submitDisabled} type="submit" value="Sign Up" />
+            <input style={submitDisabled ? {...globalStyles.button, ...formStyles.disabled} : globalStyles.button} disabled={submitDisabled} type="submit" value="Sign Up" />
             <span style={styles.login}>or <Link style={styles.loginLink} to="/login">Log in</Link></span>
           </span>
         </form>
