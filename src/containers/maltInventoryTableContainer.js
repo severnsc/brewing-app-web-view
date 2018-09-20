@@ -1,6 +1,7 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { maltInventoryTableQuery } from "../queries"
+import { Lovibond } from "../components"
 import SortableTableContainer from "./common/sortableTableContainer"
 import shortid from "shortid"
 import {
@@ -50,7 +51,7 @@ const MaltInventoryTableContainer = () => (
 																					 		JSON.parse(item.object).name,
 																					 		`${Math.trunc(item.currentQuantity)} lbs ${item.currentQuantity - Math.trunc(item.currentQuantity)} oz`,
 																					 		JSON.parse(item.object).type,
-																					 		JSON.parse(item.object).color,
+																					 		<Lovibond value={parseInt(JSON.parse(item.object).color, 10)} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
 																					 		"$"+item.unitCost,
 																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")

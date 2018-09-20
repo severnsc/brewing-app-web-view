@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Lovibond renders a lovibond component 1`] = `
+<div
+  style={
+    Object {
+      "background": "hsl(34, 100%, 43%)",
+    }
+  }
+>
+  10
+</div>
+`;

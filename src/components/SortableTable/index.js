@@ -122,7 +122,7 @@ SortableTable.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       cells: PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.element])
       )
     })
   ).isRequired,
