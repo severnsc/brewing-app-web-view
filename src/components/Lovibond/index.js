@@ -14,8 +14,8 @@ const Lovibond = ({ value }) => {
 	}
 
 	return(
-		<div style={style}>
-			{value}
+		<div style={{...style, ...styles.container}}>
+			<span style={styles.value}>{value}</span>
 		</div>
 	)
 
