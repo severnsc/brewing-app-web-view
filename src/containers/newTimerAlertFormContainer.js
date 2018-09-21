@@ -10,6 +10,7 @@ import {
 	convertMsToMinutesSecondsString,
 	convertMinutesSecondsStringToMs
 } from "../utils"
+import globalStyles from "../components/styles"
 
 class NewTimerAlertFormContainer extends Component {
 
@@ -85,7 +86,7 @@ class NewTimerAlertFormContainer extends Component {
 
 								return(
 									<Fragment>
-										<h2>{timer.name} alerts</h2>
+										<h2 style={globalStyles.subHeading}>{timer.name} alerts</h2>
 										<ul>
 											{alerts}
 										</ul>
