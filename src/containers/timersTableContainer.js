@@ -9,12 +9,13 @@ import {
 	UPDATE_TIMERS_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
+import { convertMsToMinutesSecondsString } from "../utils"
 
 const TimersTableContainer = () => {
 
 	const columns = [
     {id: shortid.generate(), name: "Timer name"},
-    {id: shortid.generate(), name: "Total duration"},
+    {id: shortid.generate(), name: "Total duration (HH:MM:SS)"},
     {id: shortid.generate(), name: "Number of alerts"}
   ]
 
@@ -31,7 +32,7 @@ const TimersTableContainer = () => {
         const tableRows = data.currentUser.timers.map(timer => {
         	const cells = [
         		timer.name,
-        		timer.duration,
+        		convertMsToMinutesSecondsString(timer.duration),
         		timer.timerAlerts.length
         	]
         	return {id: timer.id, cells}
