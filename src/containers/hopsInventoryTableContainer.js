@@ -58,6 +58,104 @@ const HopsInventoryTableContainer = () => (
 				})
 			}
 
+			const amountSort = (tableRows, order, sortIndex) => {
+				return tableRows.concat().sort((a, b) => {
+					const aLbs = parseInt(a.cells[sortIndex].split(" ")[0], 10)
+					const aOz = parseInt(a.cells[sortIndex].split(" ")[2], 10)
+					const aValue = aLbs + (aOz/16)
+
+					const bLbs = parseInt(b.cells[sortIndex].split(" ")[0], 10)
+					const bOz = parseInt(b.cells[sortIndex].split(" ")[2], 10)
+					const bValue = bLbs + (bOz/16)
+					
+					if(order === "asc"){
+	          if(aValue < bValue){
+	            return -1
+	          }
+
+	          if(aValue > bValue){
+	            return 1
+	          }
+
+	          return 0
+	        }else{
+	          if(aValue < bValue){
+	            return 1
+	          }
+
+	          if(aValue > bValue){
+	            return -1
+	          }
+
+	          return 0
+	        }
+				})
+			}
+
+			const alphaAcidSort = (tableRows, order, sortIndex) => {
+				return tableRows.concat().sort((a, b) => {
+					const aValue = parseInt(a.cells[sortIndex].split("%")[0], 10)
+					const bValue = parseInt(b.cells[sortIndex].split("%")[0], 10)
+
+					if(order === "asc"){
+	          if(aValue < bValue){
+	            return -1
+	          }
+
+	          if(aValue > bValue){
+	            return 1
+	          }
+
+	          return 0
+	        }else{
+	          if(aValue < bValue){
+	            return 1
+	          }
+
+	          if(aValue > bValue){
+	            return -1
+	          }
+
+	          return 0
+	        }
+				})
+			}
+
+			const costSort = (tableRows, order, sortIndex) => {
+				return tableRows.concat().sort((a, b) => {
+					const aValue = parseInt(a.cells[sortIndex].split("$")[1], 10)
+					const bValue = parseInt(b.cells[sortIndex].split("$")[1], 10)
+
+					if(order === "asc"){
+	          if(aValue < bValue){
+	            return -1
+	          }
+
+	          if(aValue > bValue){
+	            return 1
+	          }
+
+	          return 0
+	        }else{
+	          if(aValue < bValue){
+	            return 1
+	          }
+
+	          if(aValue > bValue){
+	            return -1
+	          }
+
+	          return 0
+	        }
+				})
+			}
+
+			const customSort = {
+				"Amount (lbs, oz)": amountSort,
+				"Alpha acid %": alphaAcidSort,
+				"Cost per lb": costSort
+			}
+
 			return(
 				<SortableTableContainer
 					sortOrderMutation={UPDATE_HOPS_TABLE_SORT}
@@ -72,6 +170,7 @@ const HopsInventoryTableContainer = () => (
 					pageNumberMutation={UPDATE_HOPS_TABLE_PAGE_NUMBER}
 					modalMutation={UPDATE_MODAL}
 					entityType="inventoryItem"
+					customSort={customSort}
 				/>
 			)
 
