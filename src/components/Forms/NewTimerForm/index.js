@@ -48,11 +48,11 @@ class NewTimerForm extends Component {
 				<form style={styles.form} onSubmit={this.handleSubmit}>
 					
 					<label style={focus === "name" ? labelFocusStyle : formStyles.label}>Name
-						<input style={focus === "name" ? inputFocusStyle : formStyles.input} name="name" type="text" value={this.state.name} onChange={this.handleNameChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+						<input style={focus === "name" ? inputFocusStyle : formStyles.input} name="name" type="text" value={name} onChange={this.handleNameChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 					</label>
 
 					<label style={focus === "duration" ? labelFocusStyle : formStyles.label}>Duration in minutes
-						<input style={focus === "duration" ? inputFocusStyle : formStyles.input} name="duration" type="number" value={this.state.duration} onChange={this.handleDurationChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+						<input style={focus === "duration" ? inputFocusStyle : formStyles.input} name="duration" type="number" value={duration} onChange={this.handleDurationChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 					</label>
 
 					<input style={globalStyles.button} type="submit" value="Create Timer" />
