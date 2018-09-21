@@ -8,6 +8,7 @@ import NewHopsForm from "./NewHopsForm"
 import NewYeastForm from "./NewYeastForm"
 import NewOtherForm from "./NewOtherForm"
 import NewTimerForm from "./NewTimerForm"
+import NewTimerAlertForm from "./NewTimerAlertForm"
 
 export {
 	LoginForm,
@@ -19,5 +20,6 @@ export {
 	NewHopsForm,
 	NewYeastForm,
 	NewOtherForm,
-	NewTimerForm
+	NewTimerForm,
+	NewTimerAlertForm
 }

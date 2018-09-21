@@ -8,7 +8,6 @@ import ResetPasswordForm from "./ResetPasswordForm"
 import SearchBar from "./SearchBar"
 import SortableTable from "./SortableTable"
 import InventoryForm from "./InventoryForm"
-import NewTimerAlertForm from "./NewTimerAlertForm"
 import Tabs from "./Tabs"
 import Tab from "./Tab"
 import Lovibond from "./Lovibond"
@@ -22,7 +21,8 @@ import {
 	NewHopsForm,
 	NewYeastForm,
 	NewOtherForm,
-	NewTimerForm
+	NewTimerForm,
+	NewTimerAlertForm
 } from "./Forms"
 
 export {
