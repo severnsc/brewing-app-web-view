@@ -2,10 +2,10 @@ import React from "react"
 import { Query, Mutation } from "react-apollo"
 import { UPDATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
 import { inventoryItemsQuery } from "../queries"
-import { MaltForm } from "../components"
+import { HopsForm } from "../components"
 import moment from "moment"
 
-const MaltContainer = ({ id }) => (
+const HopsContainer = ({ id }) => (
 	<Query query={inventoryItemsQuery}>
 		{({loading, error, data}) => {
 
@@ -16,8 +16,10 @@ const MaltContainer = ({ id }) => (
 			}
 
 			const { inventories } = data.currentUser
-			const inventory = inventories.find(inventory => inventory.name === "Malt")
+			const inventory = inventories.find(inventory => inventory.name === "Hops")
 			const item = inventory.items.find(item => item.id === id)
+			const { object } = item
+			const parsedObject = JSON.parse(object)
 
 			return(
 				<Mutation mutation={UPDATE_MODAL}>
@@ -29,17 +31,12 @@ const MaltContainer = ({ id }) => (
 								update={(cache, { data: { updateInventoryItem } }) => {
 									const { currentUser } = cache.readQuery({ query: inventoryItemsQuery })
 									const { inventories } = currentUser
-									const inventory = inventories.find(inventory => inventory.name === "Malt")
-									const items = inventory.items
-									const newItems = items.map(item => item.id === id ? updateInventoryItem : item)
-									const newInventory = {
-										...inventory,
-										items: newItems
-									}
+									const inventory = inventories.find(inventory => inventory.name === "Hops")
+									const newItems = inventory.items.map(item => item.id === id ? updateInventoryItem : item)
 									const data = {
 										currentUser: {
 											...currentUser,
-											inventories: inventories.map(inventory => inventory.name === "Malt" ? newInventory : inventory)
+											inventories: inventories.map(inventory => inventory.name === "Hops" ? {...inventory, items: newItems} : inventory)
 										}
 									}
 									cache.writeQuery({ query: inventoryItemsQuery, data })
@@ -47,11 +44,10 @@ const MaltContainer = ({ id }) => (
 							>
 								{updateInventoryItem => {
 
-									const updateMalt = (maltName, amount, maltType, maltColor, countryOfOrigin, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold) => {
+									const updateHops = (hopName, amount, countryOfOrigin, alphaAcids, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold) => {
 										const object = JSON.stringify({
-											name: maltName,
-											type: maltType,
-											color: maltColor,
+											name: hopName,
+											alphaAcids,
 											countryOfOrigin,
 										})
 										updateInventoryItem({
@@ -59,7 +55,7 @@ const MaltContainer = ({ id }) => (
 												id,
 												inventoryId: inventory.id,
 												object,
-												quantityUnit: "lbs",
+												quantityUnit: "oz",
 												currentQuantity: amount,
 												reorderQuantity,
 												reorderThreshold,
@@ -67,22 +63,18 @@ const MaltContainer = ({ id }) => (
 												unitCost,
 												reorderCost: unitCost * reorderQuantity,
 												lastReorderDate: purchaseDate,
-												deliveryDate
+												deliveryDate,
 											}
 										}).then(() => updateModal({ variables: {id: "", type: ""} }))
 									}
 
-									const { object } = item
-									const parsedObject = JSON.parse(object)
-
 									return(
-										<MaltForm
-											onSubmit={updateMalt}
+										<HopsForm
+											onSubmit={updateHops}
 											name={parsedObject.name}
-											type={parsedObject.type}
-											color={parseInt(parsedObject.color, 10)}
-											countryOfOrigin={parsedObject.countryOfOrigin}
 											amount={item.currentQuantity}
+											alphaAcids={parseInt(parsedObject.alphaAcids, 10)}
+											countryOfOrigin={parsedObject.countryOfOrigin}
 											unitCost={item.unitCost}
 											purchaseDate={item.lastReorderDate && moment(new Date(item.lastReorderDate)).format("YYYY-MM-DD")}
 											deliveryDate={item.deliveryDate && moment(new Date(item.deliveryDate)).format("YYYY-MM-DD")}
@@ -104,4 +96,4 @@ const MaltContainer = ({ id }) => (
 	</Query>
 )
 
-export default MaltContainer
+export default HopsContainer

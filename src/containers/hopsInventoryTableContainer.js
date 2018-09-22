@@ -169,7 +169,7 @@ const HopsInventoryTableContainer = () => (
 					currentPage={currentPage}
 					pageNumberMutation={UPDATE_HOPS_TABLE_PAGE_NUMBER}
 					modalMutation={UPDATE_MODAL}
-					entityType="inventoryItem"
+					entityType="hops"
 					customSort={customSort}
 				/>
 			)
