@@ -4,7 +4,7 @@ import styles from "./styles"
 import formStyles from "../styles"
 import globalStyles from "../../styles"
 
-class NewHopsForm extends Component {
+class HopsForm extends Component {
 
 	state = {
 		name: "",
@@ -100,8 +100,8 @@ class NewHopsForm extends Component {
 
 }
 
-NewHopsForm.propTypes = {
+HopsForm.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 }
 
-export default NewHopsForm
+export default HopsForm
