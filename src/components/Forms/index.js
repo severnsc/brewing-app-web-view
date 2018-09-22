@@ -5,7 +5,7 @@ import TimerForm from "./TimerForm"
 import TimerAlertForm from "./TimerAlertForm"
 import MaltForm from "./MaltForm"
 import HopsForm from "./HopsForm"
-import NewYeastForm from "./NewYeastForm"
+import YeastForm from "./YeastForm"
 import NewOtherForm from "./NewOtherForm"
 import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
@@ -18,7 +18,7 @@ export {
 	TimerAlertForm,
 	MaltForm,
 	HopsForm,
-	NewYeastForm,
+	YeastForm,
 	NewOtherForm,
 	NewTimerForm,
 	NewTimerAlertForm

@@ -2,7 +2,7 @@ import React from "react"
 import { Query, Mutation } from "react-apollo"
 import { CREATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
 import { inventoriesQuery } from "../queries"
-import { NewYeastForm } from "../components"
+import { YeastForm } from "../components"
 
 const NewHopsContainer = () => (
 	<Query query={inventoriesQuery}>
@@ -70,7 +70,7 @@ const NewHopsContainer = () => (
 									}
 
 									return(
-										<NewYeastForm onSubmit={createYeast} />
+										<YeastForm onSubmit={createYeast} />
 									)
 
 								}}

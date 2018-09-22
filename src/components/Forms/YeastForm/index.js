@@ -4,7 +4,7 @@ import styles from "./styles"
 import formStyles from "../styles"
 import globalStyles from "../../styles"
 
-class NewYeastForm extends Component {
+class YeastForm extends Component {
 
 	state = {
 		name: "",
@@ -122,8 +122,8 @@ class NewYeastForm extends Component {
 
 }
 
-NewYeastForm.propTypes = {
+YeastForm.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 }
 
-export default NewYeastForm
+export default YeastForm
