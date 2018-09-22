@@ -11,6 +11,7 @@ import NewTimerFormContainer from "./containers/newTimerFormContainer"
 import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
 import NewMaltContainer from "./containers/newMaltContainer"
+import MaltContainer from "./containers/maltContainer"
 import NewHopsContainer from "./containers/newHopsContainer"
 import NewYeastContainer from "./containers/newYeastContainer"
 import NewOtherContainer from "./containers/newOtherContainer"
@@ -34,6 +35,10 @@ class App extends Component {
 
             case "inventoryItem":
               modalItem = <InventoryItemFormContainer id={data.modal.id} />
+              break
+
+            case "malt":
+              modalItem = <MaltContainer id={data.modal.id} />
               break
 
             case "timer":

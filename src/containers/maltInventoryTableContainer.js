@@ -177,7 +177,7 @@ const MaltInventoryTableContainer = () => (
 					currentPage={currentPage}
 					pageNumberMutation={UPDATE_MALT_TABLE_PAGE_NUMBER}
 					modalMutation={UPDATE_MODAL}
-					entityType="inventoryItem"
+					entityType="malt"
 					customSort={customSort}
 				/>
 			)
