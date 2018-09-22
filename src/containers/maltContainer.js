@@ -1,11 +1,11 @@
 import React from "react"
 import { Query, Mutation } from "react-apollo"
-import { CREATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
-import { inventoriesQuery } from "../queries"
+import { UPDATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
+import { inventoryItemsQuery } from "../queries"
 import { MaltForm } from "../components"
 
-const NewMaltContainer = () => (
-	<Query query={inventoriesQuery}>
+const MaltContainer = ({ id }) => (
+	<Query query={inventoryItemsQuery}>
 		{({loading, error, data}) => {
 
 			if(loading) return <p>Loading...</p>
@@ -16,6 +16,7 @@ const NewMaltContainer = () => (
 
 			const { inventories } = data.currentUser
 			const inventory = inventories.find(inventory => inventory.name === "Malt")
+			const item = inventory.items.find(item => item.id === id)
 
 			return(
 				<Mutation mutation={UPDATE_MODAL}>
@@ -23,14 +24,16 @@ const NewMaltContainer = () => (
 
 						return(
 							<Mutation
-								mutation={CREATE_INVENTORY_ITEM}
-								update={(cache, { data: { createInventoryItem } }) => {
-									const { currentUser } = cache.readQuery({ query: inventoriesQuery })
+								mutation={UPDATE_INVENTORY_ITEM}
+								update={(cache, { data: { updateInventoryItem } }) => {
+									const { currentUser } = cache.readQuery({ query: inventoryItemsQuery })
 									const { inventories } = currentUser
 									const inventory = inventories.find(inventory => inventory.name === "Malt")
+									const items = inventory.items
+									const newItems = items.map(item => item.id === id ? updateInventoryItem : item)
 									const newInventory = {
 										...inventory,
-										items: [...inventory.items, createInventoryItem]
+										items: newItems
 									}
 									const data = {
 										currentUser: {
@@ -38,20 +41,21 @@ const NewMaltContainer = () => (
 											inventories: inventories.map(inventory => inventory.name === "Malt" ? newInventory : inventory)
 										}
 									}
-									cache.writeQuery({ query: inventoriesQuery, data })
+									cache.writeQuery({ query: inventoryItemsQuery, data })
 								}}
 							>
-								{createInventoryItem => {
+								{updateInventoryItem => {
 
-									const createMalt = (maltName, amount, maltType, maltColor, countryOfOrigin, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold) => {
+									const updateMalt = (maltName, amount, maltType, maltColor, countryOfOrigin, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold) => {
 										const object = JSON.stringify({
 											name: maltName,
 											type: maltType,
 											color: maltColor,
 											countryOfOrigin,
 										})
-										createInventoryItem({
+										updateInventoryItem({
 											variables: {
+												id,
 												inventoryId: inventory.id,
 												object,
 												quantityUnit: "lbs",
@@ -62,15 +66,28 @@ const NewMaltContainer = () => (
 												unitCost,
 												reorderCost: unitCost * reorderQuantity,
 												lastReorderDate: purchaseDate,
-												deliveryDate,
-												createdAt: new Date().toString(),
-												updatedAt: new Date().toString()
+												deliveryDate
 											}
 										}).then(() => updateModal({ variables: {id: "", type: ""} }))
 									}
 
+									const { object } = item
+									const parsedObject = JSON.parse(object)
+
 									return(
-										<MaltForm onSubmit={createMalt} />
+										<MaltForm
+											onSubmit={updateMalt}
+											name={parsedObject.name}
+											type={parsedObject.type}
+											color={parseInt(parsedObject.color, 10)}
+											countryOfOrigin={parsedObject.countryOfOrigin}
+											amount={item.currentQuantity}
+											unitCost={item.unitCost}
+											purchaseDate={item.lastReorderDate}
+											deliveryDate={item.deliveryDate}
+											reorderQuantity={item.reorderQuantity}
+											reorderThreshold={item.reorderThreshold}
+										/>
 									)
 
 								}}
@@ -86,4 +103,4 @@ const NewMaltContainer = () => (
 	</Query>
 )
 
-export default NewMaltContainer
+export default MaltContainer

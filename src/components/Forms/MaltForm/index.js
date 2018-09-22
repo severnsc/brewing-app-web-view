@@ -3,8 +3,9 @@ import PropTypes from "prop-types"
 import styles from "./styles"
 import formStyles from "../styles"
 import globalStyles from "../../styles"
+import moment from "moment"
 
-class NewMaltForm extends Component {
+class MaltForm extends Component {
 
 	state = {
 		name: "",
@@ -14,9 +15,46 @@ class NewMaltForm extends Component {
 		countryOfOrigin: "",
 		unitCost: 0,
 		purchaseDate: "",
+		deliveryDate: "",
 		reorderQuantity: 0,
 		reorderThreshold: 0,
 		focus: ""
+	}
+
+	componentDidMount() {
+		const {
+			name,
+			amount,
+			type,
+			color,
+			countryOfOrigin,
+			unitCost,
+			purchaseDate,
+			deliveryDate,
+			reorderQuantity,
+			reorderThreshold
+		} = this.props
+		const formattedPurchaseDate = purchaseDate 
+													? moment(new Date(purchaseDate)).format("YYYY-MM-DD")
+													: null
+
+		const formattedDeliveryDate = deliveryDate
+													? moment(new Date(deliveryDate)).format("YYYY-MM-DD")
+													: null
+
+
+		this.setState({
+			name: name || "",
+			amount: amount || 0,
+			type: type || "Base",
+			color: color || 0,
+			countryOfOrigin: countryOfOrigin || "",
+			unitCost: unitCost || 0,
+			purchaseDate: formattedPurchaseDate || "",
+			deliveryDate: formattedDeliveryDate || "",
+			reorderQuantity: reorderQuantity || 0,
+			reorderThreshold: reorderThreshold || 0
+		})
 	}
 
 	onSubmit = e => {
@@ -29,10 +67,11 @@ class NewMaltForm extends Component {
 			countryOfOrigin,
 			unitCost,
 			purchaseDate,
+			deliveryDate,
 			reorderQuantity,
 			reorderThreshold
 		} = this.state
-		this.props.onSubmit(name, amount, type, color, countryOfOrigin, unitCost, purchaseDate, reorderQuantity, reorderThreshold)
+		this.props.onSubmit(name, amount, type, color, countryOfOrigin, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold)
 	}
 
 	handleChange = e => {
@@ -61,6 +100,7 @@ class NewMaltForm extends Component {
 			countryOfOrigin,
 			unitCost,
 			purchaseDate,
+			deliveryDate,
 			reorderQuantity,
 			reorderThreshold,
 			focus
@@ -93,6 +133,9 @@ class NewMaltForm extends Component {
 				<label style={focus === "purchaseDate" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Purchase date
 					<input style={focus === "purchaseDate" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="purchaseDate" type="date" value={purchaseDate} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
+				<label style={focus === "deliveryDate" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Delivery date
+					<input style={focus === "deliveryDate" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="deliveryDate" type="date" value={deliveryDate} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				</label>
 				<label style={focus === "reorderQuantity" ? {...formStyles.label, ...formStyles.labelFocus} : formStyles.label}>Reorder Quantity
 					<input style={focus === "reorderQuantity" ? {...formStyles.input, ...formStyles.inputFocus} : formStyles.input} name="reorderQuantity" type="number" value={reorderQuantity} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
@@ -107,8 +150,17 @@ class NewMaltForm extends Component {
 
 }
 
-NewMaltForm.propTypes = {
-	onSubmit: PropTypes.func.isRequired
+MaltForm.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+	name: PropTypes.string,
+	amount: PropTypes.number,
+	type: PropTypes.string,
+	color: PropTypes.number,
+	countryOfOrigin: PropTypes.string,
+	unitCost: PropTypes.number,
+	purchaseDate: PropTypes.string,
+	reorderQuantity: PropTypes.number,
+	reorderThreshold: PropTypes.number
 }
 
-export default NewMaltForm
+export default MaltForm

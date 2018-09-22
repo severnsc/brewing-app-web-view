@@ -3,7 +3,7 @@ import SignupForm from "./SignupForm"
 import ForgotPasswordForm from "./ForgotPasswordForm"
 import TimerForm from "./TimerForm"
 import TimerAlertForm from "./TimerAlertForm"
-import NewMaltForm from "./NewMaltForm"
+import MaltForm from "./MaltForm"
 import NewHopsForm from "./NewHopsForm"
 import NewYeastForm from "./NewYeastForm"
 import NewOtherForm from "./NewOtherForm"
@@ -16,7 +16,7 @@ export {
 	ForgotPasswordForm,
 	TimerForm,
 	TimerAlertForm,
-	NewMaltForm,
+	MaltForm,
 	NewHopsForm,
 	NewYeastForm,
 	NewOtherForm,
