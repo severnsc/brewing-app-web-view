@@ -4,7 +4,7 @@ import { CREATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
 import { inventoriesQuery } from "../queries"
 import { YeastForm } from "../components"
 
-const NewHopsContainer = () => (
+const NewYeastContainer = () => (
 	<Query query={inventoriesQuery}>
 		{({loading, error, data}) => {
 
@@ -86,4 +86,4 @@ const NewHopsContainer = () => (
 	</Query>
 )
 
-export default NewHopsContainer
+export default NewYeastContainer
