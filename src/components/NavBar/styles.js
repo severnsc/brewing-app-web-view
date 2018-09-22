@@ -21,6 +21,7 @@ const styles = {
 	  display: "flex",
 	  flexFlow: "column",
 	  borderRadius: "5px",
+	  zIndex: 999
 	},
 	nav: {
 		display:"flex",
