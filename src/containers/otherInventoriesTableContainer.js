@@ -58,7 +58,7 @@ const OtherInventoriesTableContainer = () => (
           currentPage={currentPage}
           pageNumberMutation={UPDATE_OTHER_INVENTORIES_TABLE_PAGE_NUMBER}
           modalMutation={UPDATE_MODAL}
-          entityType="inventoryItem"
+          entityType="misc"
 				/>
 			)
 

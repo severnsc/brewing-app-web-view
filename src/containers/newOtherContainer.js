@@ -2,7 +2,7 @@ import React from "react"
 import { Query, Mutation } from "react-apollo"
 import { CREATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
 import { inventoriesQuery } from "../queries"
-import { NewOtherForm } from "../components"
+import { OtherForm } from "../components"
 
 const NewOtherContainer = () => (
 	<Query query={inventoriesQuery}>
@@ -66,7 +66,7 @@ const NewOtherContainer = () => (
 									}
 
 									return(
-										<NewOtherForm onSubmit={createOther} />
+										<OtherForm onSubmit={createOther} />
 									)
 
 								}}
