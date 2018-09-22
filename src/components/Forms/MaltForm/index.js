@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import styles from "./styles"
 import formStyles from "../styles"
 import globalStyles from "../../styles"
-import moment from "moment"
 
 class MaltForm extends Component {
 
@@ -34,13 +33,6 @@ class MaltForm extends Component {
 			reorderQuantity,
 			reorderThreshold
 		} = this.props
-		const formattedPurchaseDate = purchaseDate 
-													? moment(new Date(purchaseDate)).format("YYYY-MM-DD")
-													: null
-
-		const formattedDeliveryDate = deliveryDate
-													? moment(new Date(deliveryDate)).format("YYYY-MM-DD")
-													: null
 
 
 		this.setState({
@@ -50,8 +42,8 @@ class MaltForm extends Component {
 			color: color || 0,
 			countryOfOrigin: countryOfOrigin || "",
 			unitCost: unitCost || 0,
-			purchaseDate: formattedPurchaseDate || "",
-			deliveryDate: formattedDeliveryDate || "",
+			purchaseDate: purchaseDate || "",
+			deliveryDate: deliveryDate || "",
 			reorderQuantity: reorderQuantity || 0,
 			reorderThreshold: reorderThreshold || 0
 		})

@@ -3,6 +3,7 @@ import { Query, Mutation } from "react-apollo"
 import { UPDATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
 import { inventoryItemsQuery } from "../queries"
 import { MaltForm } from "../components"
+import moment from "moment"
 
 const MaltContainer = ({ id }) => (
 	<Query query={inventoryItemsQuery}>
@@ -83,8 +84,8 @@ const MaltContainer = ({ id }) => (
 											countryOfOrigin={parsedObject.countryOfOrigin}
 											amount={item.currentQuantity}
 											unitCost={item.unitCost}
-											purchaseDate={item.lastReorderDate}
-											deliveryDate={item.deliveryDate}
+											purchaseDate={item.lastReorderDate && moment(new Date(item.lastReorderDate)).format("YYYY-MM-DD")}
+											deliveryDate={item.deliveryDate && moment(new Date(item.deliveryDate)).format("YYYY-MM-DD")}
 											reorderQuantity={item.reorderQuantity}
 											reorderThreshold={item.reorderThreshold}
 										/>
