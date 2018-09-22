@@ -72,7 +72,7 @@ const YeastInventoryTableContainer = () => (
           currentPage={currentPage}
           pageNumberMutation={UPDATE_YEAST_TABLE_PAGE_NUMBER}
           modalMutation={UPDATE_MODAL}
-          entityType="inventoryItem"
+          entityType="yeast"
 				/>
 			)
 

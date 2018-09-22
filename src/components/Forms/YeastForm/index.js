@@ -4,7 +4,7 @@ import styles from "./styles"
 import formStyles from "../styles"
 import globalStyles from "../../styles"
 
-class NewYeastForm extends Component {
+class YeastForm extends Component {
 
 	state = {
 		name: "",
@@ -15,9 +15,40 @@ class NewYeastForm extends Component {
 		dryOrLiquid: "Dry",
 		unitCost: 0,
 		purchaseDate: "",
+		deliveryDate: "",
 		reorderQuantity: 0,
 		reorderThreshold: 0,
 		focus: ""
+	}
+
+	componentDidMount() {
+		const {
+			name,
+			amount,
+			lab,
+			number,
+			type,
+			dryOrLiquid,
+			unitCost,
+			purchaseDate,
+			deliveryDate,
+			reorderQuantity,
+			reorderThreshold
+		} = this.props
+
+		this.setState({
+			name: name || "",
+			amount: amount || 0,
+			lab: lab || "",
+			number: number || "",
+			type: type || "Ale",
+			dryOrLiquid: dryOrLiquid || "Dry",
+			unitCost: unitCost || 0,
+			purchaseDate: purchaseDate || "",
+			deliveryDate: deliveryDate || "",
+			reorderQuantity: reorderQuantity || 0,
+			reorderThreshold: reorderThreshold || 0
+		})
 	}
 
 	onSubmit = e => {
@@ -28,13 +59,14 @@ class NewYeastForm extends Component {
 			lab,
 			number,
 			type,
-			dry,
+			dryOrLiquid,
 			unitCost,
 			purchaseDate,
+			deliveryDate,
 			reorderQuantity,
 			reorderThreshold
 		} = this.state
-		this.props.onSubmit(name, amount, lab, number, type, dry, unitCost, purchaseDate, reorderQuantity, reorderThreshold)
+		this.props.onSubmit(name, amount, lab, number, type, dryOrLiquid, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold)
 	}
 
 	handleChange = e => {
@@ -61,9 +93,10 @@ class NewYeastForm extends Component {
 			lab,
 			number,
 			type,
-			dry,
+			dryOrLiquid,
 			unitCost,
 			purchaseDate,
+			deliveryDate,
 			reorderQuantity,
 			reorderThreshold,
 			focus
@@ -97,7 +130,7 @@ class NewYeastForm extends Component {
 					</select>
 				</label>
 				<label style={focus === "dry" ? labelFocusStyle : formStyles.label}>Dry or liquid
-					<select style={formStyles.select} name="dry" value={dry} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus}>
+					<select style={formStyles.select} name="dry" value={dryOrLiquid} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus}>
 						<option value="Dry">Dry</option>
 						<option value="Liquid">Liquid</option>
 					</select>
@@ -107,6 +140,9 @@ class NewYeastForm extends Component {
 				</label>
 				<label style={focus === "purchaseDate" ? labelFocusStyle : formStyles.label}>Purchase date
 					<input style={focus === "purchaseDate" ? inputFocusStyle : formStyles.input} name="purchaseDate" type="date" value={purchaseDate} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				</label>
+				<label style={focus === "deliveryDate" ? labelFocusStyle : formStyles.label}>Delivery date
+					<input style={focus === "deliveryDate" ? inputFocusStyle : formStyles.input} name="deliveryDate" type="date" value={deliveryDate} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
 				</label>
 				<label style={focus === "reorderQuantity" ? labelFocusStyle : formStyles.label}>Reorder Quantity
 					<input style={focus === "reorderQuantity" ? inputFocusStyle : formStyles.input} name="reorderQuantity" type="number" value={reorderQuantity} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
@@ -122,8 +158,26 @@ class NewYeastForm extends Component {
 
 }
 
-NewYeastForm.propTypes = {
-	onSubmit: PropTypes.func.isRequired
+YeastForm.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+	name: PropTypes.string,
+	amount: PropTypes.number,
+	lab: PropTypes.string,
+	number: PropTypes.string,
+	type: PropTypes.oneOf([
+		"Ale",
+		"Lager",
+		"Hybrid",
+		"Wine",
+		"Cider",
+		"Bacteria/Wild"
+	]),
+	dryOrLiquid: PropTypes.oneOf(["Dry", "Liquid"]),
+	unitCost: PropTypes.number,
+	purchaseDate: PropTypes.string,
+	deliveryDate: PropTypes.string,
+	reorderQuantity: PropTypes.number,
+	reorderThreshold: PropTypes.number
 }
 
-export default NewYeastForm
+export default YeastForm

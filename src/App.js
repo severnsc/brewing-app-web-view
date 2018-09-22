@@ -13,8 +13,9 @@ import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
 import NewMaltContainer from "./containers/newMaltContainer"
 import MaltContainer from "./containers/maltContainer"
 import NewHopsContainer from "./containers/newHopsContainer"
-import HopsContainer from "./containers/HopsContainer"
+import HopsContainer from "./containers/hopsContainer"
 import NewYeastContainer from "./containers/newYeastContainer"
+import YeastContainer from "./containers/yeastContainer"
 import NewOtherContainer from "./containers/newOtherContainer"
 import { Query } from 'react-apollo'
 import { modalQuery } from './queries'
@@ -44,6 +45,10 @@ class App extends Component {
 
             case "hops":
               modalItem = <HopsContainer id={data.modal.id} />
+              break
+
+            case "yeast":
+              modalItem = <YeastContainer id={data.modal.id} />
               break
 
             case "timer":

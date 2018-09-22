@@ -19,7 +19,7 @@ import {
 	TimerAlertForm,
 	MaltForm,
 	HopsForm,
-	NewYeastForm,
+	YeastForm,
 	NewOtherForm,
 	NewTimerForm,
 	NewTimerAlertForm
@@ -45,7 +45,7 @@ export {
 	NewTimerAlertForm,
 	MaltForm,
 	HopsForm,
-	NewYeastForm,
+	YeastForm,
 	NewOtherForm,
 	Tab,
 	Tabs,
