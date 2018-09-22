@@ -6,7 +6,7 @@ import TimerAlertForm from "./TimerAlertForm"
 import MaltForm from "./MaltForm"
 import HopsForm from "./HopsForm"
 import YeastForm from "./YeastForm"
-import OtherForm from "./NewOtherForm"
+import OtherForm from "./OtherForm"
 import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
 
