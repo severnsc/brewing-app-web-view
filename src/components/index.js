@@ -20,7 +20,7 @@ import {
 	MaltForm,
 	HopsForm,
 	YeastForm,
-	NewOtherForm,
+	OtherForm,
 	NewTimerForm,
 	NewTimerAlertForm
 } from "./Forms"
@@ -46,7 +46,7 @@ export {
 	MaltForm,
 	HopsForm,
 	YeastForm,
-	NewOtherForm,
+	OtherForm,
 	Tab,
 	Tabs,
 	Lovibond
