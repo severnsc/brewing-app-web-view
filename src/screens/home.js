@@ -1,4 +1,5 @@
 import React from 'react'
+import FlashContainer from "../containers/flashContainer"
 import SignupContainer from '../containers/signupContainer'
 
 const styles = {
@@ -8,12 +9,18 @@ const styles = {
 		display:"flex",
 		justifyContent:"center",
 		alignItems: "flex-start",
-		padding: "50px 10px 0px"
+		padding: "50px 10px 0px",
+		position: "relative"
+	},
+	flash: {
+		position: "absolute",
+		top: "60px"
 	}
 }
 
 const Home = () => (
 	<div style={styles.container}>
+		<FlashContainer style={styles.flash} />
   	<SignupContainer />
   </div>
 )
