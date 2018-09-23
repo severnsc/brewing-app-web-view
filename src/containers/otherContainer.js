@@ -1,12 +1,17 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Query, Mutation } from "react-apollo"
-import { UPDATE_INVENTORY_ITEM, UPDATE_MODAL } from "../mutations"
-import { inventoryItemsQuery } from "../queries"
+import {
+	CREATE_INVENTORY_ITEM,
+	UPDATE_INVENTORY_ITEM,
+	UPDATE_MODAL
+} from "../mutations"
+import { inventoriesQuery, inventoryItemsQuery } from "../queries"
 import { OtherForm } from "../components"
 import moment from "moment"
 
-const OtherContainer = ({ id }) => (
-	<Query query={inventoryItemsQuery}>
+const OtherContainer = ({ id, type }) => (
+	<Query query={type === "create" ? inventoriesQuery : inventoryItemsQuery}>
 		{({loading, error, data}) => {
 
 			if(loading) return <p>Loading...</p>
@@ -15,10 +20,45 @@ const OtherContainer = ({ id }) => (
 				return <p>Error!</p>
 			}
 
+			const createUpdateFunc = (cache, { data: { createInventoryItem } }) => {
+				const { currentUser } = cache.readQuery({ query: inventoriesQuery })
+				const { inventories } = currentUser
+				const inventory = inventories.find(inventory => inventory.name === "Other")
+				const newInventory = {
+					...inventory,
+					items: [...inventory.items, createInventoryItem]
+				}
+				const data = {
+					currentUser: {
+						...currentUser,
+						inventories: inventories.map(inventory => inventory.name === "Other" ? newInventory : inventory)
+					}
+				}
+				cache.writeQuery({ query: inventoriesQuery, data })
+			}
+
+			const updateUpdateFunc = (cache, { data: { updateInventoryItem } }) => {
+				const { currentUser } = cache.readQuery({ query: inventoryItemsQuery })
+				const { inventories } = currentUser
+				const inventory = inventories.find(inventory => inventory.name === "Other")
+				const newItems = inventory.items.map(item => item.id === id ? updateInventoryItem : item)
+				const data = {
+					currentUser: {
+						...currentUser,
+						inventories: inventories.map(inventory => inventory.name === "Other" ? {...inventory, items: newItems} : inventory)
+					}
+				}
+				cache.writeQuery({ query: inventoryItemsQuery, data })
+			}
+
 			const { inventories } = data.currentUser
 			const inventory = inventories.find(inventory => inventory.name === "Other")
-			const item = inventory.items.find(item => item.id === id)
-			const parsedObject = JSON.parse(item.object)
+			let item = {}
+			let parsedObject = {}
+			if(type === "update"){
+				item = inventory.items.find(item => item.id === id)
+				parsedObject = JSON.parse(item.object)
+			}
 
 			return(
 				<Mutation mutation={UPDATE_MODAL}>
@@ -26,28 +66,16 @@ const OtherContainer = ({ id }) => (
 
 						return(
 							<Mutation
-								mutation={UPDATE_INVENTORY_ITEM}
-								update={(cache, { data: { updateInventoryItem } }) => {
-									const { currentUser } = cache.readQuery({ query: inventoryItemsQuery })
-									const { inventories } = currentUser
-									const inventory = inventories.find(inventory => inventory.name === "Other")
-									const newItems = inventory.items.map(item => item.id === id ? updateInventoryItem : item)
-									const data = {
-										currentUser: {
-											...currentUser,
-											inventories: inventories.map(inventory => inventory.name === "Other" ? {...inventory, items: newItems} : inventory)
-										}
-									}
-									cache.writeQuery({ query: inventoryItemsQuery, data })
-								}}
+								mutation={type === "create" ? CREATE_INVENTORY_ITEM : UPDATE_INVENTORY_ITEM}
+								update={type === "create" ? createUpdateFunc : updateUpdateFunc}
 							>
-								{updateInventoryItem => {
+								{mutation => {
 
-									const updateOther = (itemName, amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold) => {
+									const otherFunc = (itemName, amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold) => {
 										const object = JSON.stringify({
 											name: itemName
 										})
-										updateInventoryItem({
+										mutation({
 											variables: {
 												id,
 												inventoryId: inventory.id,
@@ -61,23 +89,24 @@ const OtherContainer = ({ id }) => (
 												reorderCost: unitCost * reorderQuantity,
 												lastReorderDate: purchaseDate,
 												deliveryDate,
-												createdAt: new Date().toString(),
-												updatedAt: new Date().toString()
+												createdAt: item.createdAt || new Date().toString(),
+												updatedAt: item.updatedAt || new Date().toString()
 											}
 										}).then(() => updateModal({ variables: {id: "", type: ""} }))
 									}
 									
+									const props = {}
+									props.onSubmit = otherFunc
+									props.name = parsedObject.name || null
+									props.amount = item.currentQuantity || null
+									props.unitCost = item.unitCost || null
+									props.purchaseDate = item.lastReorderDate ? moment(new Date(item.lastReorderDate)).format("YYYY-MM-DD") : null
+									props.deliveryDate = item.deliveryDate ? moment(new Date(item.deliveryDate)).format("YYYY-MM-DD") : null
+									props.reorderQuantity = item.reorderQuantity || null
+									props.reorderThreshold = item.reorderThreshold || null
+
 									return(
-										<OtherForm
-											onSubmit={updateOther}
-											name={parsedObject.name}
-											amount={item.currentQuantity}
-											unitCost={item.unitCost}
-											purchaseDate={item.lastReorderDate && moment(new Date(item.lastReorderDate)).format("YYYY-MM-DD")}
-											deliveryDate={item.deliveryDate && moment(new Date(item.deliveryDate)).format("YYYY-MM-DD")}
-											reorderQuantity={item.reorderQuantity}
-											reorderThreshold={item.reorderThreshold}
-										/>
+										<OtherForm {...props} />
 									)
 
 								}}
@@ -92,5 +121,10 @@ const OtherContainer = ({ id }) => (
 		}}
 	</Query>
 )
+
+OtherContainer.propTypes = {
+	id: PropTypes.string,
+	type: PropTypes.oneOf(["create", "update"]).isRequired
+}
 
 export default OtherContainer
