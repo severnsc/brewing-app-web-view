@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flash renders a Flash component 1`] = `
+<span
+  style={
+    Object {
+      "background": "papayawhip",
+    }
+  }
+>
+  message
+</span>
+`;

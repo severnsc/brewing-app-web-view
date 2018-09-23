@@ -10,6 +10,7 @@ import InventoryForm from "./InventoryForm"
 import Tabs from "./Tabs"
 import Tab from "./Tab"
 import Lovibond from "./Lovibond"
+import Flash from "./Flash"
 import {
 	SignupForm,
 	LoginForm,
@@ -47,5 +48,6 @@ export {
 	OtherForm,
 	Tab,
 	Tabs,
-	Lovibond
+	Lovibond,
+	Flash
 }
