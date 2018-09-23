@@ -58,7 +58,7 @@ class HopsForm extends Component {
 			reorderQuantity,
 			reorderThreshold
 		} = this.state
-		this.props.onSubmit(name, amount, countryOfOrigin, alphaAcids, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold)
+		this.props.onSubmit(amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold, name, alphaAcids, countryOfOrigin)
 	}
 
 	handleChange = e => {

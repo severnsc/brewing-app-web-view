@@ -10,7 +10,6 @@ import TimerFormContainer from "./containers/timerFormContainer"
 import NewTimerFormContainer from "./containers/newTimerFormContainer"
 import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
-import HopsContainer from "./containers/hopsContainer"
 import YeastContainer from "./containers/yeastContainer"
 import OtherContainer from "./containers/otherContainer"
 import InventoryItemContainer from "./containers/inventoryItemContainer"
@@ -41,7 +40,7 @@ class App extends Component {
               break
 
             case "hops":
-              modalItem = <HopsContainer type="update" id={data.modal.id} />
+              modalItem = <InventoryItemContainer type="update" id={data.modal.id} inventoryType="Hops" />
               break
 
             case "yeast":
@@ -69,7 +68,7 @@ class App extends Component {
               break
 
             case "newHops":
-              modalItem = <HopsContainer type="create" />
+              modalItem = <InventoryItemContainer type="create" inventoryType="Hops" />
               break
 
             case "newYeast":
