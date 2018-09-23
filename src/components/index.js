@@ -1,7 +1,6 @@
 import Button from "./Button"
 import Timer from "./Timer"
 import HoverableTableRow from "./HoverableTableRow"
-import InventoryItemForm from "./InventoryItemForm"
 import Modal from "./Modal"
 import NavBar from "./NavBar"
 import ResetPasswordForm from "./ResetPasswordForm"
@@ -30,7 +29,6 @@ export {
 	Timer,
 	ForgotPasswordForm,
 	HoverableTableRow,
-	InventoryItemForm,
 	LoginForm,
 	Modal,
 	NavBar,
