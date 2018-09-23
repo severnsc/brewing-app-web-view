@@ -2,12 +2,13 @@ import React from "react"
 import PropTypes from "prop-types"
 import styles from "./styles"
 
-const Flash = ({ message }) => (
-	<span style={styles.flash}>{message}</span>
+const Flash = ({ message, style }) => (
+	<span style={{...styles.flash, ...style}}>{message}</span>
 )
 
 Flash.propTypes = {
-	message: PropTypes.string.isRequired
+	message: PropTypes.string.isRequired,
+	style: PropTypes.object
 }
 
 export default Flash
