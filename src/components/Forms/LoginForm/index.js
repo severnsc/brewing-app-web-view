@@ -49,7 +49,7 @@ class LoginForm extends Component {
         <h1 style={{...globalStyles.heading, ...styles.title}}>Brewing App</h1>
         <h2 style={globalStyles.subHeading}>Login</h2>
         <form onSubmit={e => this.onSubmit(e)} style={styles.form}>
-          {error}
+          <span style={globalStyles.error}>{error}</span>
           <label style={focus === "username" ? labelFocusStyle : formStyles.label}>Username
             <input autoFocus style={focus === "username" ? inputFocusStyle : formStyles.input} onFocus={this.toggleFocus} onBlur={this.toggleFocus} name="username" value={username} type="text" onChange={e => this.handleUsername(e)} />
           </label>

@@ -1,4 +1,4 @@
-import { green } from "./constants"
+import { green, errorRed } from "./constants"
 
 export default {
 	button: {
@@ -22,5 +22,8 @@ export default {
 	subHeading: {
 		fontSize: "2em",
 		color: "hsl(0, 0%, 45%)",
+	},
+	error: {
+		color: errorRed
 	}
 }
