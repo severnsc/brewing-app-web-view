@@ -63,7 +63,7 @@ class MaltForm extends Component {
 			reorderQuantity,
 			reorderThreshold
 		} = this.state
-		this.props.onSubmit(name, amount, type, color, countryOfOrigin, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold)
+		this.props.onSubmit(amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold, name, type, color, countryOfOrigin)
 	}
 
 	handleChange = e => {

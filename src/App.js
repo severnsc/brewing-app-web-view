@@ -10,10 +10,10 @@ import TimerFormContainer from "./containers/timerFormContainer"
 import NewTimerFormContainer from "./containers/newTimerFormContainer"
 import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
-import MaltContainer from "./containers/maltContainer"
 import HopsContainer from "./containers/hopsContainer"
 import YeastContainer from "./containers/yeastContainer"
 import OtherContainer from "./containers/otherContainer"
+import InventoryItemContainer from "./containers/inventoryItemContainer"
 import { Query } from 'react-apollo'
 import { modalQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
@@ -37,7 +37,7 @@ class App extends Component {
               break
 
             case "malt":
-              modalItem = <MaltContainer type="update" id={data.modal.id} />
+              modalItem = <InventoryItemContainer type="update" id={data.modal.id} inventoryType="Malt" />
               break
 
             case "hops":
@@ -65,7 +65,7 @@ class App extends Component {
               break
 
             case "newMalt":
-              modalItem = <MaltContainer type="create" />
+              modalItem = <InventoryItemContainer type="create" inventoryType="Malt" />
               break
 
             case "newHops":
