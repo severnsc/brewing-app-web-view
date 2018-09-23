@@ -1,6 +1,5 @@
 import React from 'react'
-import { ForgotPasswordForm } from '../components'
-import { sendRecoveryEmail } from '../adapters/userAdapter'
+import ForgotPasswordContainer from "../containers/forgotPasswordContainer"
 
 const styles = {
 	container: {
@@ -13,12 +12,9 @@ const styles = {
 	}
 }
 
-const ForgotPassword = () => (
+const ForgotPassword = ({ history }) => (
 	<div style={styles.container}>
-  	<ForgotPasswordForm 
-    	sendRecoveryEmail={sendRecoveryEmail} 
-    	navigate={() => {}}
-  	/>
+		<ForgotPasswordContainer history={history} />
   </div>
 )
 
