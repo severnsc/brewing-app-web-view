@@ -50,21 +50,7 @@ class OtherForm extends Component {
 			reorderQuantity,
 			reorderThreshold
 		} = this.state
-		this.props.onSubmit(name, amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold)
-	}
-
-	onSubmit = e => {
-		e.preventDefault()
-		const {
-			name,
-			amount,
-			unitCost,
-			purchaseDate,
-			deliveryDate,
-			reorderQuantity,
-			reorderThreshold
-		} = this.state
-		this.props.onSubmit(name, amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold)
+		this.props.onSubmit(amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold, name)
 	}
 
 	handleChange = e => {
