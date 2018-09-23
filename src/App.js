@@ -12,7 +12,6 @@ import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
 import MaltContainer from "./containers/maltContainer"
 import HopsContainer from "./containers/hopsContainer"
-import NewYeastContainer from "./containers/newYeastContainer"
 import YeastContainer from "./containers/yeastContainer"
 import NewOtherContainer from "./containers/newOtherContainer"
 import OtherContainer from "./containers/otherContainer"
@@ -47,7 +46,7 @@ class App extends Component {
               break
 
             case "yeast":
-              modalItem = <YeastContainer id={data.modal.id} />
+              modalItem = <YeastContainer type="update" id={data.modal.id} />
               break
 
             case "misc":
@@ -75,7 +74,7 @@ class App extends Component {
               break
 
             case "newYeast":
-              modalItem = <NewYeastContainer />
+              modalItem = <YeastContainer type="create" />
               break
 
             case "newOther":
