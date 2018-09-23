@@ -8,7 +8,7 @@ const SearchBarContainer = ({ mutation }) => (
     {mutation => {
 
       const updateFilter = value => {
-        mutation({ variables: { value: value }})
+        mutation({ variables: { value: value.toLowerCase() }})
       }
 
       return(
