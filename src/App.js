@@ -5,19 +5,11 @@ import Main from './Main'
 import Header from './containers/common/header'
 import ModalContainer from "./containers/common/modalContainer"
 import InventoryFormContainer from "./containers/inventoryFormContainer"
-import InventoryItemFormContainer from "./containers/inventoryItemFormContainer"
 import TimerFormContainer from "./containers/timerFormContainer"
 import NewTimerFormContainer from "./containers/newTimerFormContainer"
 import NewTimerAlertFormContainer from "./containers/newTimerAlertFormContainer"
 import ActiveTimerAlertsContainer from "./containers/activeTimerAlertsContainer"
-import NewMaltContainer from "./containers/newMaltContainer"
-import MaltContainer from "./containers/maltContainer"
-import NewHopsContainer from "./containers/newHopsContainer"
-import HopsContainer from "./containers/hopsContainer"
-import NewYeastContainer from "./containers/newYeastContainer"
-import YeastContainer from "./containers/yeastContainer"
-import NewOtherContainer from "./containers/newOtherContainer"
-import OtherContainer from "./containers/otherContainer"
+import InventoryItemContainer from "./containers/inventoryItemContainer"
 import { Query } from 'react-apollo'
 import { modalQuery } from './queries'
 import { ApolloProvider } from "react-apollo"
@@ -36,24 +28,20 @@ class App extends Component {
               modalItem = <InventoryFormContainer id={data.modal.id} />
               break
 
-            case "inventoryItem":
-              modalItem = <InventoryItemFormContainer id={data.modal.id} />
-              break
-
             case "malt":
-              modalItem = <MaltContainer id={data.modal.id} />
+              modalItem = <InventoryItemContainer type="update" id={data.modal.id} inventoryType="Malt" />
               break
 
             case "hops":
-              modalItem = <HopsContainer id={data.modal.id} />
+              modalItem = <InventoryItemContainer type="update" id={data.modal.id} inventoryType="Hops" />
               break
 
             case "yeast":
-              modalItem = <YeastContainer id={data.modal.id} />
+              modalItem = <InventoryItemContainer type="update" id={data.modal.id} inventoryType="Yeast" />
               break
 
             case "misc":
-              modalItem = <OtherContainer id={data.modal.id} />
+              modalItem = <InventoryItemContainer type="update" id={data.modal.id} inventoryType="Other" />
               break
 
             case "timer":
@@ -69,19 +57,19 @@ class App extends Component {
               break
 
             case "newMalt":
-              modalItem = <NewMaltContainer />
+              modalItem = <InventoryItemContainer type="create" inventoryType="Malt" />
               break
 
             case "newHops":
-              modalItem = <NewHopsContainer />
+              modalItem = <InventoryItemContainer type="create" inventoryType="Hops" />
               break
 
             case "newYeast":
-              modalItem = <NewYeastContainer />
+              modalItem = <InventoryItemContainer type="create" inventoryType="Yeast" />
               break
 
             case "newOther":
-              modalItem = <NewOtherContainer />
+              modalItem = <InventoryItemContainer type="create" inventoryType="Other" />
               break
 
             case "activeTimerAlerts":

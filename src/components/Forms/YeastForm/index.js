@@ -66,7 +66,7 @@ class YeastForm extends Component {
 			reorderQuantity,
 			reorderThreshold
 		} = this.state
-		this.props.onSubmit(name, amount, lab, number, type, dryOrLiquid, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold)
+		this.props.onSubmit(amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold, name, lab, number, type, dryOrLiquid)
 	}
 
 	handleChange = e => {
@@ -130,7 +130,7 @@ class YeastForm extends Component {
 					</select>
 				</label>
 				<label style={focus === "dry" ? labelFocusStyle : formStyles.label}>Dry or liquid
-					<select style={formStyles.select} name="dry" value={dryOrLiquid} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus}>
+					<select style={formStyles.select} name="dryOrLiquid" value={dryOrLiquid} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus}>
 						<option value="Dry">Dry</option>
 						<option value="Liquid">Liquid</option>
 					</select>

@@ -7,10 +7,15 @@ import {
 	UPDATE_MODAL
 } from "../mutations"
 import { inventoriesQuery, inventoryItemsQuery } from "../queries"
-import { YeastForm } from "../components"
+import {
+	HopsForm,
+	MaltForm,
+	YeastForm,
+	OtherForm
+} from "../components"
 import moment from "moment"
 
-const YeastContainer = ({ id, type }) => (
+const InventoryItemContainer = ({ id, type, inventoryType }) => (
 	<Query query={type === "create" ? inventoriesQuery : inventoryItemsQuery}>
 		{({loading, error, data}) => {
 
@@ -20,10 +25,10 @@ const YeastContainer = ({ id, type }) => (
 				return <p>Error!</p>
 			}
 
-			const createUpdateFunc = (cache, { data: { createInventoryItem } }) => {
+			const createUpdateFunction = (cache, { data: { createInventoryItem } }) => {
 				const { currentUser } = cache.readQuery({ query: inventoriesQuery })
 				const { inventories } = currentUser
-				const inventory = inventories.find(inventory => inventory.name === "Yeast")
+				const inventory = inventories.find(inventory => inventory.name === inventoryType)
 				const newInventory = {
 					...inventory,
 					items: [...inventory.items, createInventoryItem]
@@ -31,28 +36,28 @@ const YeastContainer = ({ id, type }) => (
 				const data = {
 					currentUser: {
 						...currentUser,
-						inventories: inventories.map(inventory => inventory.name === "Yeast" ? newInventory : inventory)
+						inventories: inventories.map(inventory => inventory.name === inventoryType ? newInventory : inventory)
 					}
 				}
 				cache.writeQuery({ query: inventoriesQuery, data })
 			}
 
-			const updateUpdateFunc = (cache, { data: { updateInventoryItem } }) => {
+			const updateUpdateFunction = (cache, { data: { updateInventoryItem } }) => {
 				const { currentUser } = cache.readQuery({ query: inventoryItemsQuery })
 				const { inventories } = currentUser
-				const inventory = inventories.find(inventory => inventory.name === "Yeast")
+				const inventory = inventories.find(inventory => inventory.name === inventoryType)
 				const newItems = inventory.items.map(item => item.id === id ? updateInventoryItem : item)
 				const data = {
 					currentUser: {
 						...currentUser,
-						inventories: inventories.map(inventory => inventory.name === "Yeast" ? {...inventory, items: newItems} : inventory)
+						inventories: inventories.map(inventory => inventory.name === inventoryType ? {...inventory, items: newItems} : inventory)
 					}
 				}
 				cache.writeQuery({ query: inventoryItemsQuery, data })
 			}
 
 			const { inventories } = data.currentUser
-			const inventory = inventories.find(inventory => inventory.name === "Yeast")
+			const inventory = inventories.find(inventory => inventory.name === inventoryType)
 			let item = {}
 			let parsedObject = {}
 			if(type === "update"){
@@ -67,24 +72,50 @@ const YeastContainer = ({ id, type }) => (
 						return(
 							<Mutation
 								mutation={type === "create" ? CREATE_INVENTORY_ITEM : UPDATE_INVENTORY_ITEM}
-								update={type === "create" ? createUpdateFunc : updateUpdateFunc}
+								update={type === "create" ? createUpdateFunction : updateUpdateFunction}
 							>
 								{mutation => {
 
-									const yeastFunc = (yeastName, amount, yeastLab, yeastNumber, yeastType, dryOrLiquid, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold) => {
-										const object = JSON.stringify({
-											name: yeastName,
-											yeastLab,
-											yeastNumber,
-											yeastType,
-											dry: dryOrLiquid === "Dry"
-										})
+									const itemFunc = (amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold, ...rest) => {
+										let object
+										switch(inventoryType) {
+											case "Hops":
+												object = JSON.stringify({
+																name: rest[0],
+																alphaAcids: rest[1],
+																countryOfOrigin: rest[2],
+															})
+												break
+
+											case "Malt":
+												object = JSON.stringify({
+																name: rest[0],
+																type: rest[1],
+																color: rest[2],
+																countryOfOrigin: rest[3],
+															})
+												break
+
+											case "Yeast":
+												object = JSON.stringify({
+																name: rest[0],
+																yeastLab: rest[1],
+																yeastNumber: rest[2],
+																yeastType: rest[3],
+																dry: rest[4] === "Dry"
+															})
+												break
+
+											default:
+												object = JSON.stringify({name: rest[0]})
+										}
+										
 										mutation({
 											variables: {
 												id,
 												inventoryId: inventory.id,
 												object,
-												quantityUnit: "vials",
+												quantityUnit: "oz",
 												currentQuantity: amount,
 												reorderQuantity,
 												reorderThreshold,
@@ -94,28 +125,41 @@ const YeastContainer = ({ id, type }) => (
 												lastReorderDate: purchaseDate,
 												deliveryDate,
 												createdAt: item.createdAt || new Date().toString(),
-												updatedAt: item.updatedAt || new Date().toString()
+												updatedAt: item.updatedAt || new Date().toString() 
 											}
 										}).then(() => updateModal({ variables: {id: "", type: ""} }))
 									}
 
 									const props = {}
-									props.onSubmit = yeastFunc
+									props.onSubmit = itemFunc
 									props.name = parsedObject.name || null
 									props.amount = item.currentQuantity || null
+									props.color = parsedObject.color || null
+									props.type = parsedObject.type || parsedObject.yeastType || null
+									props.alphaAcids = parseInt(parsedObject.alphaAcids, 10) || null
+									props.countryOfOrigin = parsedObject.countryOfOrigin || null
 									props.lab = parsedObject.yeastLab || null
 									props.number = parsedObject.yeastNumber || null
-									props.type = parsedObject.yeastType || null
-									props.dryOrLiquid = parsedObject.dryOrLiquid || null
+									props.dryOrLiquid = parsedObject.dry ? "Dry" : "Liquid"
 									props.unitCost = item.unitCost || null
 									props.purchaseDate = item.lastReorderDate ? moment(new Date(item.lastReorderDate)).format("YYYY-MM-DD") : null
 									props.deliveryDate = item.deliveryDate ? moment(new Date(item.deliveryDate)).format("YYYY-MM-DD") : null
 									props.reorderQuantity = item.reorderQuantity || null
 									props.reorderThreshold = item.reorderThreshold || null
 
-									return(
-										<YeastForm {...props} />
-									)
+									switch(inventoryType){
+										case "Hops":
+											return <HopsForm {...props} />
+
+										case "Malt":
+											return <MaltForm {...props} />
+
+										case "Yeast":
+											return <YeastForm {...props} />
+
+										default:
+											return <OtherForm {...props} />
+									}
 
 								}}
 							</Mutation>
@@ -130,9 +174,10 @@ const YeastContainer = ({ id, type }) => (
 	</Query>
 )
 
-YeastContainer.propTypes = {
+InventoryItemContainer.propTypes = {
 	id: PropTypes.string,
-	type: PropTypes.oneOf(["create", "update"]).isRequired
+	type: PropTypes.oneOf(["create", "update"]).isRequired,
+	inventoryType: PropTypes.oneOf(["Hops", "Malt", "Yeast", "Other"]).isRequired
 }
 
-export default YeastContainer
+export default InventoryItemContainer
