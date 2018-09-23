@@ -34,6 +34,11 @@ describe("Flash", () => {
 		expect(flash.find("span").prop("style").borderLeft).toBe("3px solid " + green)
 	})
 
+	it("has color hsl(0, 0%, 13%)", () => {
+		const flash = shallow(<Flash message="hello" />)
+		expect(flash.find("span").prop("style").color).toBe("hsl(0, 0%, 13%)")
+	})
+
 	it("passes style props through", () => {
 		const flash = shallow(<Flash message="hello" style={{position: "absolute"}} />)
 		expect(flash.find("span").prop("style").position).toBe("absolute")

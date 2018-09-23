@@ -6,6 +6,7 @@ exports[`Flash renders a Flash component 1`] = `
     Object {
       "background": "papayawhip",
       "borderLeft": "3px solid hsl(167, 90%, 38%)",
+      "color": "hsl(0, 0%, 13%)",
       "padding": "5px 10px",
     }
   }
