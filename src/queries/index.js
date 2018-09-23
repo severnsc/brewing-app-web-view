@@ -14,7 +14,7 @@ import hopsInventoryTableQuery from "./hopsInventoryTable"
 import yeastInventoryTableQuery from "./yeastInventoryTable"
 import otherInventoriesTableQuery from "./otherInventoriesTable"
 import currentUserQuery from "./currentUser"
-import flash from "./flash"
+import flashQuery from "./flash"
 
 export {
   dashboardTableQuery,
@@ -33,5 +33,5 @@ export {
   yeastInventoryTableQuery,
   otherInventoriesTableQuery,
   currentUserQuery,
-  flash
+  flashQuery
 }
