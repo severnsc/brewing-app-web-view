@@ -138,8 +138,8 @@ const InventoryItemContainer = ({ id, type, inventoryType }) => (
 									props.type = parsedObject.type || parsedObject.yeastType || null
 									props.alphaAcids = parseInt(parsedObject.alphaAcids, 10) || null
 									props.countryOfOrigin = parsedObject.countryOfOrigin || null
-									props.yeastLab = parsedObject.yeastLab || null
-									props.yeastNumber = parsedObject.yeastNumber || null
+									props.lab = parsedObject.yeastLab || null
+									props.number = parsedObject.yeastNumber || null
 									props.dryOrLiquid = parsedObject.dry ? "Dry" : "Liquid"
 									props.unitCost = item.unitCost || null
 									props.purchaseDate = item.lastReorderDate ? moment(new Date(item.lastReorderDate)).format("YYYY-MM-DD") : null
