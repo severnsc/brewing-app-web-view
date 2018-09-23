@@ -91,8 +91,8 @@ const HopsContainer = ({ id, type }) => (
 												reorderCost: unitCost * reorderQuantity,
 												lastReorderDate: purchaseDate,
 												deliveryDate,
-												createdAt: type === "create" ? new Date().toString() : item.createdAt,
-												updatedAt: type === "create" ? new Date().toString() : item.updatedAt 
+												createdAt: item.createdAt || new Date().toString(),
+												updatedAt: item.updatedAt || new Date().toString() 
 											}
 										}).then(() => updateModal({ variables: {id: "", type: ""} }))
 									}
