@@ -1,8 +1,22 @@
-import React from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Flash } from "../components"
-import { Query } from "react-apollo"
+import { Query, Mutation } from "react-apollo"
 import { flashQuery } from "../queries"
+import { UPDATE_FLASH } from "../mutations"
+
+class FlashComponent extends Component {
+
+	componentWillUnmount() {
+		this.props.unmount()
+	}
+
+	render(){
+		const { message, style } = this.props
+		return <Flash message={message} style={style} />
+	}
+
+}
 
 const FlashContainer = ({ style }) => (
 	<Query query={flashQuery}>
@@ -16,7 +30,23 @@ const FlashContainer = ({ style }) => (
 
 			const { message } = data.flash
 
-			return message ? <Flash message={message} style={style} /> : null
+			return(
+				<Mutation mutation={UPDATE_FLASH}>
+					{updateFlash => {
+
+						const removeFlash = () => {
+							updateFlash({ variables: { message: "" } })
+						}
+
+						return(
+							message 
+							? <FlashComponent message={message} style={style} unmount={removeFlash} />
+							: null
+						)
+
+					}}
+				</Mutation>
+			)
 
 		}}
 	</Query>
