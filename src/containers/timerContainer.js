@@ -1,9 +1,46 @@
-import React from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Timer } from "../components"
 import { Query } from "react-apollo"
 import { timersQuery } from "../queries"
 import { convertMsToMinutesSecondsString } from "../utils"
+
+class TimerComponent extends Component {
+
+	componentDidMount() {
+		if(this.props.isRunning){
+			this.props.startPolling()
+		}
+	}
+
+	render() {
+
+		const {
+			name,
+			time,
+			isRunning,
+			startTimer,
+			stopTimer,
+			resetTimer,
+			nextAlertMessage,
+			nextAlertActivationTime
+		} = this.props
+
+		return(
+			<Timer
+				name={name}
+				time={time}
+				isRunning={isRunning}
+				startTimer={startTimer}
+				stopTimer={stopTimer}
+				resetTimer={resetTimer}
+				nextAlertMessage={nextAlertMessage}
+				nextAlertActivationTime={nextAlertActivationTime}
+			/>
+		)
+	}
+
+}
 
 const TimerContainer = ({ id, startTimer, stopTimer, resetTimer }) => (
 	<Query query={timersQuery}>
@@ -53,7 +90,7 @@ const TimerContainer = ({ id, startTimer, stopTimer, resetTimer }) => (
 			}
 
 			return(
-				<Timer
+				<TimerComponent
 					name={timer.name}
 					time={time}
 					isRunning={timer.isRunning}
@@ -62,6 +99,7 @@ const TimerContainer = ({ id, startTimer, stopTimer, resetTimer }) => (
 					resetTimer={resetTimer}
 					nextAlertMessage={nextAlertMessage}
 					nextAlertActivationTime={nextAlertActivationTime}
+					startPolling={() => startPolling(1000)}
 				/>
 			)
 
