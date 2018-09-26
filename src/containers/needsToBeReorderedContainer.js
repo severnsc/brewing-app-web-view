@@ -1,11 +1,11 @@
 import React from "react"
 import { Query } from "react-apollo"
-import { needsToBeReorderedTableQuery } from "../queries"
+import { inventoryItemsQuery } from "../queries"
 import { ScrollableList } from "../components"
 import shortid from "shortid"
 
 const NeedsToBeReorderedContainer = () => (
-	<Query query={needsToBeReorderedTableQuery}>
+	<Query query={inventoryItemsQuery}>
 		{({loading, error, data}) => {
 
 			if(loading) return <p>Loading...</p>

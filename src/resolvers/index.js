@@ -94,18 +94,6 @@ const otherInventoriesTableQuery = gql`
   }
 `
 
-const needsToBeReorderedTableQuery = gql`
-  query {
-    needsToBeReorderedTable @client {
-      sortBy
-      sortOrder
-      itemsPerPage
-      currentPage
-      filterString
-    }
-  }
-`
-
 export default {
   Mutation: {
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
@@ -943,101 +931,6 @@ export default {
       }
 
       cache.writeQuery({ query: otherInventoriesTableQuery, data })
-
-      return null
-
-    },
-
-    updateNeedsToBeReorderedTableSort: (_, { cellName }, { cache }) => {
-
-      const { needsToBeReorderedTable } = cache.readQuery({ query: needsToBeReorderedTableQuery })
-
-      const { sortOrder, sortBy } = needsToBeReorderedTable
-
-      let order = sortOrder
-      if(sortBy === cellName){
-        order = sortOrder === "asc" ? "desc" : "asc"
-      }else{
-        order = "asc"
-      }
-
-      const data = {
-        needsToBeReorderedTable: {
-          ...needsToBeReorderedTable,
-          sortOrder: order,
-          sortBy: cellName
-        }
-      }
-
-      cache.writeQuery({ query: needsToBeReorderedTableQuery, data })
-
-      return null
-
-    },
-
-    updateNeedsToBeReorderedTableItemLimit: (_, { value }, { cache }) => {
-
-      const query = gql`
-        query {
-
-          currentUser {
-            inventories {
-              name
-              items {
-                currentQuantity
-                reorderThreshold
-              }
-            }
-          }
-
-          needsToBeReorderedTable @client {
-            sortBy
-            sortOrder
-            itemsPerPage
-            currentPage
-          }
-        }
-      `
-
-      const { currentUser, needsToBeReorderedTable } = cache.readQuery({ query })
-
-      let pageNumber = needsToBeReorderedTable.currentPage
-      const allItems = currentUser.inventories.map(inventory => inventory.items).flat()
-      const itemsToBeReordered = allItems.filter(item => item.currentQuantity <= item.reorderThreshold)
-      if(pageNumber >= itemsToBeReordered.length/value){
-        pageNumber = Math.ceil(itemsToBeReordered.length/value) - 1
-      }
-
-      const data = {
-        currentUser,
-        needsToBeReorderedTable: {
-          ...needsToBeReorderedTable,
-          itemsPerPage: value,
-          currentPage: pageNumber
-        }
-      }
-
-      cache.writeQuery({ query, data })
-
-      return null
-
-    },
-
-    updateNeedsToBeReorderedTablePageNumber: (_, { type }, { cache }) => {
-
-      const { needsToBeReorderedTable } = cache.readQuery({ query: needsToBeReorderedTableQuery })
-
-      const { currentPage } = needsToBeReorderedTable
-      const integer = type === "INCREMENT" ? 1 : -1
-
-      const data = {
-        needsToBeReorderedTable: {
-          ...needsToBeReorderedTable,
-          currentPage: currentPage + integer
-        }
-      }
-
-      cache.writeQuery({ query: needsToBeReorderedTableQuery, data })
 
       return null
 
