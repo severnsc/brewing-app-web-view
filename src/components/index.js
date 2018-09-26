@@ -11,6 +11,7 @@ import Tabs from "./Tabs"
 import Tab from "./Tab"
 import Lovibond from "./Lovibond"
 import Flash from "./Flash"
+import ScrollableList from "./ScrollableList"
 import {
 	SignupForm,
 	LoginForm,
@@ -49,5 +50,6 @@ export {
 	Tab,
 	Tabs,
 	Lovibond,
-	Flash
+	Flash,
+	ScrollableList
 }
