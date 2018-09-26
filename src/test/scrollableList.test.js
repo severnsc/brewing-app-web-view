@@ -18,7 +18,7 @@ describe("ScrollableList", () => {
 
 	it("renders the header from the header prop", () => {
 		const header = (
-			<div>
+			<div id="header">
 				<span>Name</span>
 				<span>Amount</span>
 			</div>
@@ -30,14 +30,14 @@ describe("ScrollableList", () => {
 				renderItem={() => {}}
 			/>
 		)
-		expect(list.find("div").childAt(0).text()).toBe("Name")
-		expect(list.find("div").childAt(1).text()).toBe("Amount")
+		expect(list.find("#header").childAt(0).text()).toBe("Name")
+		expect(list.find("#header").childAt(1).text()).toBe("Amount")
 	})
 
 	it("renders the data following the renderItem prop", () => {
 		const data = [{key:1, name: "Name", amount: "Amount"}]
 		const renderItem = item => (
-			<div key={item.key}>
+			<div id="row" key={item.key}>
 				<span>{item.name}</span>
 				<span>{item.amount}</span>
 			</div>
@@ -48,8 +48,39 @@ describe("ScrollableList", () => {
 				renderItem={renderItem}
 			/>
 		)
-		expect(list.find("div").childAt(0).text()).toBe("Name")
-		expect(list.find("div").childAt(1).text()).toBe("Amount")
+		expect(list.find("#row").childAt(0).text()).toBe("Name")
+		expect(list.find("#row").childAt(1).text()).toBe("Amount")
+	})
+
+	it("passes the style prop through to the wrapping div", () => {
+		const list = shallow(
+			<ScrollableList
+				data={[]}
+				renderItem={() => {}}
+				style={{background: "red"}}
+			/>
+		)
+		expect(list.find("div").prop("style").background).toBe("red")
+	})
+
+	it("has display flex", () => {
+			const list = shallow(
+			<ScrollableList
+				data={[]}
+				renderItem={() => {}}
+			/>
+		)
+		expect(list.find("div").prop("style").display).toBe("flex")
+	})
+
+	it("has flex flow column", () => {
+			const list = shallow(
+			<ScrollableList
+				data={[]}
+				renderItem={() => {}}
+			/>
+		)
+		expect(list.find("div").prop("style").flexFlow).toBe("column")
 	})
 
 })
