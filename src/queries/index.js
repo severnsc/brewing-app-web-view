@@ -13,6 +13,7 @@ import maltInventoryTableQuery from "./maltInventoryTable"
 import hopsInventoryTableQuery from "./hopsInventoryTable"
 import yeastInventoryTableQuery from "./yeastInventoryTable"
 import otherInventoriesTableQuery from "./otherInventoriesTable"
+import needsToBeReorderedTableQuery from "./needsToBeReorderedTable"
 import currentUserQuery from "./currentUser"
 import flashQuery from "./flash"
 
@@ -33,5 +34,6 @@ export {
   yeastInventoryTableQuery,
   otherInventoriesTableQuery,
   currentUserQuery,
-  flashQuery
+  flashQuery,
+  needsToBeReorderedTableQuery
 }

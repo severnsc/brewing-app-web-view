@@ -10,6 +10,7 @@ import hopsInventoryTable from "./hopsInventoryTable"
 import yeastInventoryTable from "./yeastInventoryTable"
 import otherInventoriesTable from "./otherInventoriesTable"
 import flash from "./flash"
+import needsToBeReorderedTable from "./needsToBeReorderedTable"
 
 export default {
 	dashboard,
@@ -23,5 +24,6 @@ export default {
 	hopsInventoryTable,
 	yeastInventoryTable,
 	otherInventoriesTable,
-	flash
+	flash,
+	needsToBeReorderedTable
 }
