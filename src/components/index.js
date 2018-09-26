@@ -13,6 +13,10 @@ import Lovibond from "./Lovibond"
 import Flash from "./Flash"
 import ScrollableList from "./ScrollableList"
 import {
+	NeedsToBeReorderedHeader,
+	NeedsToBeReorderedListItem
+} from "./NeedsToBeReordered"
+import {
 	SignupForm,
 	LoginForm,
 	ForgotPasswordForm,
@@ -51,5 +55,7 @@ export {
 	Tabs,
 	Lovibond,
 	Flash,
-	ScrollableList
+	ScrollableList,
+	NeedsToBeReorderedHeader,
+	NeedsToBeReorderedListItem
 }

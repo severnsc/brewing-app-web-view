@@ -1,7 +1,11 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { inventoryItemsQuery } from "../queries"
-import { ScrollableList } from "../components"
+import {
+	ScrollableList,
+	NeedsToBeReorderedHeader,
+	NeedsToBeReorderedListItem
+} from "../components"
 import shortid from "shortid"
 
 const NeedsToBeReorderedContainer = () => (
@@ -23,23 +27,17 @@ const NeedsToBeReorderedContainer = () => (
 				amount: item.currentQuantity
 			}))
 
-			const header = (
-				<div>
-					<span>Item name</span>
-					<span>Amount</span>
-				</div>
-			)
-
 			const renderItem = item => (
-				<div>
-					<span>{item.name}</span>
-					<span>{item.amount}</span>
-				</div>
+				<NeedsToBeReorderedListItem
+					key={item.key}
+					name={item.name}
+					amount={item.amount}
+				/>
 			)
 
 			return(
 				<ScrollableList
-					header={header}
+					header={<NeedsToBeReorderedHeader />}
 					data={dataItems}
 					renderItem={renderItem}
 				/>
