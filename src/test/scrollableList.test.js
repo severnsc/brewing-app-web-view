@@ -63,24 +63,4 @@ describe("ScrollableList", () => {
 		expect(list.find("div").prop("style").background).toBe("red")
 	})
 
-	it("has display flex", () => {
-			const list = shallow(
-			<ScrollableList
-				data={[]}
-				renderItem={() => {}}
-			/>
-		)
-		expect(list.find("div").prop("style").display).toBe("flex")
-	})
-
-	it("has flex flow column", () => {
-			const list = shallow(
-			<ScrollableList
-				data={[]}
-				renderItem={() => {}}
-			/>
-		)
-		expect(list.find("div").prop("style").flexFlow).toBe("column")
-	})
-
 })

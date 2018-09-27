@@ -2,11 +2,6 @@
 
 exports[`ScrollableList renders a ScrollableList component 1`] = `
 <div
-  style={
-    Object {
-      "display": "flex",
-      "flexFlow": "column",
-    }
-  }
+  style={undefined}
 />
 `;
