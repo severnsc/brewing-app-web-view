@@ -14,7 +14,8 @@ import Flash from "./Flash"
 import ScrollableList from "./ScrollableList"
 import {
 	NeedsToBeReorderedHeader,
-	NeedsToBeReorderedListItem
+	NeedsToBeReorderedListItem,
+	NeedsToBeReorderedFooter
 } from "./NeedsToBeReordered"
 import {
 	SignupForm,
@@ -57,5 +58,6 @@ export {
 	Flash,
 	ScrollableList,
 	NeedsToBeReorderedHeader,
-	NeedsToBeReorderedListItem
+	NeedsToBeReorderedListItem,
+	NeedsToBeReorderedFooter
 }

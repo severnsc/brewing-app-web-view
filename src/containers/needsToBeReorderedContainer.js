@@ -4,7 +4,8 @@ import { inventoryItemsQuery } from "../queries"
 import {
 	ScrollableList,
 	NeedsToBeReorderedHeader,
-	NeedsToBeReorderedListItem
+	NeedsToBeReorderedListItem,
+	NeedsToBeReorderedFooter
 } from "../components"
 import shortid from "shortid"
 
@@ -29,6 +30,8 @@ const NeedsToBeReorderedContainer = () => (
 				reorderCost: item.reorderCost
 			}))
 
+			const totalReorderCost = itemsToReorder.reduce((acc, cv) => acc + cv.reorderCost, 0)
+
 			const renderItem = item => (
 				<NeedsToBeReorderedListItem
 					key={item.key}
@@ -44,6 +47,7 @@ const NeedsToBeReorderedContainer = () => (
 					header={<NeedsToBeReorderedHeader />}
 					data={dataItems}
 					renderItem={renderItem}
+					footer={<NeedsToBeReorderedFooter totalReorderCost={totalReorderCost} />}
 				/>
 			)
 
