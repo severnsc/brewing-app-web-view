@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Query } from "react-apollo"
 import { inventoryItemsQuery } from "../queries"
 import {
@@ -55,5 +56,9 @@ const NeedsToBeReorderedContainer = ({ style }) => (
 		}}
 	</Query>
 )
+
+NeedsToBeReorderedContainer.propTypes = {
+	style: PropTypes.object
+}
 
 export default NeedsToBeReorderedContainer
