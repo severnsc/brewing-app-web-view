@@ -9,7 +9,7 @@ import {
 } from "../components"
 import shortid from "shortid"
 
-const NeedsToBeReorderedContainer = () => (
+const NeedsToBeReorderedContainer = ({ style }) => (
 	<Query query={inventoryItemsQuery}>
 		{({loading, error, data}) => {
 
@@ -48,6 +48,7 @@ const NeedsToBeReorderedContainer = () => (
 					data={dataItems}
 					renderItem={renderItem}
 					footer={<NeedsToBeReorderedFooter totalReorderCost={totalReorderCost} />}
+					style={style}
 				/>
 			)
 
