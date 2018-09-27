@@ -24,7 +24,9 @@ const NeedsToBeReorderedContainer = () => (
 			const dataItems = itemsToReorder.map(item => ({
 				key: shortid.generate(),
 				name: JSON.parse(item.object).name,
-				amount: item.currentQuantity
+				amount: item.currentQuantity,
+				reorderQuantity: item.reorderQuantity,
+				reorderCost: item.reorderCost
 			}))
 
 			const renderItem = item => (
@@ -32,6 +34,8 @@ const NeedsToBeReorderedContainer = () => (
 					key={item.key}
 					name={item.name}
 					amount={item.amount}
+					reorderQuantity={item.reorderQuantity}
+					reorderCost={item.reorderCost}
 				/>
 			)
 
