@@ -1,8 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
+import styles from "./styles"
 
 const ScrollableList = ({ header, data, renderItem, style, footer }) => (
-	<div style={style}>
+	<div style={{...styles.container, ...style}}>
 		{header}
 		{data.map(i => renderItem(i))}
 		{footer}
