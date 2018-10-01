@@ -2,10 +2,17 @@ import React from "react"
 import PropTypes from "prop-types"
 import styles from "./styles"
 
-const ScrollableList = ({ header, data, renderItem, style, footer }) => (
+const ScrollableList = ({
+	header,
+	data,
+	renderItem,
+	style,
+	footer,
+	emptyListComponent
+}) => (
 	<div style={{...styles.container, ...style}}>
 		{header}
-		{data.map(i => renderItem(i))}
+		{data.length === 0 ? emptyListComponent : data.map(i => renderItem(i))}
 		{footer}
 	</div>
 )
@@ -15,7 +22,8 @@ ScrollableList.propTypes = {
 	data: PropTypes.arrayOf(PropTypes.object).isRequired,
 	renderItem: PropTypes.func.isRequired,
 	style: PropTypes.object,
-	footer: PropTypes.element
+	footer: PropTypes.element,
+	emptyListComponent: PropTypes.element
 }
 
 export default ScrollableList
