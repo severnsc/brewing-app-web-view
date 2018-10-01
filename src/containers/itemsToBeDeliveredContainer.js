@@ -9,7 +9,7 @@ import { Query } from "react-apollo"
 import { inventoryItemsQuery } from "../queries"
 import moment from "moment"
 
-const ItemsToBeDeliveredContainer = () => (
+const ItemsToBeDeliveredContainer = ({ style }) => (
 	<Query query={inventoryItemsQuery}>
 
 		{({ loading, error, data }) => {
@@ -43,6 +43,7 @@ const ItemsToBeDeliveredContainer = () => (
 					data={itemsToBeDelivered}
 					renderItem={renderItem}
 					emptyListComponent={<ItemsToBeDeliveredEmpty />}
+					style={style}
 				/>
 			)
 
