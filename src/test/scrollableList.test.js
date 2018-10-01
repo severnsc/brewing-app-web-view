@@ -63,4 +63,15 @@ describe("ScrollableList", () => {
 		expect(list.find("div").prop("style").background).toBe("red")
 	})
 
+	it("renders the EmptyListComponent when list is empty", () => {
+		const list = shallow(
+			<ScrollableList
+				data={[]}
+				renderItem={() => {}}
+				emptyListComponent={<p>No items!</p>}
+			/>
+		)
+		expect(list.find("p").text()).toBe("No items!")
+	})
+
 })
