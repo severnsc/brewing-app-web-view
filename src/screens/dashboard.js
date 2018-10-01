@@ -1,6 +1,5 @@
 import React from 'react'
-import DashboardSearchBarContainer from '../containers/dashboardSearchBarContainer'
-import DashboardTableContainer from '../containers/dashboardTableContainer'
+import NeedsToBeReorderedContainer from "../containers/needsToBeReorderedContainer"
 import globalStyles from "../components/styles"
 
 const styles = {
@@ -17,8 +16,7 @@ const styles = {
 const Dashboard = () => (
   <div style={styles.container}>
     <h1 style={styles.heading}>Total Inventory</h1>
-    <DashboardSearchBarContainer />
-    <DashboardTableContainer />
+    <NeedsToBeReorderedContainer />
   </div>
 )
 

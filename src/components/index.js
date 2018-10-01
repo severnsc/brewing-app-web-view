@@ -11,6 +11,12 @@ import Tabs from "./Tabs"
 import Tab from "./Tab"
 import Lovibond from "./Lovibond"
 import Flash from "./Flash"
+import ScrollableList from "./ScrollableList"
+import {
+	NeedsToBeReorderedHeader,
+	NeedsToBeReorderedListItem,
+	NeedsToBeReorderedFooter
+} from "./NeedsToBeReordered"
 import {
 	SignupForm,
 	LoginForm,
@@ -49,5 +55,9 @@ export {
 	Tab,
 	Tabs,
 	Lovibond,
-	Flash
+	Flash,
+	ScrollableList,
+	NeedsToBeReorderedHeader,
+	NeedsToBeReorderedListItem,
+	NeedsToBeReorderedFooter
 }
