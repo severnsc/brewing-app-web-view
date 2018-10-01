@@ -19,7 +19,8 @@ import {
 } from "./NeedsToBeReordered"
 import {
 	ItemsToBeDeliveredHeader,
-	ItemsToBeDeliveredListItem
+	ItemsToBeDeliveredListItem,
+	ItemsToBeDeliveredEmpty
 } from "./ItemsToBeDelivered"
 import {
 	SignupForm,
@@ -65,5 +66,6 @@ export {
 	NeedsToBeReorderedListItem,
 	NeedsToBeReorderedFooter,
 	ItemsToBeDeliveredHeader,
-	ItemsToBeDeliveredListItem
+	ItemsToBeDeliveredListItem,
+	ItemsToBeDeliveredEmpty
 }

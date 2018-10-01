@@ -2,7 +2,8 @@ import React from "react"
 import {
 	ScrollableList,
 	ItemsToBeDeliveredHeader,
-	ItemsToBeDeliveredListItem
+	ItemsToBeDeliveredListItem,
+	ItemsToBeDeliveredEmpty
 } from "../components"
 import { Query } from "react-apollo"
 import { inventoryItemsQuery } from "../queries"
@@ -41,6 +42,7 @@ const ItemsToBeDeliveredContainer = () => (
 					header={<ItemsToBeDeliveredHeader />}
 					data={itemsToBeDelivered}
 					renderItem={renderItem}
+					emptyListComponent={<ItemsToBeDeliveredEmpty />}
 				/>
 			)
 
