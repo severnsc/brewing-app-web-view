@@ -6,6 +6,7 @@ import {
 } from "../components"
 import { Query } from "react-apollo"
 import { inventoryItemsQuery } from "../queries"
+import moment from "moment"
 
 const ItemsToBeDeliveredContainer = () => (
 	<Query query={inventoryItemsQuery}>
@@ -31,7 +32,7 @@ const ItemsToBeDeliveredContainer = () => (
 					name={JSON.parse(item.object).name}
 					amountOrdered={item.reorderQuantity}
 					currentQuantity={item.currentQuantity}
-					deliveryDate={item.deliveryDate}
+					deliveryDate={moment(new Date(item.deliveryDate)).format("MM/DD/YYYY")}
 				/>
 			)
 
@@ -47,3 +48,5 @@ const ItemsToBeDeliveredContainer = () => (
 
 	</Query>
 )
+
+export default ItemsToBeDeliveredContainer

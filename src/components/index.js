@@ -18,6 +18,10 @@ import {
 	NeedsToBeReorderedFooter
 } from "./NeedsToBeReordered"
 import {
+	ItemsToBeDeliveredHeader,
+	ItemsToBeDeliveredListItem
+} from "./ItemsToBeDelivered"
+import {
 	SignupForm,
 	LoginForm,
 	ForgotPasswordForm,
@@ -59,5 +63,7 @@ export {
 	ScrollableList,
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
-	NeedsToBeReorderedFooter
+	NeedsToBeReorderedFooter,
+	ItemsToBeDeliveredHeader,
+	ItemsToBeDeliveredListItem
 }
