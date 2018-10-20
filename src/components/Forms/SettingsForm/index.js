@@ -11,6 +11,17 @@ class SettingsForm extends Component {
 		beerColor: ""
 	}
 
+	componentDidMount() {
+		const state = Object.keys(this.state)
+		state.forEach(key => {
+			if(this.props[key]){
+				const newState = []
+				newState[key] = this.props[key]
+				this.setState(newState)
+			}
+		})
+	}
+
 	onChange = e => {
 		const newState = {}
 		newState[e.target.name] = e.target.value
@@ -58,7 +69,12 @@ class SettingsForm extends Component {
 }
 
 SettingsForm.propTypes = {
-	onSubmit: PropTypes.func.isRequired
+	onSubmit: PropTypes.func.isRequired,
+	weight: PropTypes.string,
+	liquid: PropTypes.string,
+	currency: PropTypes.string,
+	maltColor: PropTypes.string,
+	beerColor: PropTypes.string
 }
 
 export default SettingsForm

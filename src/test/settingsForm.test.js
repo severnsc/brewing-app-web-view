@@ -58,6 +58,11 @@ describe("SettingsForm", () => {
 			expect(form.find("[name='weight']").prop("value")).toBe("metric")
 		})
 
+		it("should initialize value to weight prop if it is set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} weight="imperial" />)
+			expect(form.find("select[name='weight']").prop("value")).toBe("imperial")
+		})
+
 	})
 
 	describe("liquid input", () => {
@@ -100,6 +105,11 @@ describe("SettingsForm", () => {
 		it("updates value to selected option on change", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			form.find("select[name='liquid']").simulate("change", {target: {name: "liquid", value: "metric"}})
+			expect(form.find("select[name='liquid']").prop("value")).toBe("metric")
+		})
+
+		it("should initialize value to liquid prop if set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} liquid="metric" />)
 			expect(form.find("select[name='liquid']").prop("value")).toBe("metric")
 		})
 
@@ -158,6 +168,11 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='currency']").prop("value")).toBe("GBP")
 		})
 
+		it("should initialize currency to prop if set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} currency="USD" />)
+			expect(form.find("select[name='currency']").prop("value")).toBe("USD")
+		})
+
 	})
 
 	describe("malt color input", () => {
@@ -208,6 +223,11 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='maltColor']").prop("value")).toBe("SRM")
 		})
 
+		it("should set the maltColor to prop if set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} maltColor="SRM" />)
+			expect(form.find("select[name='maltColor']").prop("value")).toBe("SRM")
+		})
+
 	})
 
 	describe("beer color input", () => {
@@ -255,6 +275,11 @@ describe("SettingsForm", () => {
 		it("changes the value to the selected option on change", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			form.find("select[name='beerColor']").simulate("change", {target: {name: "beerColor", value: "SRM"}})
+			expect(form.find("select[name='beerColor']").prop("value")).toBe("SRM")
+		})
+
+		it("should set the beerColor to prop if set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} beerColor="SRM" />)
 			expect(form.find("select[name='beerColor']").prop("value")).toBe("SRM")
 		})
 
