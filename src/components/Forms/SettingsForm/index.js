@@ -38,10 +38,13 @@ class SettingsForm extends Component {
 		const { weight, liquid, currency, maltColor, beerColor } = this.state
 		return(
 			<form onSubmit={this.onSubmit}>
-				<select name="weight" value={weight} onChange={this.onChange}>
-					<option value="imperial">Imperial (lbs/oz)</option>
-					<option value="metric">Metric (kg/g)</option>
-				</select>
+				<label for="weight">
+					Weight
+					<select name="weight" value={weight} onChange={this.onChange}>
+						<option value="imperial">Imperial (lbs/oz)</option>
+						<option value="metric">Metric (kg/g)</option>
+					</select>
+				</label>
 				<select name="liquid" value={liquid} onChange={this.onChange}>
 					<option value="imperial">Imperial (gal/oz)</option>
 					<option value="metric">Metric (l/ml)</option>

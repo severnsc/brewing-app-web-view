@@ -17,6 +17,21 @@ describe("SettingsForm", () => {
 
 	describe("weight input", () => {
 
+		it("has label for weight", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='weight']").length).toBe(1)
+		})
+
+		it("has a label with text weight", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='weight']").contains("Weight")).toBe(true)
+		})
+
+		it("has select with id weight", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("#weight").type()).toBe("select")
+		})
+
 		it("is named named weight", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("[name='weight']").length).toBe(1)

@@ -4,22 +4,27 @@ exports[`SettingsForm renders a renders a form component 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <select
-    name="weight"
-    onChange={[Function]}
-    value=""
+  <label
+    for="weight"
   >
-    <option
-      value="imperial"
+    Weight
+    <select
+      name="weight"
+      onChange={[Function]}
+      value=""
     >
-      Imperial (lbs/oz)
-    </option>
-    <option
-      value="metric"
-    >
-      Metric (kg/g)
-    </option>
-  </select>
+      <option
+        value="imperial"
+      >
+        Imperial (lbs/oz)
+      </option>
+      <option
+        value="metric"
+      >
+        Metric (kg/g)
+      </option>
+    </select>
+  </label>
   <select
     name="liquid"
     onChange={[Function]}
