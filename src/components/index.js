@@ -33,7 +33,8 @@ import {
 	YeastForm,
 	OtherForm,
 	NewTimerForm,
-	NewTimerAlertForm
+	NewTimerAlertForm,
+	SettingsForm
 } from "./Forms"
 
 export {
@@ -67,5 +68,6 @@ export {
 	NeedsToBeReorderedFooter,
 	ItemsToBeDeliveredHeader,
 	ItemsToBeDeliveredListItem,
-	ItemsToBeDeliveredEmpty
+	ItemsToBeDeliveredEmpty,
+	SettingsForm
 }

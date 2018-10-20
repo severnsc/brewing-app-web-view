@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsForm renders a renders a form component 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <select
+    name="weight"
+    onChange={[Function]}
+    value=""
+  >
+    <option
+      value="imperial"
+    >
+      Imperial (lbs/oz)
+    </option>
+    <option
+      value="metric"
+    >
+      Metric (kg/g)
+    </option>
+  </select>
+  <select
+    name="liquid"
+    onChange={[Function]}
+    value=""
+  >
+    <option
+      value="imperial"
+    >
+      Imperial (gal/oz)
+    </option>
+    <option
+      value="metric"
+    >
+      Metric (l/ml)
+    </option>
+  </select>
+  <select
+    name="currency"
+    onChange={[Function]}
+    value=""
+  >
+    <option
+      value="USD"
+    >
+      USD
+    </option>
+    <option
+      value="GBP"
+    >
+      GBP
+    </option>
+    <option
+      value="EUR"
+    >
+      EUR
+    </option>
+  </select>
+  <select
+    name="maltColor"
+    onChange={[Function]}
+    value=""
+  >
+    <option
+      value="SRM"
+    >
+      SRM
+    </option>
+    <option
+      value="EBC"
+    >
+      EBC
+    </option>
+    <option
+      value="L"
+    >
+      L
+    </option>
+  </select>
+  <select
+    name="beerColor"
+    onChange={[Function]}
+    value=""
+  >
+    <option
+      value="SRM"
+    >
+      SRM
+    </option>
+    <option
+      value="ECB"
+    >
+      ECB
+    </option>
+    <option
+      value="L"
+    >
+      L
+    </option>
+  </select>
+  <input
+    type="submit"
+    value="Save settings"
+  />
+</form>
+`;

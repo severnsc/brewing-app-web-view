@@ -9,6 +9,7 @@ import YeastForm from "./YeastForm"
 import OtherForm from "./OtherForm"
 import NewTimerForm from "./NewTimerForm"
 import NewTimerAlertForm from "./NewTimerAlertForm"
+import SettingsForm from "./SettingsForm"
 
 export {
 	LoginForm,
@@ -21,5 +22,6 @@ export {
 	YeastForm,
 	OtherForm,
 	NewTimerForm,
-	NewTimerAlertForm
+	NewTimerAlertForm,
+	SettingsForm
 }
