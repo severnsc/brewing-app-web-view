@@ -6,11 +6,30 @@ exports[`SettingsForm renders a renders a form component 1`] = `
 >
   <label
     for="weight"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
   >
     Weight
     <select
+      id="weight"
       name="weight"
       onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
       value=""
     >
       <option
@@ -25,86 +44,198 @@ exports[`SettingsForm renders a renders a form component 1`] = `
       </option>
     </select>
   </label>
-  <select
-    name="liquid"
-    onChange={[Function]}
-    value=""
+  <label
+    for="liquid"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
   >
-    <option
-      value="imperial"
+    Liquid
+    <select
+      id="liquid"
+      name="liquid"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
     >
-      Imperial (gal/oz)
-    </option>
-    <option
-      value="metric"
-    >
-      Metric (l/ml)
-    </option>
-  </select>
-  <select
-    name="currency"
-    onChange={[Function]}
-    value=""
+      <option
+        value="imperial"
+      >
+        Imperial (gal/oz)
+      </option>
+      <option
+        value="metric"
+      >
+        Metric (l/ml)
+      </option>
+    </select>
+  </label>
+  <label
+    for="currency"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
   >
-    <option
-      value="USD"
+    Currency
+    <select
+      id="currency"
+      name="currency"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
     >
-      USD
-    </option>
-    <option
-      value="GBP"
-    >
-      GBP
-    </option>
-    <option
-      value="EUR"
-    >
-      EUR
-    </option>
-  </select>
-  <select
-    name="maltColor"
-    onChange={[Function]}
-    value=""
+      <option
+        value="USD"
+      >
+        USD
+      </option>
+      <option
+        value="GBP"
+      >
+        GBP
+      </option>
+      <option
+        value="EUR"
+      >
+        EUR
+      </option>
+    </select>
+  </label>
+  <label
+    for="maltColor"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
   >
-    <option
-      value="SRM"
+    Malt color
+    <select
+      id="maltColor"
+      name="maltColor"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
     >
-      SRM
-    </option>
-    <option
-      value="EBC"
-    >
-      EBC
-    </option>
-    <option
-      value="L"
-    >
-      L
-    </option>
-  </select>
-  <select
-    name="beerColor"
-    onChange={[Function]}
-    value=""
+      <option
+        value="SRM"
+      >
+        SRM
+      </option>
+      <option
+        value="EBC"
+      >
+        EBC
+      </option>
+      <option
+        value="L"
+      >
+        L
+      </option>
+    </select>
+  </label>
+  <label
+    for="beerColor"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
   >
-    <option
-      value="SRM"
+    Beer color
+    <select
+      id="beerColor"
+      name="beerColor"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
     >
-      SRM
-    </option>
-    <option
-      value="ECB"
-    >
-      ECB
-    </option>
-    <option
-      value="L"
-    >
-      L
-    </option>
-  </select>
+      <option
+        value="SRM"
+      >
+        SRM
+      </option>
+      <option
+        value="ECB"
+      >
+        ECB
+      </option>
+      <option
+        value="L"
+      >
+        L
+      </option>
+    </select>
+  </label>
   <input
+    disabled={true}
+    style={
+      Object {
+        "MozAppearance": "none",
+        "WebkitAppearance": "none",
+        "appearance": "none",
+        "background": "hsl(0, 0%, 90%)",
+        "border": "none",
+        "borderRadius": "20px",
+        "color": "hsla(0, 0%, 100%, 0.85)",
+        "cursor": "default",
+        "fontSize": "1em",
+        "minWidth": "10em",
+        "padding": "10px",
+      }
+    }
     type="submit"
     value="Save settings"
   />

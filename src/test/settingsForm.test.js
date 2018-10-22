@@ -1,9 +1,21 @@
 import React from "react"
 import renderer from "react-test-renderer"
 import { SettingsForm } from "../components"
+import { green } from "../components/constants"
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
+
+const labelStyle = {
+  display: "flex",
+  flexFlow: "column",
+  alignItems: "stretch",
+  textAlign: "left",
+  textTransform: "uppercase",
+  color: "hsl(0, 0%, 50%)",
+  fontSize: "0.75em",
+  marginBottom: "10px"
+}
 
 describe("SettingsForm", () => {
 
@@ -25,6 +37,11 @@ describe("SettingsForm", () => {
 		it("has a label with text weight", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("label[for='weight']").contains("Weight")).toBe(true)
+		})
+
+		it("has label with label style", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='weight']").prop("style")).toEqual(labelStyle)
 		})
 
 		it("has select with id weight", () => {
@@ -78,9 +95,39 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='weight']").prop("value")).toBe("imperial")
 		})
 
+		it("has margin 10px 0", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='weight']").prop("style").margin).toBe("10px 0")
+		})
+
+		it("has font size 1em", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='weight']").prop("style").fontSize).toBe("1em")
+		})
+
 	})
 
 	describe("liquid input", () => {
+
+		it("has label for liquid", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='liquid']").length).toBe(1)
+		})
+
+		it("has label with text liquid", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='liquid']").contains("Liquid")).toBe(true)
+		})
+
+		it("has label with labelStyle", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='liquid']").prop("style")).toEqual(labelStyle)
+		})
+
+		it("has select with id liquid", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("#liquid").type()).toBe("select")
+		})
 
 		it("has name liquid", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
@@ -128,9 +175,39 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='liquid']").prop("value")).toBe("metric")
 		})
 
+		it("has margin 10px 0", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='liquid']").prop("style").margin).toBe("10px 0")
+		})
+
+		it("has font size 1em", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='liquid']").prop("style").fontSize).toBe("1em")
+		})
+
 	})
 
 	describe("currency input", () => {
+
+		it("has label for currency", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='currency']").length).toBe(1)
+		})
+
+		it("has label with text currency", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='currency']").contains("Currency")).toBe(true)
+		})
+
+		it("has label with labelStyle", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='currency']").prop("style")).toEqual(labelStyle)
+		})
+
+		it("has select with id currency", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("#currency").type()).toBe("select")
+		})
 
 		it("has name currency", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
@@ -188,9 +265,39 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='currency']").prop("value")).toBe("USD")
 		})
 
+		it("has margin 10px 0", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='currency']").prop("style").margin).toBe("10px 0")
+		})
+
+		it("has font size 1em", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='currency']").prop("style").fontSize).toBe("1em")
+		})
+
 	})
 
 	describe("malt color input", () => {
+
+		it("has label for maltColor", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='maltColor']").length).toBe(1)
+		})
+
+		it("has label with text Malt color", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='maltColor']").contains("Malt color")).toBe(true)
+		})
+
+		it("has label with labelStyle", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='maltColor']").prop("style")).toEqual(labelStyle)
+		})
+
+		it("has select tag with id maltColor", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("#maltColor").type()).toBe("select")
+		})
 
 		it("is a select tag with name malt color", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
@@ -243,9 +350,39 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='maltColor']").prop("value")).toBe("SRM")
 		})
 
+		it("has margin 10px 0", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='maltColor']").prop("style").margin).toBe("10px 0")
+		})
+
+		it("has font size 1em", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='maltColor']").prop("style").fontSize).toBe("1em")
+		})
+
 	})
 
 	describe("beer color input", () => {
+
+		it("has a label for beerColor", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='beerColor']").length).toBe(1)
+		})
+
+		it("has label with text Beer color", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='beerColor']").contains("Beer color")).toBe(true)
+		})
+
+		it("has label with labelStyle", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[for='beerColor']").prop("style")).toEqual(labelStyle)
+		})
+
+		it("has select with id beerColor", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("#beerColor").type()).toBe("select")
+		})
 
 		it("is a select with name beerColor", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
@@ -298,9 +435,38 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='beerColor']").prop("value")).toBe("SRM")
 		})
 
+		it("has margin 10px 0", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='beerColor']").prop("style").margin).toBe("10px 0")
+		})
+
+		it("has font size 1em", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='beerColor']").prop("style").fontSize).toBe("1em")
+		})
+
 	})
 
 	describe("submit button", () => {
+
+		const button = {
+			fontSize: "1em",
+	    padding: "10px",
+	    borderRadius: "20px",
+	    color: "hsla(0, 0%, 100%, 0.85)",
+	    background: green,
+	    border: "none",
+	    appearance: "none",
+	    "WebkitAppearance": "none",
+	    "MozAppearance": "none",
+	    cursor: "pointer",
+	    minWidth: "10em"
+	  }
+
+	  const disabled = {
+			background: "hsl(0, 0%, 90%)",
+			cursor: "default"
+		}
 
 		it("should have a input of type submit", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
@@ -310,6 +476,77 @@ describe("SettingsForm", () => {
 		it("should have value 'Save settings'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("input[type='submit']").prop("value")).toBe("Save settings")
+		})
+
+		it("should be disabled on mount", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("input[type='submit']").prop("disabled")).toBe(true)
+		})
+
+		it("should be enabled when a input value changes from initial value", () => {
+			const form = shallow(
+				<SettingsForm
+					onSubmit={() => {}}
+					weight="imperial"
+					liquid="imperial"
+					currency="USD"
+					maltColor="SRM"
+					beerColor="SRM"
+				/>
+			)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "metric"}})
+			expect(form.find("input[type='submit']").prop("disabled")).toBe(false)
+		})
+
+		it("should be disabled if any inputs are empty strings", () => {
+			const form = shallow(
+				<SettingsForm
+					onSubmit={() => {}}
+					weight="imperial"
+					liquid="imperial"
+					currency="USD"
+					maltColor="SRM"
+					beerColor="SRM"
+				/>
+			)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: ""}})
+			expect(form.find("input[type='submit']").prop("disabled")).toBe(true)
+		})
+
+		it("should be enabled if all values are not empty strings and at least one value updated from initial value", () => {
+			const form = shallow(
+				<SettingsForm
+					onSubmit={() => {}}
+					weight="imperial"
+					liquid="imperial"
+					currency="USD"
+					maltColor="SRM"
+					beerColor="SRM"
+				/>
+			)
+			expect(form.find("input[type='submit']").prop("disabled")).toBe(true)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "ECB"}})
+			expect(form.find("input[type='submit']").prop("disabled")).toBe(false)
+		})
+
+		it("should have button style when disabled is false", () => {
+			const form = shallow(
+				<SettingsForm
+					onSubmit={() => {}}
+					weight="imperial"
+					liquid="imperial"
+					currency="USD"
+					maltColor="SRM"
+					beerColor="SRM"
+				/>
+			)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "ECB"}})
+			expect(form.find("input[type='submit']").prop("style")).toEqual(button)
+		})
+
+		it("should have disabled style when disabled is true", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("input[type='submit']").prop("style")).toEqual({...button, ...disabled})
 		})
 
 	})
