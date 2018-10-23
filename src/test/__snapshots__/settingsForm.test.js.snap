@@ -238,9 +238,9 @@ exports[`SettingsForm renders a renders a form component 1`] = `
         SRM
       </option>
       <option
-        value="ECB"
+        value="EBC"
       >
-        ECB
+        EBC
       </option>
       <option
         value="L"

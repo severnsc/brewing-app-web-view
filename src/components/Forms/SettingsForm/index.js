@@ -97,7 +97,7 @@ class SettingsForm extends Component {
 					<select id="beerColor" name="beerColor" value={beerColor} onChange={this.onChange} style={formStyles.select}>
 						<option disabled value="">Select beer color units</option>
 						<option value="SRM">SRM</option>
-						<option value="ECB">ECB</option>
+						<option value="EBC">EBC</option>
 						<option value="L">L</option>
 					</select>
 				</label>

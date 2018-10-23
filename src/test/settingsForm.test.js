@@ -374,7 +374,7 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='maltColor'] > option[value='SRM']").text()).toBe("SRM")
 		})
 
-		it("has an option with value 'ECB", () => {
+		it("has an option with value 'EBC", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("select[name='maltColor'] > option[value='EBC']").length).toBe(1)
 		})
@@ -474,14 +474,14 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='beerColor'] > option[value='SRM']").text()).toBe("SRM")
 		})
 
-		it("has option with value ECB", () => {
+		it("has option with value EBC", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("select[name='beerColor'] > option[value='ECB']").length).toBe(1)
+			expect(form.find("select[name='beerColor'] > option[value='EBC']").length).toBe(1)
 		})
 
-		it("has option with text ECB", () => {
+		it("has option with text EBC", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("select[name='beerColor'] > option[value='ECB']").text()).toBe("ECB")
+			expect(form.find("select[name='beerColor'] > option[value='EBC']").text()).toBe("EBC")
 		})
 
 		it("has option with value L", () => {
@@ -600,7 +600,7 @@ describe("SettingsForm", () => {
 				/>
 			)
 			expect(form.find("input[type='submit']").prop("disabled")).toBe(true)
-			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "ECB"}})
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "EBC"}})
 			expect(form.find("input[type='submit']").prop("disabled")).toBe(false)
 		})
 
@@ -615,7 +615,7 @@ describe("SettingsForm", () => {
 					beerColor="SRM"
 				/>
 			)
-			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "ECB"}})
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "EBC"}})
 			expect(form.find("input[type='submit']").prop("style")).toEqual(button)
 		})
 

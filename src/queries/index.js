@@ -15,6 +15,7 @@ import yeastInventoryTableQuery from "./yeastInventoryTable"
 import otherInventoriesTableQuery from "./otherInventoriesTable"
 import currentUserQuery from "./currentUser"
 import flashQuery from "./flash"
+import settingsQuery from "./setting"
 
 export {
   dashboardTableQuery,
@@ -33,5 +34,6 @@ export {
   yeastInventoryTableQuery,
   otherInventoriesTableQuery,
   currentUserQuery,
-  flashQuery
+  flashQuery,
+  settingsQuery
 }
