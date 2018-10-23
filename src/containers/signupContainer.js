@@ -54,7 +54,7 @@ const SignupContainer = ({match, location, history}) => (
                                 await createInventory({ variables: {name: "Malt", userId: id} })
                                 await createInventory({ variables: {name: "Yeast", userId: id} })
                                 await createInventory({ variables: {name: "Other", userId: id} })
-                                history.push("/profile")
+                                history.push("/createSettings")
                               })
                             })
                           })
