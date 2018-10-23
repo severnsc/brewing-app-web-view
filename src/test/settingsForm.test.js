@@ -74,6 +74,11 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='weight'] > option[disabled]").text()).toBe("--- select weight units ---")
 		})
 
+		it("does not have a disabled option if the weight prop is set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} weight="imperial" />)
+			expect(form.find("select[name='weight'] > option[disabled]").length).toBe(0)
+		})
+
 		it("has option with value 'imperial'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("[name='weight'] > option[value='imperial']").length).toBe(1)
@@ -169,6 +174,11 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='liquid'] > option[disabled]").text()).toBe("--- select liquid units ---")
 		})
 
+		it("does not have a disabled option if the liquid prop is set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} liquid="imperial" />)
+			expect(form.find("select[name='liquid'] > option[disabled]").length).toBe(0)
+		})
+
 		it("has option with value imperial", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("[name='liquid'] > option[value='imperial']").length).toBe(1)
@@ -262,6 +272,11 @@ describe("SettingsForm", () => {
 		it("has disabled option with text '--- select currency units ---'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("select[name='currency'] > option[disabled]").text()).toBe("--- select currency units ---")
+		})
+
+		it("does not have a disabled option if the currency prop is set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} currency="USD" />)
+			expect(form.find("select[name='currency'] > option[disabled]").length).toBe(0)
 		})
 
 		it("has option with value USD", () => {
@@ -364,6 +379,11 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='maltColor'] > option[disabled]").text()).toBe("--- select malt color units ---")
 		})
 
+		it("does not have a disabled option if maltColor prop is set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} maltColor="SRM"/>)
+			expect(form.find("select[name='maltColor'] > option[disabled]").length).toBe(0)
+		})
+
 		it("has an option with value 'SRM'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("select[name='maltColor'] > option[value='SRM']").length).toBe(1)
@@ -462,6 +482,11 @@ describe("SettingsForm", () => {
 		it("has disabled option with text '--- select beer color units ---'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("select[name='beerColor'] > option[disabled]").text()).toBe("--- select beer color units ---")
+		})
+
+		it("does not have a disabled option if beerColor prop is set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} beerColor="SRM" />)
+			expect(form.find("select[name='beerColor'] > option[disabled]").length).toBe(0)
 		})
 
 		it("has option with value SRM", () => {
