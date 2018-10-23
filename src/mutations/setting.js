@@ -12,6 +12,8 @@ export const UPDATE_SETTING = gql`
 	mutation updateSetting($id: String!, $value: String!) {
 		updateSetting(id: $id, value: $value) {
 			id
+			name
+			value
 		}
 	}
 `

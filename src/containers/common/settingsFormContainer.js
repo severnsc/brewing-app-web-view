@@ -4,7 +4,7 @@ import { Mutation, Query } from "react-apollo"
 import { settingsQuery } from "../../queries"
 import { CREATE_SETTING, UPDATE_SETTING } from "../../mutations"
 
-const SettingsFormContainer = isCreating => (
+const SettingsFormContainer = ({ isCreating }) => (
 	<Query query={settingsQuery}>
 		{({ loading, error, data }) => {
 
