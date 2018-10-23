@@ -659,6 +659,22 @@ describe("SettingsForm", () => {
 			expect(onSubmitArgs).toEqual(["metric", "metric", "USD", "SRM", "SRM"])
 		})
 
+		it("should reset the submit input back to disabled", () => {
+			const form = shallow(
+				<SettingsForm
+					onSubmit={() => {}}
+					weight="imperial"
+					liquid="imperial"
+					currency="USD"
+					maltColor="SRM"
+					beerColor="SRM"
+				/>
+			)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "EBC"}})
+			form.simulate("submit", {preventDefault() {}})
+			expect(form.find("input[type='submit']").prop("disabled")).toBe(true)
+		})
+
 	})
 
 })

@@ -52,6 +52,7 @@ class SettingsForm extends Component {
 		e.preventDefault()
 		const { weight, liquid, currency, maltColor, beerColor } = this.state
 		this.props.onSubmit(weight, liquid, currency, maltColor, beerColor)
+		this.setState({ disabled: true })
 	}
 
 	render(){
