@@ -39,6 +39,14 @@ class SettingsForm extends Component {
 			this.state[key] !== this.props[key]
 		)){
 			this.setState({	disabled: false })
+			return
+		}
+
+		//If all of the inputs have reverted to original values
+		if(Object.keys(prevInputs).some(key => 
+			prevState[key] !== this.state[key] && this.state[key] === this.props[key]
+		)){
+			this.setState({ disabled: true })
 		}
 	}
 

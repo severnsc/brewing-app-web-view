@@ -675,6 +675,25 @@ describe("SettingsForm", () => {
 			expect(form.find("input[type='submit']").prop("disabled")).toBe(true)
 		})
 
+		it("should be disabled if change input and then change it back", () => {
+			const form = shallow(
+				<SettingsForm
+					onSubmit={() => {}}
+					weight="imperial"
+					liquid="imperial"
+					currency="USD"
+					maltColor="SRM"
+					beerColor="SRM"
+				/>
+			)
+			const submit = "input[type='submit']"
+			expect(form.find(submit).prop("disabled")).toBe(true)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "metric"}})
+			expect(form.find(submit).prop("disabled")).toBe(false)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "imperial"}})
+			expect(form.find(submit).prop("disabled")).toBe(true)
+		})
+
 	})
 
 })
