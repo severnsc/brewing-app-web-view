@@ -3,6 +3,7 @@ import { SettingsForm } from "../../components"
 import { Mutation, Query } from "react-apollo"
 import { settingsQuery } from "../../queries"
 import { CREATE_SETTING, UPDATE_SETTING } from "../../mutations"
+import { withRouter } from "react-router"
 
 const SettingsFormContainer = ({ isCreating, history }) => (
 	<Query query={settingsQuery}>
@@ -79,4 +80,4 @@ const SettingsFormContainer = ({ isCreating, history }) => (
 	</Query>
 )
 
-export default SettingsFormContainer
+export default withRouter(SettingsFormContainer)
