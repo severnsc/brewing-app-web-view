@@ -4,7 +4,7 @@ import { Mutation, Query } from "react-apollo"
 import { settingsQuery } from "../../queries"
 import { CREATE_SETTING, UPDATE_SETTING } from "../../mutations"
 
-const SettingsFormContainer = ({ isCreating }) => (
+const SettingsFormContainer = ({ isCreating, history }) => (
 	<Query query={settingsQuery}>
 		{({ loading, error, data }) => {
 
@@ -40,7 +40,7 @@ const SettingsFormContainer = ({ isCreating }) => (
 											name: key,
 											value: settings[key]
 										}
-									})
+									}).then(() => history.push("/dashboard"))
 								})
 							}else{
 								currentUserSettings.forEach(userSetting => {
@@ -58,9 +58,11 @@ const SettingsFormContainer = ({ isCreating }) => (
 						}
 
 						const props = {}
-						currentUserSettings.forEach(userSetting => {
-							props[userSetting.name] = userSetting.value
-						})
+						if(!isCreating){
+							currentUserSettings.forEach(userSetting => {
+								props[userSetting.name] = userSetting.value
+							})
+						}
 
 						return(
 							<SettingsForm
