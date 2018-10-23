@@ -694,6 +694,26 @@ describe("SettingsForm", () => {
 			expect(form.find(submit).prop("disabled")).toBe(true)
 		})
 
+		it("should be enabled if changed multiple and change one back", () => {
+			const form = shallow(
+				<SettingsForm
+					onSubmit={() => {}}
+					weight="imperial"
+					liquid="imperial"
+					currency="USD"
+					maltColor="SRM"
+					beerColor="SRM"
+				/>
+			)
+			const submit = "input[type='submit']"
+			expect(form.find(submit).prop("disabled")).toBe(true)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "metric"}})
+			form.find("select[name='liquid']").simulate("change", {target: {name: "liquid", value: "metric"}})
+			expect(form.find(submit).prop("disabled")).toBe(false)
+			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "imperial"}})
+			expect(form.find(submit).prop("disabled")).toBe(false)
+		})
+
 	})
 
 })

@@ -36,15 +36,16 @@ class SettingsForm extends Component {
 		const { disabled: prevDisabled, ...prevInputs } = prevState
 		if(Object.keys(prevInputs).some(key => 
 			prevState[key] !== this.state[key] && 
-			this.state[key] !== this.props[key]
+			this.state[key] !== this.props[key] &&
+			this.state.disabled
 		)){
 			this.setState({	disabled: false })
 			return
 		}
 
 		//If all of the inputs have reverted to original values
-		if(Object.keys(prevInputs).some(key => 
-			prevState[key] !== this.state[key] && this.state[key] === this.props[key]
+		if(Object.keys(prevInputs).every(key => 
+			this.state[key] === this.props[key] && !this.state.disabled
 		)){
 			this.setState({ disabled: true })
 		}
