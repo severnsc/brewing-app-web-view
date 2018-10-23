@@ -71,7 +71,7 @@ class SettingsForm extends Component {
 				<label htmlFor="weight" style={formStyles.label}>
 					Weight
 					<select id="weight" name="weight" value={weight} onChange={this.onChange} style={formStyles.select}>
-						<option disabled value="">Select weight units</option>
+						<option disabled value="">--- select weight units ---</option>
 						<option value="imperial">Imperial (lbs/oz)</option>
 						<option value="metric">Metric (kg/g)</option>
 					</select>
@@ -79,7 +79,7 @@ class SettingsForm extends Component {
 				<label htmlFor="liquid" style={formStyles.label}>
 					Liquid
 					<select id="liquid" name="liquid" value={liquid} onChange={this.onChange} style={formStyles.select}>
-						<option disabled value="">Select liquid units</option>
+						<option disabled value="">--- select liquid units ---</option>
 						<option value="imperial">Imperial (gal/oz)</option>
 						<option value="metric">Metric (l/ml)</option>
 					</select>
@@ -87,7 +87,7 @@ class SettingsForm extends Component {
 				<label htmlFor="currency" style={formStyles.label}>
 					Currency
 					<select id="currency" name="currency" value={currency} onChange={this.onChange} style={formStyles.select}>
-						<option disabled value="">Select currency units</option>
+						<option disabled value="">--- select currency units ---</option>
 						<option value="USD">USD</option>
 						<option value="GBP">GBP</option>
 						<option value="EUR">EUR</option>
@@ -96,7 +96,7 @@ class SettingsForm extends Component {
 				<label htmlFor="maltColor" style={formStyles.label}>
 					Malt color
 					<select id="maltColor" name="maltColor" value={maltColor} onChange={this.onChange} style={formStyles.select}>
-						<option disabled value="">Select malt color units</option>
+						<option disabled value="">--- select malt color units ---</option>
 						<option value="SRM">SRM</option>
 						<option value="EBC">EBC</option>
 						<option value="L">L</option>
@@ -105,7 +105,7 @@ class SettingsForm extends Component {
 				<label htmlFor="beerColor" style={formStyles.label}>
 					Beer color
 					<select id="beerColor" name="beerColor" value={beerColor} onChange={this.onChange} style={formStyles.select}>
-						<option disabled value="">Select beer color units</option>
+						<option disabled value="">--- select beer color units ---</option>
 						<option value="SRM">SRM</option>
 						<option value="EBC">EBC</option>
 						<option value="L">L</option>

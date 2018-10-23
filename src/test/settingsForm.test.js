@@ -69,9 +69,9 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='weight'] > option[value='']").length).toBe(1)
 		})
 
-		it("has disabled option with text 'Select weight units'", () => {
+		it("has disabled option with text '--- select weight units ---'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("select[name='weight'] > option[disabled]").text()).toBe("Select weight units")
+			expect(form.find("select[name='weight'] > option[disabled]").text()).toBe("--- select weight units ---")
 		})
 
 		it("has option with value 'imperial'", () => {
@@ -164,9 +164,9 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='liquid'] > option[value='']").length).toBe(1)
 		})
 
-		it("has disabled option with text 'Select liquid units'", () => {
+		it("has disabled option with text '--- select liquid units ---'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("select[name='liquid'] > option[disabled]").text()).toBe("Select liquid units")
+			expect(form.find("select[name='liquid'] > option[disabled]").text()).toBe("--- select liquid units ---")
 		})
 
 		it("has option with value imperial", () => {
@@ -259,9 +259,9 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='currency'] > option[value='']").length).toBe(1)
 		})
 
-		it("has disabled option with text 'Select currency units'", () => {
+		it("has disabled option with text '--- select currency units ---'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("select[name='currency'] > option[disabled]").text()).toBe("Select currency units")
+			expect(form.find("select[name='currency'] > option[disabled]").text()).toBe("--- select currency units ---")
 		})
 
 		it("has option with value USD", () => {
@@ -359,9 +359,9 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='maltColor'] > option[value='']").length).toBe(1)
 		})
 
-		it("has disabled option with text 'Select maltColor units'", () => {
+		it("has disabled option with text '--- select maltColor units ---'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("select[name='maltColor'] > option[disabled]").text()).toBe("Select malt color units")
+			expect(form.find("select[name='maltColor'] > option[disabled]").text()).toBe("--- select malt color units ---")
 		})
 
 		it("has an option with value 'SRM'", () => {
@@ -459,9 +459,9 @@ describe("SettingsForm", () => {
 			expect(form.find("select[name='beerColor'] > option[value='']").length).toBe(1)
 		})
 
-		it("has disabled option with text 'Select beer color units'", () => {
+		it("has disabled option with text '--- select beer color units ---'", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("select[name='beerColor'] > option[disabled]").text()).toBe("Select beer color units")
+			expect(form.find("select[name='beerColor'] > option[disabled]").text()).toBe("--- select beer color units ---")
 		})
 
 		it("has option with value SRM", () => {

@@ -36,7 +36,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
         disabled={true}
         value=""
       >
-        Select weight units
+        --- select weight units ---
       </option>
       <option
         value="imperial"
@@ -82,7 +82,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
         disabled={true}
         value=""
       >
-        Select liquid units
+        --- select liquid units ---
       </option>
       <option
         value="imperial"
@@ -128,7 +128,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
         disabled={true}
         value=""
       >
-        Select currency units
+        --- select currency units ---
       </option>
       <option
         value="USD"
@@ -179,7 +179,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
         disabled={true}
         value=""
       >
-        Select malt color units
+        --- select malt color units ---
       </option>
       <option
         value="SRM"
@@ -230,7 +230,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
         disabled={true}
         value=""
       >
-        Select beer color units
+        --- select beer color units ---
       </option>
       <option
         value="SRM"
