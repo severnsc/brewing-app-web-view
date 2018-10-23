@@ -2,7 +2,7 @@ import React from "react"
 import renderer from "react-test-renderer"
 import { SettingsForm } from "../components"
 import { green } from "../components/constants"
-import { configure, shallow } from 'enzyme';
+import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
@@ -31,17 +31,17 @@ describe("SettingsForm", () => {
 
 		it("has label for weight", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='weight']").length).toBe(1)
+			expect(form.find("label[htmlFor='weight']").length).toBe(1)
 		})
 
 		it("has a label with text weight", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='weight']").contains("Weight")).toBe(true)
+			expect(form.find("label[htmlFor='weight']").contains("Weight")).toBe(true)
 		})
 
 		it("has label with label style", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='weight']").prop("style")).toEqual(labelStyle)
+			expect(form.find("label[htmlFor='weight']").prop("style")).toEqual(labelStyle)
 		})
 
 		it("has select with id weight", () => {
@@ -57,6 +57,21 @@ describe("SettingsForm", () => {
 		it("is a select", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("[name='weight']").type()).toBe('select')
+		})
+
+		it("has an option that is disabled", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='weight'] > option[disabled]").length).toBe(1)
+		})
+
+		it("has option with value of empty string", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='weight'] > option[value='']").length).toBe(1)
+		})
+
+		it("has disabled option with text 'Select weight units'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='weight'] > option[disabled]").text()).toBe("Select weight units")
 		})
 
 		it("has option with value 'imperial'", () => {
@@ -111,17 +126,17 @@ describe("SettingsForm", () => {
 
 		it("has label for liquid", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='liquid']").length).toBe(1)
+			expect(form.find("label[htmlFor='liquid']").length).toBe(1)
 		})
 
 		it("has label with text liquid", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='liquid']").contains("Liquid")).toBe(true)
+			expect(form.find("label[htmlFor='liquid']").contains("Liquid")).toBe(true)
 		})
 
 		it("has label with labelStyle", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='liquid']").prop("style")).toEqual(labelStyle)
+			expect(form.find("label[htmlFor='liquid']").prop("style")).toEqual(labelStyle)
 		})
 
 		it("has select with id liquid", () => {
@@ -137,6 +152,21 @@ describe("SettingsForm", () => {
 		it("is a select tag", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("[name='liquid']").type()).toBe("select")
+		})
+
+		it("has an option that is disabled", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='liquid'] > option[disabled]").length).toBe(1)
+		})
+
+		it("has option with value of empty string", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='liquid'] > option[value='']").length).toBe(1)
+		})
+
+		it("has disabled option with text 'Select liquid units'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='liquid'] > option[disabled]").text()).toBe("Select liquid units")
 		})
 
 		it("has option with value imperial", () => {
@@ -191,17 +221,17 @@ describe("SettingsForm", () => {
 
 		it("has label for currency", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='currency']").length).toBe(1)
+			expect(form.find("label[htmlFor='currency']").length).toBe(1)
 		})
 
 		it("has label with text currency", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='currency']").contains("Currency")).toBe(true)
+			expect(form.find("label[htmlFor='currency']").contains("Currency")).toBe(true)
 		})
 
 		it("has label with labelStyle", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='currency']").prop("style")).toEqual(labelStyle)
+			expect(form.find("label[htmlFor='currency']").prop("style")).toEqual(labelStyle)
 		})
 
 		it("has select with id currency", () => {
@@ -217,6 +247,21 @@ describe("SettingsForm", () => {
 		it("is a select tag", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("[name='currency']").type()).toBe("select")
+		})
+
+		it("has an option that is disabled", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='currency'] > option[disabled]").length).toBe(1)
+		})
+
+		it("has option with value of empty string", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='currency'] > option[value='']").length).toBe(1)
+		})
+
+		it("has disabled option with text 'Select currency units'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='currency'] > option[disabled]").text()).toBe("Select currency units")
 		})
 
 		it("has option with value USD", () => {
@@ -281,17 +326,17 @@ describe("SettingsForm", () => {
 
 		it("has label for maltColor", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='maltColor']").length).toBe(1)
+			expect(form.find("label[htmlFor='maltColor']").length).toBe(1)
 		})
 
 		it("has label with text Malt color", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='maltColor']").contains("Malt color")).toBe(true)
+			expect(form.find("label[htmlFor='maltColor']").contains("Malt color")).toBe(true)
 		})
 
 		it("has label with labelStyle", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='maltColor']").prop("style")).toEqual(labelStyle)
+			expect(form.find("label[htmlFor='maltColor']").prop("style")).toEqual(labelStyle)
 		})
 
 		it("has select tag with id maltColor", () => {
@@ -302,6 +347,21 @@ describe("SettingsForm", () => {
 		it("is a select tag with name malt color", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("select[name='maltColor']").length).toBe(1)
+		})
+
+		it("has an option that is disabled", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='maltColor'] > option[disabled]").length).toBe(1)
+		})
+
+		it("has option with value of empty string", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='maltColor'] > option[value='']").length).toBe(1)
+		})
+
+		it("has disabled option with text 'Select maltColor units'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='maltColor'] > option[disabled]").text()).toBe("Select malt color units")
 		})
 
 		it("has an option with value 'SRM'", () => {
@@ -366,17 +426,17 @@ describe("SettingsForm", () => {
 
 		it("has a label for beerColor", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='beerColor']").length).toBe(1)
+			expect(form.find("label[htmlFor='beerColor']").length).toBe(1)
 		})
 
 		it("has label with text Beer color", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='beerColor']").contains("Beer color")).toBe(true)
+			expect(form.find("label[htmlFor='beerColor']").contains("Beer color")).toBe(true)
 		})
 
 		it("has label with labelStyle", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
-			expect(form.find("label[for='beerColor']").prop("style")).toEqual(labelStyle)
+			expect(form.find("label[htmlFor='beerColor']").prop("style")).toEqual(labelStyle)
 		})
 
 		it("has select with id beerColor", () => {
@@ -387,6 +447,21 @@ describe("SettingsForm", () => {
 		it("is a select with name beerColor", () => {
 			const form = shallow(<SettingsForm onSubmit={() => {}} />)
 			expect(form.find("select[name='beerColor']").length).toBe(1)
+		})
+
+		it("has an option that is disabled", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='beerColor'] > option[disabled]").length).toBe(1)
+		})
+
+		it("has option with value of empty string", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='beerColor'] > option[value='']").length).toBe(1)
+		})
+
+		it("has disabled option with text 'Select beer color units'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='beerColor'] > option[disabled]").text()).toBe("Select beer color units")
 		})
 
 		it("has option with value SRM", () => {
@@ -556,7 +631,7 @@ describe("SettingsForm", () => {
 		it("should call event.preventDefault", () => {
 			let preventDefaultCalled = false
 			const preventDefault = () => {preventDefaultCalled = true}
-			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			const form = mount(<SettingsForm onSubmit={() => {}} />)
 			form.simulate("submit", {preventDefault})
 			expect(preventDefaultCalled).toBe(true)
 		})

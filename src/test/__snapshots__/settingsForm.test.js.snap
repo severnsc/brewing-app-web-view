@@ -5,7 +5,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
   onSubmit={[Function]}
 >
   <label
-    for="weight"
+    htmlFor="weight"
     style={
       Object {
         "alignItems": "stretch",
@@ -33,6 +33,12 @@ exports[`SettingsForm renders a renders a form component 1`] = `
       value=""
     >
       <option
+        disabled={true}
+        value=""
+      >
+        Select weight units
+      </option>
+      <option
         value="imperial"
       >
         Imperial (lbs/oz)
@@ -45,7 +51,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
     </select>
   </label>
   <label
-    for="liquid"
+    htmlFor="liquid"
     style={
       Object {
         "alignItems": "stretch",
@@ -73,6 +79,12 @@ exports[`SettingsForm renders a renders a form component 1`] = `
       value=""
     >
       <option
+        disabled={true}
+        value=""
+      >
+        Select liquid units
+      </option>
+      <option
         value="imperial"
       >
         Imperial (gal/oz)
@@ -85,7 +97,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
     </select>
   </label>
   <label
-    for="currency"
+    htmlFor="currency"
     style={
       Object {
         "alignItems": "stretch",
@@ -113,6 +125,12 @@ exports[`SettingsForm renders a renders a form component 1`] = `
       value=""
     >
       <option
+        disabled={true}
+        value=""
+      >
+        Select currency units
+      </option>
+      <option
         value="USD"
       >
         USD
@@ -130,7 +148,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
     </select>
   </label>
   <label
-    for="maltColor"
+    htmlFor="maltColor"
     style={
       Object {
         "alignItems": "stretch",
@@ -158,6 +176,12 @@ exports[`SettingsForm renders a renders a form component 1`] = `
       value=""
     >
       <option
+        disabled={true}
+        value=""
+      >
+        Select malt color units
+      </option>
+      <option
         value="SRM"
       >
         SRM
@@ -175,7 +199,7 @@ exports[`SettingsForm renders a renders a form component 1`] = `
     </select>
   </label>
   <label
-    for="beerColor"
+    htmlFor="beerColor"
     style={
       Object {
         "alignItems": "stretch",
@@ -202,6 +226,12 @@ exports[`SettingsForm renders a renders a form component 1`] = `
       }
       value=""
     >
+      <option
+        disabled={true}
+        value=""
+      >
+        Select beer color units
+      </option>
       <option
         value="SRM"
       >
