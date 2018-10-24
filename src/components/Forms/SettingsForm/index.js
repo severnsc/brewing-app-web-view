@@ -11,6 +11,7 @@ class SettingsForm extends Component {
 		currency: "",
 		maltColor: "",
 		beerColor: "",
+		dateFormat: "",
 		disabled: true
 	}
 
@@ -65,7 +66,7 @@ class SettingsForm extends Component {
 	}
 
 	render(){
-		const { weight, liquid, currency, maltColor, beerColor, disabled } = this.state
+		const { weight, liquid, currency, maltColor, beerColor, dateFormat, disabled } = this.state
 		return(
 			<form onSubmit={this.onSubmit}>
 				<label htmlFor="weight" style={formStyles.label}>
@@ -111,6 +112,15 @@ class SettingsForm extends Component {
 						<option value="L">L</option>
 					</select>
 				</label>
+				<label htmlFor="dateFormat" style={formStyles.label}>
+					Date format
+					<select id="dateFormat" name="dateFormat" value={dateFormat} onChange={this.onChange} style={formStyles.select}>
+						{dateFormat ? null : <option disabled value="">--- select date format ---</option>}
+						<option value="MM/DD/YYYY">MM/DD/YYYY</option>
+						<option value="MM/DD/YY">MM/DD/YY</option>
+						<option value="YYYY-MM-DD">YYYY-MM-DD</option>
+					</select>
+				</label>
 				<input type="submit" value="Save settings" style={disabled ? {...globalStyles.button, ...formStyles.disabled} : globalStyles.button} disabled={disabled} />
 			</form>
 		)		
@@ -124,7 +134,8 @@ SettingsForm.propTypes = {
 	liquid: PropTypes.oneOf(["imperial", "metric"]),
 	currency: PropTypes.oneOf(["USD", "GBP", "EUR"]),
 	maltColor: PropTypes.oneOf(["SRM", "EBC", "L"]),
-	beerColor: PropTypes.oneOf(["SRM", "EBC", "L"])
+	beerColor: PropTypes.oneOf(["SRM", "EBC", "L"]),
+	dateFormat: PropTypes.oneOf(["MM/DD/YYYY", "MM/DD/YY", "YYYY-MM-DD"])
 }
 
 export default SettingsForm

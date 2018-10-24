@@ -17,6 +17,11 @@ const labelStyle = {
   marginBottom: "10px"
 }
 
+const selectStyle = {
+	margin:  "10px 0",
+  fontSize: "1em"
+}
+
 describe("SettingsForm", () => {
 
 	it("renders a renders a form component", () => {
@@ -547,6 +552,106 @@ describe("SettingsForm", () => {
 
 	})
 
+	describe("date format input", () => {
+
+		it("has a label for date format", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[htmlFor='dateFormat']").length).toBe(1)
+		})
+
+		it("has a label with text Date format", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[htmlFor='dateFormat']").contains("Date format")).toBe(true)
+		})
+
+		it("has a label with label style", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("label[htmlFor='dateFormat']").prop("style")).toEqual(labelStyle)
+		})
+
+		it("has select with id dateFormat", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("#dateFormat").type()).toBe("select")
+		})
+
+		it("has select with name dateFormat", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat']").length).toBe(1)
+		})
+
+		it("has a disabled option", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[disabled]").length).toBe(1)
+		})
+
+		it("has a disabled option with value ''", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[disabled]").prop("value")).toBe("")
+		})
+
+		it("has a disabled option with text --- select date format ---", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[disabled]").text()).toBe("--- select date format ---")
+		})
+
+		it("does not display disabled option if dateFormat prop is set", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} dateFormat={"MM/DD/YYYY"} />)
+			expect(form.find("select[name='dateFormat'] > option[disabled]").length).toBe(0)
+		})
+
+		it("has an option with value 'MM/DD/YYYY'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[value='MM/DD/YYYY']").length).toBe(1)
+		})
+
+		it("has an option with text 'MM/DD/YYYY'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[value='MM/DD/YYYY']").text()).toBe("MM/DD/YYYY")
+		})
+
+		it("has an option with value 'MM/DD/YY'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[value='MM/DD/YY']").length).toBe(1)
+		})
+
+		it("has an option with text 'MM/DD/YY'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[value='MM/DD/YY']").text()).toBe("MM/DD/YY")
+		})
+
+		it("has an option with value 'YYYY-MM-DD'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[value='YYYY-MM-DD']").length).toBe(1)
+		})
+
+		it("has an option with text 'YYYY-MM-DD'", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat'] > option[value='YYYY-MM-DD']").text()).toBe("YYYY-MM-DD")
+		})
+
+		it("should initialize with value of ''", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat']").prop("value")).toBe("")
+		})
+
+		it("should change the value on change", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			form.find("select[name='dateFormat']").simulate("change", {target: {name: "dateFormat", value: "MM/DD/YYYY"}})
+			expect(form.find("select[name='dateFormat']").prop("value")).toBe("MM/DD/YYYY")
+		})
+
+		it("should set the value equal to the prop", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} dateFormat="MM/DD/YYYY" />)
+			expect(form.find("select[name='dateFormat']").prop("value")).toBe("MM/DD/YYYY")
+		})
+
+		it("should have style equal to select style", () => {
+			const form = shallow(<SettingsForm onSubmit={() => {}} />)
+			expect(form.find("select[name='dateFormat']").prop("style")).toEqual(selectStyle)
+		})
+
+	})
+
 	describe("submit button", () => {
 
 		const button = {
@@ -592,6 +697,7 @@ describe("SettingsForm", () => {
 					currency="USD"
 					maltColor="SRM"
 					beerColor="SRM"
+					dateFormat="MM/DD/YYYY"
 				/>
 			)
 			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "metric"}})
@@ -622,6 +728,7 @@ describe("SettingsForm", () => {
 					currency="USD"
 					maltColor="SRM"
 					beerColor="SRM"
+					dateFormat="MM/DD/YYYY"
 				/>
 			)
 			expect(form.find("input[type='submit']").prop("disabled")).toBe(true)
@@ -638,6 +745,7 @@ describe("SettingsForm", () => {
 					currency="USD"
 					maltColor="SRM"
 					beerColor="SRM"
+					dateFormat="MM/DD/YYYY"
 				/>
 			)
 			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "EBC"}})
@@ -709,6 +817,7 @@ describe("SettingsForm", () => {
 					currency="USD"
 					maltColor="SRM"
 					beerColor="SRM"
+					dateFormat="MM/DD/YYYY"
 				/>
 			)
 			const submit = "input[type='submit']"
@@ -728,6 +837,7 @@ describe("SettingsForm", () => {
 					currency="USD"
 					maltColor="SRM"
 					beerColor="SRM"
+					dateFormat="MM/DD/YYYY"
 				/>
 			)
 			const submit = "input[type='submit']"

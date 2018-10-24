@@ -249,6 +249,57 @@ exports[`SettingsForm renders a renders a form component 1`] = `
       </option>
     </select>
   </label>
+  <label
+    htmlFor="dateFormat"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Date format
+    <select
+      id="dateFormat"
+      name="dateFormat"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        --- select date format ---
+      </option>
+      <option
+        value="MM/DD/YYYY"
+      >
+        MM/DD/YYYY
+      </option>
+      <option
+        value="MM/DD/YY"
+      >
+        MM/DD/YY
+      </option>
+      <option
+        value="YYYY-MM-DD"
+      >
+        YYYY-MM-DD
+      </option>
+    </select>
+  </label>
   <input
     disabled={true}
     style={
