@@ -779,8 +779,8 @@ describe("SettingsForm", () => {
 
 		it("should pass the state to the onSubmit prop", () => {
 			let onSubmitArgs = []
-			const onSubmit = (weight, liquid, currency, maltColor, beerColor) => {
-				onSubmitArgs = [weight, liquid, currency, maltColor, beerColor]
+			const onSubmit = (weight, liquid, currency, maltColor, beerColor, dateFormat) => {
+				onSubmitArgs = [weight, liquid, currency, maltColor, beerColor, dateFormat]
 			}
 			const form = shallow(<SettingsForm onSubmit={onSubmit}/>)
 			form.find("select[name='weight']").simulate("change", {target: {name: "weight", value: "metric"}})
@@ -788,8 +788,9 @@ describe("SettingsForm", () => {
 			form.find("select[name='currency']").simulate("change", {target: {name: "currency", value: "USD"}})
 			form.find("select[name='maltColor']").simulate("change", {target: {name: "maltColor", value: "SRM"}})
 			form.find("select[name='beerColor']").simulate("change", {target: {name: "beerColor", value: "SRM"}})
+			form.find("select[name='dateFormat']").simulate("change", {target: {name: "dateFormat", value: "MM/DD/YYYY"}})
 			form.simulate("submit", {preventDefault() {}})
-			expect(onSubmitArgs).toEqual(["metric", "metric", "USD", "SRM", "SRM"])
+			expect(onSubmitArgs).toEqual(["metric", "metric", "USD", "SRM", "SRM", "MM/DD/YYYY"])
 		})
 
 		it("should reset the submit input back to disabled", () => {

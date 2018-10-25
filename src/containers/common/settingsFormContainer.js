@@ -24,13 +24,14 @@ const SettingsFormContainer = ({ isCreating, history }) => (
 				<Mutation mutation={mutation}>
 					{mutation => {
 
-						const onSubmit = (weight, liquid, currency, maltColor, beerColor) => {
+						const onSubmit = (weight, liquid, currency, maltColor, beerColor, dateFormat) => {
 							const settings = {
 								weight,
 								liquid,
 								currency,
 								maltColor,
-								beerColor
+								beerColor,
+								dateFormat
 							}
 
 							if(isCreating){
