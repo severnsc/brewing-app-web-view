@@ -11,6 +11,14 @@ import {
 	UPDATE_MODAL
 } from "../mutations"
 import moment from "moment"
+import {
+	weightUnits,
+	maltColor,
+	convertWeight,
+	formatWeightString,
+	convertCurrency,
+	formatCurrencyString
+} from "../utils"
 
 const MaltInventoryTableContainer = () => (
 	<Query query={maltInventoryTableQuery}>
@@ -22,11 +30,15 @@ const MaltInventoryTableContainer = () => (
 				return <p>Error!</p>
 			}
 
+			const { settings } = data.currentUser
+			const weightSettings = settings.find(setting => setting.name === "weight")
+			const currencySetting = settings.find(setting => setting.name === "currency")
+
 			const columns = [
 				{id: shortid.generate(), name: "Malt name"},
-				{id: shortid.generate(), name: "Amount (lbs, oz)"},
+				{id: shortid.generate(), name: `Amount ${weightUnits(weightSettings.value)}`},
 				{id: shortid.generate(), name: "Malt type"},
-				{id: shortid.generate(), name: "Malt color (SRM)"},
+				{id: shortid.generate(), name: `Malt color ${maltColor(settings.maltColor)}`},
 				{id: shortid.generate(), name: "Country of origin"},
 				{id: shortid.generate(), name: "Cost per lb"},
 				{id: shortid.generate(), name: "Purchase date"}
@@ -49,11 +61,11 @@ const MaltInventoryTableContainer = () => (
 																					 	id: item.id,
 																					 	cells: [
 																					 		JSON.parse(item.object).name,
-																					 		`${Math.trunc(item.currentQuantity)} lbs ${item.currentQuantity - Math.trunc(item.currentQuantity)} oz`,
+																					 		formatWeightString(convertWeight(item.currentQuantity, item.quantityUnit, weightSettings.value), weightSettings.value),
 																					 		JSON.parse(item.object).type,
 																					 		<Lovibond value={parseInt(JSON.parse(item.object).color, 10)} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
-																					 		"$"+item.unitCost,
+																					 		formatCurrencyString(convertCurrency(item.unitCost, item.costUnit, currencySetting.value), currencySetting.value),
 																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
 																					 	]
 																					}))
