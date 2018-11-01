@@ -13,6 +13,11 @@ export default gql`
 
 		currentUser {
 			id
+			settings {
+				id
+				name
+				value
+			}
 			...InventoryItems
 		}
 	}
