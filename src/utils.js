@@ -1,4 +1,5 @@
 import moment from "moment"
+import convert from "convert-units"
 
 export const constructErrorMessage = (name, type, item) => 
   `${name} must be of type ${type}! Got value: ` + item
@@ -38,5 +39,45 @@ export const maltColor = type => {
 
 		default:
 			return "SRM"
+	}
+}
+
+export const convertKgToLbs = kg => convert(kg).from("kg").to("lb")
+
+export const convertLbsToKg = lbs => convert(lbs).from("lb").to("kg")
+
+export const convertWeight = (weight, originalUnits, convertedUnits) => {
+	if(originalUnits === "imperial" && convertedUnits === "metric"){
+		return convertLbsToKg(weight)
+	}
+
+	if(originalUnits === "metric" && convertedUnits === "imperial"){
+		return convertKgToLbs(weight)
+	}
+
+	return weight
+}
+
+export const formatLbsOzString = weight => {
+	const lbs = Math.trunc(weight)
+	const oz = convert(weight - lbs).from("lb").to("oz")
+	const lbsString = lbs <= 1 ? "lb" : "lbs"
+	return `${lbs} ${lbsString}, ${oz} oz`
+}
+
+export const formatKgGString = weight => {
+	const kgs = Math.trunc(weight)
+	const g = convert(weight - kgs).from("kg").to("g")
+	const kgsString = kgs <= 1 ? "kg" : "kgs"
+	return `${kgs} ${kgsString}, ${g} g`
+}
+
+export const formatWeightString = (weight, units) => {
+	if(units === "imperial"){
+		return formatLbsOzString(weight)
+	}
+
+	if(units === "metric"){
+		return formatKgGString(weight)
 	}
 }
