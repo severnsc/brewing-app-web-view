@@ -17,3 +17,26 @@ export const convertMinutesSecondsStringToMs = string => {
 	const splitTime = string.split(":")
 	return splitTime[0] * 60 * 60 * 1000 + splitTime[1] * 60 * 1000 + splitTime[2] * 1000
 }
+
+export const weightUnits = type => {
+	switch(type){
+		case "metric":
+			return "(kg, g)"
+
+		default:
+			return "(lbs, oz)"
+	}
+}
+
+export const maltColor = type => {
+	switch(type){
+		case "EBC":
+			return "EBC"
+
+		case "L":
+			return "L"
+
+		default:
+			return "SRM"
+	}
+}
