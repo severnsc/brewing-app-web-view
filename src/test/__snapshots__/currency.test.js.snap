@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`currency component renders a currency component 1`] = `
+<span>
+  $
+  0.00
+</span>
+`;

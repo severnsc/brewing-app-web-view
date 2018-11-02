@@ -12,6 +12,7 @@ import Tab from "./Tab"
 import Lovibond from "./Lovibond"
 import Flash from "./Flash"
 import ScrollableList from "./ScrollableList"
+import Currency from "./Currency"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -69,5 +70,6 @@ export {
 	ItemsToBeDeliveredHeader,
 	ItemsToBeDeliveredListItem,
 	ItemsToBeDeliveredEmpty,
-	SettingsForm
+	SettingsForm,
+	Currency
 }
