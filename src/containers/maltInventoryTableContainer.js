@@ -1,8 +1,9 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { maltInventoryTableQuery } from "../queries"
-import { Lovibond } from "../components"
+import { Lovibond, Currency } from "../components"
 import SortableTableContainer from "./common/sortableTableContainer"
+import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import shortid from "shortid"
 import {
 	UPDATE_MALT_TABLE_SORT,
@@ -65,7 +66,7 @@ const MaltInventoryTableContainer = () => (
 																					 		JSON.parse(item.object).type,
 																					 		<Lovibond value={parseInt(JSON.parse(item.object).color, 10)} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
-																					 		formatCurrencyString(convertCurrency(item.unitCost, item.costUnit, currencySetting.value), currencySetting.value),
+																					 		item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
 																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
 																					 	]
 																					}))
