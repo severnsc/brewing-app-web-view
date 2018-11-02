@@ -67,7 +67,7 @@ export const formatLbsOzString = weight => {
 
 export const formatKgGString = weight => {
 	const kgs = Math.trunc(weight)
-	const g = convert(weight - kgs).from("kg").to("g")
+	const g = convert(parseFloat((weight - kgs).toFixed(4))).from("kg").to("g")
 	const kgsString = kgs <= 1 ? "kg" : "kgs"
 	return `${kgs} ${kgsString}, ${g} g`
 }
