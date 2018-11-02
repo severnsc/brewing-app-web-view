@@ -5,7 +5,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-describe.only("currency component", () => {
+describe("currency component", () => {
 
 	it("renders a currency component", () => {
 		const currency = renderer.create(<Currency amount={0} unit="USD"/>)
