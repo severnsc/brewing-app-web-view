@@ -29,19 +29,6 @@ export const weightUnits = type => {
 	}
 }
 
-export const maltColor = type => {
-	switch(type){
-		case "EBC":
-			return "EBC"
-
-		case "L":
-			return "L"
-
-		default:
-			return "SRM"
-	}
-}
-
 export const convertKgToLbs = kg => convert(kg).from("kg").to("lb")
 
 export const convertLbsToKg = lbs => convert(lbs).from("lb").to("kg")
