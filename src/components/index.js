@@ -13,6 +13,7 @@ import Lovibond from "./Lovibond"
 import Flash from "./Flash"
 import ScrollableList from "./ScrollableList"
 import Currency from "./Currency"
+import Weight from "./Weight"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -71,5 +72,6 @@ export {
 	ItemsToBeDeliveredListItem,
 	ItemsToBeDeliveredEmpty,
 	SettingsForm,
-	Currency
+	Currency,
+	Weight
 }

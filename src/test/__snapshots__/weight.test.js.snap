@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`weight component renders a weight component 1`] = `
+<span>
+  0 lb, 0 oz
+</span>
+`;
