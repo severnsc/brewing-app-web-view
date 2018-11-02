@@ -1,7 +1,7 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { maltInventoryTableQuery } from "../queries"
-import { Lovibond, Currency } from "../components"
+import { Lovibond, Currency, Weight } from "../components"
 import SortableTableContainer from "./common/sortableTableContainer"
 import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import shortid from "shortid"
@@ -14,11 +14,7 @@ import {
 import moment from "moment"
 import {
 	weightUnits,
-	maltColor,
-	convertWeight,
-	formatWeightString,
-	convertCurrency,
-	formatCurrencyString
+	convertWeight
 } from "../utils"
 
 const MaltInventoryTableContainer = () => (
@@ -34,12 +30,13 @@ const MaltInventoryTableContainer = () => (
 			const { settings } = data.currentUser
 			const weightSettings = settings.find(setting => setting.name === "weight")
 			const currencySetting = settings.find(setting => setting.name === "currency")
+			const maltColorSetting = settings.find(setting => setting.name === "maltColor")
 
 			const columns = [
 				{id: shortid.generate(), name: "Malt name"},
 				{id: shortid.generate(), name: `Amount ${weightUnits(weightSettings.value)}`},
 				{id: shortid.generate(), name: "Malt type"},
-				{id: shortid.generate(), name: `Malt color ${maltColor(settings.maltColor)}`},
+				{id: shortid.generate(), name: `Malt color ${maltColorSetting.value}`},
 				{id: shortid.generate(), name: "Country of origin"},
 				{id: shortid.generate(), name: "Cost per lb"},
 				{id: shortid.generate(), name: "Purchase date"}
@@ -62,7 +59,7 @@ const MaltInventoryTableContainer = () => (
 																					 	id: item.id,
 																					 	cells: [
 																					 		JSON.parse(item.object).name,
-																					 		formatWeightString(convertWeight(item.currentQuantity, item.quantityUnit, weightSettings.value), weightSettings.value),
+																					 		<Weight amount={convertWeight(item.currentQuantity, item.quantityUnit, weightSettings.value)} unit={weightSettings.value} />,
 																					 		JSON.parse(item.object).type,
 																					 		<Lovibond value={parseInt(JSON.parse(item.object).color, 10)} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
