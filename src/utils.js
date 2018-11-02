@@ -45,6 +45,8 @@ export const convertWeight = (weight, originalUnits, convertedUnits) => {
 	return weight
 }
 
+const isInt = num => num % 1 === 0
+
 export const formatLbsOzString = weight => {
 	const lbs = Math.trunc(weight)
 	const oz = convert(weight - lbs).from("lb").to("oz")
@@ -54,7 +56,8 @@ export const formatLbsOzString = weight => {
 
 export const formatKgGString = weight => {
 	const kgs = Math.trunc(weight)
-	const g = convert(parseFloat((weight - kgs))).from("kg").to("g").toFixed(1)
+	let g = parseFloat(convert((weight - kgs)).from("kg").to("g").toFixed(1))
+	if(isInt(g)) g = (g).toFixed(0)
 	const kgsString = kgs <= 1 ? "kg" : "kgs"
 	return `${kgs} ${kgsString}, ${g} g`
 }
