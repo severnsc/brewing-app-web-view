@@ -15,6 +15,7 @@ import ScrollableList from "./ScrollableList"
 import Currency from "./Currency"
 import Weight from "./Weight"
 import ConvertWeight from "./ConvertWeight"
+import SRM from "./SRM"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -75,5 +76,6 @@ export {
 	SettingsForm,
 	Currency,
 	Weight,
-	ConvertWeight
+	ConvertWeight,
+	SRM
 }
