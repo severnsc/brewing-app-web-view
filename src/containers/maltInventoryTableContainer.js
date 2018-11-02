@@ -1,7 +1,7 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { maltInventoryTableQuery } from "../queries"
-import { Lovibond, Currency, Weight } from "../components"
+import { Lovibond, Currency, Weight, ConvertWeight } from "../components"
 import SortableTableContainer from "./common/sortableTableContainer"
 import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import shortid from "shortid"
@@ -12,10 +12,7 @@ import {
 	UPDATE_MODAL
 } from "../mutations"
 import moment from "moment"
-import {
-	weightUnits,
-	convertWeight
-} from "../utils"
+import { weightUnits } from "../utils"
 
 const MaltInventoryTableContainer = () => (
 	<Query query={maltInventoryTableQuery}>
@@ -59,7 +56,7 @@ const MaltInventoryTableContainer = () => (
 																					 	id: item.id,
 																					 	cells: [
 																					 		JSON.parse(item.object).name,
-																					 		<Weight amount={convertWeight(item.currentQuantity, item.quantityUnit, weightSettings.value)} unit={weightSettings.value} />,
+																					 		item.quantityUnit !== weightSettings.value ? <ConvertWeight from={item.quantityUnit} to={weightSettings.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSettings.value} />,
 																					 		JSON.parse(item.object).type,
 																					 		<Lovibond value={parseInt(JSON.parse(item.object).color, 10)} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
