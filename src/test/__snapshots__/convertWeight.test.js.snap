@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`convertWeight component renders a convertWeight component 1`] = `
+<span>
+  2 lbs, 3.2739907229404395 oz
+</span>
+`;

@@ -14,6 +14,7 @@ import Flash from "./Flash"
 import ScrollableList from "./ScrollableList"
 import Currency from "./Currency"
 import Weight from "./Weight"
+import ConvertWeight from "./ConvertWeight"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -73,5 +74,6 @@ export {
 	ItemsToBeDeliveredEmpty,
 	SettingsForm,
 	Currency,
-	Weight
+	Weight,
+	ConvertWeight
 }
