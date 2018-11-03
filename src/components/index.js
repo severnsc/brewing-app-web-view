@@ -16,6 +16,7 @@ import Currency from "./Currency"
 import Weight from "./Weight"
 import ConvertWeight from "./ConvertWeight"
 import SRM from "./SRM"
+import MaltColor from "./MaltColor"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -77,5 +78,6 @@ export {
 	Currency,
 	Weight,
 	ConvertWeight,
-	SRM
+	SRM,
+	MaltColor
 }
