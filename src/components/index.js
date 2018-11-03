@@ -6,6 +6,7 @@ import NavBar from "./NavBar"
 import ResetPasswordForm from "./ResetPasswordForm"
 import SearchBar from "./SearchBar"
 import SortableTable from "./SortableTable"
+import TableData from "./TableData"
 import InventoryForm from "./InventoryForm"
 import Tabs from "./Tabs"
 import Tab from "./Tab"
@@ -18,6 +19,7 @@ import ConvertWeight from "./ConvertWeight"
 import SRM from "./SRM"
 import MaltColor from "./MaltColor"
 import ConvertMaltColor from "./ConvertMaltColor"
+import Pagination from "./Pagination"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -55,6 +57,7 @@ export {
 	SearchBar,
 	SignupForm,
 	SortableTable,
+	TableData,
 	TimerAlertForm,
 	TimerForm,
 	InventoryForm,
@@ -81,5 +84,6 @@ export {
 	ConvertWeight,
 	SRM,
 	MaltColor,
-	ConvertMaltColor
+	ConvertMaltColor,
+	Pagination
 }
