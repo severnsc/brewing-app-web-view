@@ -16,11 +16,6 @@ describe("convert malt color component", () => {
 
 	describe("when from is SRM and to is L", () => {
 
-		it("renders a MaltColor component with unit prop L", () => {
-			const convertMaltColor = shallow(<ConvertMaltColor from="SRM" to="L" />)
-			expect(convertMaltColor.find("MaltColor").prop("unit")).toBe("L")
-		})
-
 		it("converts the value properly and passes to value prop", () => {
 			const convertMaltColor = shallow(<ConvertMaltColor from="SRM" to="L" value={1} />)
 			const convertedValue = convertColor("SRM", "L", 1)
@@ -30,11 +25,6 @@ describe("convert malt color component", () => {
 	})
 
 	describe("when from is L and to is SRM", () => {
-
-		it("renders a MaltColor component with unit prop SRM", () => {
-			const convertMaltColor = shallow(<ConvertMaltColor from="L" to="SRM" />)
-			expect(convertMaltColor.find("MaltColor").prop("unit")).toBe("SRM")
-		})
 
 		it("converts the value properly and passes to value prop", () => {
 			const convertMaltColor = shallow(<ConvertMaltColor from="L" to="SRM" value={1} />)
