@@ -3,7 +3,7 @@ import styles from "./styles"
 import PropTypes from 'prop-types'
 import { HoverableTableRow } from '..'
 
-const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, itemsPerPageOptions, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick, customSort }) => {
+const SortableTable = ({ columns, sortBy, sortOrder, toggleSort, itemsPerPageOptions, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick, customSort }) => {
 
   const sortIndicator = sortOrder === "asc" ? "∧" : "∨"
 
@@ -18,46 +18,6 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
   const handleClick = cellName => toggleSort(cellName)
 
   const handleItemsPerPageChange = e => onItemsPerPageChange(e.target.value)
-
-  const columnNames = columns.map(column => column.name)
-  const sortByIndex = columnNames.indexOf(sortBy)
-  const sortedTableRows = customSort && customSort[sortBy]
-                          ? customSort[sortBy](tableRows, sortOrder, sortByIndex)
-                          : tableRows.concat().sort((tableRowA, tableRowB) => {
-
-                              let aValue = tableRowA.cells[sortByIndex]
-                              let bValue = tableRowB.cells[sortByIndex]
-
-                              if(typeof aValue === 'string'){
-                                aValue = aValue.toLowerCase()
-                              }
-
-                              if(typeof bValue === 'string'){
-                                bValue = bValue.toLowerCase()
-                              }
-                              
-                              if(sortOrder === "asc"){
-                                if(aValue < bValue){
-                                  return -1
-                                }
-
-                                if(aValue > bValue){
-                                  return 1
-                                }
-
-                                return 0
-                              }else{
-                                if(aValue < bValue){
-                                  return 1
-                                }
-
-                                if(aValue > bValue){
-                                  return -1
-                                }
-
-                                return 0
-                              }
-                            })
 
   const startIndex = currentPage*itemsPerPage
   const endIndex = (currentPage + 1) * itemsPerPage
@@ -87,14 +47,7 @@ const SortableTable = ({ columns, tableRows, sortBy, sortOrder, toggleSort, item
           </tr>
         </thead>
         <tbody>
-          {currentPageTableRows.map(row => {
-            return (
-              <HoverableTableRow onClick={onTableRowClick} key={row.id} id={row.id}>
-                {row.cells.map((cell, index) => 
-                  <td key={index} style={{...styles.tableData, width: `${widthPercentage}%`}}>{cell}</td>)}
-              </HoverableTableRow>
-            )
-          })}
+          {children}
         </tbody>
       </table>
       <div style={styles.footer}>
@@ -117,14 +70,6 @@ SortableTable.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  tableRows: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      cells: PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.element])
-      )
     })
   ).isRequired,
   sortBy: PropTypes.string.isRequired,
