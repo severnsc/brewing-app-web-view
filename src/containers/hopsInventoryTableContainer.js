@@ -1,4 +1,8 @@
 import React from "react"
+import {
+	ConvertWeight,
+	Weight
+} from "../components"
 import { Query } from "react-apollo"
 import { hopsInventoryTableQuery } from "../queries"
 import shortid from "shortid"
@@ -10,6 +14,7 @@ import {
 	UPDATE_MODAL
 } from "../mutations"
 import moment from "moment"
+import { weightUnits } from "../utils"
 
 const HopsInventoryTableContainer = () => (
 	<Query query={hopsInventoryTableQuery}>
@@ -18,16 +23,8 @@ const HopsInventoryTableContainer = () => (
 			if(loading) return <p>Loading...</p>
 			if(error) return <p>Error!</p>
 
-			const columns = [
-				{id: shortid.generate(), name: "Hop name"},
-				{id: shortid.generate(), name: "Amount (lbs, oz)"},
-				{id: shortid.generate(), name: "Country of origin"},
-				{id: shortid.generate(), name: "Alpha acid %"},
-				{id: shortid.generate(), name: "Cost per lb"},
-				{id: shortid.generate(), name: "Purchase date"}
-			]
-
 			const { currentUser, hopsInventoryTable } = data
+			const { settings } = currentUser
 			const {
 				sortBy,
 				sortOrder,
@@ -36,13 +33,24 @@ const HopsInventoryTableContainer = () => (
 				filterString
 			}	= hopsInventoryTable
 
+			const weightSetting = settings.find(setting => setting.name === "weight")
+
+			const columns = [
+				{id: shortid.generate(), name: "Hop name"},
+				{id: shortid.generate(), name: `Amount ${weightUnits(weightSetting.value)}`},
+				{id: shortid.generate(), name: "Country of origin"},
+				{id: shortid.generate(), name: "Alpha acid %"},
+				{id: shortid.generate(), name: "Cost per lb"},
+				{id: shortid.generate(), name: "Purchase date"}
+			]
+
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
 			const tableRows = inventory
 												? inventory.items.map(item => ({
 														id: item.id,
 														cells: [
 															JSON.parse(item.object).name,
-															`${Math.trunc(item.currentQuantity/16)} lbs ${item.currentQuantity%16} oz`,
+															item.quantityUnit !== weightSetting.value ? <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSetting.value} />,
 															JSON.parse(item.object).countryOfOrigin,
 															JSON.parse(item.object).alphaAcids + "%",
 															"$" + item.unitCost,

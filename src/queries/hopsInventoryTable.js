@@ -6,6 +6,10 @@ export default gql`
 		currentUser {
 			id
 			...InventoryItems
+			settings {
+				name
+				value
+			}
 		}
 
 		hopsInventoryTable @client {
