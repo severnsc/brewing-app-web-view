@@ -71,3 +71,18 @@ export const formatWeightString = (weight, units) => {
 		return formatKgGString(weight)
 	}
 }
+
+export const SRMtoL = srm => (srm + 0.6) / 1.35
+export const LtoSRM = l => (1.35 * l) - 0.6
+
+export convertColor = (from, to, value) => {
+	if(from === "SRM" && to === "L"){
+		return SRMtoL(value)
+	}
+
+	if(from === "L" && to === "SRM"){
+		return LtoSRM(value)
+	}
+
+	return value
+}
