@@ -1,5 +1,6 @@
 import moment from "moment"
 import convert from "convert-units"
+import shortid from "shortid"
 
 export const constructErrorMessage = (name, type, item) => 
   `${name} must be of type ${type}! Got value: ` + item
@@ -153,3 +154,5 @@ function doubleToHex(d) {
 }
 
 export const formatDate = (date, formatString) => moment(date).format(formatString)
+
+export const generateId = () => shortid.generate()

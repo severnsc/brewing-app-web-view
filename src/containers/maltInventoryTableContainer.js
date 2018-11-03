@@ -10,14 +10,13 @@ import {
 } from "../components"
 import SortableTableContainer from "./common/sortableTableContainer"
 import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
-import shortid from "shortid"
 import {
 	UPDATE_MALT_TABLE_SORT,
 	UPDATE_MALT_TABLE_ITEM_LIMIT,
 	UPDATE_MALT_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
-import { weightUnits, formatDate } from "../utils"
+import { weightUnits, formatDate, generateId } from "../utils"
 
 const MaltInventoryTableContainer = () => (
 	<Query query={maltInventoryTableQuery}>
@@ -36,13 +35,13 @@ const MaltInventoryTableContainer = () => (
 			const dateSetting = settings.find(setting => setting.name === "dateFormat")
 
 			const columns = [
-				{id: shortid.generate(), name: "Malt name"},
-				{id: shortid.generate(), name: `Amount ${weightUnits(weightSettings.value)}`},
-				{id: shortid.generate(), name: "Malt type"},
-				{id: shortid.generate(), name: `Malt color ${maltColorSetting.value}`},
-				{id: shortid.generate(), name: "Country of origin"},
-				{id: shortid.generate(), name: "Cost per lb"},
-				{id: shortid.generate(), name: "Purchase date"}
+				{id: generateId(), name: "Malt name"},
+				{id: generateId(), name: `Amount ${weightUnits(weightSettings.value)}`},
+				{id: generateId(), name: "Malt type"},
+				{id: generateId(), name: `Malt color ${maltColorSetting.value}`},
+				{id: generateId(), name: "Country of origin"},
+				{id: generateId(), name: "Cost per lb"},
+				{id: generateId(), name: "Purchase date"}
 			]
 
 			const { maltInventoryTable, currentUser } = data
