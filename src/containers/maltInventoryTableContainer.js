@@ -68,7 +68,7 @@ const MaltInventoryTableContainer = () => (
 																					 		JSON.parse(item.object).name,
 																					 		item.quantityUnit !== weightSettings.value ? <ConvertWeight from={item.quantityUnit} to={weightSettings.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSettings.value} />,
 																					 		JSON.parse(item.object).type,
-																					 		maltColorUnit !== maltColorSetting.value ? <ConvertMaltColor from={maltColorUnit(item)} to={maltColorSetting.value} value={maltColor(item)} /> : <MaltColor value={maltColor(item)} unit={maltColorSetting.value} />,
+																					 		maltColorUnit(item) !== maltColorSetting.value ? <ConvertMaltColor from={maltColorUnit(item)} to={maltColorSetting.value} value={maltColor(item)} /> : <MaltColor value={maltColor(item)} unit={maltColorSetting.value} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
 																					 		item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
 																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
