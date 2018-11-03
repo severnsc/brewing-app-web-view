@@ -1,17 +1,14 @@
 import React from "react"
-import { SRM, Lovibond } from ".."
+import styles from "./styles"
 
-const MaltColor = ({ unit, value }) => {
-	switch(unit){
-		case "SRM":
-			return <SRM value={value} />
+const MaltColor = ({ value }) => {
+	const color = styles.color(value)
 
-		case "L":
-			return <Lovibond value={value} />
-
-		default:
-			return null
-	}
+	return(
+		<div style={{background: color, ...styles.container}}>
+			<span style={styles.value}>{Math.round(value)}</span>
+		</div>
+	)
 }
 
 export default MaltColor
