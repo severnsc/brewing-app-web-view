@@ -6,7 +6,6 @@ import {
 } from "../components"
 import { Query } from "react-apollo"
 import { hopsInventoryTableQuery } from "../queries"
-import shortid from "shortid"
 import SortableTableContainer from "./common/sortableTableContainer"
 import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import {
@@ -15,8 +14,11 @@ import {
 	UPDATE_HOPS_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
-import moment from "moment"
-import { weightUnits, formatDate } from "../utils"
+import {
+	weightUnits,
+	formatDate,
+	generateId
+} from "../utils"
 
 const HopsInventoryTableContainer = () => (
 	<Query query={hopsInventoryTableQuery}>
@@ -40,12 +42,12 @@ const HopsInventoryTableContainer = () => (
 			const dateSetting = settings.find(setting => setting.name === "dateFormat")
 
 			const columns = [
-				{id: shortid.generate(), name: "Hop name"},
-				{id: shortid.generate(), name: `Amount ${weightUnits(weightSetting.value)}`},
-				{id: shortid.generate(), name: "Country of origin"},
-				{id: shortid.generate(), name: "Alpha acid %"},
-				{id: shortid.generate(), name: "Cost per lb"},
-				{id: shortid.generate(), name: "Purchase date"}
+				{id: generateId(), name: "Hop name"},
+				{id: generateId(), name: `Amount ${weightUnits(weightSetting.value)}`},
+				{id: generateId(), name: "Country of origin"},
+				{id: generateId(), name: "Alpha acid %"},
+				{id: generateId(), name: "Cost per lb"},
+				{id: generateId(), name: "Purchase date"}
 			]
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
