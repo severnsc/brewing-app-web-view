@@ -1,12 +1,14 @@
 import React from "react"
 import {
 	ConvertWeight,
-	Weight
+	Weight,
+	Currency
 } from "../components"
 import { Query } from "react-apollo"
 import { hopsInventoryTableQuery } from "../queries"
 import shortid from "shortid"
 import SortableTableContainer from "./common/sortableTableContainer"
+import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import {
 	UPDATE_HOPS_TABLE_SORT,
 	UPDATE_HOPS_TABLE_ITEM_LIMIT,
@@ -34,6 +36,7 @@ const HopsInventoryTableContainer = () => (
 			}	= hopsInventoryTable
 
 			const weightSetting = settings.find(setting => setting.name === "weight")
+			const currencySetting = settings.find(setting => setting.name === "currency")
 
 			const columns = [
 				{id: shortid.generate(), name: "Hop name"},
@@ -53,7 +56,7 @@ const HopsInventoryTableContainer = () => (
 															item.quantityUnit !== weightSetting.value ? <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSetting.value} />,
 															JSON.parse(item.object).countryOfOrigin,
 															JSON.parse(item.object).alphaAcids + "%",
-															"$" + item.unitCost,
+															item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
 															moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
 														]
 													}))
