@@ -151,3 +151,5 @@ function doubleToHex(d) {
     }
     return hexText;
 }
+
+export const formatDate = (date, formatString) => moment(date).format(formatString)

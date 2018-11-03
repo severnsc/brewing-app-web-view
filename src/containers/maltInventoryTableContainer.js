@@ -17,8 +17,7 @@ import {
 	UPDATE_MALT_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
-import moment from "moment"
-import { weightUnits } from "../utils"
+import { weightUnits, formatDate } from "../utils"
 
 const MaltInventoryTableContainer = () => (
 	<Query query={maltInventoryTableQuery}>
@@ -34,6 +33,7 @@ const MaltInventoryTableContainer = () => (
 			const weightSettings = settings.find(setting => setting.name === "weight")
 			const currencySetting = settings.find(setting => setting.name === "currency")
 			const maltColorSetting = settings.find(setting => setting.name === "maltColor")
+			const dateSetting = settings.find(setting => setting.name === "dateFormat")
 
 			const columns = [
 				{id: shortid.generate(), name: "Malt name"},
@@ -71,7 +71,7 @@ const MaltInventoryTableContainer = () => (
 																					 		maltColorUnit(item) !== maltColorSetting.value ? <ConvertMaltColor from={maltColorUnit(item)} to={maltColorSetting.value} value={maltColor(item)} /> : <MaltColor value={maltColor(item)} unit={maltColorSetting.value} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
 																					 		item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
-																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
+																					 		formatDate(new Date(item.lastReorderDate), dateSetting.value)
 																					 	]
 																					}))
 												: []
