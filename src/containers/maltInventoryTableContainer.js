@@ -1,7 +1,13 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { maltInventoryTableQuery } from "../queries"
-import { Lovibond, Currency, Weight, ConvertWeight } from "../components"
+import {
+	Currency,
+	Weight,
+	ConvertWeight,
+	MaltColor,
+	ConvertMaltColor
+} from "../components"
 import SortableTableContainer from "./common/sortableTableContainer"
 import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import shortid from "shortid"
@@ -51,6 +57,10 @@ const MaltInventoryTableContainer = () => (
 
 			const inventory = currentUser.inventories
 																	 .find(inventory => inventory.name === "Malt")
+
+			const maltColor = item => parseInt(JSON.parse(item.object).color, 10)
+			const maltColorUnit = item => JSON.parse(item.object).colorUnit
+
 			const tableRows = inventory
 												? inventory.items.map(item => ({
 																					 	id: item.id,
@@ -58,7 +68,7 @@ const MaltInventoryTableContainer = () => (
 																					 		JSON.parse(item.object).name,
 																					 		item.quantityUnit !== weightSettings.value ? <ConvertWeight from={item.quantityUnit} to={weightSettings.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSettings.value} />,
 																					 		JSON.parse(item.object).type,
-																					 		<Lovibond value={parseInt(JSON.parse(item.object).color, 10)} />,
+																					 		maltColorUnit !== maltColorSetting.value ? <ConvertMaltColor from={maltColorUnit(item)} to={maltColorSetting.value} value={maltColor(item)} /> : <MaltColor value={maltColor(item)} unit={maltColorSetting.value} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
 																					 		item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
 																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
