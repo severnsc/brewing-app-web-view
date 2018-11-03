@@ -4,7 +4,7 @@ import styles from "./styles"
 
 const SRM = ({ value }) => {
 
-	let style = styles[value]
+	let style = styles[Math.round(value)]
 	if(!style && value >= 31){
 		style = styles.dark
 	}
@@ -15,7 +15,7 @@ const SRM = ({ value }) => {
 
 	return(
 		<div style={{...style, ...styles.container}}>
-			<span style={styles.value}>{value}</span>
+			<span style={styles.value}>{Math.round(value)}</span>
 		</div>
 	)
 }

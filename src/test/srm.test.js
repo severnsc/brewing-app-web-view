@@ -200,6 +200,11 @@ describe("srm component", () => {
 			expect(srm.find("div").prop("style").background).toBe("black")
 		})
 
+		it("uses the rounded value when the value prop is a decimal", () => {
+			const srm = shallow(<SRM value={1.2} />)
+			expect(srm.find("div").prop("style").background).toBe("#F3F993")
+		})
+
 	})
 
 	describe("the value", () => {
@@ -252,6 +257,11 @@ describe("srm component", () => {
 		it("should have alignItems center", () => {
 			const srm = shallow(<SRM value={0} />)
 			expect(srm.find("span").prop("style").alignItems).toBe("center")
+		})
+
+		it("rounds the value when the value prop is a decimal", () => {
+			const srm = shallow(<SRM value={1.2} />)
+			expect(srm.find("span").text()).toBe("1")
 		})
 
 	})
