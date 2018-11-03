@@ -16,7 +16,7 @@ import {
 	UPDATE_MODAL
 } from "../mutations"
 import moment from "moment"
-import { weightUnits } from "../utils"
+import { weightUnits, formatDate } from "../utils"
 
 const HopsInventoryTableContainer = () => (
 	<Query query={hopsInventoryTableQuery}>
@@ -37,6 +37,7 @@ const HopsInventoryTableContainer = () => (
 
 			const weightSetting = settings.find(setting => setting.name === "weight")
 			const currencySetting = settings.find(setting => setting.name === "currency")
+			const dateSetting = settings.find(setting => setting.name === "dateFormat")
 
 			const columns = [
 				{id: shortid.generate(), name: "Hop name"},
@@ -57,7 +58,7 @@ const HopsInventoryTableContainer = () => (
 															JSON.parse(item.object).countryOfOrigin,
 															JSON.parse(item.object).alphaAcids + "%",
 															item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
-															moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
+															formatDate(new Date(item.lastReorderDate), dateSetting.value)
 														]
 													}))
 												: []
