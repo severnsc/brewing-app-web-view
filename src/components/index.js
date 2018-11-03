@@ -12,6 +12,12 @@ import Tab from "./Tab"
 import Lovibond from "./Lovibond"
 import Flash from "./Flash"
 import ScrollableList from "./ScrollableList"
+import Currency from "./Currency"
+import Weight from "./Weight"
+import ConvertWeight from "./ConvertWeight"
+import SRM from "./SRM"
+import MaltColor from "./MaltColor"
+import ConvertMaltColor from "./ConvertMaltColor"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -33,7 +39,8 @@ import {
 	YeastForm,
 	OtherForm,
 	NewTimerForm,
-	NewTimerAlertForm
+	NewTimerAlertForm,
+	SettingsForm
 } from "./Forms"
 
 export {
@@ -67,5 +74,12 @@ export {
 	NeedsToBeReorderedFooter,
 	ItemsToBeDeliveredHeader,
 	ItemsToBeDeliveredListItem,
-	ItemsToBeDeliveredEmpty
+	ItemsToBeDeliveredEmpty,
+	SettingsForm,
+	Currency,
+	Weight,
+	ConvertWeight,
+	SRM,
+	MaltColor,
+	ConvertMaltColor
 }

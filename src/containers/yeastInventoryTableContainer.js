@@ -1,7 +1,6 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { yeastInventoryTableQuery } from "../queries"
-import shortid from "shortid"
 import SortableTableContainer from "./common/sortableTableContainer"
 import {
   UPDATE_YEAST_TABLE_SORT,
@@ -9,7 +8,10 @@ import {
   UPDATE_YEAST_TABLE_PAGE_NUMBER,
   UPDATE_MODAL
 } from "../mutations"
-import moment from "moment"
+import {
+	generateId,
+	formatDate
+} from "../utils"
 
 const YeastInventoryTableContainer = () => (
 	<Query query={yeastInventoryTableQuery}>
@@ -19,23 +21,26 @@ const YeastInventoryTableContainer = () => (
 			if(error) return <p>Error!</p>
 
 			const columns = [
-				{id: shortid.generate(), name: "Yeast name"},
-				{id: shortid.generate(), name: "Amount (vials)"},
-				{id: shortid.generate(), name: "Yeast lab"},
-				{id: shortid.generate(), name: "Yeast number"},
-				{id: shortid.generate(), name: "Yeast type"},
-				{id: shortid.generate(), name: "Dry or Liquid"},
-				{id: shortid.generate(), name: "Purchase date"}
+				{id: generateId(), name: "Yeast name"},
+				{id: generateId(), name: "Amount (vials)"},
+				{id: generateId(), name: "Yeast lab"},
+				{id: generateId(), name: "Yeast number"},
+				{id: generateId(), name: "Yeast type"},
+				{id: generateId(), name: "Dry or Liquid"},
+				{id: generateId(), name: "Purchase date"}
 			]
 
 			const { currentUser, yeastInventoryTable } = data
-			const {
+			const { settings } = currentUser
+ 			const {
 				sortBy,
 				sortOrder,
 				itemsPerPage,
 				currentPage,
 				filterString
 			} = yeastInventoryTable
+
+			const dateSetting = settings.find(setting => setting.name === "dateFormat")
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Yeast")
 			const tableRows = inventory
@@ -48,7 +53,7 @@ const YeastInventoryTableContainer = () => (
 															JSON.parse(item.object).yeastNumber,
 															JSON.parse(item.object).yeastType,
 															JSON.parse(item.object).dry ? "Dry" : "Liquid",
-															moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
+															formatDate(new Date(item.lastReorderDate), dateSetting.value)
 														]
 													}))
 												: []

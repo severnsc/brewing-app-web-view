@@ -1,0 +1,324 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsForm renders a renders a form component 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <label
+    htmlFor="weight"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Weight
+    <select
+      id="weight"
+      name="weight"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        --- select weight units ---
+      </option>
+      <option
+        value="imperial"
+      >
+        Imperial (lbs/oz)
+      </option>
+      <option
+        value="metric"
+      >
+        Metric (kg/g)
+      </option>
+    </select>
+  </label>
+  <label
+    htmlFor="liquid"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Liquid
+    <select
+      id="liquid"
+      name="liquid"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        --- select liquid units ---
+      </option>
+      <option
+        value="imperial"
+      >
+        Imperial (gal/oz)
+      </option>
+      <option
+        value="metric"
+      >
+        Metric (l/ml)
+      </option>
+    </select>
+  </label>
+  <label
+    htmlFor="currency"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Currency
+    <select
+      id="currency"
+      name="currency"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        --- select currency units ---
+      </option>
+      <option
+        value="USD"
+      >
+        USD
+      </option>
+      <option
+        value="GBP"
+      >
+        GBP
+      </option>
+      <option
+        value="EUR"
+      >
+        EUR
+      </option>
+    </select>
+  </label>
+  <label
+    htmlFor="maltColor"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Malt color
+    <select
+      id="maltColor"
+      name="maltColor"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        --- select malt color units ---
+      </option>
+      <option
+        value="SRM"
+      >
+        SRM
+      </option>
+      <option
+        value="EBC"
+      >
+        EBC
+      </option>
+      <option
+        value="L"
+      >
+        L
+      </option>
+    </select>
+  </label>
+  <label
+    htmlFor="beerColor"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Beer color
+    <select
+      id="beerColor"
+      name="beerColor"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        --- select beer color units ---
+      </option>
+      <option
+        value="SRM"
+      >
+        SRM
+      </option>
+      <option
+        value="EBC"
+      >
+        EBC
+      </option>
+      <option
+        value="L"
+      >
+        L
+      </option>
+    </select>
+  </label>
+  <label
+    htmlFor="dateFormat"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "color": "hsl(0, 0%, 50%)",
+        "display": "flex",
+        "flexFlow": "column",
+        "fontSize": "0.75em",
+        "marginBottom": "10px",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Date format
+    <select
+      id="dateFormat"
+      name="dateFormat"
+      onChange={[Function]}
+      style={
+        Object {
+          "fontSize": "1em",
+          "margin": "10px 0",
+        }
+      }
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        --- select date format ---
+      </option>
+      <option
+        value="MM/DD/YYYY"
+      >
+        MM/DD/YYYY
+      </option>
+      <option
+        value="MM/DD/YY"
+      >
+        MM/DD/YY
+      </option>
+      <option
+        value="YYYY-MM-DD"
+      >
+        YYYY-MM-DD
+      </option>
+    </select>
+  </label>
+  <input
+    disabled={true}
+    style={
+      Object {
+        "MozAppearance": "none",
+        "WebkitAppearance": "none",
+        "appearance": "none",
+        "background": "hsl(0, 0%, 90%)",
+        "border": "none",
+        "borderRadius": "20px",
+        "color": "hsla(0, 0%, 100%, 0.85)",
+        "cursor": "default",
+        "fontSize": "1em",
+        "minWidth": "10em",
+        "padding": "10px",
+      }
+    }
+    type="submit"
+    value="Save settings"
+  />
+</form>
+`;

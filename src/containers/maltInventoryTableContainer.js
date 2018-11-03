@@ -1,16 +1,22 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { maltInventoryTableQuery } from "../queries"
-import { Lovibond } from "../components"
+import {
+	Currency,
+	Weight,
+	ConvertWeight,
+	MaltColor,
+	ConvertMaltColor
+} from "../components"
 import SortableTableContainer from "./common/sortableTableContainer"
-import shortid from "shortid"
+import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import {
 	UPDATE_MALT_TABLE_SORT,
 	UPDATE_MALT_TABLE_ITEM_LIMIT,
 	UPDATE_MALT_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
-import moment from "moment"
+import { weightUnits, formatDate, generateId } from "../utils"
 
 const MaltInventoryTableContainer = () => (
 	<Query query={maltInventoryTableQuery}>
@@ -22,14 +28,20 @@ const MaltInventoryTableContainer = () => (
 				return <p>Error!</p>
 			}
 
+			const { settings } = data.currentUser
+			const weightSettings = settings.find(setting => setting.name === "weight")
+			const currencySetting = settings.find(setting => setting.name === "currency")
+			const maltColorSetting = settings.find(setting => setting.name === "maltColor")
+			const dateSetting = settings.find(setting => setting.name === "dateFormat")
+
 			const columns = [
-				{id: shortid.generate(), name: "Malt name"},
-				{id: shortid.generate(), name: "Amount (lbs, oz)"},
-				{id: shortid.generate(), name: "Malt type"},
-				{id: shortid.generate(), name: "Malt color (SRM)"},
-				{id: shortid.generate(), name: "Country of origin"},
-				{id: shortid.generate(), name: "Cost per lb"},
-				{id: shortid.generate(), name: "Purchase date"}
+				{id: generateId(), name: "Malt name"},
+				{id: generateId(), name: `Amount ${weightUnits(weightSettings.value)}`},
+				{id: generateId(), name: "Malt type"},
+				{id: generateId(), name: `Malt color ${maltColorSetting.value}`},
+				{id: generateId(), name: "Country of origin"},
+				{id: generateId(), name: "Cost per lb"},
+				{id: generateId(), name: "Purchase date"}
 			]
 
 			const { maltInventoryTable, currentUser } = data
@@ -44,17 +56,21 @@ const MaltInventoryTableContainer = () => (
 
 			const inventory = currentUser.inventories
 																	 .find(inventory => inventory.name === "Malt")
+
+			const maltColor = item => parseInt(JSON.parse(item.object).color, 10)
+			const maltColorUnit = item => JSON.parse(item.object).colorUnit
+
 			const tableRows = inventory
 												? inventory.items.map(item => ({
 																					 	id: item.id,
 																					 	cells: [
 																					 		JSON.parse(item.object).name,
-																					 		`${Math.trunc(item.currentQuantity)} lbs ${item.currentQuantity - Math.trunc(item.currentQuantity)} oz`,
+																					 		item.quantityUnit !== weightSettings.value ? <ConvertWeight from={item.quantityUnit} to={weightSettings.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSettings.value} />,
 																					 		JSON.parse(item.object).type,
-																					 		<Lovibond value={parseInt(JSON.parse(item.object).color, 10)} />,
+																					 		maltColorUnit(item) !== maltColorSetting.value ? <ConvertMaltColor from={maltColorUnit(item)} to={maltColorSetting.value} value={maltColor(item)} /> : <MaltColor value={maltColor(item)} unit={maltColorSetting.value} />,
 																					 		JSON.parse(item.object).countryOfOrigin,
-																					 		"$"+item.unitCost,
-																					 		moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
+																					 		item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
+																					 		formatDate(new Date(item.lastReorderDate), dateSetting.value)
 																					 	]
 																					}))
 												: []

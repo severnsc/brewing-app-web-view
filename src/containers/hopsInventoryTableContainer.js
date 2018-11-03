@@ -1,15 +1,24 @@
 import React from "react"
+import {
+	ConvertWeight,
+	Weight,
+	Currency
+} from "../components"
 import { Query } from "react-apollo"
 import { hopsInventoryTableQuery } from "../queries"
-import shortid from "shortid"
 import SortableTableContainer from "./common/sortableTableContainer"
+import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
 import {
 	UPDATE_HOPS_TABLE_SORT,
 	UPDATE_HOPS_TABLE_ITEM_LIMIT,
 	UPDATE_HOPS_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
-import moment from "moment"
+import {
+	weightUnits,
+	formatDate,
+	generateId
+} from "../utils"
 
 const HopsInventoryTableContainer = () => (
 	<Query query={hopsInventoryTableQuery}>
@@ -18,16 +27,8 @@ const HopsInventoryTableContainer = () => (
 			if(loading) return <p>Loading...</p>
 			if(error) return <p>Error!</p>
 
-			const columns = [
-				{id: shortid.generate(), name: "Hop name"},
-				{id: shortid.generate(), name: "Amount (lbs, oz)"},
-				{id: shortid.generate(), name: "Country of origin"},
-				{id: shortid.generate(), name: "Alpha acid %"},
-				{id: shortid.generate(), name: "Cost per lb"},
-				{id: shortid.generate(), name: "Purchase date"}
-			]
-
 			const { currentUser, hopsInventoryTable } = data
+			const { settings } = currentUser
 			const {
 				sortBy,
 				sortOrder,
@@ -36,17 +37,30 @@ const HopsInventoryTableContainer = () => (
 				filterString
 			}	= hopsInventoryTable
 
+			const weightSetting = settings.find(setting => setting.name === "weight")
+			const currencySetting = settings.find(setting => setting.name === "currency")
+			const dateSetting = settings.find(setting => setting.name === "dateFormat")
+
+			const columns = [
+				{id: generateId(), name: "Hop name"},
+				{id: generateId(), name: `Amount ${weightUnits(weightSetting.value)}`},
+				{id: generateId(), name: "Country of origin"},
+				{id: generateId(), name: "Alpha acid %"},
+				{id: generateId(), name: "Cost per lb"},
+				{id: generateId(), name: "Purchase date"}
+			]
+
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
 			const tableRows = inventory
 												? inventory.items.map(item => ({
 														id: item.id,
 														cells: [
 															JSON.parse(item.object).name,
-															`${Math.trunc(item.currentQuantity/16)} lbs ${item.currentQuantity%16} oz`,
+															item.quantityUnit !== weightSetting.value ? <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSetting.value} />,
 															JSON.parse(item.object).countryOfOrigin,
 															JSON.parse(item.object).alphaAcids + "%",
-															"$" + item.unitCost,
-															moment(new Date(item.lastReorderDate)).format("MM/DD/YY")
+															item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
+															formatDate(new Date(item.lastReorderDate), dateSetting.value)
 														]
 													}))
 												: []
