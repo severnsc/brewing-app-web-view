@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from "./styles"
 import PropTypes from 'prop-types'
-import { HoverableTableRow } from '..'
 
-const SortableTable = ({ columns, sortBy, sortOrder, toggleSort, itemsPerPageOptions, itemsPerPage, onItemsPerPageChange, currentPage, decrementPage, incrementPage, onTableRowClick, customSort }) => {
+const SortableTable = ({ children, columns, sortBy, sortOrder, toggleSort, itemsPerPageOptions, itemsPerPage, onItemsPerPageChange, onTableRowClick, customSort }) => {
 
   const sortIndicator = sortOrder === "asc" ? "∧" : "∨"
 
@@ -18,15 +17,6 @@ const SortableTable = ({ columns, sortBy, sortOrder, toggleSort, itemsPerPageOpt
   const handleClick = cellName => toggleSort(cellName)
 
   const handleItemsPerPageChange = e => onItemsPerPageChange(e.target.value)
-
-  const startIndex = currentPage*itemsPerPage
-  const endIndex = (currentPage + 1) * itemsPerPage
-  const currentPageTableRows = sortedTableRows.slice(startIndex, endIndex)
-
-  const previousPageButton = currentPage > 0 ? <span style={styles.leftPageButton} onClick={decrementPage}>&lt; Previous</span> : <span style={styles.pageButton} ></span>
-
-  const lastPage = Math.ceil(tableRows.length/itemsPerPage) - 1
-  const nextPageButton = currentPage < lastPage ? <span style={styles.rightPageButton} onClick={incrementPage}>Next &gt;</span> : <span style={styles.pageButton} ></span>
 
   const widthPercentage = 100/columns.length
 
@@ -51,14 +41,12 @@ const SortableTable = ({ columns, sortBy, sortOrder, toggleSort, itemsPerPageOpt
         </tbody>
       </table>
       <div style={styles.footer}>
-        {previousPageButton}
         <span style={styles.span}>
           <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
             {optionElements}
           </select>
           <span style={styles.itemsPerPage}>items per page</span>
         </span>
-        {nextPageButton}
       </div>
     </div>
   )
@@ -66,6 +54,10 @@ const SortableTable = ({ columns, sortBy, sortOrder, toggleSort, itemsPerPageOpt
 }
 
 SortableTable.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ]),
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -78,9 +70,6 @@ SortableTable.propTypes = {
   itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
   itemsPerPage: PropTypes.number.isRequired,
   onItemsPerPageChange: PropTypes.func.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  decrementPage: PropTypes.func.isRequired,
-  incrementPage: PropTypes.func.isRequired,
   onTableRowClick: PropTypes.func,
   customSort: PropTypes.object
 }
