@@ -1,12 +1,9 @@
 import Button from "./Button"
 import Timer from "./Timer"
-import HoverableTableRow from "./HoverableTableRow"
 import Modal from "./Modal"
 import NavBar from "./NavBar"
 import ResetPasswordForm from "./ResetPasswordForm"
 import SearchBar from "./SearchBar"
-import Table from "./Table"
-import TableData from "./TableData"
 import InventoryForm from "./InventoryForm"
 import Tabs from "./Tabs"
 import Tab from "./Tab"
@@ -20,7 +17,12 @@ import SRM from "./SRM"
 import MaltColor from "./MaltColor"
 import ConvertMaltColor from "./ConvertMaltColor"
 import Pagination from "./Pagination"
-import SortableTableHeader from "./SortableTableHeader"
+import {
+	HoverableTableRow,
+	SortableTableHeader,
+	Table,
+	TableData
+} from "./Tables"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,

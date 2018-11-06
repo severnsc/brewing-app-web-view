@@ -1,4 +1,4 @@
-import { green } from "../constants"
+import { green } from "../../constants"
 
 export default {
 	default: {
