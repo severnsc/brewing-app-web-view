@@ -5,7 +5,7 @@ import Modal from "./Modal"
 import NavBar from "./NavBar"
 import ResetPasswordForm from "./ResetPasswordForm"
 import SearchBar from "./SearchBar"
-import SortableTable from "./SortableTable"
+import Table from "./Table"
 import TableData from "./TableData"
 import InventoryForm from "./InventoryForm"
 import Tabs from "./Tabs"
@@ -57,7 +57,7 @@ export {
 	ResetPasswordForm,
 	SearchBar,
 	SignupForm,
-	SortableTable,
+	Table,
 	TableData,
 	TimerAlertForm,
 	TimerForm,

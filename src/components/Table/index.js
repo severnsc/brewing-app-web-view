@@ -2,25 +2,23 @@ import React from 'react'
 import styles from "./styles"
 import PropTypes from 'prop-types'
 
-const SortableTable = ({ children }) => {
+const Table = ({ children }) => {
 
   return(
     <div style={styles.container}>
       <table style={styles.table}>
-        <tbody>
-          {children}
-        </tbody>
+        {children}
       </table>
     </div>
   )
 
 }
 
-SortableTable.propTypes = {
+Table.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element)
   ])
 }
 
-export default SortableTable
+export default Table
