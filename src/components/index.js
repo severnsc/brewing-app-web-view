@@ -20,6 +20,7 @@ import SRM from "./SRM"
 import MaltColor from "./MaltColor"
 import ConvertMaltColor from "./ConvertMaltColor"
 import Pagination from "./Pagination"
+import SortableTableHeader from "./SortableTableHeader"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -85,5 +86,6 @@ export {
 	SRM,
 	MaltColor,
 	ConvertMaltColor,
-	Pagination
+	Pagination,
+	SortableTableHeader
 }
