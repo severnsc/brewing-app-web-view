@@ -7,7 +7,12 @@ const Pagination = ({
 	totalPages,
 	showPageNumbers,
 	decrement,
-	increment
+	increment,
+	updatePageNumber,
+	showItemsPerPage,
+	itemsPerPageOptions,
+	itemsPerPage,
+	updateItemsPerPage
 }) => {
 
 	const pageNumbers = []
@@ -19,15 +24,44 @@ const Pagination = ({
 
 	return(
 		<div>
+			<div>
+				{
+					page > 0
+					? <span style={styles.pageButton} onClick={decrement}>&lt; Previous</span>
+					: null
+				}
+				{
+					pageNumbers.map(n => 
+						<span
+							key={n}
+							style={
+								n === page + 1
+								? {...styles.pageNumber, ...styles.currentPage}
+								: styles.pageNumber
+							}
+							onClick={() => updatePageNumber(n)}
+						>
+							{n}
+						</span>
+					)
+				}
+				{
+					page < totalPages
+					? <span style={styles.pageButton} onClick={increment}>Next &gt;</span>
+					: null
+				}
+			</div>
 			{
-				page > 0
-				? <span style={styles.pageButton} onClick={decrement}>&lt; Previous</span>
-				: null
-			}
-			{pageNumbers.map(n => <span key={n} style={styles.pageNumber}>{n}</span>)}
-			{
-				page < totalPages
-				? <span style={styles.pageButton} onClick={increment}>Next &gt;</span>
+				showItemsPerPage
+				? (
+						<div>
+							<select value={itemsPerPage} onChange={e => updateItemsPerPage(e.target.value)}>
+								{itemsPerPageOptions.map(option => 
+									<option key={option} value={option}>{option}</option>)}
+							</select>
+							<span style={styles.itemsPerPage}>items per page</span>
+						</div>
+					)
 				: null
 			}
 		</div>
@@ -39,7 +73,12 @@ Pagination.propTypes = {
 	totalPages: PropTypes.number.isRequired,
 	showPageNumbers: PropTypes.bool,
 	decrement: PropTypes.func.isRequired,
-	increment: PropTypes.func.isRequired
+	increment: PropTypes.func.isRequired,
+	updatePageNumber: PropTypes.func.isRequired,
+	showItemsPerPage: PropTypes.bool,
+	itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number),
+	itemsPerPage: PropTypes.number,
+	updateItemsPerPage: PropTypes.func
 }
 
 export default Pagination

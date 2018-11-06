@@ -2,17 +2,19 @@
 
 exports[`pagination renders a pagination component 1`] = `
 <div>
-  <span
-    onClick={[Function]}
-    style={
-      Object {
-        "cursor": "pointer",
-        "textDecoration": "underline",
-        "width": "86.73px",
+  <div>
+    <span
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+          "textDecoration": "underline",
+          "width": "86.73px",
+        }
       }
-    }
-  >
-    Next &gt;
-  </span>
+    >
+      Next &gt;
+    </span>
+  </div>
 </div>
 `;
