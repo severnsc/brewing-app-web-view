@@ -526,17 +526,32 @@ export default {
       return null
     },
 
-    updateMaltInventoryTablePageNumber:(_, { type }, { cache }) => {
+    updateMaltInventoryTablePageNumber:(_, { type, page }, { cache }) => {
 
       const { maltInventoryTable } = cache.readQuery({ query: maltInventoryTableQuery })
 
       const { currentPage } = maltInventoryTable
-      const integer = type === "INCREMENT" ? 1 : -1
+
+      let integer = currentPage
+      switch(type){
+        
+        case "INCREMENT":
+          integer = currentPage + 1
+          break
+
+        case "DECREMENT":
+          integer = currentPage - 1
+          break
+
+        default:
+          integer = page
+
+      }
 
       const data = {
         maltInventoryTable: {
           ...maltInventoryTable,
-          currentPage: currentPage + integer
+          currentPage: integer
         }
       }
 
@@ -636,17 +651,31 @@ export default {
 
     },
 
-    updateHopsInventoryTablePageNumber: (_, { type }, { cache }) => {
+    updateHopsInventoryTablePageNumber: (_, { type, page }, { cache }) => {
 
       const { hopsInventoryTable } = cache.readQuery({ query: hopsInventoryTableQuery })
 
       const { currentPage } = hopsInventoryTable
-      const integer = type === "INCREMENT" ? 1 : -1
+      let integer = currentPage
+      switch(type){
+        
+        case "INCREMENT":
+          integer = currentPage + 1
+          break
+
+        case "DECREMENT":
+          integer = currentPage - 1
+          break
+
+        default:
+          integer = page
+
+      }
 
       const data = {
         hopsInventoryTable: {
           ...hopsInventoryTable,
-          currentPage: currentPage + integer
+          currentPage: integer
         }
       }
 
@@ -787,17 +816,31 @@ export default {
       return null
     },
 
-    updateYeastInventoryTablePageNumber: (_, { type }, { cache }) => {
+    updateYeastInventoryTablePageNumber: (_, { type, page }, { cache }) => {
 
       const { yeastInventoryTable } = cache.readQuery({ query: yeastInventoryTableQuery })
 
       const { currentPage } = yeastInventoryTable
-      const integer = type === "INCREMENT" ? 1 : -1
+      let integer = currentPage
+      switch(type){
+        
+        case "INCREMENT":
+          integer = currentPage + 1
+          break
+
+        case "DECREMENT":
+          integer = currentPage - 1
+          break
+
+        default:
+          integer = page
+
+      }
 
       const data = {
         yeastInventoryTable: {
           ...yeastInventoryTable,
-          currentPage: currentPage + integer
+          currentPage: integer
         }
       }
 
@@ -898,17 +941,31 @@ export default {
 
     },
 
-    updateOtherInventoriesTablePageNumber: (_, { type }, { cache }) => {
+    updateOtherInventoriesTablePageNumber: (_, { type, page }, { cache }) => {
 
       const { otherInventoriesTable } = cache.readQuery({ query: otherInventoriesTableQuery })
 
       const { currentPage } = otherInventoriesTable
-      const integer = type === "INCREMENT" ? 1 : -1
+      let integer = currentPage
+      switch(type){
+        
+        case "INCREMENT":
+          integer = currentPage + 1
+          break
+
+        case "DECREMENT":
+          integer = currentPage - 1
+          break
+
+        default:
+          integer = page
+
+      }
 
       const data = {
         otherInventoriesTable: {
           ...otherInventoriesTable,
-          currentPage: currentPage + integer
+          currentPage: integer
         }
       }
 

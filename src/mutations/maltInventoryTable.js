@@ -13,8 +13,8 @@ export const UPDATE_MALT_TABLE_ITEM_LIMIT = gql`
 `
 
 export const UPDATE_MALT_TABLE_PAGE_NUMBER = gql`
-	mutation updateMaltInventoryTablePageNumber($type: String!) {
-		updateMaltInventoryTablePageNumber(type: $type) @client
+	mutation updateMaltInventoryTablePageNumber($type: String!, $page: Number) {
+		updateMaltInventoryTablePageNumber(type: $type, number: $number) @client
 	}
 `
 
