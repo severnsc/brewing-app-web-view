@@ -7,7 +7,7 @@ import PaginationContainer from "./paginationContainer"
 import SearchBarContainer from "./searchBarContainer"
 import SettingsFormContainer from "./settingsFormContainer"
 import SortableTableHeaderContainer from "./sortableTableHeaderContainer"
-import TimerAlertFormContainer from "./TimerAlertFormContainer"
+import TimerAlertFormContainer from "./timerAlertFormContainer"
 
 export {
 	ConvertCurrencyContainer,
