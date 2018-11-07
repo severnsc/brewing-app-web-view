@@ -27,7 +27,7 @@ const HoverableTableRowContainer = ({
 )
 
 HoverableTableRowContainer.propTypes = {
-	modalMutation: PropTypes.string.isRequired,
+	modalMutation: PropTypes.object.isRequired,
 	entityType: PropTypes.string.isRequired,
 	id: PropTypes.string.isRequired,
 	children: PropTypes.oneOfType([

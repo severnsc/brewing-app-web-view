@@ -66,8 +66,8 @@ PaginationContainer.propTypes = {
 	showItemsPerPage: PropTypes.bool,
 	itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number),
 	itemsPerPage: PropTypes.number,
-	pageNumberMutation: PropTypes.string.isRequired,
-	itemsPerPageMutation: PropTypes.string.isRequired
+	pageNumberMutation: PropTypes.object.isRequired,
+	itemsPerPageMutation: PropTypes.object.isRequired
 }
 
 export default PaginationContainer
