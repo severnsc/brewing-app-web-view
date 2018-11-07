@@ -2,18 +2,27 @@ import React from "react"
 import {
 	ConvertWeight,
 	Weight,
-	Currency
+	Currency,
+	Table,
+	TableData
 } from "../components"
 import { Query } from "react-apollo"
 import { hopsInventoryTableQuery } from "../queries"
-import SortableTableContainer from "./common/sortableTableContainer"
-import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
+
+import {
+	ConvertCurrencyContainer,
+	SortableTableHeaderContainer,
+	HoverableTableRowContainer,
+	PaginationContainer
+} from "./common"
+
 import {
 	UPDATE_HOPS_TABLE_SORT,
 	UPDATE_HOPS_TABLE_ITEM_LIMIT,
 	UPDATE_HOPS_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
+
 import {
 	weightUnits,
 	formatDate,
@@ -42,28 +51,49 @@ const HopsInventoryTableContainer = () => (
 			const dateSetting = settings.find(setting => setting.name === "dateFormat")
 
 			const columns = [
-				{id: generateId(), name: "Hop name"},
-				{id: generateId(), name: `Amount ${weightUnits(weightSetting.value)}`},
-				{id: generateId(), name: "Country of origin"},
-				{id: generateId(), name: "Alpha acid %"},
-				{id: generateId(), name: "Cost per lb"},
-				{id: generateId(), name: "Purchase date"}
+				"Hop name",
+				`Amount ${weightUnits(weightSetting.value)}`,
+				"Country of origin",
+				"Alpha acid %",
+				"Cost per lb",
+				"Purchase date"
 			]
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
-			const tableRows = inventory
-												? inventory.items.map(item => ({
-														id: item.id,
-														cells: [
-															JSON.parse(item.object).name,
-															item.quantityUnit !== weightSetting.value ? <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSetting.value} />,
-															JSON.parse(item.object).countryOfOrigin,
-															JSON.parse(item.object).alphaAcids + "%",
-															item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
-															formatDate(new Date(item.lastReorderDate), dateSetting.value)
-														]
-													}))
-												: []
+			const tableRows = (
+				inventory
+				? inventory.items.map(item => 
+						<HoverableTableRowContainer
+							modalMutation={UPDATE_MODAL}
+							entityType="hops"
+							id={item.id}
+						>
+							<TableData value={JSON.parse(item.object).name} />
+							<TableData
+								value={
+									item.quantityUnit === weightSetting.value
+									? <Weight amount={item.currenQuantity} unit={weightSetting.value} />
+									: <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currenQuantity}/>
+								}
+							/>
+							<TableData value={JSON.parse(item.object).countryOfOrigin} />
+							<TableData value={JSON.parse(item.object).alphaAcids + "%"} />
+							<TableData
+								value={
+									item.costUnit === currencySetting.value
+									? <Currency amount={item.unitCost} unit={currencySetting.value} />
+									: <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} />
+								}
+							/>
+							<TableData
+								value={
+									formatDate(item.lastReorderDate, dateSetting.value)
+								}
+							/>
+						</HoverableTableRowContainer>
+					)
+				: []
+			)
 
 			let filteredRows
 			if(filterString){
@@ -171,21 +201,17 @@ const HopsInventoryTableContainer = () => (
 			}
 
 			return(
-				<SortableTableContainer
-					sortOrderMutation={UPDATE_HOPS_TABLE_SORT}
-					columns={columns}
-					tableRows={filteredRows || tableRows}
-					sortBy={sortBy}
-					sortOrder={sortOrder}
-					itemsPerPageOptions={[5,25,50,100]}
-					itemsPerPage={itemsPerPage}
-					itemsPerPageMutation={UPDATE_HOPS_TABLE_ITEM_LIMIT}
-					currentPage={currentPage}
-					pageNumberMutation={UPDATE_HOPS_TABLE_PAGE_NUMBER}
-					modalMutation={UPDATE_MODAL}
-					entityType="hops"
-					customSort={customSort}
-				/>
+				<Table>
+					<SortableTableHeaderContainer
+						columns={columns}
+						sortBy={sortBy}
+						sortOrder={sortOrder}
+						toggleSortMutation={UPDATE_HOPS_TABLE_SORT}
+					/>
+					<tbody>
+						{tableRows}
+					</tbody>
+				</Table>
 			)
 
 		}}
