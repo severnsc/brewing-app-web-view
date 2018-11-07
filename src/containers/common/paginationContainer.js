@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Pagination } from "../../components"
 import { Mutation } from "react-apollo"
 
@@ -56,4 +57,17 @@ const PaginationContainer = ({
 
 		}}
 	</Mutation>
-) 
+)
+
+PaginationContainer.propTypes = {
+	page: PropTypes.number.isRequired,
+	totalPages: PropTypes.number.isRequired,
+	showPageNumbers: PropTypes.bool,
+	showItemsPerPage: PropTypes.bool,
+	itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number),
+	itemsPerPage: PropTypes.number,
+	pageNumberMutation: PropTypes.string.isRequired,
+	itemsPerPageMutation: PropTypes.string.isRequired
+}
+
+export default PaginationContainer
