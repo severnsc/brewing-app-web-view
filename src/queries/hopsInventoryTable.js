@@ -16,6 +16,7 @@ export default gql`
 			sortBy
 			sortOrder
 			itemsPerPage
+			totalPages
 			currentPage
 			filterString
 		}

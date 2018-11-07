@@ -714,11 +714,14 @@ export default {
         pageNumber = Math.ceil(hops.length/value) - 1
       }
 
+      const totalPages = hops.length/value
+
       const data = {
         currentUser,
         hopsInventoryTable: {
           ...hopsInventoryTable,
           itemsPerPage: value,
+          totalPages,
           currentPage: pageNumber
         }
       }

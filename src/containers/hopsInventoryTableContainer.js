@@ -25,8 +25,7 @@ import {
 
 import {
 	weightUnits,
-	formatDate,
-	generateId
+	formatDate
 } from "../utils"
 
 const HopsInventoryTableContainer = () => (
@@ -68,20 +67,51 @@ const HopsInventoryTableContainer = () => (
 			let tableRows = (
 				inventory
 				? inventory.items.map(item => ({
+						id: item.id,
 						name: JSON.parse(item.object).name,
-						amount: item.currentQuantity,
+						currentQuantity: item.currentQuantity,
+						quantityUnit: item.quantityUnit,
 						country: JSON.parse(item.object).countryOfOrigin,
 						alphas: JSON.parse(item.object).alphaAcids,
-						cost: item.unitCost,
+						unitCost: item.unitCost,
+						costUnit: item.costUnit,
 						date: item.lastReorderDate
 					}))
-					.filter(item => item.name.includes(filterString))
+					.filter(item => item.name.toLowerCase().includes(filterString))
 					.sort((a, b) => {
-						if(a[sortBy] < b[sortBy]){
+
+						let sortKey
+						switch(sortBy){
+							
+							case columns[1]:
+								sortKey = "currentQuantity"
+								break
+
+							case columns[2]:
+								sortKey = "country"
+								break
+
+							case columns[3]:
+								sortKey = "alphas"
+								break
+
+							case columns[4]:
+								sortKey = "unitCost"
+								break
+
+							case columns[5]:
+								sortKey = "date"
+								break
+
+							default:
+								sortKey = "name"
+						}
+
+						if(a[sortKey] < b[sortKey]){
 							return -1
 						}
 
-						if(a[sortBy] > b[sortBy]){
+						if(a[sortKey] > b[sortKey]){
 							return 1
 						}
 
@@ -90,20 +120,21 @@ const HopsInventoryTableContainer = () => (
 					.slice(startIndex, endIndex)
 					.map(item =>
 						<HoverableTableRowContainer
+							key={item.id}
 							modalMutation={UPDATE_MODAL}
 							entityType="hops"
 							id={item.id}
 						>
-							<TableData value={JSON.parse(item.object).name} />
+							<TableData value={item.name} />
 							<TableData
 								value={
 									item.quantityUnit === weightSetting.value
-									? <Weight amount={item.currenQuantity} unit={weightSetting.value} />
-									: <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currenQuantity}/>
+									? <Weight amount={item.currentQuantity} unit={weightSetting.value} />
+									: <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currentQuantity}/>
 								}
 							/>
-							<TableData value={JSON.parse(item.object).countryOfOrigin} />
-							<TableData value={JSON.parse(item.object).alphaAcids + "%"} />
+							<TableData value={item.country} />
+							<TableData value={item.alphas + "%"} />
 							<TableData
 								value={
 									item.costUnit === currencySetting.value
