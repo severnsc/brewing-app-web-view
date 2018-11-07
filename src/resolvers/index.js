@@ -1,5 +1,10 @@
 import gql from 'graphql-tag'
-import { modalQuery, loginQuery, flashQuery } from "../queries"
+import {
+  modalQuery,
+  loginQuery,
+  flashQuery,
+  hopsInventoryTableQuery
+} from "../queries"
 
 const dashboardTableQuery = gql`
   query {
@@ -54,18 +59,6 @@ const maltInventoryTableQuery = gql`
       itemLimit
       filterString
       currentPage
-    }
-  }
-`
-
-const hopsInventoryTableQuery = gql`
-  query {
-    hopsInventoryTable @client {
-      sortBy
-      sortOrder
-      itemsPerPage
-      currentPage
-      filterString
     }
   }
 `
@@ -687,34 +680,17 @@ export default {
 
     updateHopsInventoryTableItemLimit: (_, { value }, { cache }) => {
 
-      const query = gql`
-        query {
-
-          currentUser {
-            inventories {
-              name
-              items
-            }
-          }
-
-          hopsInventoryTable @client {
-            sortBy
-            sortOrder
-            itemsPerPage
-            currentPage
-          }
-        }
-      `
+      const query = hopsInventoryTableQuery
 
       const { currentUser, hopsInventoryTable } = cache.readQuery({ query })
-
+      
       let pageNumber = hopsInventoryTable.currentPage
       const hops = currentUser.inventories.find(inventory => inventory.name === "Hops").items
       if(pageNumber >= hops.length/value){
         pageNumber = Math.ceil(hops.length/value) - 1
       }
 
-      const totalPages = hops.length/value
+      const totalPages = Math.ceil(hops.length/value)
 
       const data = {
         currentUser,
@@ -726,7 +702,7 @@ export default {
         }
       }
 
-      cache.writeQuery({ query, data })
+      cache.writeQuery({ query, data }) 
 
       return null
 

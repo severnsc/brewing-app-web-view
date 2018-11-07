@@ -55,7 +55,7 @@ const Pagination = ({
 				showItemsPerPage
 				? (
 						<div>
-							<select value={itemsPerPage} onChange={e => updateItemsPerPage(e.target.value)}>
+							<select value={itemsPerPage} onChange={e => updateItemsPerPage(parseInt(e.target.value, 10))}>
 								{itemsPerPageOptions.map(option => 
 									<option key={option} value={option}>{option}</option>)}
 							</select>
