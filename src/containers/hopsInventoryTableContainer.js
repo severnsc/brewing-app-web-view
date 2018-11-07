@@ -42,6 +42,7 @@ const HopsInventoryTableContainer = () => (
 				sortBy,
 				sortOrder,
 				itemsPerPage,
+				totalPages,
 				currentPage,
 				filterString
 			}	= hopsInventoryTable
@@ -60,9 +61,34 @@ const HopsInventoryTableContainer = () => (
 			]
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
-			const tableRows = (
+		
+			const startIndex = itemsPerPage * currentPage
+			const endIndex = itemsPerPage * (currentPage + 1)
+
+			let tableRows = (
 				inventory
-				? inventory.items.map(item => 
+				? inventory.items.map(item => ({
+						name: JSON.parse(item.object).name,
+						amount: item.currentQuantity,
+						country: JSON.parse(item.object).countryOfOrigin,
+						alphas: JSON.parse(item.object).alphaAcids,
+						cost: item.unitCost,
+						date: item.lastReorderDate
+					}))
+					.filter(item => item.name.includes(filterString))
+					.sort((a, b) => {
+						if(a[sortBy] < b[sortBy]){
+							return -1
+						}
+
+						if(a[sortBy] > b[sortBy]){
+							return 1
+						}
+
+						return 0
+					})
+					.slice(startIndex, endIndex)
+					.map(item =>
 						<HoverableTableRowContainer
 							modalMutation={UPDATE_MODAL}
 							entityType="hops"
@@ -95,123 +121,32 @@ const HopsInventoryTableContainer = () => (
 				: []
 			)
 
-			let filteredRows
-			if(filterString){
-				filteredRows = tableRows.filter(tableRow => {
-					return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(filterString))
-				})
-			}
-
-			const amountSort = (tableRows, order, sortIndex) => {
-				return tableRows.concat().sort((a, b) => {
-					const aLbs = parseInt(a.cells[sortIndex].split(" ")[0], 10)
-					const aOz = parseInt(a.cells[sortIndex].split(" ")[2], 10)
-					const aValue = aLbs + (aOz/16)
-
-					const bLbs = parseInt(b.cells[sortIndex].split(" ")[0], 10)
-					const bOz = parseInt(b.cells[sortIndex].split(" ")[2], 10)
-					const bValue = bLbs + (bOz/16)
-					
-					if(order === "asc"){
-	          if(aValue < bValue){
-	            return -1
-	          }
-
-	          if(aValue > bValue){
-	            return 1
-	          }
-
-	          return 0
-	        }else{
-	          if(aValue < bValue){
-	            return 1
-	          }
-
-	          if(aValue > bValue){
-	            return -1
-	          }
-
-	          return 0
-	        }
-				})
-			}
-
-			const alphaAcidSort = (tableRows, order, sortIndex) => {
-				return tableRows.concat().sort((a, b) => {
-					const aValue = parseInt(a.cells[sortIndex].split("%")[0], 10)
-					const bValue = parseInt(b.cells[sortIndex].split("%")[0], 10)
-
-					if(order === "asc"){
-	          if(aValue < bValue){
-	            return -1
-	          }
-
-	          if(aValue > bValue){
-	            return 1
-	          }
-
-	          return 0
-	        }else{
-	          if(aValue < bValue){
-	            return 1
-	          }
-
-	          if(aValue > bValue){
-	            return -1
-	          }
-
-	          return 0
-	        }
-				})
-			}
-
-			const costSort = (tableRows, order, sortIndex) => {
-				return tableRows.concat().sort((a, b) => {
-					const aValue = parseInt(a.cells[sortIndex].split("$")[1], 10)
-					const bValue = parseInt(b.cells[sortIndex].split("$")[1], 10)
-
-					if(order === "asc"){
-	          if(aValue < bValue){
-	            return -1
-	          }
-
-	          if(aValue > bValue){
-	            return 1
-	          }
-
-	          return 0
-	        }else{
-	          if(aValue < bValue){
-	            return 1
-	          }
-
-	          if(aValue > bValue){
-	            return -1
-	          }
-
-	          return 0
-	        }
-				})
-			}
-
-			const customSort = {
-				"Amount (lbs, oz)": amountSort,
-				"Alpha acid %": alphaAcidSort,
-				"Cost per lb": costSort
-			}
+			if(sortOrder === "desc") tableRows = tableRows.reverse()
 
 			return(
-				<Table>
-					<SortableTableHeaderContainer
-						columns={columns}
-						sortBy={sortBy}
-						sortOrder={sortOrder}
-						toggleSortMutation={UPDATE_HOPS_TABLE_SORT}
+				<div>
+					<Table>
+						<SortableTableHeaderContainer
+							columns={columns}
+							sortBy={sortBy}
+							sortOrder={sortOrder}
+							toggleSortMutation={UPDATE_HOPS_TABLE_SORT}
+						/>
+						<tbody>
+							{tableRows}
+						</tbody>
+					</Table>
+					<PaginationContainer
+						page={currentPage}
+						totalPages={totalPages}
+						showPageNumbers={true}
+						showItemsPerPage={true}
+						itemsPerPageOptions={[5, 10, 25, 50]}
+						itemsPerPage={itemsPerPage}
+						pageNumberMutation={UPDATE_HOPS_TABLE_PAGE_NUMBER}
+						itemsPerPageMutation={UPDATE_HOPS_TABLE_ITEM_LIMIT}
 					/>
-					<tbody>
-						{tableRows}
-					</tbody>
-				</Table>
+				</div>
 			)
 
 		}}
