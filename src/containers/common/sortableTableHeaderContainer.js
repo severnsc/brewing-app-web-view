@@ -12,7 +12,7 @@ const SortableTableHeaderContainer = ({
 	<Mutation mutation={toggleSortMutation}>
 		{mutation => {
 
-			onClick = columnName => {
+			const onClick = columnName => {
 				toggleSortMutation({variables: { cellName: columnName } })
 			}
 
