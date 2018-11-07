@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { SortableTableHeader } from "../../components"
 import { Mutation } from "react-apollo"
 
@@ -27,5 +28,12 @@ const SortableTableHeaderContainer = ({
 		}}
 	</Mutation>
 )
+
+SortableTableHeaderContainer.propTypes = {
+	columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+	sortBy: PropTypes.string,
+	sortOrder: PropTypes.oneOf(["asc", "desc"]),
+	toggleSortMutation: PropTypes.string.isRequired
+}
 
 export default SortableTableHeaderContainer
