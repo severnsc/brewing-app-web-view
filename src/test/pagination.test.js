@@ -21,11 +21,11 @@ describe("pagination", () => {
 		expect(tree).toMatchSnapshot()
 	})
 
-	it("does not render a previous button if page is 0", () => {
+	it("does not render a previous button if page is 1", () => {
 		const pagination = shallow(
 			<Pagination
 				totalPages={2}
-				page={0}
+				page={1}
 				decrement={() => {}}
 				increment={() => {}}
 				updatePageNumber={() => {}}
@@ -36,11 +36,11 @@ describe("pagination", () => {
 		).toBe(0)
 	})
 
-	it("renders a span with text < Previous is page is > 0", () => {
+	it("renders a span with text < Previous is page is > 1", () => {
 		const pagination = shallow(
 			<Pagination
 				totalPages={2}
-				page={1}
+				page={2}
 				decrement={() => {}}
 				increment={() => {}}
 				updatePageNumber={() => {}}
@@ -88,8 +88,8 @@ describe("pagination", () => {
 		}
 		const pagination = shallow(
 			<Pagination
-				page={1}
-				totalPages={1}
+				page={2}
+				totalPages={2}
 				decrement={mock}
 				increment={() => {}}
 				updatePageNumber={() => {}}
@@ -108,8 +108,8 @@ describe("pagination", () => {
 		}
 		const pagination = shallow(
 			<Pagination
-				page={0}
-				totalPages={1}
+				page={1}
+				totalPages={2}
 				decrement={() => {}}
 				increment={mock}
 				updatePageNumber={() => {}}
@@ -163,7 +163,7 @@ describe("pagination", () => {
 			}
 			const pagination = shallow(
 				<Pagination
-					page={0}
+					page={1}
 					totalPages={2}
 					showPageNumbers={true}
 					updatePageNumber={updatePageNumber}
@@ -181,7 +181,7 @@ describe("pagination", () => {
 		it("has textDecoration underline", () => {
 			const pagination = shallow(
 				<Pagination
-					page={0}
+					page={1}
 					totalPages={2}
 					decrement={() => {}}
 					increment={() => {}}
@@ -215,7 +215,7 @@ describe("pagination", () => {
 			it("has fontWeight: bold", () => {
 				const pagination = shallow(
 					<Pagination
-						page={0}
+						page={1}
 						totalPages={2}
 						showPageNumbers={true}
 						decrement={() => {}}
@@ -231,7 +231,7 @@ describe("pagination", () => {
 			it("has textDecoration: none", () => {
 				const pagination = shallow(
 					<Pagination
-						page={0}
+						page={1}
 						totalPages={2}
 						showPageNumbers={true}
 						decrement={() => {}}
@@ -247,7 +247,7 @@ describe("pagination", () => {
 			it("has cursor: default", () => {
 				const pagination = shallow(
 					<Pagination
-						page={0}
+						page={1}
 						totalPages={2}
 						showPageNumbers={true}
 						decrement={() => {}}
@@ -435,8 +435,8 @@ describe("pagination", () => {
 		it("has text decoration underline", () => {
 			const pagination = shallow(
 				<Pagination
-					page={1}
-					totalPages={1}
+					page={2}
+					totalPages={2}
 					decrement={() => {}}
 					increment={() => {}}
 					updatePageNumber={() => {}}
@@ -450,8 +450,8 @@ describe("pagination", () => {
 		it("has cursor pointer", () => {
 			const pagination = shallow(
 				<Pagination
-					page={1}
-					totalPages={1}
+					page={2}
+					totalPages={2}
 					decrement={() => {}}
 					increment={() => {}}
 					updatePageNumber={() => {}}
@@ -465,8 +465,8 @@ describe("pagination", () => {
 		it("has width: 86.73px", () => {
 			const pagination = shallow(
 				<Pagination
-					page={1}
-					totalPages={1}
+					page={2}
+					totalPages={2}
 					decrement={() => {}}
 					increment={() => {}}
 					updatePageNumber={() => {}}

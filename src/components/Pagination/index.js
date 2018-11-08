@@ -26,7 +26,7 @@ const Pagination = ({
 		<div>
 			<div>
 				{
-					page > 0
+					page > 1
 					? <span style={styles.pageButton} onClick={decrement}>&lt; Previous</span>
 					: null
 				}
@@ -35,7 +35,7 @@ const Pagination = ({
 						<span
 							key={n}
 							style={
-								n === page + 1
+								n === page
 								? {...styles.pageNumber, ...styles.currentPage}
 								: styles.pageNumber
 							}
