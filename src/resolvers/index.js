@@ -619,7 +619,7 @@ export default {
 
     updateHopsInventoryTableSort: (_, { cellName }, { cache }) => {
 
-      const { hopsInventoryTable } = cache.readQuery({ query: hopsInventoryTableQuery })
+      const { hopsInventoryTable, currentUser } = cache.readQuery({ query: hopsInventoryTableQuery })
 
       const { sortOrder, sortBy } = hopsInventoryTable
 
@@ -631,6 +631,7 @@ export default {
       }
 
       const data = {
+        currentUser,
         hopsInventoryTable: {
           ...hopsInventoryTable,
           sortOrder: order,
@@ -710,13 +711,14 @@ export default {
 
     updateHopsInventoryTableFilter: (_, { value }, { cache }) => {
 
-      const { hopsInventoryTable } = cache.readQuery({ query: hopsInventoryTableQuery })
+      const { hopsInventoryTable, currentUser } = cache.readQuery({ query: hopsInventoryTableQuery })
 
       const data = {
+        currentUser,
         hopsInventoryTable: {
           ...hopsInventoryTable,
           filterString: value,
-          currentPage: 0
+          currentPage: 1
         }
       }
 
