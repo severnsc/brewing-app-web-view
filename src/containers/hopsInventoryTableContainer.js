@@ -63,8 +63,8 @@ const HopsInventoryTableContainer = () => (
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
 			
-			const startIndex = itemsPerPage * currentPage
-			const endIndex = itemsPerPage * (currentPage + 1)
+			const startIndex = itemsPerPage * (currentPage - 1)
+			const endIndex = itemsPerPage * (currentPage)
 
 			let tableRows = (
 				inventory

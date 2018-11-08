@@ -687,7 +687,7 @@ export default {
       let pageNumber = hopsInventoryTable.currentPage
       const hops = currentUser.inventories.find(inventory => inventory.name === "Hops").items
       if(pageNumber >= hops.length/value){
-        pageNumber = Math.ceil(hops.length/value) - 1
+        pageNumber = Math.ceil(hops.length/value)
       }
 
       const totalPages = Math.ceil(hops.length/value)
