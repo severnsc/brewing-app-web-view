@@ -46,6 +46,8 @@ const HopsInventoryTableContainer = () => (
 				filterString
 			}	= hopsInventoryTable
 
+			console.log(currentPage, totalPages)
+
 			const weightSetting = settings.find(setting => setting.name === "weight")
 			const currencySetting = settings.find(setting => setting.name === "currency")
 			const dateSetting = settings.find(setting => setting.name === "dateFormat")
@@ -60,7 +62,7 @@ const HopsInventoryTableContainer = () => (
 			]
 
 			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
-		
+			
 			const startIndex = itemsPerPage * currentPage
 			const endIndex = itemsPerPage * (currentPage + 1)
 
@@ -75,7 +77,7 @@ const HopsInventoryTableContainer = () => (
 						alphas: JSON.parse(item.object).alphaAcids,
 						unitCost: item.unitCost,
 						costUnit: item.costUnit,
-						date: item.lastReorderDate
+						lastReorderDate: item.lastReorderDate
 					}))
 					.filter(item => item.name.toLowerCase().includes(filterString))
 					.sort((a, b) => {
