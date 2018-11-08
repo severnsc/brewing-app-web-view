@@ -39,7 +39,11 @@ const Pagination = ({
 								? {...styles.pageNumber, ...styles.currentPage}
 								: styles.pageNumber
 							}
-							onClick={() => updatePageNumber(n)}
+							onClick={
+								n === page
+								? null
+								: () => updatePageNumber(n)
+							}
 						>
 							{n}
 						</span>

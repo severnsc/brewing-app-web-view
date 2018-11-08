@@ -178,6 +178,29 @@ describe("pagination", () => {
 			expect(updatePageNumberArg).toBe(2)
 		})
 
+		it("does not call the updatePageNumber prop if click on pageNumber of current page", () => {
+			let updatePageNumberCalled = false
+			let updatePageNumberArg = null
+			const updatePageNumber = value => {
+				updatePageNumberCalled = true
+				updatePageNumberArg = value
+			}
+			const pagination = shallow(
+				<Pagination
+					page={1}
+					totalPages={2}
+					showPageNumbers={true}
+					updatePageNumber={updatePageNumber}
+					decrement={() => {}}
+					increment={() => {}}
+				/>
+			)
+			pagination.findWhere(n => 
+				n.text() === "1" && n.type() === "span"
+			).simulate("click")
+			expect(updatePageNumberCalled).toBe(false)
+		})
+
 		it("has textDecoration underline", () => {
 			const pagination = shallow(
 				<Pagination
