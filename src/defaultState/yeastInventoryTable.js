@@ -5,6 +5,5 @@ export default {
 	sortOrder: "asc",
 	itemsPerPage: 5,
 	currentPage: 1,
-	totalPages: 1,
 	filterString: ""
 }

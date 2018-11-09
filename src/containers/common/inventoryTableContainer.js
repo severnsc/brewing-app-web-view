@@ -30,7 +30,6 @@ const InventoryTableContainer = ({ name, columns, itemsPerPageOptions, map, sort
 				sortBy,
 				sortOrder,
 				itemsPerPage,
-				totalPages,
 				currentPage,
 				filterString
 			}	= table
@@ -38,6 +37,8 @@ const InventoryTableContainer = ({ name, columns, itemsPerPageOptions, map, sort
 			const inventory = currentUser.inventories.find(inventory =>
 				inventory.name.toLowerCase() === name.toLowerCase()
 			)
+
+			const totalPages = Math.ceil(inventory.items.length/itemsPerPage)
 			
 			const startIndex = itemsPerPage * (currentPage - 1)
 			const endIndex = itemsPerPage * (currentPage)

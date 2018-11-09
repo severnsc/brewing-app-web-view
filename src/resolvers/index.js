@@ -95,7 +95,6 @@ const tableQuery = gql`
       sortOrder
       itemsPerPage
       currentPage
-      totalPages
       filterString
     }
   }
@@ -112,7 +111,6 @@ export default {
             sortOrder
             itemsPerPage
             currentPage
-            totalPages
             filterString
           }
         }
@@ -160,13 +158,10 @@ export default {
         pageNumber = Math.ceil(items.length/itemsPerPage)
       }
 
-      const totalPages = Math.ceil(items.length/itemsPerPage)
-
       const data = {
         table: {
           ...table,
           itemsPerPage,
-          totalPages,
           currentPage: pageNumber
         }
       }
