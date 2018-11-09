@@ -9,7 +9,6 @@ import timersQuery from "./timer"
 import activeTimerQuery from "./activeTimer"
 import inventoriesTableQuery from "./inventoriesTable"
 import inventoriesQuery from "./inventories"
-import maltInventoryTableQuery from "./maltInventoryTable"
 import yeastInventoryTableQuery from "./yeastInventoryTable"
 import otherInventoriesTableQuery from "./otherInventoriesTable"
 import currentUserQuery from "./currentUser"
@@ -30,7 +29,6 @@ export {
   activeTimerQuery,
   inventoriesTableQuery,
   inventoriesQuery,
-  maltInventoryTableQuery,
   yeastInventoryTableQuery,
   otherInventoriesTableQuery,
   currentUserQuery,
