@@ -7,7 +7,7 @@ import {
 	TableData
 } from "../components"
 import { Query } from "react-apollo"
-import { hopsInventoryTableQuery } from "../queries"
+import { inventoryTableQuery } from "../queries"
 
 import {
 	ConvertCurrencyContainer,
@@ -29,13 +29,16 @@ import {
 } from "../utils"
 
 const HopsInventoryTableContainer = () => (
-	<Query query={hopsInventoryTableQuery}>
+	<Query query={inventoryTableQuery} variables={{name: "hops"}}>
 		{({loading, error, data}) => {
 
 			if(loading) return <p>Loading...</p>
-			if(error) return <p>Error!</p>
+			if(error){
+				console.error(error)
+				return <p>Error!</p>
+			}
 
-			const { currentUser, hopsInventoryTable } = data
+			const { currentUser, inventoryTable } = data
 			const { settings } = currentUser
 			const {
 				sortBy,
@@ -44,7 +47,8 @@ const HopsInventoryTableContainer = () => (
 				totalPages,
 				currentPage,
 				filterString
-			}	= hopsInventoryTable
+			}	= inventoryTable
+			console.log(inventoryTable)
 
 			const weightSetting = settings.find(setting => setting.name === "weight")
 			const currencySetting = settings.find(setting => setting.name === "currency")

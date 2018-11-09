@@ -1,5 +1,6 @@
 export default {
-	__typename: "HopsInventoryTable",
+	__typename: "InventoryTable",
+	name: "hops",
 	sortBy: "Hop name",
 	sortOrder: "asc",
 	itemsPerPage: 5,

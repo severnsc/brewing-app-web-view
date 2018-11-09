@@ -6,7 +6,7 @@ export default gql`
 		maltInventoryTable @client {
 			sortOrder
 			sortBy
-			itemLimit
+			itemsPerPage
 			currentPage
 			filterString
 		}

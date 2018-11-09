@@ -19,9 +19,11 @@ export default {
 	timersTable,
 	activeTimer,
 	inventoriesTable,
-	maltInventoryTable,
-	hopsInventoryTable,
-	yeastInventoryTable,
-	otherInventoriesTable,
+	inventoryTables: [
+		maltInventoryTable,
+		hopsInventoryTable,
+		yeastInventoryTable,
+		otherInventoriesTable
+	],
 	flash
 }

@@ -88,6 +88,29 @@ const otherInventoriesTableQuery = gql`
 `
 
 export default {
+  Query: {
+    inventoryTable: (_, { name }, { cache }) => {
+      const query = gql`
+        query {
+          inventoryTables @client {
+            name
+            sortBy
+            sortOrder
+            itemsPerPage
+            currentPage
+            totalPages
+            filterString
+          }
+        }
+      `
+
+      const { inventoryTables } = cache.readQuery({ query })
+
+      const inventoryTable = inventoryTables.find(i => i.name === name)
+
+      return inventoryTable
+    }
+  },
   Mutation: {
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
 

@@ -1,8 +1,10 @@
 export default {
-	__typename: "YeastInventoryTable",
+	__typename: "InventoryTable",
+	name: "yeast",
 	sortBy: "Yeast name",
 	sortOrder: "asc",
 	itemsPerPage: 5,
-	currentPage: 0,
+	currentPage: 1,
+	totalPages: 1,
 	filterString: ""
 }

@@ -17,6 +17,7 @@ import currentUserQuery from "./currentUser"
 import flashQuery from "./flash"
 import settingsQuery from "./setting"
 import currencyExchangeQuery from "./currencyExchange"
+import inventoryTableQuery from "./inventoryTable"
 
 export {
   dashboardTableQuery,
@@ -37,5 +38,6 @@ export {
   currentUserQuery,
   flashQuery,
   settingsQuery,
-  currencyExchangeQuery
+  currencyExchangeQuery,
+  inventoryTableQuery
 }

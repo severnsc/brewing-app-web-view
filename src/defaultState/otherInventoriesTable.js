@@ -1,8 +1,10 @@
 export default {
-	__typename: "OtherInventoriesTable",
+	__typename: "InventoryTable",
+	name: "other",
 	sortBy: "Item name",
 	sortOrder: "asc",
 	itemsPerPage: 5,
-	currentPage: 0,
+	currentPage: 1,
+	totalPages: 1,
 	filterString: ""
 }
