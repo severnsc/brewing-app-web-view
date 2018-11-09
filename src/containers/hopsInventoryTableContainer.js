@@ -33,8 +33,6 @@ const HopsInventoryTableContainer = () => (
 				return <p>Error!</p>
 			}
 
-			console.log(data)
-
 			const { settings } = data.currentUser
 
 			const weightSetting = settings.find(s => s.name === "weight").value
@@ -59,7 +57,7 @@ const HopsInventoryTableContainer = () => (
 				alphas: JSON.parse(item.object).alphaAcids,
 				unitCost: item.unitCost,
 				costUnit: item.costUnit,
-				lastReorderDate: item.lastReorderDate
+				lastReorderDate: new Date(item.lastReorderDate)
 			})
 
 			const sort = sortBy => 
@@ -130,7 +128,7 @@ const HopsInventoryTableContainer = () => (
 					<TableData
 						value={
 							formatDate(
-								new Date(item.lastReorderDate),
+								item.lastReorderDate,
 								dateSetting
 							)
 						}

@@ -56,7 +56,7 @@ const MaltInventoryTableContainer = () => (
 				colorUnit: JSON.parse(item.object).colorUnit,
 				unitCost: item.unitCost,
 				costUnit: item.costUnit,
-				lastReorderDate: item.lastReorderDate
+				lastReorderDate: new Date(item.lastReorderDate)
 			})
 
 			const sort = sortBy => 
@@ -138,7 +138,7 @@ const MaltInventoryTableContainer = () => (
 						<TableData
 							value={
 								formatDate(
-									new Date(item.lastReorderDate),
+									item.lastReorderDate,
 									dateSetting
 								)
 							}
