@@ -9,7 +9,6 @@ import timersQuery from "./timer"
 import activeTimerQuery from "./activeTimer"
 import inventoriesTableQuery from "./inventoriesTable"
 import inventoriesQuery from "./inventories"
-import otherInventoriesTableQuery from "./otherInventoriesTable"
 import currentUserQuery from "./currentUser"
 import flashQuery from "./flash"
 import settingsQuery from "./setting"
@@ -28,7 +27,6 @@ export {
   activeTimerQuery,
   inventoriesTableQuery,
   inventoriesQuery,
-  otherInventoriesTableQuery,
   currentUserQuery,
   flashQuery,
   settingsQuery,
