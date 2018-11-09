@@ -22,15 +22,15 @@ const PaginationContainer = ({
 					{itemsPerPageMutation => {
 
 						const increment = () => {
-							pageNumberMutation({ variables: { type: "INCREMENT" } })
+							pageNumberMutation({ variables: { name, type: "INCREMENT" } })
 						}
 
 						const decrement = () => {
-							pageNumberMutation({ variables: { type: "DECREMENT" } })	
+							pageNumberMutation({ variables: { name, type: "DECREMENT" } })	
 						}
 
-						const updatePageNumber = page => {
-							pageNumberMutation({ variables: { type: "GOTO", page } })
+						const updatePageNumber = pageNumber => {
+							pageNumberMutation({ variables: { name, type: "GOTO", pageNumber } })
 						}
 
 						const updateItemsPerPage = itemsPerPage => {

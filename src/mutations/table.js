@@ -11,3 +11,9 @@ export const UPDATE_TABLE_ITEMS_PER_PAGE = gql`
 		updateTableItemsPerPage(name: $name, itemsPerPage: $itemsPerPage) @client
 	}
 `
+
+export const UPDATE_TABLE_PAGE_NUMBER = gql`
+	mutation updateTablePageNumber($name: String!, $type: String!, $pageNumber: Number) {
+		updateTablePageNumber(name: $name, type: $type, pageNumber: $pageNumber) @client
+	}
+`

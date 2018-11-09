@@ -19,7 +19,7 @@ import {
 import {
 	UPDATE_TABLE_SORT,
 	UPDATE_TABLE_ITEMS_PER_PAGE,
-	UPDATE_HOPS_TABLE_PAGE_NUMBER,
+	UPDATE_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
 
@@ -182,7 +182,7 @@ const HopsInventoryTableContainer = () => (
 						showItemsPerPage={true}
 						itemsPerPageOptions={[5, 10, 25, 50]}
 						itemsPerPage={itemsPerPage}
-						pageNumberMutation={UPDATE_HOPS_TABLE_PAGE_NUMBER}
+						pageNumberMutation={UPDATE_TABLE_PAGE_NUMBER}
 						itemsPerPageMutation={UPDATE_TABLE_ITEMS_PER_PAGE}
 					/>
 				</div>

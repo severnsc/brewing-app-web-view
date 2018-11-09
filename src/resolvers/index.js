@@ -176,6 +176,37 @@ export default {
 
       return null
     },
+    updateTablePageNumber: (_, { name, type, pageNumber }, { cache }) => {
+
+      const { table } = cache.readQuery({ query: tableQuery, variables: { name } })
+
+      let { currentPage } = table
+      switch(type){
+        
+        case "INCREMENT":
+          currentPage = currentPage + 1
+          break
+
+        case "DECREMENT":
+          currentPage = currentPage - 1
+          break
+
+        default:
+          currentPage = pageNumber
+
+      }
+
+      const data = {
+        table: {
+          ...table,
+          currentPage
+        }
+      }
+
+      cache.writeQuery({ query: tableQuery, data, variables: { name } })
+
+      return null
+    },
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
 
       const { dashboard } = cache.readQuery({ query: dashboardTableQuery })
