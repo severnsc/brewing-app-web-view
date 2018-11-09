@@ -8,6 +8,7 @@ import SearchBarContainer from "./searchBarContainer"
 import SettingsFormContainer from "./settingsFormContainer"
 import SortableTableHeaderContainer from "./sortableTableHeaderContainer"
 import TimerAlertFormContainer from "./timerAlertFormContainer"
+import InventoryTableContainer from "./inventoryTableContainer"
 
 export {
 	ConvertCurrencyContainer,
@@ -19,5 +20,6 @@ export {
 	SearchBarContainer,
 	SettingsFormContainer,
 	SortableTableHeaderContainer,
-	TimerAlertFormContainer
+	TimerAlertFormContainer,
+	InventoryTableContainer
 }
