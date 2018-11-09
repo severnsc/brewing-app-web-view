@@ -7,13 +7,14 @@ const SortableTableHeaderContainer = ({
 	columns,
 	sortBy,
 	sortOrder,
+	name,
 	toggleSortMutation
 }) => (
 	<Mutation mutation={toggleSortMutation}>
 		{toggleSortMutation => {
 
 			const onClick = columnName => {
-				toggleSortMutation({variables: { cellName: columnName } })
+				toggleSortMutation({variables: { name, sortBy: columnName } })
 			}
 
 			return(
@@ -33,6 +34,7 @@ SortableTableHeaderContainer.propTypes = {
 	columns: PropTypes.arrayOf(PropTypes.string).isRequired,
 	sortBy: PropTypes.string,
 	sortOrder: PropTypes.oneOf(["asc", "desc"]),
+	name: PropTypes.string.isRequired,
 	toggleSortMutation: PropTypes.object.isRequired
 }
 

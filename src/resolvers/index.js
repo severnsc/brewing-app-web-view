@@ -112,6 +112,42 @@ export default {
     }
   },
   Mutation: {
+    updateTableSort: (_, { name, sortBy }, { cache }) => {
+      const query = gql`
+        query {
+          inventoryTable(name: $name) @client {
+            name
+            sortBy
+            sortOrder
+            itemsPerPage
+            currentPage
+            totalPages
+            filterString
+          }
+        }
+      `
+
+      const { inventoryTable } = cache.readQuery({ query, variables: { name } })
+
+      let order = inventoryTable.sortOrder
+      if(inventoryTable.sortBy === sortBy){
+        order = inventoryTable.sortOrder === "asc" ? "desc" : "asc"
+      }else{
+        order = "asc"
+      }
+
+      const data = {
+        inventoryTable: {
+          ...inventoryTable,
+          sortOrder: order,
+          sortBy
+        }
+      }
+
+      cache.writeQuery({ query, data, variables: { name } })
+
+      return null
+    },
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
 
       const { dashboard } = cache.readQuery({ query: dashboardTableQuery })

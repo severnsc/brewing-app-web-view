@@ -17,7 +17,7 @@ import {
 } from "./common"
 
 import {
-	UPDATE_HOPS_TABLE_SORT,
+	UPDATE_TABLE_SORT,
 	UPDATE_HOPS_TABLE_ITEM_LIMIT,
 	UPDATE_HOPS_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
@@ -48,7 +48,6 @@ const HopsInventoryTableContainer = () => (
 				currentPage,
 				filterString
 			}	= inventoryTable
-			console.log(inventoryTable)
 
 			const weightSetting = settings.find(setting => setting.name === "weight")
 			const currencySetting = settings.find(setting => setting.name === "currency")
@@ -168,7 +167,8 @@ const HopsInventoryTableContainer = () => (
 							columns={columns}
 							sortBy={sortBy}
 							sortOrder={sortOrder}
-							toggleSortMutation={UPDATE_HOPS_TABLE_SORT}
+							toggleSortMutation={UPDATE_TABLE_SORT}
+							name="hops"
 						/>
 						<tbody>
 							{tableRows}
