@@ -18,7 +18,7 @@ import {
 
 import {
 	UPDATE_TABLE_SORT,
-	UPDATE_HOPS_TABLE_ITEM_LIMIT,
+	UPDATE_TABLE_ITEMS_PER_PAGE,
 	UPDATE_HOPS_TABLE_PAGE_NUMBER,
 	UPDATE_MODAL
 } from "../mutations"
@@ -175,6 +175,7 @@ const HopsInventoryTableContainer = () => (
 						</tbody>
 					</Table>
 					<PaginationContainer
+						name="hops"
 						page={currentPage}
 						totalPages={totalPages}
 						showPageNumbers={true}
@@ -182,7 +183,7 @@ const HopsInventoryTableContainer = () => (
 						itemsPerPageOptions={[5, 10, 25, 50]}
 						itemsPerPage={itemsPerPage}
 						pageNumberMutation={UPDATE_HOPS_TABLE_PAGE_NUMBER}
-						itemsPerPageMutation={UPDATE_HOPS_TABLE_ITEM_LIMIT}
+						itemsPerPageMutation={UPDATE_TABLE_ITEMS_PER_PAGE}
 					/>
 				</div>
 			)

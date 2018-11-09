@@ -4,6 +4,7 @@ import { Pagination } from "../../components"
 import { Mutation } from "react-apollo"
 
 const PaginationContainer = ({
+	name,
 	page,
 	totalPages,
 	showPageNumbers,
@@ -32,8 +33,8 @@ const PaginationContainer = ({
 							pageNumberMutation({ variables: { type: "GOTO", page } })
 						}
 
-						const updateItemsPerPage = value => {
-							itemsPerPageMutation({ variables: { value } })
+						const updateItemsPerPage = itemsPerPage => {
+							itemsPerPageMutation({ variables: { name, itemsPerPage } })
 						}
 
 						return(
@@ -60,6 +61,7 @@ const PaginationContainer = ({
 )
 
 PaginationContainer.propTypes = {
+	name: PropTypes.string.isRequired,
 	page: PropTypes.number.isRequired,
 	totalPages: PropTypes.number.isRequired,
 	showPageNumbers: PropTypes.bool,

@@ -5,3 +5,9 @@ export const UPDATE_TABLE_SORT = gql`
 		updateTableSort(name: $name, sortBy: $sortBy) @client 
 	}
 `
+
+export const UPDATE_TABLE_ITEMS_PER_PAGE = gql`
+	mutation updateTableItemsPerPage($name: String!, $itemsPerPage: Number!) {
+		updateTableItemsPerPage(name: $name, itemsPerPage: $itemsPerPage) @client
+	}
+`

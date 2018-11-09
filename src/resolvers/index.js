@@ -3,7 +3,8 @@ import {
   modalQuery,
   loginQuery,
   flashQuery,
-  hopsInventoryTableQuery
+  hopsInventoryTableQuery,
+  inventoriesQuery
 } from "../queries"
 
 const dashboardTableQuery = gql`
@@ -87,6 +88,20 @@ const otherInventoriesTableQuery = gql`
   }
 `
 
+const tableQuery = gql`
+  query {
+    table(name: $name) @client {
+      name
+      sortBy
+      sortOrder
+      itemsPerPage
+      currentPage
+      totalPages
+      filterString
+    }
+  }
+`
+
 export default {
   Query: {
     table: (_, { name }, { cache }) => {
@@ -113,21 +128,8 @@ export default {
   },
   Mutation: {
     updateTableSort: (_, { name, sortBy }, { cache }) => {
-      const query = gql`
-        query {
-          table(name: $name) @client {
-            name
-            sortBy
-            sortOrder
-            itemsPerPage
-            currentPage
-            totalPages
-            filterString
-          }
-        }
-      `
 
-      const { table } = cache.readQuery({ query, variables: { name } })
+      const { table } = cache.readQuery({ query: tableQuery, variables: { name } })
 
       let order = table.sortOrder
       if(table.sortBy === sortBy){
@@ -144,7 +146,33 @@ export default {
         }
       }
 
-      cache.writeQuery({ query, data, variables: { name } })
+      cache.writeQuery({ query: tableQuery, data, variables: { name } })
+
+      return null
+    },
+    updateTableItemsPerPage: (_, { name, itemsPerPage }, { cache }) => {
+
+      const { table } = cache.readQuery({ query: tableQuery, variables: { name } })
+      const { currentUser } = cache.readQuery({ query: inventoriesQuery })
+      const items = currentUser.inventories.find(i => i.name.toLowerCase() === name).items
+      
+      let pageNumber = table.currentPage
+      if(pageNumber >= items.length/itemsPerPage){
+        pageNumber = Math.ceil(items.length/itemsPerPage)
+      }
+
+      const totalPages = Math.ceil(items.length/itemsPerPage)
+
+      const data = {
+        table: {
+          ...table,
+          itemsPerPage,
+          totalPages,
+          currentPage: pageNumber
+        }
+      }
+
+      cache.writeQuery({ query: tableQuery, data, variables: { name } }) 
 
       return null
     },

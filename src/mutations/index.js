@@ -86,7 +86,8 @@ import {
 } from "./setting"
 
 import {
-  UPDATE_TABLE_SORT
+  UPDATE_TABLE_SORT,
+  UPDATE_TABLE_ITEMS_PER_PAGE
 } from "./table"
 
 export {
@@ -140,5 +141,6 @@ export {
   UPDATE_FLASH,
   CREATE_SETTING,
   UPDATE_SETTING,
-  UPDATE_TABLE_SORT
+  UPDATE_TABLE_SORT,
+  UPDATE_TABLE_ITEMS_PER_PAGE
 }
