@@ -3,7 +3,6 @@ import {
   modalQuery,
   loginQuery,
   flashQuery,
-  hopsInventoryTableQuery,
   inventoriesQuery
 } from "../queries"
 
@@ -747,117 +746,6 @@ export default {
       }
 
       cache.writeQuery({ query: maltInventoryTableQuery, data })
-
-      return null
-
-    },
-
-    updateHopsInventoryTableSort: (_, { cellName }, { cache }) => {
-
-      const { hopsInventoryTable, currentUser } = cache.readQuery({ query: hopsInventoryTableQuery })
-
-      const { sortOrder, sortBy } = hopsInventoryTable
-
-      let order = sortOrder
-      if(sortBy === cellName){
-        order = sortOrder === "asc" ? "desc" : "asc"
-      }else{
-        order = "asc"
-      }
-
-      const data = {
-        currentUser,
-        hopsInventoryTable: {
-          ...hopsInventoryTable,
-          sortOrder: order,
-          sortBy: cellName
-        }
-      }
-
-      cache.writeQuery({ query: hopsInventoryTableQuery, data })
-
-      return null      
-
-    },
-
-    updateHopsInventoryTablePageNumber: (_, { type, page }, { cache }) => {
-
-      const { hopsInventoryTable } = cache.readQuery({ query: hopsInventoryTableQuery })
-
-      const { currentPage } = hopsInventoryTable
-      let integer = currentPage
-      switch(type){
-        
-        case "INCREMENT":
-          integer = currentPage + 1
-          break
-
-        case "DECREMENT":
-          integer = currentPage - 1
-          break
-
-        default:
-          integer = page
-
-      }
-
-      const data = {
-        hopsInventoryTable: {
-          ...hopsInventoryTable,
-          currentPage: integer
-        }
-      }
-
-      cache.writeQuery({ query: hopsInventoryTableQuery, data })
-
-      return null
-
-    },
-
-    updateHopsInventoryTableItemLimit: (_, { value }, { cache }) => {
-
-      const query = hopsInventoryTableQuery
-
-      const { currentUser, hopsInventoryTable } = cache.readQuery({ query })
-      
-      let pageNumber = hopsInventoryTable.currentPage
-      const hops = currentUser.inventories.find(inventory => inventory.name === "Hops").items
-      if(pageNumber >= hops.length/value){
-        pageNumber = Math.ceil(hops.length/value)
-      }
-
-      const totalPages = Math.ceil(hops.length/value)
-
-      const data = {
-        currentUser,
-        hopsInventoryTable: {
-          ...hopsInventoryTable,
-          itemsPerPage: value,
-          totalPages,
-          currentPage: pageNumber
-        }
-      }
-
-      cache.writeQuery({ query, data }) 
-
-      return null
-
-    },
-
-    updateHopsInventoryTableFilter: (_, { value }, { cache }) => {
-
-      const { hopsInventoryTable, currentUser } = cache.readQuery({ query: hopsInventoryTableQuery })
-
-      const data = {
-        currentUser,
-        hopsInventoryTable: {
-          ...hopsInventoryTable,
-          filterString: value,
-          currentPage: 1
-        }
-      }
-
-      cache.writeQuery({ query: hopsInventoryTableQuery, data })
 
       return null
 
