@@ -85,7 +85,7 @@ const HopsInventoryTableContainer = () => (
 							break
 
 						case columns[5]:
-							sortKey = "date"
+							sortKey = "lastReorderDate"
 							break
 
 						default:
