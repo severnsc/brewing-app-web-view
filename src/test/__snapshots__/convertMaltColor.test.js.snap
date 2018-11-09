@@ -4,7 +4,7 @@ exports[`convert malt color component renders a convert malt color component 1`]
 <div
   style={
     Object {
-      "background": "#000000",
+      "background": "#e9d76c",
       "borderRadius": "20px",
       "height": "16px",
       "padding": "4px",
@@ -28,7 +28,7 @@ exports[`convert malt color component renders a convert malt color component 1`]
       }
     }
   >
-    NaN
+    1
   </span>
 </div>
 `;

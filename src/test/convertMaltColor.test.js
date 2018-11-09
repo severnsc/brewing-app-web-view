@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe("convert malt color component", () => {
 
 	it("renders a convert malt color component", () => {
-		const convertMaltColor = renderer.create(<ConvertMaltColor />)
+		const convertMaltColor = renderer.create(<ConvertMaltColor from="SRM" to="L" value={1} />)
 		const tree = convertMaltColor.toJSON()
 		expect(tree).toMatchSnapshot()
 	})
