@@ -48,12 +48,11 @@ const InventoryTableContainer = ({ name, columns, itemsPerPageOptions, map, sort
 				? inventory.items.map(map)
 					.filter(item => item.name.toLowerCase().includes(filterString))
 					.sort(sort(sortBy))
-					.slice(startIndex, endIndex)
-					.map(render)
 				: []
 			)
 
 			if(sortOrder === "desc") tableRows = tableRows.reverse()
+			tableRows = tableRows.slice(startIndex, endIndex).map(render)
 
 			return(
 				<div>
