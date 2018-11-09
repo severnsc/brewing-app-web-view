@@ -207,6 +207,23 @@ export default {
 
       return null
     },
+    updateTableFilter: (_, { name, filterString }, { cache }) => {
+
+      const { table } = cache.readQuery({ query: tableQuery, variables: { name } })
+
+      const data = {
+        table: {
+          ...table,
+          filterString,
+          currentPage: 1
+        }
+      }
+
+      cache.writeQuery({ query: tableQuery, data, variables: { name } })
+
+      return null
+
+    },
     updateDashboardTableSort: (_, { cellName }, { cache }) => {
 
       const { dashboard } = cache.readQuery({ query: dashboardTableQuery })

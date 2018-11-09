@@ -17,3 +17,9 @@ export const UPDATE_TABLE_PAGE_NUMBER = gql`
 		updateTablePageNumber(name: $name, type: $type, pageNumber: $pageNumber) @client
 	}
 `
+
+export const UPDATE_TABLE_FILTER = gql`
+	mutation updateTableFilter($name: String!, $filterString: String!) {
+		updateTableFilter(name: $name, filterString: $filterString) @client
+	}
+`
