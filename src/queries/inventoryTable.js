@@ -12,7 +12,7 @@ export default gql`
 			}
 		}
 
-		inventoryTable(name: $name) @client {
+		table(name: $name) @client {
 			name
 			sortBy
 			sortOrder

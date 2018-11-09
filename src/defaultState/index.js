@@ -19,7 +19,7 @@ export default {
 	timersTable,
 	activeTimer,
 	inventoriesTable,
-	inventoryTables: [
+	tables: [
 		maltInventoryTable,
 		hopsInventoryTable,
 		yeastInventoryTable,

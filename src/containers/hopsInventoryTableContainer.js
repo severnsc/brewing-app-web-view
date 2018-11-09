@@ -38,7 +38,7 @@ const HopsInventoryTableContainer = () => (
 				return <p>Error!</p>
 			}
 
-			const { currentUser, inventoryTable } = data
+			const { currentUser, table } = data
 			const { settings } = currentUser
 			const {
 				sortBy,
@@ -47,7 +47,7 @@ const HopsInventoryTableContainer = () => (
 				totalPages,
 				currentPage,
 				filterString
-			}	= inventoryTable
+			}	= table
 
 			const weightSetting = settings.find(setting => setting.name === "weight")
 			const currencySetting = settings.find(setting => setting.name === "currency")

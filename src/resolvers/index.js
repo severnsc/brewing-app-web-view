@@ -89,10 +89,10 @@ const otherInventoriesTableQuery = gql`
 
 export default {
   Query: {
-    inventoryTable: (_, { name }, { cache }) => {
+    table: (_, { name }, { cache }) => {
       const query = gql`
         query {
-          inventoryTables @client {
+          tables @client {
             name
             sortBy
             sortOrder
@@ -104,18 +104,18 @@ export default {
         }
       `
 
-      const { inventoryTables } = cache.readQuery({ query })
+      const { tables } = cache.readQuery({ query })
 
-      const inventoryTable = inventoryTables.find(i => i.name === name)
+      const table = tables.find(i => i.name === name)
 
-      return inventoryTable
+      return table
     }
   },
   Mutation: {
     updateTableSort: (_, { name, sortBy }, { cache }) => {
       const query = gql`
         query {
-          inventoryTable(name: $name) @client {
+          table(name: $name) @client {
             name
             sortBy
             sortOrder
@@ -127,18 +127,18 @@ export default {
         }
       `
 
-      const { inventoryTable } = cache.readQuery({ query, variables: { name } })
+      const { table } = cache.readQuery({ query, variables: { name } })
 
-      let order = inventoryTable.sortOrder
-      if(inventoryTable.sortBy === sortBy){
-        order = inventoryTable.sortOrder === "asc" ? "desc" : "asc"
+      let order = table.sortOrder
+      if(table.sortBy === sortBy){
+        order = table.sortOrder === "asc" ? "desc" : "asc"
       }else{
         order = "asc"
       }
 
       const data = {
-        inventoryTable: {
-          ...inventoryTable,
+        table: {
+          ...table,
           sortOrder: order,
           sortBy
         }

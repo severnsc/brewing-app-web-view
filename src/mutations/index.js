@@ -87,7 +87,7 @@ import {
 
 import {
   UPDATE_TABLE_SORT
-} from "./inventoryTable"
+} from "./table"
 
 export {
   UPDATE_DASHBOARD_TABLE_SORT,
