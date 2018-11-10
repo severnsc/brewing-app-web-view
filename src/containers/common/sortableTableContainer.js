@@ -33,8 +33,6 @@ const SortableTableContainer = ({ name, columns, itemsPerPageOptions, items, map
 				currentPage,
 				filterString
 			}	= table
-
-			const totalPages = Math.ceil(items.length/itemsPerPage)
 			
 			const startIndex = itemsPerPage * (currentPage - 1)
 			const endIndex = itemsPerPage * (currentPage)
@@ -42,6 +40,8 @@ const SortableTableContainer = ({ name, columns, itemsPerPageOptions, items, map
 			const filter = item => item.name.toLowerCase().includes(filterString)
 			let tableRows = items.map(map).filter(filter).sort(sort(sortBy))
 
+			const totalPages = Math.ceil(tableRows.length/itemsPerPage)
+			
 			if(sortOrder === "desc") tableRows = tableRows.reverse()
 			tableRows = tableRows.slice(startIndex, endIndex).map(render)
 
