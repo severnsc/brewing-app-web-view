@@ -5,16 +5,11 @@ export default gql`
 	query inventoryTableQuery {
 		currentUser {
 			id
+			settings {
+				name
+				value
+			}
 			...InventoryItems
-		}
-
-		table(name: $name) @client {
-			name
-			sortBy
-			sortOrder
-			itemsPerPage
-			currentPage
-			filterString
 		}
 	}
 ${currentUserFragments.inventoryItems}

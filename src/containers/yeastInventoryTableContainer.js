@@ -1,17 +1,17 @@
 import React from "react"
 import { Query } from "react-apollo"
 import { TableData, Currency } from "../components"
-import { settingsQuery } from "../queries"
+import { inventoryTableQuery } from "../queries"
 import { UPDATE_MODAL } from "../mutations"
 import { formatDate } from "../utils"
 import {
 	HoverableTableRowContainer,
 	ConvertCurrencyContainer,
-	InventoryTableContainer
+	SortableTableContainer
 } from "./common"
 
 const YeastInventoryTableContainer = () => (
-	<Query query={settingsQuery}>
+	<Query query={inventoryTableQuery}>
 		{({ loading, error, data }) => {
 
 			if(loading) return <p>Loading...</p>
@@ -20,7 +20,8 @@ const YeastInventoryTableContainer = () => (
 				return <p>Error!</p>
 			}
 
-			const { settings } = data.currentUser
+			const { settings, inventories } = data.currentUser
+			const inventory = inventories.find(i => i.name.toLowerCase() === "yeast")
 
 			const currencySetting = settings.find(s => s.name === "currency").value
 			const dateSetting = settings.find(s => s.name === "dateFormat").value
@@ -131,10 +132,11 @@ const YeastInventoryTableContainer = () => (
 				)
 				
 				return(
-					<InventoryTableContainer
+					<SortableTableContainer
 						name="yeast"
 						columns={columns}
 						itemsPerPageOptions={[5, 10, 25, 50]}
+						items={inventory.items}
 						map={map}
 						sort={sort}
 						render={render}

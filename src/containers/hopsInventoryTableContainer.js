@@ -8,12 +8,12 @@ import {
 } from "../components"
 
 import { Query } from "react-apollo"
-import { settingsQuery } from "../queries"
+import { inventoryTableQuery } from "../queries"
 
 import {
 	ConvertCurrencyContainer,
 	HoverableTableRowContainer,
-	InventoryTableContainer
+	SortableTableContainer
 } from "./common"
 
 import { UPDATE_MODAL } from "../mutations"
@@ -24,7 +24,7 @@ import {
 } from "../utils"
 
 const HopsInventoryTableContainer = () => (
-	<Query query={settingsQuery}>
+	<Query query={inventoryTableQuery}>
 		{({ loading, error, data }) => {
 
 			if(loading) return <p>Loading...</p>
@@ -33,7 +33,8 @@ const HopsInventoryTableContainer = () => (
 				return <p>Error!</p>
 			}
 
-			const { settings } = data.currentUser
+			const { settings, inventories } = data.currentUser
+			const inventory = inventories.find(i => i.name.toLowerCase() === "hops")
 
 			const weightSetting = settings.find(s => s.name === "weight").value
 			const currencySetting = settings.find(s => s.name === "currency").value
@@ -137,10 +138,11 @@ const HopsInventoryTableContainer = () => (
 			)
 
 			return(
-				<InventoryTableContainer
+				<SortableTableContainer
 					name="hops"
 					columns={columns}
 					itemsPerPageOptions={[5, 10, 25, 50]}
+					items={inventory.items}
 					map={map}
 					sort={sort}
 					render={render}

@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Table } from "../../components"
 import { Query } from "react-apollo"
-import { inventoryTableQuery } from "../../queries"
+import { tableQuery } from "../../queries"
 
 import {
 	SortableTableHeaderContainer,
@@ -15,8 +15,8 @@ import {
 	UPDATE_TABLE_PAGE_NUMBER
 } from "../../mutations"
 
-const InventoryTableContainer = ({ name, columns, itemsPerPageOptions, map, sort, render }) => (
-	<Query query={inventoryTableQuery} variables={{ name }}>
+const SortableTableContainer = ({ name, columns, itemsPerPageOptions, items, map, sort, render }) => (
+	<Query query={tableQuery} variables={{ name }}>
 		{({loading, error, data}) => {
 
 			if(loading) return <p>Loading...</p>
@@ -25,7 +25,7 @@ const InventoryTableContainer = ({ name, columns, itemsPerPageOptions, map, sort
 				return <p>Error!</p>
 			}
 
-			const { currentUser, table } = data
+			const { table } = data
 			const {
 				sortBy,
 				sortOrder,
@@ -34,22 +34,13 @@ const InventoryTableContainer = ({ name, columns, itemsPerPageOptions, map, sort
 				filterString
 			}	= table
 
-			const inventory = currentUser.inventories.find(inventory =>
-				inventory.name.toLowerCase() === name.toLowerCase()
-			)
-
-			const totalPages = Math.ceil(inventory.items.length/itemsPerPage)
+			const totalPages = Math.ceil(items.length/itemsPerPage)
 			
 			const startIndex = itemsPerPage * (currentPage - 1)
 			const endIndex = itemsPerPage * (currentPage)
 
-			let tableRows = (
-				inventory
-				? inventory.items.map(map)
-					.filter(item => item.name.toLowerCase().includes(filterString))
-					.sort(sort(sortBy))
-				: []
-			)
+			const filter = item => item.name.toLowerCase().includes(filterString)
+			let tableRows = items.map(map).filter(filter).sort(sort(sortBy))
 
 			if(sortOrder === "desc") tableRows = tableRows.reverse()
 			tableRows = tableRows.slice(startIndex, endIndex).map(render)
@@ -86,13 +77,14 @@ const InventoryTableContainer = ({ name, columns, itemsPerPageOptions, map, sort
 	</Query>
 )
 
-InventoryTableContainer.propTypes = {
+SortableTableContainer.propTypes = {
 	name: PropTypes.string.isRequired,
 	columns: PropTypes.arrayOf(PropTypes.string).isRequired,
 	itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
+	items: PropTypes.array.isRequired,
 	map: PropTypes.func.isRequired,
 	sort: PropTypes.func.isRequired,
 	render: PropTypes.func.isRequired
 }
 
-export default InventoryTableContainer
+export default SortableTableContainer

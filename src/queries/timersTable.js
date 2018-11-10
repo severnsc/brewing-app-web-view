@@ -8,10 +8,11 @@ export default gql`
       ...Timers
     }
 
-    timersTable @client {
+    table(name: $name) @client {
+      name
       sortBy
       sortOrder
-      itemLimit
+      itemsPerPage
       filterString
       currentPage
     }
