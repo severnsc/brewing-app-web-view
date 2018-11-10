@@ -3,7 +3,8 @@ import {
   modalQuery,
   loginQuery,
   flashQuery,
-  inventoriesQuery
+  inventoriesQuery,
+  tableQuery
 } from "../queries"
 
 const dashboardTableQuery = gql`
@@ -47,19 +48,6 @@ const inventoriesTableQuery = gql`
       itemLimit
       filterString
       currentPage
-    }
-  }
-`
-
-const tableQuery = gql`
-  query {
-    table(name: $name) @client {
-      name
-      sortBy
-      sortOrder
-      itemsPerPage
-      currentPage
-      filterString
     }
   }
 `

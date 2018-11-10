@@ -1,5 +1,4 @@
 import dashboardTableQuery from "./dashboard"
-import timersTableQuery from "./timersTable"
 import signupQuery from "./signup"
 import modalQuery from "./modal"
 import loginQuery from "./login"
@@ -18,7 +17,6 @@ import tableQuery from "./table"
 
 export {
   dashboardTableQuery,
-  timersTableQuery,
   signupQuery,
   modalQuery,
   loginQuery,

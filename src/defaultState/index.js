@@ -23,7 +23,8 @@ export default {
 		maltInventoryTable,
 		hopsInventoryTable,
 		yeastInventoryTable,
-		otherInventoriesTable
+		otherInventoriesTable,
+		timersTable
 	],
 	flash
 }

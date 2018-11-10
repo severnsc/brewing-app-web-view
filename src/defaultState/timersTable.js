@@ -1,8 +1,9 @@
 export default {
 	__typename: "Timers",
+	name: "timers",
   sortBy: "Timer name",
   sortOrder: "asc",
-  itemLimit: 25,
+  itemsPerPage: 5,
   filterString: "",
-  currentPage: 0
+  currentPage: 1
 }
