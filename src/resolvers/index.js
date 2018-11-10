@@ -4,17 +4,9 @@ import {
   loginQuery,
   flashQuery,
   inventoriesQuery,
-  tableQuery
+  tableQuery,
+  signupQuery
 } from "../queries"
-
-const signupQuery = gql`
-  query {
-    signup @client {
-      isUsernameUnique
-      error
-    }
-  }
-`
 
 export default {
   Query: {
