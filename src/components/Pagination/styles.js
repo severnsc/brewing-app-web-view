@@ -16,6 +16,9 @@ export default {
 		cursor: "default"
 	},
 	itemsPerPage: {
-		marginLeft: "5px"
+		margin: "10px 0 0 0"
+	},
+	itemsPerPageText: {
+		marginLeft: "5px",
 	}
 }

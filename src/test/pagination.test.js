@@ -490,6 +490,26 @@ describe("pagination", () => {
 			).prop("style").marginLeft).toBe("5px")
 		})
 
+		it("has margin 10px 0 0 0", () => {
+			const itemsPerPageOptions = [5, 10, 15, 20]
+			const pagination = shallow(
+				<Pagination
+					page={0}
+					totalPages={1}
+					decrement={() => {}}
+					increment={() => {}}
+					showItemsPerPage={true}
+					itemsPerPageOptions={itemsPerPageOptions}
+					itemsPerPage={10}
+					updateItemsPerPage={() => {}}
+					updatePageNumber={() => {}}
+				/>
+			)
+			expect(pagination.findWhere(n => 
+				n.text() === "items per page"&& n.type() === "span"
+			).parent().prop("style").margin).toBe("10px 0 0 0")
+		})
+
 	})
 
 	describe("previous button style", () => {

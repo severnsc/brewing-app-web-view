@@ -58,12 +58,12 @@ const Pagination = ({
 			{
 				showItemsPerPage
 				? (
-						<div>
+						<div style={styles.itemsPerPage}>
 							<select value={itemsPerPage} onChange={e => updateItemsPerPage(parseInt(e.target.value, 10))}>
 								{itemsPerPageOptions.map(option => 
 									<option key={option} value={option}>{option}</option>)}
 							</select>
-							<span style={styles.itemsPerPage}>items per page</span>
+							<span style={styles.itemsPerPageText}>items per page</span>
 						</div>
 					)
 				: null
