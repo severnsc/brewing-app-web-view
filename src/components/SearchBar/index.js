@@ -8,6 +8,12 @@ class SearchBar extends Component {
     value: ""
   }
 
+  componentDidMount() {
+    if(this.props.initialValue){
+      this.setState({ value: this.props.initialValue })
+    }
+  }
+
   handleChange = e => {
     if(this.props.onChange) this.props.onChange(e.target.value)
     this.setState({value: e.target.value})
@@ -41,7 +47,8 @@ class SearchBar extends Component {
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  initialValue: PropTypes.string
 }
 
 export default SearchBar
