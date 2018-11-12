@@ -11,13 +11,9 @@ const uri = "https://brewing-app-api.herokuapp.com/graphql"
 
 const cache = new InMemoryCache()
 
-const defaults = {
-  ...defaultState
-}
-
 const stateLink = withClientState({
   cache,
-  defaults,
+  defaults: defaultState,
   resolvers
 })
 
