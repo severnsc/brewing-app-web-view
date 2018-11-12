@@ -1,12 +1,14 @@
 export default {
 	pageNumber: {
 		textDecoration: "underline",
-		cursor: "pointer"
+		cursor: "pointer",
+		padding: "0px 5px"
 	},
 	pageButton: {
 		textDecoration: "underline",
 		cursor: "pointer",
-		width: "86.73px"
+		width: "86.73px",
+		padding: "0px 5px"
 	},
 	currentPage: {
 		fontWeight: "bold",

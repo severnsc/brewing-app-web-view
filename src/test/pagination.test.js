@@ -121,6 +121,28 @@ describe("pagination", () => {
 		expect(called).toBe(true)
 	})
 
+	describe("next and previous controls", () => {
+
+		it("has padding 0px 5px", () => {
+			const pagination = shallow(
+				<Pagination
+					page={2}
+					totalPages={3}
+					decrement={() => {}}
+					increment={() => {}}
+					showPageNumbers={true}
+					updatePageNumber={() => {}}
+				/>
+			)
+			pagination.findWhere(n => 
+				n.type() === "span" && (n.text().includes("Previous") || n.text().includes("Next"))
+			).forEach(n => 
+				expect(n.prop("style").padding).toBe("0px 5px")
+			)
+		})
+
+	})
+
 	describe("page numbers", () => {
 
 		it("renders the page numbers if the showPageNumbers prop is true", () => {
@@ -231,6 +253,23 @@ describe("pagination", () => {
 			expect(pagination.findWhere(n => 
 				n.text() === "2" && n.type() === "span").prop("style").cursor
 			).toBe("pointer")
+		})
+
+		it("has padding 0px 5px", () => {
+			const pagination = shallow(
+				<Pagination
+					page={1}
+					totalPages={2}
+					decrement={() => {}}
+					increment={() => {}}
+					showPageNumbers={true}
+					updatePageNumber={() => {}}
+				/>
+			)
+			pagination.findWhere(n => 
+				n.type() === "span" && !n.text().includes("Next"))
+			.forEach(n => 
+				expect(n.prop("style").padding).toBe("0px 5px"))
 		})
 
 		describe("current page number", () => {
