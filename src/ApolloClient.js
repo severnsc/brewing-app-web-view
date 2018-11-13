@@ -39,4 +39,6 @@ const client = new ApolloClient({
   ])
 })
 
+client.onResetStore(stateLink.writeDefaults);
+
 export default client
