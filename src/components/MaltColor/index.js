@@ -7,7 +7,7 @@ const MaltColor = ({ value, srmValue }) => {
 
 	return(
 		<div style={{background: color, ...styles.container}}>
-			<span style={styles.value}>{Math.round(value)}</span>
+			<span style={styles.value(Math.round(value))}>{Math.round(value)}</span>
 		</div>
 	)
 }

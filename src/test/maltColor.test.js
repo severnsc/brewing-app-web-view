@@ -25,4 +25,27 @@ describe("malt color component", () => {
 		expect(maltColor.find("div").prop("style").background).toBe(rgbValue)
 	})
 
+	describe("when value is greater than 99", () => {
+
+		it("sets the value width to 30px", () => {
+			const maltColor = shallow(<MaltColor srmValue={1} value={100} />)
+			expect(maltColor.find("span").prop("style").width).toBe("30px")
+		})
+
+	})
+
+	describe("when value is greater than 999", () => {
+
+		it("sets the value width to 40px", () => {
+			const maltColor = shallow(<MaltColor srmValue={1} value={1000} />)
+			expect(maltColor.find("span").prop("style").width).toBe("40px")
+		})
+
+		it("sets left to -9px", () => {
+			const maltColor = shallow(<MaltColor srmValue={1} value={1000} />)
+			expect(maltColor.find("span").prop("style").left).toBe("-9px")
+		})
+
+	})
+
 })
