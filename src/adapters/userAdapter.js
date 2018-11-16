@@ -25,10 +25,9 @@ export const loginUser = async (username, password) => {
   },
   {withCredentials: true}
   )
-    .then(response => {
-      console.log(response)
-      return response.data === "OK" ? true : false
-    })
+    .then(response =>
+      response.data === "OK" ? true : false
+    )
     .catch(e => e)
 }
 

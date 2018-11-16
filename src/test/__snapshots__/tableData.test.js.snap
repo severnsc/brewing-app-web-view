@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`table data component renders a table data component 1`] = `
+<td
+  style={
+    Object {
+      "borderBottom": "1px solid hsl(0, 0%, 90%)",
+      "color": "hsl(0, 0%, 22%)",
+      "padding": "20px 10px",
+    }
+  }
+/>
+`;

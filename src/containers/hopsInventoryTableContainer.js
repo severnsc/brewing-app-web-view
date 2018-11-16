@@ -1,190 +1,151 @@
 import React from "react"
+
 import {
 	ConvertWeight,
 	Weight,
-	Currency
+	Currency,
+	TableData
 } from "../components"
+
 import { Query } from "react-apollo"
-import { hopsInventoryTableQuery } from "../queries"
-import SortableTableContainer from "./common/sortableTableContainer"
-import ConvertCurrencyContainer from "./common/convertCurrencyContainer"
+import { inventoryTableQuery } from "../queries"
+
 import {
-	UPDATE_HOPS_TABLE_SORT,
-	UPDATE_HOPS_TABLE_ITEM_LIMIT,
-	UPDATE_HOPS_TABLE_PAGE_NUMBER,
-	UPDATE_MODAL
-} from "../mutations"
+	ConvertCurrencyContainer,
+	HoverableTableRowContainer,
+	SortableTableContainer
+} from "./common"
+
+import { UPDATE_MODAL } from "../mutations"
+
 import {
 	weightUnits,
-	formatDate,
-	generateId
+	formatDate
 } from "../utils"
 
 const HopsInventoryTableContainer = () => (
-	<Query query={hopsInventoryTableQuery}>
-		{({loading, error, data}) => {
+	<Query query={inventoryTableQuery}>
+		{({ loading, error, data }) => {
 
 			if(loading) return <p>Loading...</p>
-			if(error) return <p>Error!</p>
+			if(error){
+				console.error(error)
+				return <p>Error!</p>
+			}
 
-			const { currentUser, hopsInventoryTable } = data
-			const { settings } = currentUser
-			const {
-				sortBy,
-				sortOrder,
-				itemsPerPage,
-				currentPage,
-				filterString
-			}	= hopsInventoryTable
+			const { settings, inventories } = data.currentUser
+			const inventory = inventories.find(i => i.name.toLowerCase() === "hops")
 
-			const weightSetting = settings.find(setting => setting.name === "weight")
-			const currencySetting = settings.find(setting => setting.name === "currency")
-			const dateSetting = settings.find(setting => setting.name === "dateFormat")
+			const weightSetting = settings.find(s => s.name === "weight").value
+			const currencySetting = settings.find(s => s.name === "currency").value
+			const dateSetting = settings.find(s => s.name === "dateFormat").value
 
 			const columns = [
-				{id: generateId(), name: "Hop name"},
-				{id: generateId(), name: `Amount ${weightUnits(weightSetting.value)}`},
-				{id: generateId(), name: "Country of origin"},
-				{id: generateId(), name: "Alpha acid %"},
-				{id: generateId(), name: "Cost per lb"},
-				{id: generateId(), name: "Purchase date"}
+				"Hop name",
+				`Amount ${weightUnits(weightSetting)}`,
+				"Country of origin",
+				"Alpha acid %",
+				"Cost per lb",
+				"Purchase date"
 			]
 
-			const inventory = currentUser.inventories.find(inventory => inventory.name === "Hops")
-			const tableRows = inventory
-												? inventory.items.map(item => ({
-														id: item.id,
-														cells: [
-															JSON.parse(item.object).name,
-															item.quantityUnit !== weightSetting.value ? <ConvertWeight from={item.quantityUnit} to={weightSetting.value} amount={item.currentQuantity} /> : <Weight amount={item.currentQuantity} unit={weightSetting.value} />,
-															JSON.parse(item.object).countryOfOrigin,
-															JSON.parse(item.object).alphaAcids + "%",
-															item.costUnit !== currencySetting.value ? <ConvertCurrencyContainer from={item.costUnit} to={currencySetting.value} amount={item.unitCost} /> : <Currency unit={currencySetting.value} amount={item.unitCost} />,
-															formatDate(new Date(item.lastReorderDate), dateSetting.value)
-														]
-													}))
-												: []
+			const map = item => ({
+				id: item.id,
+				name: JSON.parse(item.object).name,
+				currentQuantity: item.currentQuantity,
+				quantityUnit: item.quantityUnit,
+				country: JSON.parse(item.object).countryOfOrigin,
+				alphas: JSON.parse(item.object).alphaAcids,
+				unitCost: item.unitCost,
+				costUnit: item.costUnit,
+				lastReorderDate: new Date(item.lastReorderDate)
+			})
 
-			let filteredRows
-			if(filterString){
-				filteredRows = tableRows.filter(tableRow => {
-					return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(filterString))
-				})
-			}
+			const sort = sortBy => 
+				(a, b) => {
 
-			const amountSort = (tableRows, order, sortIndex) => {
-				return tableRows.concat().sort((a, b) => {
-					const aLbs = parseInt(a.cells[sortIndex].split(" ")[0], 10)
-					const aOz = parseInt(a.cells[sortIndex].split(" ")[2], 10)
-					const aValue = aLbs + (aOz/16)
+					let sortKey
+					switch(sortBy){
+						
+						case columns[1]:
+							sortKey = "currentQuantity"
+							break
 
-					const bLbs = parseInt(b.cells[sortIndex].split(" ")[0], 10)
-					const bOz = parseInt(b.cells[sortIndex].split(" ")[2], 10)
-					const bValue = bLbs + (bOz/16)
-					
-					if(order === "asc"){
-	          if(aValue < bValue){
-	            return -1
-	          }
+						case columns[2]:
+							sortKey = "country"
+							break
 
-	          if(aValue > bValue){
-	            return 1
-	          }
+						case columns[3]:
+							sortKey = "alphas"
+							break
 
-	          return 0
-	        }else{
-	          if(aValue < bValue){
-	            return 1
-	          }
+						case columns[4]:
+							sortKey = "unitCost"
+							break
 
-	          if(aValue > bValue){
-	            return -1
-	          }
+						case columns[5]:
+							sortKey = "lastReorderDate"
+							break
 
-	          return 0
-	        }
-				})
-			}
+						default:
+							sortKey = "name"
+					}
 
-			const alphaAcidSort = (tableRows, order, sortIndex) => {
-				return tableRows.concat().sort((a, b) => {
-					const aValue = parseInt(a.cells[sortIndex].split("%")[0], 10)
-					const bValue = parseInt(b.cells[sortIndex].split("%")[0], 10)
+					if(a[sortKey] < b[sortKey]){
+						return -1
+					}
 
-					if(order === "asc"){
-	          if(aValue < bValue){
-	            return -1
-	          }
+					if(a[sortKey] > b[sortKey]){
+						return 1
+					}
 
-	          if(aValue > bValue){
-	            return 1
-	          }
+					return 0
+				}
 
-	          return 0
-	        }else{
-	          if(aValue < bValue){
-	            return 1
-	          }
-
-	          if(aValue > bValue){
-	            return -1
-	          }
-
-	          return 0
-	        }
-				})
-			}
-
-			const costSort = (tableRows, order, sortIndex) => {
-				return tableRows.concat().sort((a, b) => {
-					const aValue = parseInt(a.cells[sortIndex].split("$")[1], 10)
-					const bValue = parseInt(b.cells[sortIndex].split("$")[1], 10)
-
-					if(order === "asc"){
-	          if(aValue < bValue){
-	            return -1
-	          }
-
-	          if(aValue > bValue){
-	            return 1
-	          }
-
-	          return 0
-	        }else{
-	          if(aValue < bValue){
-	            return 1
-	          }
-
-	          if(aValue > bValue){
-	            return -1
-	          }
-
-	          return 0
-	        }
-				})
-			}
-
-			const customSort = {
-				"Amount (lbs, oz)": amountSort,
-				"Alpha acid %": alphaAcidSort,
-				"Cost per lb": costSort
-			}
+			const render = item => (
+				<HoverableTableRowContainer
+					key={item.id}
+					modalMutation={UPDATE_MODAL}
+					entityType="hops"
+					id={item.id}
+				>
+					<TableData value={item.name} />
+					<TableData
+						value={
+							item.quantityUnit === weightSetting
+							? <Weight amount={item.currentQuantity} unit={weightSetting} />
+							: <ConvertWeight from={item.quantityUnit} to={weightSetting} amount={item.currentQuantity}/>
+						}
+					/>
+					<TableData value={item.country} />
+					<TableData value={item.alphas + "%"} />
+					<TableData
+						value={
+							item.costUnit === currencySetting
+							? <Currency amount={item.unitCost} unit={currencySetting} />
+							: <ConvertCurrencyContainer from={item.costUnit} to={currencySetting} amount={item.unitCost} />
+						}
+					/>
+					<TableData
+						value={
+							formatDate(
+								item.lastReorderDate,
+								dateSetting
+							)
+						}
+					/>
+				</HoverableTableRowContainer>
+			)
 
 			return(
 				<SortableTableContainer
-					sortOrderMutation={UPDATE_HOPS_TABLE_SORT}
+					name="hops"
 					columns={columns}
-					tableRows={filteredRows || tableRows}
-					sortBy={sortBy}
-					sortOrder={sortOrder}
-					itemsPerPageOptions={[5,25,50,100]}
-					itemsPerPage={itemsPerPage}
-					itemsPerPageMutation={UPDATE_HOPS_TABLE_ITEM_LIMIT}
-					currentPage={currentPage}
-					pageNumberMutation={UPDATE_HOPS_TABLE_PAGE_NUMBER}
-					modalMutation={UPDATE_MODAL}
-					entityType="hops"
-					customSort={customSort}
+					itemsPerPageOptions={[5, 10, 25, 50]}
+					items={inventory.items}
+					map={map}
+					sort={sort}
+					render={render}
 				/>
 			)
 

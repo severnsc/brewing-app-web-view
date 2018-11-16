@@ -1,79 +1,98 @@
 import React from "react"
 import { Query } from "react-apollo"
-import { timersTableQuery } from "../queries"
-import shortid from 'shortid'
-import SortableTableContainer from './common/sortableTableContainer'
-import {
-	UPDATE_TIMERS_TABLE_SORT,
-	UPDATE_TIMERS_TABLE_ITEM_LIMIT,
-	UPDATE_TIMERS_TABLE_PAGE_NUMBER,
-	UPDATE_MODAL
-} from "../mutations"
+import { timersQuery } from "../queries"
 import { convertMsToMinutesSecondsString } from "../utils"
+import { TableData } from "../components"
+import { UPDATE_MODAL } from "../mutations"
+import {
+	HoverableTableRowContainer,
+	SortableTableContainer
+} from "./common"
 
-const TimersTableContainer = () => {
+const TimersTableContainer = () => (
+	<Query query={timersQuery}>
+		{({ loading, error, data }) => {
 
-	const columns = [
-    {id: shortid.generate(), name: "Timer name"},
-    {id: shortid.generate(), name: "Total duration (HH:MM:SS)"},
-    {id: shortid.generate(), name: "Number of alerts"}
-  ]
+			if(loading) return <p>Loading...</p>
+			if(error){
+				console.error(error)
+				return <p>Error!</p>
+			}
 
-	return(
-		<Query query={timersTableQuery}>
-			{({ loading, error, data }) => {
+			const { timers } = data.currentUser
 
-				if(loading) return <p>Loading...</p>
-        if(error) {
-        	console.error(error)
-        	return <p>Error</p>
-        }
+			const columns = [
+		    "Timer name",
+		    "Total duration (HH:MM:SS)",
+		    "Number of alerts"
+		  ]
 
-        const tableRows = data.currentUser.timers.map(timer => {
-        	const cells = [
-        		timer.name,
-        		convertMsToMinutesSecondsString(timer.duration),
-        		timer.timerAlerts.length
-        	]
-        	return {id: timer.id, cells}
-        })
+		 	const map = timer => ({
+		 		id: timer.id,
+		 		name: timer.name,
+		 		duration: convertMsToMinutesSecondsString(timer.duration),
+		 		alertCount: timer.timerAlerts.length
+		 	})
 
-				const {
-					sortBy,
-					sortOrder,
-					itemLimit,
-					currentPage,
-					filterString
-				} = data.timersTable
+		 	const sort = sortBy => 
+		 		(a,b) => {
 
-				let filteredTableRows
-				if(filterString !== ""){
-					filteredTableRows = tableRows.filter(tableRow => {
-						return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(filterString))
-					})
-				}
+		 			let sortKey
 
-				return(
-					<SortableTableContainer
-						sortOrderMutation={UPDATE_TIMERS_TABLE_SORT}
-			      columns={columns}
-			      tableRows={filteredTableRows || tableRows}
-			      sortBy={sortBy}
-			      sortOrder={sortOrder}
-			      itemsPerPageOptions={[25,50,100]}
-			      itemsPerPage={itemLimit}
-			      itemsPerPageMutation={UPDATE_TIMERS_TABLE_ITEM_LIMIT}
-			      currentPage={currentPage}
-			      pageNumberMutation={UPDATE_TIMERS_TABLE_PAGE_NUMBER}
-			      modalMutation={UPDATE_MODAL}
-			      entityType="timer"
-					/>
-				)
+		 			switch(sortBy){
+		 				
+		 				case columns[1]:
+		 					sortKey = "duration"
+		 					break
 
-			}}
-		</Query>	
-	)
+		 				case columns[2]:
+		 					sortKey = "alertCount"
+		 					break
 
-}
+		 				default:
+		 					sortKey = "name"
+
+		 			}
+
+		 			if(a[sortKey] > b[sortKey]){
+		 				return 1
+		 			}
+
+		 			if(a[sortKey] < b[sortKey]){
+		 				return -1
+		 			}
+
+		 			return 0
+
+		 		}
+
+		 	const render = timer => (
+		 		<HoverableTableRowContainer
+		 			key={timer.id}
+		 			modalMutation={UPDATE_MODAL}
+					entityType="timer"
+					id={timer.id}
+		 		>
+		 			<TableData value={timer.name} />
+		 			<TableData value={timer.duration} />
+		 			<TableData value={timer.alertCount} />
+		 		</HoverableTableRowContainer>
+		 	)
+
+			return(
+				<SortableTableContainer
+					name="timers"
+					columns={columns}
+					itemsPerPageOptions={[5, 10, 25, 50]}
+					items={timers}
+					map={map}
+					sort={sort}
+					render={render}
+				/>
+			)
+
+		}}
+	</Query>
+)
 
 export default TimersTableContainer

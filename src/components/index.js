@@ -1,11 +1,9 @@
 import Button from "./Button"
 import Timer from "./Timer"
-import HoverableTableRow from "./HoverableTableRow"
 import Modal from "./Modal"
 import NavBar from "./NavBar"
 import ResetPasswordForm from "./ResetPasswordForm"
 import SearchBar from "./SearchBar"
-import SortableTable from "./SortableTable"
 import InventoryForm from "./InventoryForm"
 import Tabs from "./Tabs"
 import Tab from "./Tab"
@@ -18,6 +16,13 @@ import ConvertWeight from "./ConvertWeight"
 import SRM from "./SRM"
 import MaltColor from "./MaltColor"
 import ConvertMaltColor from "./ConvertMaltColor"
+import Pagination from "./Pagination"
+import {
+	HoverableTableRow,
+	SortableTableHeader,
+	Table,
+	TableData
+} from "./Tables"
 import {
 	NeedsToBeReorderedHeader,
 	NeedsToBeReorderedListItem,
@@ -54,7 +59,8 @@ export {
 	ResetPasswordForm,
 	SearchBar,
 	SignupForm,
-	SortableTable,
+	Table,
+	TableData,
 	TimerAlertForm,
 	TimerForm,
 	InventoryForm,
@@ -81,5 +87,7 @@ export {
 	ConvertWeight,
 	SRM,
 	MaltColor,
-	ConvertMaltColor
+	ConvertMaltColor,
+	Pagination,
+	SortableTableHeader
 }

@@ -3,19 +3,20 @@ import PropTypes from 'prop-types'
 import { SearchBar } from '../../components'
 import { Mutation } from 'react-apollo'
 
-const SearchBarContainer = ({ mutation }) => (
+const SearchBarContainer = ({ name, mutation, placeholder, initialValue }) => (
   <Mutation mutation={mutation}>
     {mutation => {
 
-      const updateFilter = value => {
-        mutation({ variables: { value: value.toLowerCase() }})
+      const updateFilter = filterString => {
+        mutation({ variables: { name, filterString: filterString.toLowerCase() }})
       }
 
       return(
         <SearchBar
           onSubmit={updateFilter}
           onChange={updateFilter}
-          placeholder="Search"
+          placeholder={placeholder}
+          initialValue={initialValue}
         />
       )
     }}
@@ -23,7 +24,10 @@ const SearchBarContainer = ({ mutation }) => (
 )
 
 SearchBarContainer.propTypes = {
-  mutation: PropTypes.object.isRequired
+  name: PropTypes.string.isRequired,
+  mutation: PropTypes.object.isRequired,
+  placeholder: PropTypes.string,
+  initialValue: PropTypes.string
 }
 
 export default SearchBarContainer

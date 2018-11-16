@@ -1,100 +1,90 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Mutation } from 'react-apollo'
-import { SortableTable } from '../../components'
+import React from "react"
+import PropTypes from "prop-types"
+import { Table } from "../../components"
+import { Query } from "react-apollo"
+import { tableQuery } from "../../queries"
 
-const SortableTableContainer = ({sortOrderMutation, columns, tableRows, sortBy, sortOrder, itemsPerPageOptions, itemsPerPage, itemsPerPageMutation, currentPage, pageNumberMutation, modalMutation, entityType, customSort }) => (
-  <Mutation mutation={sortOrderMutation}>
-    {sortMutation => {
+import {
+	SortableTableHeaderContainer,
+	PaginationContainer
+} from "."
 
-      const toggleSort = cellName => {
-        sortMutation({ variables: {cellName: cellName} })
-      }
+import {
+	UPDATE_TABLE_SORT,
+	UPDATE_TABLE_ITEMS_PER_PAGE,
+	UPDATE_TABLE_PAGE_NUMBER
+} from "../../mutations"
 
-      return(
-        <Mutation mutation={itemsPerPageMutation}>
-          {itemsMutation => {
+const SortableTableContainer = ({ name, columns, itemsPerPageOptions, items, map, sort, render }) => (
+	<Query query={tableQuery} variables={{ name }}>
+		{({loading, error, data}) => {
 
-            const onItemsPerPageChange = value => {
-              itemsMutation({ variables: { value: parseInt(value, 10) } })
-            }
+			if(loading) return <p>Loading...</p>
+			if(error){
+				console.error(error)
+				return <p>Error!</p>
+			}
 
-            return(
-              <Mutation mutation={pageNumberMutation}>
-                {pageNumMutation => {
+			const { table } = data
+			const {
+				sortBy,
+				sortOrder,
+				itemsPerPage,
+				currentPage,
+				filterString
+			}	= table
+			
+			const startIndex = itemsPerPage * (currentPage - 1)
+			const endIndex = itemsPerPage * (currentPage)
 
-                  const decrementPage = () => {
-                    pageNumMutation({ variables: {type: "DECREMENT"} })
-                  }
+			const filter = item => item.name.toLowerCase().includes(filterString)
+			let tableRows = items.map(map).filter(filter).sort(sort(sortBy))
 
-                  const incrementPage = () => {
-                    pageNumMutation({ variables: {type: "INCREMENT"} })
-                  }
+			const totalPages = Math.ceil(tableRows.length/itemsPerPage)
+			
+			if(sortOrder === "desc") tableRows = tableRows.reverse()
+			tableRows = tableRows.slice(startIndex, endIndex).map(render)
 
-                  return(
-                    <Mutation mutation={modalMutation}>
-                      {modalMutation => {
+			return(
+				<div>
+					<Table>
+						<SortableTableHeaderContainer
+							columns={columns}
+							sortBy={sortBy}
+							sortOrder={sortOrder}
+							toggleSortMutation={UPDATE_TABLE_SORT}
+							name={name}
+						/>
+						<tbody>
+							{tableRows}
+						</tbody>
+					</Table>
+					<PaginationContainer
+						name={name}
+						page={currentPage}
+						totalPages={totalPages}
+						showPageNumbers={true}
+						showItemsPerPage={true}
+						itemsPerPageOptions={itemsPerPageOptions}
+						itemsPerPage={itemsPerPage}
+						pageNumberMutation={UPDATE_TABLE_PAGE_NUMBER}
+						itemsPerPageMutation={UPDATE_TABLE_ITEMS_PER_PAGE}
+					/>
+				</div>
+			)
 
-                        const onTableRowClick = itemId => {
-                          modalMutation({ variables: { id: itemId, type: entityType } })
-                        }
-
-                        return(
-
-                          <SortableTable
-                            columns={columns}
-                            toggleSort={toggleSort}
-                            tableRows={tableRows}
-                            sortBy={sortBy}
-                            sortOrder={sortOrder}
-                            itemsPerPageOptions={itemsPerPageOptions}
-                            itemsPerPage={itemsPerPage}
-                            onItemsPerPageChange={onItemsPerPageChange}
-                            currentPage={currentPage}
-                            decrementPage={decrementPage}
-                            incrementPage={incrementPage}
-                            onTableRowClick={onTableRowClick}
-                            customSort={customSort}
-                          />
-
-                        )
-
-                      }}
-                    </Mutation>
-                  )
-                }}
-              </Mutation>
-            )
-          }}
-        </Mutation>
-      )
-    }}
-  </Mutation>
+		}}
+	</Query>
 )
 
 SortableTableContainer.propTypes = {
-  sortOrderMutation: PropTypes.object.isRequired,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  tableRows: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    cells: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.element])
-    ).isRequired
-  })).isRequired,
-  sortBy: PropTypes.string.isRequired,
-  sortOrder: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
-  itemsPerPage: PropTypes.number.isRequired,
-  itemsPerPageMutation: PropTypes.object.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  pageNumberMutation: PropTypes.object.isRequired,
-  modalMutation: PropTypes.object.isRequired,
-  entityType: PropTypes.string.isRequired
+	name: PropTypes.string.isRequired,
+	columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+	itemsPerPageOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
+	items: PropTypes.array.isRequired,
+	map: PropTypes.func.isRequired,
+	sort: PropTypes.func.isRequired,
+	render: PropTypes.func.isRequired
 }
 
 export default SortableTableContainer

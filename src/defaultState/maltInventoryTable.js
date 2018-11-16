@@ -1,8 +1,9 @@
 export default {
-	__typename: "MaltInventoryTable",
+	__typename: "InventoryTable",
+	name: "malt",
 	sortBy: "Malt name",
 	sortOrder: "asc",
-	itemLimit: 5,
-	currentPage: 0,
+	itemsPerPage: 5,
+	currentPage: 1,
 	filterString: ""
 }

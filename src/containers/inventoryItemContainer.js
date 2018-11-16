@@ -14,6 +14,7 @@ import {
 	OtherForm
 } from "../components"
 import moment from "moment"
+import { weightUnits } from "../utils"
 
 const InventoryItemContainer = ({ id, type, inventoryType }) => (
 	<Query query={type === "create" ? inventoriesQuery : inventoryItemsQuery}>
@@ -56,7 +57,12 @@ const InventoryItemContainer = ({ id, type, inventoryType }) => (
 				cache.writeQuery({ query: inventoryItemsQuery, data })
 			}
 
-			const { inventories } = data.currentUser
+			const { inventories, settings } = data.currentUser
+
+			const weightSetting = settings.find(s => s.name === "weight").value
+			const maltColorSetting = settings.find(s => s.name === "maltColor").value
+			const currencySetting = settings.find(s => s.name === "currency").value
+
 			const inventory = inventories.find(inventory => inventory.name === inventoryType)
 			let item = {}
 			let parsedObject = {}
@@ -134,7 +140,9 @@ const InventoryItemContainer = ({ id, type, inventoryType }) => (
 									props.onSubmit = itemFunc
 									props.name = parsedObject.name || null
 									props.amount = item.currentQuantity || null
+									props.weightUnit = weightUnits(weightSetting)
 									props.color = parsedObject.color || null
+									props.maltColorUnit = maltColorSetting
 									props.type = parsedObject.type || parsedObject.yeastType || null
 									props.alphaAcids = parseInt(parsedObject.alphaAcids, 10) || null
 									props.countryOfOrigin = parsedObject.countryOfOrigin || null
@@ -142,6 +150,7 @@ const InventoryItemContainer = ({ id, type, inventoryType }) => (
 									props.number = parsedObject.yeastNumber || null
 									props.dryOrLiquid = parsedObject.dry ? "Dry" : "Liquid"
 									props.unitCost = item.unitCost || null
+									props.currencyUnit = currencySetting
 									props.purchaseDate = item.lastReorderDate ? moment(new Date(item.lastReorderDate)).format("YYYY-MM-DD") : null
 									props.deliveryDate = item.deliveryDate ? moment(new Date(item.deliveryDate)).format("YYYY-MM-DD") : null
 									props.reorderQuantity = item.reorderQuantity || null

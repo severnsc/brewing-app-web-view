@@ -1,64 +1,84 @@
 import React from "react"
 import { Query } from "react-apollo"
-import { otherInventoriesTableQuery } from "../queries"
-import shortid from "shortid"
-import SortableTableContainer from "./common/sortableTableContainer"
+import { inventoryTableQuery } from "../queries"
+import { UPDATE_MODAL } from "../mutations"
+import { TableData } from "../components"
 import {
-  UPDATE_OTHER_INVENTORIES_TABLE_SORT,
-  UPDATE_OTHER_INVENTORIES_TABLE_ITEM_LIMIT,
-  UPDATE_OTHER_INVENTORIES_TABLE_PAGE_NUMBER,
-  UPDATE_MODAL
-} from "../mutations"
+	HoverableTableRowContainer,
+	SortableTableContainer
+} from "./common"
 
 const OtherInventoriesTableContainer = () => (
-	<Query query={otherInventoriesTableQuery}>
-		{({loading, error, data}) => {
+	<Query query={inventoryTableQuery}>
+		{({ loading, error, data }) => {
 
 			if(loading) return <p>Loading...</p>
-			if(error) return <p>Error!</p>
-
-			const columns = [
-				{id: shortid.generate(), name: "Item name"},
-				{id: shortid.generate(), name: "Amount"},
-			]
-
-			const { currentUser, otherInventoriesTable } = data
-			const {
-				sortBy,
-				sortOrder,
-				itemsPerPage,
-				currentPage,
-				filterString
-			} = otherInventoriesTable
-
-			const inventories = currentUser.inventories.filter(inventory => !["Malt", "Hops", "Yeast"].includes(inventory.name))
-			const itemsArray = inventories.map(inventory => inventory.items)
-			const items = [].concat.apply([], itemsArray)
-			const tableRows = items.map(item => ({
-				id: item.id,
-				cells: [JSON.parse(item.object).name, item.currentQuantity]
-			}))
-			let filteredTableRows
-			if(filterString){
-				filteredTableRows = tableRows.filter(tableRow => {
-					return tableRow.cells.find(cell => cell.toString().toLowerCase().includes(filterString))
-				})
+			if(error){
+				console.error(error)
+				return <p>Error!</p>
 			}
 
+			const { inventories } = data.currentUser
+			const inventory = inventories.find(i => i.name.toLowerCase() === "other")
+
+			const columns = [
+				"Item name",
+				"Amount"
+			]
+
+			const map = item => ({
+				id: item.id,
+				name: JSON.parse(item.object).name,
+				currentQuantity: item.currentQuantity,
+				quantityUnit: item.quantityUnit
+			})
+
+			const sort = sortBy => 
+				(a, b) => {
+
+					let sortKey
+					switch(sortBy){
+						
+						case "Amount":
+							sortKey = "currentQuantity"
+							break
+
+						default:
+							sortKey = "name"
+					}
+
+					if(a[sortKey] < b[sortKey]){
+						return -1
+					}
+
+					if(a[sortKey] > b[sortKey]){
+						return 1
+					}
+
+					return 0
+				}
+
+			const render = item => (
+				<HoverableTableRowContainer
+					key={item.id}
+					modalMutation={UPDATE_MODAL}
+					entityType="other"
+					id={item.id}
+				>
+					<TableData value={item.name} />
+					<TableData value={item.currentQuantity} />
+				</HoverableTableRowContainer>
+			)
+			
 			return(
 				<SortableTableContainer
-					sortOrderMutation={UPDATE_OTHER_INVENTORIES_TABLE_SORT}
-          columns={columns}
-          tableRows={filteredTableRows || tableRows}
-          sortBy={sortBy}
-          sortOrder={sortOrder}
-          itemsPerPageOptions={[5, 25,50,100]}
-          itemsPerPage={itemsPerPage}
-          itemsPerPageMutation={UPDATE_OTHER_INVENTORIES_TABLE_ITEM_LIMIT}
-          currentPage={currentPage}
-          pageNumberMutation={UPDATE_OTHER_INVENTORIES_TABLE_PAGE_NUMBER}
-          modalMutation={UPDATE_MODAL}
-          entityType="misc"
+					name="other"
+					columns={columns}
+					itemsPerPageOptions={[5, 10, 25, 50]}
+					items={inventory.items}
+					map={map}
+					sort={sort}
+					render={render}
 				/>
 			)
 

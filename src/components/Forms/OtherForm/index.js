@@ -50,7 +50,15 @@ class OtherForm extends Component {
 			reorderQuantity,
 			reorderThreshold
 		} = this.state
-		this.props.onSubmit(amount, unitCost, purchaseDate, deliveryDate, reorderQuantity, reorderThreshold, name)
+		this.props.onSubmit(
+			amount,
+			unitCost,
+			purchaseDate,
+			deliveryDate,
+			reorderQuantity,
+			reorderThreshold,
+			name
+		)
 	}
 
 	handleChange = e => {
@@ -87,26 +95,89 @@ class OtherForm extends Component {
 
 		return(
 			<form style={styles.form} onSubmit={this.onSubmit}>
-				<label style={focus === "name" ? labelFocusStyle : formStyles.label}>Item name
-					<input style={focus === "name" ? inputFocusStyle : formStyles.input} name="name" type="text" value={name} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				<label style={focus === "name" ? labelFocusStyle : formStyles.label}>
+					Item name
+					<input
+						style={focus === "name" ? inputFocusStyle : formStyles.input}
+						name="name"
+						type="text"
+						value={name}
+						onChange={this.handleChange}
+						onFocus={this.toggleFocus}
+						onBlur={this.toggleFocus}
+					/>
 				</label>
-				<label style={focus === "amount" ? labelFocusStyle : formStyles.label}>Amount (lbs)
-					<input style={focus === "amount" ? inputFocusStyle : formStyles.input} name="amount" type="number" value={amount} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				<label style={focus === "amount" ? labelFocusStyle : formStyles.label}>
+					Amount {`${this.props.weightUnit}`}
+					<input
+						style={focus === "amount" ? inputFocusStyle : formStyles.input}
+						name="amount"
+						type="number"
+						value={amount}
+						onChange={this.handleChange}
+						onFocus={this.toggleFocus}
+						onBlur={this.toggleFocus}
+					/>
 				</label>
-				<label style={focus === "unitCost" ? labelFocusStyle : formStyles.label}>Unit cost
-					<input style={focus === "unitCost" ? inputFocusStyle : formStyles.input} name="unitCost" type="number" value={unitCost} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				<label style={focus === "unitCost" ? labelFocusStyle : formStyles.label}>
+					Unit cost ({`${this.props.currencyUnit}`})
+					<input
+						style={focus === "unitCost" ? inputFocusStyle : formStyles.input}
+						name="unitCost"
+						type="number"
+						value={unitCost}
+						onChange={this.handleChange}
+						onFocus={this.toggleFocus}
+						onBlur={this.toggleFocus}
+					/>
 				</label>
-				<label style={focus === "purchaseDate" ? labelFocusStyle : formStyles.label}>Purchase date
-					<input style={focus === "purchaseDate" ? inputFocusStyle : formStyles.input} name="purchaseDate" type="date" value={purchaseDate} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				<label style={focus === "purchaseDate" ? labelFocusStyle : formStyles.label}>
+					Purchase date
+					<input
+						style={focus === "purchaseDate" ? inputFocusStyle : formStyles.input}
+						name="purchaseDate"
+						type="date"
+						value={purchaseDate}
+						onChange={this.handleChange}
+						onFocus={this.toggleFocus}
+						onBlur={this.toggleFocus}
+					/>
 				</label>
-				<label style={focus === "deliveryDate" ? labelFocusStyle : formStyles.label}>Delivery date
-					<input style={focus === "deliveryDate" ? inputFocusStyle : formStyles.input} name="deliveryDate" type="date" value={deliveryDate} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				<label style={focus === "deliveryDate" ? labelFocusStyle : formStyles.label}>
+					Delivery date
+					<input
+						style={focus === "deliveryDate" ? inputFocusStyle : formStyles.input}
+						name="deliveryDate"
+						type="date"
+						value={deliveryDate}
+						onChange={this.handleChange}
+						onFocus={this.toggleFocus}
+						onBlur={this.toggleFocus}
+					/>
 				</label>
-				<label style={focus === "reorderQuantity" ? labelFocusStyle : formStyles.label}>Reorder Quantity
-					<input style={focus === "reorderQuantity" ? inputFocusStyle : formStyles.input} name="reorderQuantity" type="number" value={reorderQuantity} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				<label style={focus === "reorderQuantity" ? labelFocusStyle : formStyles.label}>
+					Reorder Quantity {`${this.props.weightUnit}`}
+					<input
+						style={focus === "reorderQuantity" ? inputFocusStyle : formStyles.input}
+						name="reorderQuantity"
+						type="number"
+						value={reorderQuantity}
+						onChange={this.handleChange}
+						onFocus={this.toggleFocus}
+						onBlur={this.toggleFocus}
+					/>
 				</label>
-				<label style={focus === "reorderThreshold" ? labelFocusStyle : formStyles.label}>Reorder Threshold
-					<input style={focus === "reorderThreshold" ? inputFocusStyle : formStyles.input} name="reorderThreshold" type="number" value={reorderThreshold} onChange={this.handleChange} onFocus={this.toggleFocus} onBlur={this.toggleFocus} />
+				<label style={focus === "reorderThreshold" ? labelFocusStyle : formStyles.label}>
+					Reorder Threshold {`${this.props.weightUnit}`}
+					<input
+						style={focus === "reorderThreshold" ? inputFocusStyle : formStyles.input}
+						name="reorderThreshold"
+						type="number"
+						value={reorderThreshold}
+						onChange={this.handleChange}
+						onFocus={this.toggleFocus}
+						onBlur={this.toggleFocus}
+					/>
 				</label>
 				<input style={globalStyles.button} type="submit" value="submit" />
 			</form>
@@ -124,7 +195,9 @@ OtherForm.propTypes = {
 	purchaseDate: PropTypes.string,
 	deliveryDate: PropTypes.string,
 	reorderQuantity: PropTypes.number,
-	reorderThreshold: PropTypes.number
+	reorderThreshold: PropTypes.number,
+	weightUnit: PropTypes.oneOf(["(lbs, oz)", "(kgs, g)"]).isRequired,
+	currencyUnit: PropTypes.oneOf(["USD", "EUR", "GBP"]).isRequired
 }
 
 export default OtherForm

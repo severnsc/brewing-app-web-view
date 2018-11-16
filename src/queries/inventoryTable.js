@@ -2,18 +2,14 @@ import gql from "graphql-tag"
 import { currentUserFragments } from "../fragments"
 
 export default gql`
-	query {
+	query inventoryTableQuery {
 		currentUser {
 			id
+			settings {
+				name
+				value
+			}
 			...InventoryItems
-		}
-
-		otherInventoriesTable @client {
-			sortBy
-			sortOrder
-			itemsPerPage
-			currentPage
-			filterString
 		}
 	}
 ${currentUserFragments.inventoryItems}

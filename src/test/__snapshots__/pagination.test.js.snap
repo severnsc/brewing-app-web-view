@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pagination renders a pagination component 1`] = `
+<div>
+  <div>
+    <span
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+          "padding": "0px 5px",
+          "textDecoration": "underline",
+          "width": "86.73px",
+        }
+      }
+    >
+      Next &gt;
+    </span>
+  </div>
+</div>
+`;
