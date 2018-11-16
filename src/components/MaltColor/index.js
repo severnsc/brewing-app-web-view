@@ -2,8 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import styles from "./styles"
 
-const MaltColor = ({ value }) => {
-	const color = styles.color(value)
+const MaltColor = ({ value, srmValue }) => {
+	const color = styles.color(srmValue)
 
 	return(
 		<div style={{background: color, ...styles.container}}>
@@ -13,7 +13,8 @@ const MaltColor = ({ value }) => {
 }
 
 MaltColor.propTypes = {
-	value: PropTypes.number.isRequired
+	value: PropTypes.number.isRequired,
+	srmValue: PropTypes.number.isRequired
 }
 
 export default MaltColor

@@ -2,7 +2,7 @@ import React from "react"
 import { Query } from "react-apollo"
 import { inventoryTableQuery } from "../queries"
 import { UPDATE_MODAL } from "../mutations"
-import { weightUnits, formatDate } from "../utils"
+import { weightUnits, formatDate, convertColor } from "../utils"
 import {
 	Currency,
 	Weight,
@@ -124,7 +124,7 @@ const MaltInventoryTableContainer = () => (
 						<TableData
 							value={
 								item.colorUnit === maltColorSetting
-								? <MaltColor value={item.color} />
+								? <MaltColor value={item.color} srmValue={convertColor(item.colorUnit, "SRM", item.color)} />
 								: <ConvertMaltColor from={item.colorUnit} to={maltColorSetting} value={item.color} /> 
 							}
 						/>

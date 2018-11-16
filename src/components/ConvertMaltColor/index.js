@@ -7,7 +7,14 @@ const ConvertMaltColor = ({ from, to, value }) => {
 
 	const convertedColor = convertColor(from, to, value)
 
-	return <MaltColor value={convertedColor} />
+	let srmValue
+	if(from === "SRM"){
+		srmValue = value
+	}else{
+		srmValue = convertColor(from, "SRM", value)
+	}
+
+	return <MaltColor srmValue={srmValue} value={convertedColor} />
 
 }
 

@@ -19,5 +19,5 @@ export default {
     display: "flex",
     alignItems: "center"
 	},
-	color: l => "#" + srmToRGB(l)
+	color: srm => "#" + srmToRGB(srm)
 }

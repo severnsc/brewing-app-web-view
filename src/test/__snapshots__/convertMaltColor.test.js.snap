@@ -4,7 +4,7 @@ exports[`convert malt color component renders a convert malt color component 1`]
 <div
   style={
     Object {
-      "background": "#e9d76c",
+      "background": "#f0efb5",
       "borderRadius": "20px",
       "height": "16px",
       "padding": "4px",

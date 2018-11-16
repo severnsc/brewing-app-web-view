@@ -75,6 +75,10 @@ export const formatWeightString = (weight, units) => {
 
 export const SRMtoL = srm => (srm + 0.6) / 1.35
 export const LtoSRM = l => (1.35 * l) - 0.6
+export const LtoEBC = l => (2.65 * l) - 1.2
+export const EBCtoL = ebc => (ebc + 1.2) / 2.65
+export const SRMtoEBC = srm => srm * 1.97
+export const EBCtoSRM = ebc => ebc / 1.97
 
 export const convertColor = (from, to, value) => {
 	if(from === "SRM" && to === "L"){
@@ -84,6 +88,22 @@ export const convertColor = (from, to, value) => {
 	if(from === "L" && to === "SRM"){
 		return LtoSRM(value)
 	}
+
+    if(from === "L" && to === "EBC"){
+        return LtoEBC(value)
+    }
+
+    if(from === "EBC" && to === "L"){
+        return EBCtoL(value)
+    }
+
+    if(from === "SRM" && to === "EBC"){
+        return SRMtoEBC(value)
+    }
+
+    if(from === "EBC" && to === "SRM"){
+        return EBCtoSRM(value)
+    }
 
 	return value
 }
