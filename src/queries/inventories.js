@@ -11,6 +11,10 @@ export default gql`
 					id
 				}
 			}
+			settings {
+				name
+				value
+			}
 		}
 	}
 `
