@@ -65,12 +65,14 @@ class NavBar extends Component {
 
     if(this.props.authenticated){
 
+      const homeLinkStyle = this.state.mouseenter === "Home" ? styles.navLinkMouseEnter : styles.navLink
       const timersLinkStyle = this.state.mouseenter === "Timers" ? styles.navLinkMouseEnter : styles.navLink
       const inventoriesLinkStyle = this.state.mouseenter === "Inventories" ? styles.navLinkMouseEnter : styles.navLink
       const accountLinkStyle = this.state.mouseenter === "Account" || this.state.submenuVisible ? styles.accountLinkMouseEnter : styles.accountLink
       return(
         <nav style={styles.nav}>
           <span style={styles.span}>
+            <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={homeLinkStyle} to="/dashboard">Home</Link>
             <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={timersLinkStyle} to="/timers">Timers</Link>
             <Link onMouseEnter={this.handleMouse} onMouseLeave={this.handleMouse} style={inventoriesLinkStyle} to="/inventories">Inventories</Link>
           </span>
