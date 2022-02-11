@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "ajv": "^6.7.0",
+    "ajv": "^6.12.3",
     "apollo-boost": "^0.1.23",
     "axios": "^0.18.1",
     "chai-enzyme": "^1.0.0-beta.1",
